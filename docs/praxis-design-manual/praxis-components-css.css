@@ -1,0 +1,747 @@
+/**
+ * Praxis Security Labs - Component Styles
+ * Version: 1.0.0
+ * 
+ * This file contains all component classes for the Praxis design system.
+ * Import this after Tailwind's base layers.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* ============================================
+     TYPOGRAPHY CLASSES
+     ============================================ */
+  
+  /* Headings */
+  .h1 {
+    @apply text-5xl font-heading uppercase tracking-brand-wide text-praxis-dark-blue;
+  }
+  
+  .h2 {
+    @apply text-4xl font-heading uppercase tracking-brand-wide text-praxis-dark-blue;
+  }
+  
+  .h3 {
+    @apply text-3xl font-heading uppercase tracking-brand-normal text-praxis-dark-blue;
+  }
+  
+  .h4 {
+    @apply text-2xl font-heading uppercase tracking-brand-normal text-praxis-dark-blue;
+  }
+  
+  .h5 {
+    @apply text-xl font-heading uppercase tracking-brand-normal text-praxis-blue;
+  }
+  
+  .h6 {
+    @apply text-lg font-heading uppercase tracking-brand-normal text-praxis-blue;
+  }
+  
+  /* Body Text */
+  .body-large {
+    @apply text-lg font-body leading-relaxed text-praxis-black;
+  }
+  
+  .body-base {
+    @apply text-base font-body leading-relaxed text-praxis-black;
+  }
+  
+  .body-small {
+    @apply text-sm font-body leading-relaxed text-praxis-black;
+  }
+  
+  .caption {
+    @apply text-xs font-body text-praxis-brown;
+  }
+  
+  /* Text Utilities */
+  .text-link {
+    @apply text-praxis-blue italic hover:text-praxis-dark-blue transition-colors duration-brand cursor-pointer underline;
+  }
+  
+  .text-muted {
+    @apply text-praxis-brown;
+  }
+  
+  .text-error {
+    @apply text-praxis-brick;
+  }
+  
+  .text-success {
+    @apply text-praxis-gold-700;
+  }
+  
+  /* ============================================
+     BUTTON COMPONENTS
+     ============================================ */
+  
+  /* Base Button */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-heading uppercase tracking-brand-wide rounded-lg transition-all duration-brand ease-brand focus:outline-none focus:ring-4 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  /* Button Variants */
+  .btn-primary {
+    @apply btn bg-praxis-dark-blue text-praxis-white hover:bg-praxis-dark-blue-600 active:bg-praxis-dark-blue-700 focus:ring-praxis-dark-blue-300 disabled:hover:bg-praxis-dark-blue;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-praxis-blue text-praxis-white hover:bg-praxis-blue-600 active:bg-praxis-blue-700 focus:ring-praxis-blue-300 disabled:hover:bg-praxis-blue;
+  }
+  
+  .btn-accent {
+    @apply btn bg-praxis-gold text-praxis-dark-blue hover:bg-praxis-gold-600 active:bg-praxis-gold-700 focus:ring-praxis-gold-300 disabled:hover:bg-praxis-gold;
+  }
+  
+  .btn-outline {
+    @apply btn bg-transparent border-2 border-praxis-dark-blue text-praxis-dark-blue hover:bg-praxis-dark-blue hover:text-praxis-white active:bg-praxis-dark-blue-700 focus:ring-praxis-dark-blue-300 disabled:hover:bg-transparent disabled:hover:text-praxis-dark-blue;
+  }
+  
+  .btn-outline-accent {
+    @apply btn bg-transparent border-2 border-praxis-gold text-praxis-gold hover:bg-praxis-gold hover:text-praxis-dark-blue active:bg-praxis-gold-600 focus:ring-praxis-gold-300 disabled:hover:bg-transparent disabled:hover:text-praxis-gold;
+  }
+  
+  .btn-danger {
+    @apply btn bg-praxis-brick text-praxis-white hover:bg-praxis-brick-600 active:bg-praxis-brick-700 focus:ring-praxis-brick-300 disabled:hover:bg-praxis-brick;
+  }
+  
+  .btn-ghost {
+    @apply btn bg-transparent text-praxis-dark-blue hover:bg-praxis-dark-blue-50 active:bg-praxis-dark-blue-100 focus:ring-praxis-dark-blue-200;
+  }
+  
+  /* Button Sizes */
+  .btn-xs {
+    @apply px-3 py-1.5 text-xs;
+  }
+  
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+  
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+  
+  .btn-xl {
+    @apply px-10 py-5 text-xl;
+  }
+  
+  /* Button Groups */
+  .btn-group {
+    @apply inline-flex rounded-lg overflow-hidden;
+  }
+  
+  .btn-group .btn {
+    @apply rounded-none;
+  }
+  
+  .btn-group .btn:not(:last-child) {
+    @apply border-r-0;
+  }
+  
+  /* ============================================
+     CARD COMPONENTS
+     ============================================ */
+  
+  .card {
+    @apply bg-praxis-white rounded-lg border border-praxis-gray-200 overflow-hidden transition-all duration-brand;
+  }
+  
+  .card-hoverable {
+    @apply card hover:shadow-lg hover:border-praxis-blue-300 hover:-translate-y-0.5 cursor-pointer;
+  }
+  
+  .card-bordered {
+    @apply card border-2;
+  }
+  
+  .card-header {
+    @apply px-6 py-4 border-b border-praxis-gray-200 bg-praxis-dark-blue-50;
+  }
+  
+  .card-header-accent {
+    @apply px-6 py-4 border-b-2 border-praxis-gold bg-praxis-gold-50;
+  }
+  
+  .card-body {
+    @apply p-6;
+  }
+  
+  .card-footer {
+    @apply px-6 py-4 border-t border-praxis-gray-200 bg-gray-50;
+  }
+  
+  /* Card Variants */
+  .card-primary {
+    @apply bg-praxis-dark-blue-50 border-praxis-dark-blue-200;
+  }
+  
+  .card-accent {
+    @apply bg-praxis-gold-50 border-praxis-gold-200;
+  }
+  
+  .card-danger {
+    @apply bg-praxis-brick-50 border-praxis-brick-200;
+  }
+  
+  /* ============================================
+     FORM COMPONENTS
+     ============================================ */
+  
+  /* Input Fields */
+  .input {
+    @apply w-full px-4 py-2 border-2 border-praxis-gray-300 rounded-lg font-body text-praxis-black placeholder-praxis-gray bg-praxis-white focus:border-praxis-blue focus:outline-none focus:ring-4 focus:ring-praxis-blue-200 transition-all duration-brand disabled:bg-praxis-tan-100 disabled:cursor-not-allowed;
+  }
+  
+  .input-sm {
+    @apply px-3 py-1.5 text-sm;
+  }
+  
+  .input-lg {
+    @apply px-5 py-3 text-lg;
+  }
+  
+  .input-error {
+    @apply border-praxis-brick-400 focus:border-praxis-brick focus:ring-praxis-brick-200;
+  }
+  
+  .input-success {
+    @apply border-praxis-gold-400 focus:border-praxis-gold focus:ring-praxis-gold-200;
+  }
+  
+  /* Textarea */
+  .textarea {
+    @apply input min-h-[100px] resize-y;
+  }
+  
+  /* Select */
+  .select {
+    @apply input appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23013E75%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22m6%209%206%206%206-6%22%2F%3E%3C%2Fsvg%3E')] bg-[position:right_0.5rem_center] bg-[size:1.5rem] pr-10;
+  }
+  
+  /* Checkbox & Radio */
+  .checkbox,
+  .radio {
+    @apply w-5 h-5 border-2 border-praxis-gray-300 text-praxis-dark-blue focus:ring-4 focus:ring-praxis-blue-200 focus:ring-offset-0 transition-all duration-brand cursor-pointer disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .checkbox {
+    @apply rounded;
+  }
+  
+  .radio {
+    @apply rounded-full;
+  }
+  
+  /* Labels */
+  .label {
+    @apply block mb-2 font-heading uppercase text-sm tracking-brand-wide text-praxis-dark-blue;
+  }
+  
+  .label-required::after {
+    @apply content-['*'] ml-1 text-praxis-brick;
+  }
+  
+  /* Help Text */
+  .help-text {
+    @apply mt-1 text-sm text-praxis-brown;
+  }
+  
+  .error-text {
+    @apply mt-1 text-sm text-praxis-brick font-medium;
+  }
+  
+  .success-text {
+    @apply mt-1 text-sm text-praxis-gold-700 font-medium;
+  }
+  
+  /* Form Group */
+  .form-group {
+    @apply mb-6;
+  }
+  
+  .form-row {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-4 mb-6;
+  }
+  
+  /* ============================================
+     ALERT COMPONENTS
+     ============================================ */
+  
+  .alert {
+    @apply p-4 rounded-lg border-2 font-body relative;
+  }
+  
+  .alert-info {
+    @apply alert bg-praxis-sky-50 border-praxis-sky-300 text-praxis-pine;
+  }
+  
+  .alert-success {
+    @apply alert bg-praxis-gold-50 border-praxis-gold-300 text-praxis-brown;
+  }
+  
+  .alert-warning {
+    @apply alert bg-praxis-yellow-50 border-praxis-yellow-300 text-praxis-brown;
+  }
+  
+  .alert-danger {
+    @apply alert bg-praxis-brick-50 border-praxis-brick-300 text-praxis-brick-900;
+  }
+  
+  .alert-title {
+    @apply font-heading uppercase text-sm tracking-brand-wide mb-2;
+  }
+  
+  .alert-dismissible {
+    @apply pr-10;
+  }
+  
+  .alert-close {
+    @apply absolute top-4 right-4 text-current opacity-70 hover:opacity-100 cursor-pointer transition-opacity duration-brand;
+  }
+  
+  /* ============================================
+     BADGE COMPONENTS
+     ============================================ */
+  
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-heading uppercase tracking-brand-wide;
+  }
+  
+  .badge-primary {
+    @apply badge bg-praxis-dark-blue text-praxis-white;
+  }
+  
+  .badge-secondary {
+    @apply badge bg-praxis-blue text-praxis-white;
+  }
+  
+  .badge-accent {
+    @apply badge bg-praxis-gold text-praxis-dark-blue;
+  }
+  
+  .badge-success {
+    @apply badge bg-praxis-gold-100 text-praxis-gold-800 border border-praxis-gold-300;
+  }
+  
+  .badge-warning {
+    @apply badge bg-praxis-yellow-100 text-praxis-brown border border-praxis-yellow-300;
+  }
+  
+  .badge-danger {
+    @apply badge bg-praxis-brick-100 text-praxis-brick-800 border border-praxis-brick-300;
+  }
+  
+  .badge-info {
+    @apply badge bg-praxis-sky-100 text-praxis-pine border border-praxis-sky-300;
+  }
+  
+  /* ============================================
+     TABLE COMPONENTS
+     ============================================ */
+  
+  .table {
+    @apply w-full border-collapse;
+  }
+  
+  .table-bordered {
+    @apply border border-praxis-gray-200;
+  }
+  
+  .table-striped tbody tr:nth-child(even) {
+    @apply bg-praxis-dark-blue-50;
+  }
+  
+  .table-hover tbody tr {
+    @apply hover:bg-praxis-gold-50 transition-colors duration-brand;
+  }
+  
+  .table thead {
+    @apply bg-praxis-dark-blue-100 border-b-2 border-praxis-dark-blue-200;
+  }
+  
+  .table th {
+    @apply px-4 py-3 text-left font-heading uppercase text-sm tracking-brand-wide text-praxis-dark-blue;
+  }
+  
+  .table td {
+    @apply px-4 py-3 text-praxis-black border-t border-praxis-gray-200;
+  }
+  
+  /* ============================================
+     NAVIGATION COMPONENTS
+     ============================================ */
+  
+  .nav {
+    @apply flex space-x-8;
+  }
+  
+  .nav-item {
+    @apply font-heading uppercase text-sm tracking-brand-wide text-praxis-dark-blue hover:text-praxis-blue transition-colors duration-brand cursor-pointer;
+  }
+  
+  .nav-item-active {
+    @apply nav-item text-praxis-blue border-b-2 border-praxis-gold pb-1;
+  }
+  
+  .nav-vertical {
+    @apply flex flex-col space-y-2 space-x-0;
+  }
+  
+  .nav-vertical .nav-item {
+    @apply px-4 py-2 rounded-lg hover:bg-praxis-dark-blue-50;
+  }
+  
+  .nav-vertical .nav-item-active {
+    @apply bg-praxis-dark-blue-100 border-l-4 border-praxis-gold border-b-0 pb-2;
+  }
+  
+  /* Breadcrumbs */
+  .breadcrumb {
+    @apply flex items-center space-x-2 text-sm;
+  }
+  
+  .breadcrumb-item {
+    @apply text-praxis-blue hover:text-praxis-dark-blue transition-colors duration-brand;
+  }
+  
+  .breadcrumb-separator {
+    @apply text-praxis-gray;
+  }
+  
+  .breadcrumb-current {
+    @apply text-praxis-black font-medium;
+  }
+  
+  /* ============================================
+     MODAL/DIALOG COMPONENTS
+     ============================================ */
+  
+  .modal-backdrop {
+    @apply fixed inset-0 bg-praxis-black bg-opacity-50 z-40;
+  }
+  
+  .modal {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+  }
+  
+  .modal-content {
+    @apply bg-praxis-white rounded-lg shadow-xl max-w-lg w-full max-h-[90vh] overflow-hidden;
+  }
+  
+  .modal-header {
+    @apply px-6 py-4 border-b border-praxis-gray-200 bg-praxis-dark-blue-50;
+  }
+  
+  .modal-title {
+    @apply h4;
+  }
+  
+  .modal-body {
+    @apply px-6 py-4 overflow-y-auto;
+  }
+  
+  .modal-footer {
+    @apply px-6 py-4 border-t border-praxis-gray-200 bg-gray-50 flex justify-end space-x-2;
+  }
+  
+  /* ============================================
+     LOGO UTILITIES
+     ============================================ */
+  
+  .logo-xs {
+    @apply h-8 w-auto;
+  }
+  
+  .logo-sm {
+    @apply h-12 w-auto;
+  }
+  
+  .logo-md {
+    @apply h-16 w-auto;
+  }
+  
+  .logo-lg {
+    @apply h-24 w-auto;
+  }
+  
+  .logo-xl {
+    @apply h-32 w-auto;
+  }
+  
+  .logo-container {
+    @apply p-4; /* Minimum clearspace */
+  }
+  
+  /* ============================================
+     ICON UTILITIES (When approved by PM)
+     ============================================ */
+  
+  .icon-xs {
+    @apply h-4 w-4;
+  }
+  
+  .icon-sm {
+    @apply h-5 w-5;
+  }
+  
+  .icon-md {
+    @apply h-6 w-6;
+  }
+  
+  .icon-lg {
+    @apply h-8 w-8;
+  }
+  
+  .icon-xl {
+    @apply h-10 w-10;
+  }
+  
+  .icon-primary {
+    @apply text-praxis-dark-blue;
+  }
+  
+  .icon-secondary {
+    @apply text-praxis-blue;
+  }
+  
+  .icon-muted {
+    @apply text-praxis-gray;
+  }
+  
+  .icon-accent {
+    @apply text-praxis-gold;
+  }
+  
+  .icon-danger {
+    @apply text-praxis-brick;
+  }
+  
+  .icon-success {
+    @apply text-praxis-gold-700;
+  }
+  
+  /* ============================================
+     UTILITY CLASSES
+     ============================================ */
+  
+  /* Interactive States */
+  .hover-lift {
+    @apply transition-transform duration-brand hover:-translate-y-1;
+  }
+  
+  .hover-glow {
+    @apply transition-shadow duration-brand hover:shadow-lg;
+  }
+  
+  .hover-brighten {
+    @apply transition-opacity duration-brand hover:opacity-90;
+  }
+  
+  .hover-scale {
+    @apply transition-transform duration-brand hover:scale-105;
+  }
+  
+  /* Focus States */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-4 focus:ring-praxis-blue-300 focus:ring-opacity-50;
+  }
+  
+  .focus-ring-gold {
+    @apply focus:outline-none focus:ring-4 focus:ring-praxis-gold-300 focus:ring-opacity-50;
+  }
+  
+  .focus-ring-danger {
+    @apply focus:outline-none focus:ring-4 focus:ring-praxis-brick-300 focus:ring-opacity-50;
+  }
+  
+  /* Active States */
+  .active-scale {
+    @apply active:scale-95 transition-transform duration-75;
+  }
+  
+  .active-darken {
+    @apply active:brightness-90 transition-all duration-75;
+  }
+  
+  /* Transitions */
+  .transition-brand {
+    @apply transition-all duration-brand ease-brand;
+  }
+  
+  .transition-fast {
+    @apply transition-all duration-150 ease-brand;
+  }
+  
+  .transition-slow {
+    @apply transition-all duration-500 ease-brand;
+  }
+  
+  /* Animations */
+  .animate-fade-in {
+    @apply animate-fade-in;
+  }
+  
+  .animate-slide-up {
+    @apply animate-slide-up;
+  }
+  
+  .animate-pulse-subtle {
+    @apply animate-pulse-subtle;
+  }
+  
+  /* Container */
+  .container-praxis {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* Section Spacing */
+  .section-padding {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+  
+  /* Dividers */
+  .divider {
+    @apply border-t border-praxis-gray-200 my-8;
+  }
+  
+  .divider-thick {
+    @apply border-t-2 border-praxis-dark-blue-200 my-8;
+  }
+  
+  .divider-accent {
+    @apply border-t-2 border-praxis-gold my-8;
+  }
+  
+  /* ============================================
+     RESPONSIVE UTILITIES
+     ============================================ */
+  
+  /* Hide/Show utilities */
+  .mobile-only {
+    @apply block md:hidden;
+  }
+  
+  .tablet-up {
+    @apply hidden md:block;
+  }
+  
+  .desktop-only {
+    @apply hidden lg:block;
+  }
+  
+  /* ============================================
+     ACCESSIBILITY
+     ============================================ */
+  
+  /* Screen reader only */
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+  }
+  
+  /* Focus visible only for keyboard navigation */
+  .focus-visible-only:focus:not(:focus-visible) {
+    @apply outline-none ring-0;
+  }
+  
+  /* Skip to content link */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-praxis-dark-blue focus:text-praxis-white focus:rounded-lg;
+  }
+  
+  /* ============================================
+     MOTION PREFERENCES
+     ============================================ */
+  
+  @media (prefers-reduced-motion: reduce) {
+    .transition-brand,
+    .transition-fast,
+    .transition-slow {
+      @apply transition-none;
+    }
+    
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-pulse-subtle {
+      @apply animate-none;
+    }
+    
+    .hover-lift,
+    .hover-scale {
+      @apply hover:transform-none;
+    }
+  }
+  
+  /* ============================================
+     DARK MODE (Optional - extend as needed)
+     ============================================ */
+  
+  @media (prefers-color-scheme: dark) {
+    .dark-mode-auto .card {
+      @apply bg-praxis-pine border-praxis-pine-600 text-praxis-white;
+    }
+    
+    .dark-mode-auto .btn-primary {
+      @apply bg-praxis-sky text-praxis-pine hover:bg-praxis-sky-600;
+    }
+    
+    .dark-mode-auto .input {
+      @apply bg-praxis-pine-800 border-praxis-pine-600 text-praxis-white placeholder-praxis-gray;
+    }
+  }
+  
+  .dark .card {
+    @apply bg-praxis-pine border-praxis-pine-600 text-praxis-white;
+  }
+  
+  .dark .btn-primary {
+    @apply bg-praxis-sky text-praxis-pine hover:bg-praxis-sky-600;
+  }
+  
+  .dark .input {
+    @apply bg-praxis-pine-800 border-praxis-pine-600 text-praxis-white placeholder-praxis-gray;
+  }
+}
+
+/* ============================================
+   CUSTOM FONT FACES
+   ============================================ */
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/Avenir-Medium.woff2') format('woff2'),
+       url('/fonts/Avenir-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('/fonts/Avenir-MediumOblique.woff2') format('woff2'),
+       url('/fonts/Avenir-MediumOblique.woff') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Black';
+  src: url('/fonts/Avenir-Black.woff2') format('woff2'),
+       url('/fonts/Avenir-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Black';
+  src: url('/fonts/Avenir-BlackOblique.woff2') format('woff2'),
+       url('/fonts/Avenir-BlackOblique.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
