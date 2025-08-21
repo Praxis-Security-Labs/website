@@ -1,6 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { PrivacyPolicyContent } from '../../components/sections/PrivacyPolicyContent';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { PrivacyPolicyContent } from '../../../components/sections/PrivacyPolicyContent';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 // SEO and meta configuration
 const title = 'Privacy Policy | Praxis Navigator';
@@ -15,6 +18,7 @@ const structuredData = {
   '@type': 'WebPage',
   name: 'Privacy Policy',
   description: description,
+  inLanguage: 'en-US',
   isPartOf: {
     '@type': 'WebSite',
     name: 'Praxis Navigator',
@@ -40,6 +44,7 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="content"
 >

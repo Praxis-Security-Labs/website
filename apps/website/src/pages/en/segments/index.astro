@@ -1,0 +1,414 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+const title =
+  'For Your Role - Security Solutions by Segment | Praxis Navigator';
+const description =
+  'Tailored security behavior monitoring solutions for Security Leaders, Executives, Managers, and SAT Teams. Find the right approach for your role and organization size.';
+const keywords =
+  'security solutions by role, CISO solutions, executive security, manager tools, SAT team resources, security culture by segment';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Security Solutions by Role',
+  description: description,
+  inLanguage: 'en-US',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Security Leaders & CISOs',
+        description: 'ROI measurement and board-ready reporting',
+        url: '/en/segments/security-leaders',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Board Members & Executives',
+        description: 'Business risk translation and governance',
+        url: '/en/segments/executives',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Department Managers',
+        description: 'Team performance visibility and benchmarking',
+        url: '/en/segments/managers',
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'SAT Teams & Training Coordinators',
+        description: 'Training effectiveness and program optimization',
+        url: '/en/segments/sat-teams',
+      },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  lang={lang}
+  structuredData={structuredData}
+  pageType="content"
+>
+  <main>
+    {/* Hero Section */}
+    <section
+      class="bg-gradient-to-b from-praxis-dark-blue to-praxis-dark-blue-800 text-white py-20"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6"
+          >
+            Solutions <span class="text-praxis-gold">For Your Role</span>
+          </h1>
+          <p class="text-xl text-praxis-light-blue mb-8">
+            Discover how Praxis Navigator transforms security culture
+            measurement for your specific role and organizational needs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* Segments Grid */}
+    <section class="py-20 bg-praxis-light-gray">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Security Leaders */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-blue rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12,1L21,5V11C21,16.55 17.16,21.74 12,23C6.84,21.74 3,16.55 3,11V5L12,1M12,7C10.9,7 10,7.9 10,9C10,10.1 10.9,11 12,11C13.1,11 14,10.1 14,9C14,7.9 13.1,7 12,7M12,13C10.67,13 8,13.67 8,15V16H16V15C16,13.67 13.33,13 12,13Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              Security Leaders & CISOs
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Measure security training ROI and generate board-ready reports
+              with behavioral monitoring data.
+            </p>
+            <ul class="text-sm text-praxis-gray space-y-2 mb-6">
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Prove training ROI with data
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Board-ready compliance reports
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Executive communication tools
+              </li>
+            </ul>
+            <div class="text-center">
+              <a
+                href="/en/segments/security-leaders"
+                class="bg-praxis-blue hover:bg-praxis-blue-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-block"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+
+          {/* Executives */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-orange rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19,3H5C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H19C20.1,21 21,20.1 21,19V5C21,3.9 20.1,3 19,3M12,8C13.66,8 15,9.34 15,11C15,12.66 13.66,14 12,14C10.34,14 9,12.66 9,11C9,9.34 10.34,8 12,8M18,18H6V16.5C6,14.56 9.97,13.5 12,13.5C14.03,13.5 18,14.56 18,16.5V18Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              Board Members & Executives
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Transform security risks into business language with regulatory
+              compliance insights.
+            </p>
+            <ul class="text-sm text-praxis-gray space-y-2 mb-6">
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Business risk translation
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Regulatory compliance tracking
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Investment ROI measurement
+              </li>
+            </ul>
+            <div class="text-center">
+              <a
+                href="/en/segments/executives"
+                class="bg-praxis-orange hover:bg-praxis-orange-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-block"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+
+          {/* Managers */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-green rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16,4C16.88,4 17.67,4.5 18,5.26L20,9H4L6,5.26C6.33,4.5 7.12,4 8,4H16M18,10V16H16V10H18M8,10V16H6V10H8M4,17H20V19H4V17Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              Department Managers
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Monitor and improve your team&apos;s security performance with
+              benchmarking capabilities.
+            </p>
+            <ul class="text-sm text-praxis-gray space-y-2 mb-6">
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Team performance visibility
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Benchmarking capabilities
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Improvement tracking
+              </li>
+            </ul>
+            <div class="text-center">
+              <a
+                href="/en/segments/managers"
+                class="bg-praxis-green hover:bg-praxis-green-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-block"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+
+          {/* SAT Teams */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-purple rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12,3L1,9L12,15L21,10.09V17H23V9M5,13.18V17.18L12,21L19,17.18V13.18L12,17L5,13.18Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              SAT Teams & Training Coordinators
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Enhance training programs with behavioral measurement and access
+              research resources.
+            </p>
+            <ul class="text-sm text-praxis-gray space-y-2 mb-6">
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Training effectiveness measurement
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Program optimization
+              </li>
+              <li class="flex items-center">
+                <svg
+                  class="w-4 h-4 text-praxis-green mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                  ></path>
+                </svg>
+                Research hub access
+              </li>
+            </ul>
+            <div class="text-center">
+              <a
+                href="/en/segments/sat-teams"
+                class="bg-praxis-purple hover:bg-praxis-purple-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors inline-block"
+              >
+                Learn More
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* CTA Section */}
+    <section class="py-20 bg-praxis-dark-blue text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">
+          Ready to Find Your Solution?
+        </h2>
+        <p class="text-xl text-praxis-light-blue mb-8 max-w-3xl mx-auto">
+          Discover how Praxis Navigator can transform security culture
+          measurement for your specific role and organizational needs.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/en/pricing"
+            class="bg-praxis-orange hover:bg-praxis-orange-dark text-white px-8 py-4 rounded-lg font-semibold transition-colors"
+          >
+            Start Free Trial
+          </a>
+          <a
+            href="/contact"
+            class="border border-praxis-light-blue text-praxis-light-blue hover:bg-praxis-light-blue hover:text-praxis-dark-blue px-8 py-4 rounded-lg font-semibold transition-colors"
+          >
+            Contact Our Experts
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

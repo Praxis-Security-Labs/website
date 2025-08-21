@@ -1,8 +1,11 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { AboutHeroSection } from '../../components/sections/AboutHeroSection';
-import { ProfessionalTimelineSection } from '../../components/sections/ProfessionalTimelineSection';
-import { PublicationsSection } from '../../components/sections/PublicationsSection';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'no'
+import { AboutHeroSection } from '../../../components/sections/AboutHeroSection';
+import { ProfessionalTimelineSection } from '../../../components/sections/ProfessionalTimelineSection';
+import { PublicationsSection } from '../../../components/sections/PublicationsSection';
 
 // SEO Configuration for About Page
 const title =
@@ -142,6 +145,7 @@ const combinedSchema = {
   structuredData={combinedSchema}
   ogImage="/images/about/kai-roer-og-image.png"
   ogType="profile"
+  lang={lang}
 >
   <!-- Breadcrumb Navigation -->
   <nav aria-label="Breadcrumb" class="bg-praxis-tan-50 py-4">

@@ -1,6 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CookiePolicyContent } from '../../components/sections/CookiePolicyContent';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CookiePolicyContent } from '../../../components/sections/CookiePolicyContent';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 // SEO and meta configuration
 const title = 'Cookie Policy | Praxis Navigator';
@@ -15,6 +18,7 @@ const structuredData = {
   '@type': 'WebPage',
   name: 'Cookie Policy',
   description: description,
+  inLanguage: 'en-US',
   isPartOf: {
     '@type': 'WebSite',
     name: 'Praxis Navigator',
@@ -40,6 +44,7 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="content"
 >

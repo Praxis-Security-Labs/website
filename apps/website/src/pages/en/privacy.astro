@@ -1,5 +1,8 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 // Get language from URL or default to English
 const url = Astro.url;
@@ -446,7 +449,7 @@ const structuredData = {
 <BaseLayout
   title={t.title}
   description={t.sections.introduction.content.substring(0, 160)}
-  lang={currentLanguage}
+  lang={lang}
   structuredData={structuredData}
   pageType="content"
 >

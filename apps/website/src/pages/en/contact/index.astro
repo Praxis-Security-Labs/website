@@ -1,5 +1,8 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 const title = 'Contact & Demo - Get Started with Praxis Navigator';
 const description =
@@ -12,6 +15,7 @@ const structuredData = {
   '@type': 'ContactPage',
   name: 'Contact & Demo',
   description: description,
+  inLanguage: 'en-US',
   mainEntity: {
     '@type': 'Organization',
     name: 'Praxis Navigator',
@@ -32,6 +36,7 @@ const structuredData = {
   keywords={keywords}
   structuredData={structuredData}
   pageType="contact"
+  lang={lang}
 >
   <main>
     {/* Hero Section */}

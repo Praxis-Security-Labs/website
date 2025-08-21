@@ -1,10 +1,13 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { ProductHeroSection } from '../../components/sections/ProductHeroSection';
-import { ProcessFlowSection } from '../../components/sections/ProcessFlowSection';
-import { GraphIntegrationSection } from '../../components/sections/GraphIntegrationSection';
-import { FeaturesCapabilitiesSection } from '../../components/sections/FeaturesCapabilitiesSection';
-import { ProblemSolutionSection } from '../../components/sections/ProblemSolutionSection';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ProductHeroSection } from '../../../components/sections/ProductHeroSection';
+import { ProcessFlowSection } from '../../../components/sections/ProcessFlowSection';
+import { GraphIntegrationSection } from '../../../components/sections/GraphIntegrationSection';
+import { FeaturesCapabilitiesSection } from '../../../components/sections/FeaturesCapabilitiesSection';
+import { ProblemSolutionSection } from '../../../components/sections/ProblemSolutionSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'no'
 
 // SEO Configuration for Product Overview Page
 const title =
@@ -23,6 +26,7 @@ const productSchema = {
   applicationSubCategory: 'Behavioral Security Monitoring',
   operatingSystem: 'Microsoft 365',
   description: description,
+  inLanguage: 'no-NO',
   url: 'https://praxisnavigator.io/product',
   screenshot:
     'https://praxisnavigator.io/images/product/dashboard-screenshot.png',
@@ -137,6 +141,7 @@ const combinedSchema = {
   structuredData={combinedSchema}
   ogImage="/images/product/product-overview-og.png"
   ogType="website"
+  lang={lang}
 >
   <!-- Breadcrumb Navigation -->
   <nav aria-label="Breadcrumb" class="bg-praxis-tan-50 py-4">

@@ -1,6 +1,9 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { TermsOfServiceContent } from '../../components/sections/TermsOfServiceContent';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { TermsOfServiceContent } from '../../../components/sections/TermsOfServiceContent';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 // SEO and meta configuration
 const title = 'Terms of Service | Praxis Navigator';
@@ -15,6 +18,7 @@ const structuredData = {
   '@type': 'WebPage',
   name: 'Terms of Service',
   description: description,
+  inLanguage: 'en-US',
   isPartOf: {
     '@type': 'WebSite',
     name: 'Praxis Navigator',
@@ -39,6 +43,7 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="content"
 >

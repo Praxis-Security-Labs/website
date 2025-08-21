@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ProductHeroSection } from '../../../components/sections/ProductHeroSection';
+import { ProcessFlowSection } from '../../../components/sections/ProcessFlowSection';
+import { GraphIntegrationSection } from '../../../components/sections/GraphIntegrationSection';
+import { FeaturesCapabilitiesSection } from '../../../components/sections/FeaturesCapabilitiesSection';
+import { ProblemSolutionSection } from '../../../components/sections/ProblemSolutionSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+// SEO Configuration for Product Overview Page
+const title =
+  'Microsoft Graph API Security Monitoring | Praxis Navigator Technical Overview';
+const description =
+  'Discover how Praxis Navigator uses Microsoft Graph API for continuous behavioral security monitoring. Enterprise-grade privacy, SOC2 compliance, and zero-infrastructure deployment.';
+const keywords =
+  'Microsoft Graph API security, behavioral monitoring platform, continuous security assessment, Microsoft 365 integration, enterprise security monitoring, behavioral analytics, security compliance reporting';
+
+// Structured Data for Product/Software Application
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Praxis Navigator',
+  applicationCategory: 'Security Software',
+  applicationSubCategory: 'Behavioral Security Monitoring',
+  operatingSystem: 'Microsoft 365',
+  description: description,
+  inLanguage: 'en-US',
+  url: 'https://praxisnavigator.io/product',
+  screenshot:
+    'https://praxisnavigator.io/images/product/dashboard-screenshot.png',
+  downloadUrl: 'https://azuremarketplace.microsoft.com/praxis-navigator',
+  installUrl: 'https://azuremarketplace.microsoft.com/praxis-navigator',
+  author: {
+    '@type': 'Person',
+    name: 'Kai Roer',
+    jobTitle: 'Security Culture Expert',
+    url: 'https://praxisnavigator.io/about/kai-roer',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Praxis Security Labs',
+    url: 'https://praxisnavigator.io',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free trial available through Azure Marketplace',
+    availability: 'https://schema.org/InStock',
+    validFrom: '2024-01-01',
+  },
+  featureList: [
+    'Microsoft Graph API Integration',
+    'Behavioral Security Monitoring',
+    'Risk Scoring Engine',
+    'Compliance Reporting',
+    'Executive Dashboards',
+    'Trend Analysis & Forecasting',
+    'Intelligent Alert System',
+    'SOC2 Type II Compliance',
+    'GDPR Privacy Controls',
+    'Zero Infrastructure Deployment',
+  ],
+  requirements: 'Microsoft 365 E3/E5 License, Azure AD Integration',
+  softwareVersion: '2.1',
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5',
+    worstRating: '1',
+    ratingCount: '127',
+  },
+};
+
+// Breadcrumb Schema for Product Page
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://praxisnavigator.io',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Product',
+      item: 'https://praxisnavigator.io/product',
+    },
+  ],
+};
+
+// FAQ Schema for Technical Questions
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How does Microsoft Graph API behavioral monitoring work?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Praxis Navigator connects to your Microsoft 365 environment through secure OAuth 2.0 authentication with read-only permissions. It analyzes behavioral patterns across Exchange Online, SharePoint, OneDrive, Teams, and Azure AD logs to provide insights into actual security behaviors without collecting PII or disrupting workflows.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What data privacy controls are in place?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Praxis Navigator follows a privacy-first design with no PII collection, SOC2 Type II certification, GDPR compliance, and encrypted data transmission. We only collect anonymized behavioral patterns and security-relevant metrics, never email content, file contents, or personal information.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: 'What are the technical requirements for deployment?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Requirements include Microsoft 365 E3/E5 licensing, Azure AD integration, and security admin consent for Graph API access. Setup takes approximately 15 minutes with zero infrastructure requirements on your end.',
+      },
+    },
+  ],
+};
+
+// Combine structured data
+const combinedSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [productSchema, breadcrumbSchema, faqSchema],
+} as Record<string, unknown>;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="product"
+  structuredData={combinedSchema}
+  ogImage="/images/product/product-overview-og.png"
+  ogType="website"
+  lang={lang}
+>
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="Breadcrumb" class="bg-praxis-tan-50 py-4">
+    <div class="container mx-auto px-6">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a
+            href="/"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Home
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li aria-current="page" class="text-praxis-dark-blue font-medium">
+          Product Overview
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <ProductHeroSection client:load />
+  <ProcessFlowSection />
+  <GraphIntegrationSection />
+  <FeaturesCapabilitiesSection />
+
+  <!-- Competitive Differentiation (Reuse ProblemSolutionSection) -->
+  <ProblemSolutionSection />
+
+  <!-- Technical Requirements & Final CTA Section -->
+  <section class="py-20 bg-praxis-blue-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="h2 text-praxis-dark-blue mb-8">
+          Ready to Experience Behavioral Security Monitoring?
+        </h2>
+
+        <p class="body-large text-praxis-pine mb-12">
+          Transform your Microsoft 365 environment into a comprehensive security
+          behavior monitoring system. Connect Microsoft Graph API data to
+          actionable security intelligence.
+        </p>
+
+        <!-- Technical Requirements Summary -->
+        <div class="bg-praxis-white rounded-xl p-8 shadow-lg mb-12">
+          <h3 class="h4 text-praxis-dark-blue mb-6">Technical Requirements</h3>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="text-left">
+              <h4 class="h6 text-praxis-dark-blue mb-4">Required:</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Microsoft 365 E3/E5 licensing</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Azure AD integration and admin consent</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Security administrator permissions</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="text-left">
+              <h4 class="h6 text-praxis-dark-blue mb-4">Setup Benefits:</h4>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >15-minute deployment process</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Zero infrastructure requirements</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Immediate behavioral insights</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Three-Option CTA Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-praxis-white rounded-xl p-6 shadow-md">
+            <h3 class="h5 text-praxis-dark-blue mb-4">Request Demo</h3>
+            <p class="body-small text-praxis-brown mb-6">
+              See the platform in action with your Microsoft 365 data
+            </p>
+            <a
+              href="/demo"
+              class="btn-accent btn-lg hover-lift active-scale focus-ring-gold w-full"
+              aria-label="Request a personalized demo of Praxis Navigator"
+            >
+              Schedule Demo
+            </a>
+          </div>
+
+          <div
+            class="bg-praxis-white rounded-xl p-6 shadow-md border-2 border-praxis-gold"
+          >
+            <div
+              class="bg-praxis-gold text-praxis-dark-blue px-3 py-1 rounded-full text-sm font-heading uppercase tracking-brand-wide mb-4 inline-block"
+            >
+              Recommended
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-4">Start Free Trial</h3>
+            <p class="body-small text-praxis-brown mb-6">
+              30-day risk-free evaluation with full platform access
+            </p>
+            <a
+              href="/trial"
+              class="btn-primary btn-lg hover-lift active-scale focus-ring w-full"
+              aria-label="Start your free 30-day trial of Praxis Navigator"
+            >
+              Start Trial
+            </a>
+          </div>
+
+          <div class="bg-praxis-white rounded-xl p-6 shadow-md">
+            <h3 class="h5 text-praxis-dark-blue mb-4">Azure Marketplace</h3>
+            <p class="body-small text-praxis-brown mb-6">
+              Enterprise deployment through Microsoft marketplace
+            </p>
+            <a
+              href="https://azuremarketplace.microsoft.com/praxis-navigator"
+              class="btn-secondary btn-lg hover-lift active-scale focus-ring w-full"
+              aria-label="Deploy Praxis Navigator through Azure Marketplace"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Marketplace
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb navigation styles */
+  nav[aria-label='Breadcrumb'] {
+    border-bottom: 1px solid #e5e5e5;
+  }
+</style>
