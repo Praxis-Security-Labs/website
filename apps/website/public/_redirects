@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects and routing configuration
+
+# Static site - no redirects needed for current setup
+# Future SPA routes would go here
+
+# Security headers (handled by Cloudflare settings)
+# Cache configuration (handled by Cloudflare settings)

@@ -1,14 +1,57 @@
 {
-  "name": "src",
+  "name": "praxis-website",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
+    "build:fast": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "lint": "eslint . --ext .ts,.tsx,.astro",
+    "lint:fix": "eslint . --ext .ts,.tsx,.astro --fix",
+    "type-check": "astro check",
+    "test": "vitest",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "test:watch": "vitest",
+    "test:all": "npm run lint && npm run type-check && npm run test:unit && npm run build:fast",
+    "clean": "rm -rf dist .astro",
+    "astro": "astro",
+    "prepare": "husky"
   },
   "dependencies": {
-    "astro": "^5.13.2"
+    "astro": "^3.0.0",
+    "@astrojs/react": "^3.0.0",
+    "@astrojs/tailwind": "^5.0.0",
+    "@astrojs/check": "^0.5.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-astro": "^0.29.0",
+    "eslint-plugin-jsx-a11y": "^6.7.0",
+    "eslint-plugin-react": "^7.33.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "astro-eslint-parser": "^0.16.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-astro": "^0.12.0",
+    "@tailwindcss/typography": "^0.5.0",
+    "vitest": "^0.34.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/coverage-v8": "^0.34.0",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/user-event": "^14.0.0",
+    "jsdom": "^22.0.0",
+    "@playwright/test": "^1.37.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.0"
   }
 }

@@ -1,0 +1,28 @@
+---
+import '@/styles/globals.css';
+import { SampleComponent } from '@/components/ui/SampleComponent';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Praxis Security Labs - Setup Complete</title>
+  </head>
+  <body class="bg-praxis-white min-h-screen">
+    <div class="container mx-auto p-8">
+      <h1 class="h1 mb-8">Praxis Security Labs</h1>
+      <p class="body-large mb-8 text-praxis-brown">
+        Development Environment Setup Complete
+      </p>
+
+      <SampleComponent
+        client:load
+        title="Praxis Design System Test"
+        message="This component demonstrates the Praxis design system integration with Tailwind CSS theme configuration."
+      />
+    </div>
+  </body>
+</html>

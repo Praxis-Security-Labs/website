@@ -1,0 +1,58 @@
+# GitHub Actions workflow to validate builds before Cloudflare Pages deployment
+name: Validate Build
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'apps/website/**'
+      - 'packages/**'
+      - '.github/workflows/**'
+  
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  validate-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Install website dependencies
+        run: cd apps/website && npm ci
+      
+      - name: Run linting
+        run: cd apps/website && npm run lint
+      
+      - name: Run type checking
+        run: cd apps/website && npm run type-check
+      
+      - name: Build website
+        run: cd apps/website && npm run build
+      
+      - name: Verify build output
+        run: |
+          if [ ! -d "apps/website/dist" ]; then
+            echo "❌ Build output directory not found"
+            exit 1
+          fi
+          
+          if [ ! -f "apps/website/dist/index.html" ]; then
+            echo "❌ Main HTML file not generated"
+            exit 1
+          fi
+          
+          echo "✅ Build validation passed"
+          echo "📁 Build output structure:"
+          find apps/website/dist -type f | head -10

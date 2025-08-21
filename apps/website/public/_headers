@@ -1,0 +1,28 @@
+# Cloudflare Pages custom headers for performance optimization
+
+# Security and performance headers for all routes
+/*
+  # Security headers
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-XSS-Protection: 1; mode=block
+
+  # Performance headers
+  X-DNS-Prefetch-Control: on
+
+# Cache headers for static assets
+/_astro/*
+  # Long cache for hashed assets (1 year)
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache headers for images and fonts  
+/images/*
+  Cache-Control: public, max-age=2592000
+  
+/fonts/*
+  Cache-Control: public, max-age=31536000
+
+# HTML files - no cache for dynamic content
+/*.html
+  Cache-Control: public, max-age=0, s-maxage=86400
