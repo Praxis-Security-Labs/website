@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+// Set the response status to 404
+Astro.response.status = 404;
+
 // Get language from URL or default to English
 const url = Astro.url;
 const isNorwegian = url.pathname.startsWith('/no/');
