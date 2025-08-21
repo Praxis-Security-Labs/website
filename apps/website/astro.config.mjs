@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,10 +10,23 @@ export default defineConfig({
     react(),
     tailwind({
       applyBaseStyles: false, // Let Praxis handle base styles
+    }),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en-US',
+          no: 'nb-NO',
+        },
+      },
+      filter: (page) => {
+        // Exclude staging and development pages from sitemap
+        return !page.includes('staging') && !page.includes('dev') && !page.includes('test');
+      },
     })
   ],
   output: 'static',
-  site: 'https://praxis-website.pages.dev', // Will be updated with actual Cloudflare Pages URL
+  site: 'https://praxisnavigator.io',
   build: {
     format: 'directory',
     inlineStylesheets: 'auto', // Inline small CSS files for better performance

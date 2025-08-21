@@ -1,0 +1,69 @@
+---
+/**
+ * StructuredData component for consistent JSON-LD schema markup
+ * Supports Organization, Person, SoftwareApplication, and FAQ schemas
+ */
+
+export interface Props {
+  type:
+    | 'organization'
+    | 'person'
+    | 'software'
+    | 'faq'
+    | 'breadcrumb'
+    | 'custom';
+  data?: Record<string, unknown>;
+  faqs?: Array<{ question: string; answer: string }>;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+}
+
+import {
+  createOrganizationSchema,
+  createPersonSchema,
+  createSoftwareApplicationSchema,
+  createFAQSchema,
+  createBreadcrumbSchema,
+} from '../../utils/seo';
+
+const { type, data, faqs = [], breadcrumbs = [] } = Astro.props;
+
+let schemaData: Record<string, unknown> = {};
+
+switch (type) {
+  case 'organization':
+    schemaData = createOrganizationSchema();
+    break;
+  case 'person':
+    schemaData = createPersonSchema();
+    break;
+  case 'software':
+    schemaData = createSoftwareApplicationSchema();
+    break;
+  case 'faq':
+    schemaData = createFAQSchema(faqs);
+    break;
+  case 'breadcrumb':
+    schemaData = createBreadcrumbSchema(breadcrumbs);
+    break;
+  case 'custom':
+    schemaData = data || {};
+    break;
+  default:
+    schemaData = {};
+}
+
+// Merge with additional data if provided
+if (data && type !== 'custom') {
+  schemaData = { ...schemaData, ...data };
+}
+---
+
+{
+  schemaData && Object.keys(schemaData).length > 0 && (
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(schemaData)}
+    />
+  )
+}
