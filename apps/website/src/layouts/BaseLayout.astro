@@ -267,7 +267,7 @@ const organizationSchema = {
             return;
           }
 
-          // Don't redirect if this appears to be a manual language switch
+          // Check if this is a manual language switch by looking at referrer
           if (
             document.referrer &&
             new URL(document.referrer).hostname === window.location.hostname
@@ -275,12 +275,37 @@ const organizationSchema = {
             const referrerPath = new URL(document.referrer).pathname;
             const referrerLanguage = getLanguageFromPath(referrerPath);
 
-            // If coming from the other language version, this is likely a manual switch
+            // Only update preference if:
+            // 1. Coming from the opposite language (manual switch)
+            // 2. AND the current URL language is different from stored preference
+            // 3. AND this looks like a direct language switch (same page, different language)
             if (referrerLanguage !== urlLanguage) {
-              try {
-                localStorage.setItem(LANGUAGE_PREFERENCE_KEY, urlLanguage);
-              } catch {
-                // localStorage not available
+              // Check if this is the same page in different language (manual switch)
+              let referrerWithoutLang = referrerPath;
+              if (referrerPath.startsWith('/en/')) {
+                referrerWithoutLang = referrerPath.substring(3);
+              } else if (referrerPath.startsWith('/no/')) {
+                referrerWithoutLang = referrerPath.substring(3);
+              } else if (referrerPath === '/' || referrerPath === '/en') {
+                referrerWithoutLang = '';
+              }
+
+              let currentWithoutLang = currentPath;
+              if (currentPath.startsWith('/en/')) {
+                currentWithoutLang = currentPath.substring(3);
+              } else if (currentPath.startsWith('/no/')) {
+                currentWithoutLang = currentPath.substring(3);
+              } else if (currentPath === '/' || currentPath === '/en') {
+                currentWithoutLang = '';
+              }
+
+              // Only update preference if it's the same page (manual language switch)
+              if (referrerWithoutLang === currentWithoutLang) {
+                try {
+                  localStorage.setItem(LANGUAGE_PREFERENCE_KEY, urlLanguage);
+                } catch {
+                  // localStorage not available
+                }
               }
               return;
             }
