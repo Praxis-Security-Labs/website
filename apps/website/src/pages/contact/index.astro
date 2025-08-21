@@ -1,0 +1,584 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Contact & Demo - Get Started with Praxis Navigator';
+const description =
+  'Contact us for demos, consultations, and support. Schedule a personalized demo of Praxis Navigator security behavior monitoring platform with Kai Roer and team.';
+const keywords =
+  'contact Praxis Navigator, schedule demo, security culture consultation, Kai Roer contact, behavioral monitoring demo, enterprise security solutions';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact & Demo',
+  description: description,
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      availableLanguage: ['English', 'Norwegian'],
+      areaServed: 'Worldwide',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="contact"
+>
+  <main>
+    {/* Hero Section */}
+    <section
+      class="bg-gradient-to-b from-praxis-dark-blue to-praxis-dark-blue-800 text-white py-20"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6"
+          >
+            <span class="text-praxis-gold">Contact & Demo</span>
+          </h1>
+          <p class="text-xl text-praxis-light-blue mb-8">
+            Ready to transform your security culture measurement? Schedule a
+            personalized demo or consultation with our team of experts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* Contact Options */}
+    <section class="py-20 bg-praxis-light-gray">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Schedule a Demo */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div class="text-center">
+              <div
+                class="w-16 h-16 bg-praxis-gold rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <svg
+                  class="w-8 h-8 text-praxis-dark-blue"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"
+                  ></path>
+                </svg>
+              </div>
+              <h3
+                class="text-2xl font-heading font-bold text-praxis-dark-blue mb-4"
+              >
+                Schedule a Demo
+              </h3>
+              <p class="text-praxis-gray mb-6">
+                See Praxis Navigator in action with a personalized 30-minute
+                demo tailored to your organization&rsquo;s needs.
+              </p>
+              <ul class="text-left text-praxis-gray text-sm mb-6 space-y-2">
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Live platform walkthrough
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Custom use case discussion
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  ROI analysis for your organization
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Implementation planning
+                </li>
+              </ul>
+              <a href="/pricing" class="btn-primary w-full text-center block">
+                Book Demo Now
+              </a>
+            </div>
+          </div>
+
+          {/* Expert Consultation */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div class="text-center">
+              <div
+                class="w-16 h-16 bg-praxis-blue rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-6h3v7c0 .55.45 1 1 1h9c.55 0 1-.45 1-1v-7h3v6h4v2H0v-2h4z"
+                  ></path>
+                </svg>
+              </div>
+              <h3
+                class="text-2xl font-heading font-bold text-praxis-dark-blue mb-4"
+              >
+                Expert Consultation
+              </h3>
+              <p class="text-praxis-gray mb-6">
+                Get strategic guidance from Kai Roer and our team of security
+                culture experts.
+              </p>
+              <ul class="text-left text-praxis-gray text-sm mb-6 space-y-2">
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Security culture assessment
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Custom measurement strategy
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Implementation roadmap
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Executive presentations
+                </li>
+              </ul>
+              <a
+                href="#consultation-form"
+                class="btn-primary w-full text-center block"
+              >
+                Request Consultation
+              </a>
+            </div>
+          </div>
+
+          {/* Speaking & Training */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div class="text-center">
+              <div
+                class="w-16 h-16 bg-praxis-green rounded-full flex items-center justify-center mx-auto mb-6"
+              >
+                <svg
+                  class="w-8 h-8 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3
+                class="text-2xl font-heading font-bold text-praxis-dark-blue mb-4"
+              >
+                Speaking & Training
+              </h3>
+              <p class="text-praxis-gray mb-6">
+                Book Kai Roer for keynotes, workshops, and training sessions on
+                security culture.
+              </p>
+              <ul class="text-left text-praxis-gray text-sm mb-6 space-y-2">
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Conference keynotes
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Executive workshops
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Team training sessions
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Custom presentations
+                </li>
+              </ul>
+              <a
+                href="#speaking-form"
+                class="btn-primary w-full text-center block"
+              >
+                Book Speaking
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Contact Forms */}
+    <section class="py-20 bg-white" id="consultation-form">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2
+            class="text-3xl font-heading font-bold text-praxis-dark-blue mb-6"
+          >
+            Get In Touch
+          </h2>
+          <p class="text-xl text-praxis-gray">
+            Choose the option that best fits your needs, and we&rsquo;ll get
+            back to you within 24 hours.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* General Contact Form */}
+          <div class="bg-praxis-light-gray p-8 rounded-lg">
+            <h3
+              class="text-2xl font-heading font-bold text-praxis-dark-blue mb-6"
+            >
+              General Inquiry
+            </h3>
+            <form class="space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="first-name"
+                    class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                  >
+                    First Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="first-name"
+                    required
+                    class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="last-name"
+                    class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                  >
+                    Last Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="last-name"
+                    required
+                    class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Email Address *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="company"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Company
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="role"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Your Role
+                </label>
+                <select
+                  id="role"
+                  name="role"
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                >
+                  <option value="">Select your role</option>
+                  <option value="ciso">CISO / Security Leader</option>
+                  <option value="executive">C-Level Executive</option>
+                  <option value="manager">Mid-Level Manager</option>
+                  <option value="sat-team">SAT Team Member</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="message"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  required
+                  placeholder="Tell us about your security culture challenges and goals..."
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-accent w-full">
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          {/* Speaking Request Form */}
+          <div class="bg-praxis-light-gray p-8 rounded-lg" id="speaking-form">
+            <h3
+              class="text-2xl font-heading font-bold text-praxis-dark-blue mb-6"
+            >
+              Speaking Request
+            </h3>
+            <form class="space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label
+                    htmlFor="event-name"
+                    class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                  >
+                    Event Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="event-name"
+                    name="event-name"
+                    required
+                    class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="event-date"
+                    class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                  >
+                    Event Date
+                  </label>
+                  <input
+                    type="date"
+                    id="event-date"
+                    name="event-date"
+                    class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contact-email"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Contact Email *
+                </label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="contact-email"
+                  required
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="organization"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Organization *
+                </label>
+                <input
+                  type="text"
+                  id="organization"
+                  name="organization"
+                  required
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="session-type"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Session Type
+                </label>
+                <select
+                  id="session-type"
+                  name="session-type"
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                >
+                  <option value="">Select session type</option>
+                  <option value="keynote">Keynote Presentation</option>
+                  <option value="workshop">Workshop</option>
+                  <option value="panel">Panel Discussion</option>
+                  <option value="training">Training Session</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="event-details"
+                  class="block text-sm font-semibold text-praxis-dark-blue mb-2"
+                >
+                  Event Details *
+                </label>
+                <textarea
+                  id="event-details"
+                  name="event-details"
+                  rows="4"
+                  required
+                  placeholder="Tell us about your event, audience, desired topics, and any specific requirements..."
+                  class="w-full px-4 py-3 border border-praxis-gray rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-accent w-full">
+                Submit Speaking Request
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Contact Information */}
+    <section class="py-20 bg-praxis-dark-blue text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-heading font-bold mb-6">
+            Other Ways to Connect
+          </h2>
+          <p class="text-xl text-praxis-light-blue">
+            Multiple channels to reach us and get the support you need.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-praxis-gold rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-praxis-dark-blue"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-heading font-bold mb-2">Email</h3>
+            <p class="text-praxis-light-blue">contact@praxisnavigator.io</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-praxis-blue rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-heading font-bold mb-2">LinkedIn</h3>
+            <p class="text-praxis-light-blue">@PraxisNavigator</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-praxis-green rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-heading font-bold mb-2">Support</h3>
+            <p class="text-praxis-light-blue">help@praxisnavigator.io</p>
+          </div>
+
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-praxis-purple rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-heading font-bold mb-2">Media</h3>
+            <p class="text-praxis-light-blue">media@praxisnavigator.io</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Response Time */}
+    <section class="py-16 bg-praxis-light-gray">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-heading font-bold text-praxis-dark-blue mb-6">
+          Our Commitment to You
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <div class="text-4xl font-bold text-praxis-gold mb-2">24h</div>
+            <div class="text-praxis-gray">Response Time</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-praxis-gold mb-2">100%</div>
+            <div class="text-praxis-gray">Follow-up Guarantee</div>
+          </div>
+          <div>
+            <div class="text-4xl font-bold text-praxis-gold mb-2">25+</div>
+            <div class="text-praxis-gray">Years of Expertise</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

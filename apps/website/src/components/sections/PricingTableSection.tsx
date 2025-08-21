@@ -18,7 +18,7 @@ interface PricingTier {
 }
 
 export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
-  language = 'en' as 'en' | 'no',
+  language = 'en',
 }) => {
   const [billingPeriod, setBillingPeriod] = useState<'monthly' | 'annual'>(
     'annual'
@@ -136,7 +136,8 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
               'Bespoke onboarding',
             ],
             ctaText: 'Contact Sales',
-            ctaUrl: language === 'no' ? '/no/contact' : '/contact',
+            ctaUrl:
+              (language as 'en' | 'no') === 'no' ? '/no/contact' : '/contact',
             supportLevel: 'Priority phone & email support with SLA',
           },
         ]

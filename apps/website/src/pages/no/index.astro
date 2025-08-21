@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { HeroSection } from '../../components/sections/HeroSection';
+import { AuthoritySection } from '../../components/sections/AuthoritySection';
+import { ProblemSolutionSection } from '../../components/sections/ProblemSolutionSection';
+import { SocialProofSection } from '../../components/sections/SocialProofSection';
+
+// SEO Configuration for Norwegian Homepage
+const title = 'Sikkerheitsatferd Overvåking | Praxis Navigator av Kai Roer';
+const description =
+  'Mål faktisk sikkerheitsatferd med Microsoft Graph API overvåking. Slutt å gjette, begynn å måle. Evidensbasert sikkerheitskultur forbedring av sikkerheitsekspert Kai Roer.';
+const keywords =
+  'sikkerheitsatferd overvåking, SAT effektivitet, Microsoft Graph sikkerhet, sikkerheitskultur måling, atferdsanalyse, Kai Roer, sikkerhetstrening ROI';
+
+// Structured Data for Norwegian Homepage
+const homepageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Praxis Navigator',
+  applicationCategory: 'Security Software',
+  operatingSystem: 'Microsoft 365',
+  description: description,
+  inLanguage: 'no',
+  author: {
+    '@type': 'Person',
+    name: 'Kai Roer',
+    jobTitle: 'Sikkerheitskultur Ekspert',
+    url: 'https://praxisnavigator.io/no/about/kai-roer',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'NOK',
+    description: 'Gratis prøveversjon tilgjengelig',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    bestRating: '5',
+    worstRating: '1',
+    ratingCount: '47',
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="homepage"
+  structuredData={homepageSchema}
+  ogImage="/images/og-praxis-navigator-homepage-no.png"
+  ogType="website"
+  lang="no"
+>
+  <HeroSection client:load />
+  <AuthoritySection />
+  <ProblemSolutionSection />
+  <SocialProofSection />
+</BaseLayout>

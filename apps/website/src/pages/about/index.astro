@@ -1,0 +1,332 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'About Praxis Navigator & Kai Roer - Security Culture Pioneers';
+const description =
+  'Learn about Praxis Navigator and its creator Kai Roer, pioneer of security culture measurement and the framework adopted by ENISA. 25+ years of research in behavioral security monitoring.';
+const keywords =
+  'about Praxis Navigator, Kai Roer biography, security culture framework, ENISA adoption, behavioral monitoring history, security culture research';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Praxis Navigator',
+  description: description,
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Praxis Navigator',
+    description:
+      'Security behavior monitoring platform created by security culture pioneer Kai Roer',
+    founder: {
+      '@type': 'Person',
+      name: 'Kai Roer',
+      jobTitle: 'Security Culture Pioneer',
+      url: '/about/kai-roer',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="about"
+>
+  <main>
+    {/* Hero Section */}
+    <section
+      class="bg-gradient-to-b from-praxis-dark-blue to-praxis-dark-blue-800 text-white py-20"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6"
+          >
+            About <span class="text-praxis-gold">Praxis Navigator</span>
+          </h1>
+          <p class="text-xl text-praxis-light-blue mb-8">
+            Born from 25+ years of pioneering security culture research and
+            real-world application. Created by the expert whose framework was
+            adopted by ENISA for EU security guidelines.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* Story Section */}
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+          <div class="text-center mb-16">
+            <h2
+              class="text-3xl font-heading font-bold text-praxis-dark-blue mb-6"
+            >
+              The Story Behind the Platform
+            </h2>
+            <p class="text-xl text-praxis-gray">
+              From academic research to industry adoption, Praxis Navigator
+              represents the evolution of security culture measurement into a
+              practical, scalable solution.
+            </p>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16"
+          >
+            <div>
+              <h3
+                class="text-2xl font-heading font-bold text-praxis-dark-blue mb-4"
+              >
+                Research Foundation
+              </h3>
+              <p class="text-praxis-gray mb-6">
+                Praxis Navigator is built on decades of academic research and
+                real-world validation. Every measurement methodology, behavioral
+                indicator, and reporting framework has been tested and refined
+                through extensive field studies.
+              </p>
+              <ul class="space-y-3 text-praxis-gray">
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Security Culture Framework adopted by ENISA
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Co-author of &ldquo;The Security Culture Playbook&rdquo; (Wiley,
+                  2022)
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  Former Chief Research Officer at KnowBe4
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">✓</span>
+                  25+ years in security culture research
+                </li>
+              </ul>
+            </div>
+            <div class="bg-praxis-light-gray p-8 rounded-lg">
+              <blockquote class="text-praxis-dark-blue italic text-lg mb-4">
+                &ldquo;Security culture isn&rsquo;t about awareness campaigns or
+                training completion rates. It&rsquo;s about measuring actual
+                behaviors that indicate real security posture.&rdquo;
+              </blockquote>
+              <cite class="text-praxis-gray font-semibold"
+                >- Kai Roer, Creator</cite
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Mission & Vision */}
+    <section class="py-20 bg-praxis-light-gray">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <div
+              class="w-16 h-16 bg-praxis-gold rounded-full flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-praxis-dark-blue"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-2xl font-heading font-bold text-praxis-dark-blue mb-4"
+            >
+              Our Mission
+            </h3>
+            <p class="text-praxis-gray">
+              To transform security culture from guesswork into measurable,
+              actionable intelligence. We provide organizations with the tools
+              to understand, measure, and improve their human security posture
+              through evidence-based behavioral monitoring.
+            </p>
+          </div>
+
+          <div class="bg-white p-8 rounded-lg shadow-lg">
+            <div
+              class="w-16 h-16 bg-praxis-blue rounded-full flex items-center justify-center mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-2xl font-heading font-bold text-praxis-dark-blue mb-4"
+            >
+              Our Vision
+            </h3>
+            <p class="text-praxis-gray">
+              A world where every organization can confidently answer:
+              &ldquo;How secure are our people?&rdquo; Where security culture
+              measurement is as standard and trusted as financial auditing,
+              providing clear insights that drive meaningful behavioral change.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Meet Kai Roer */}
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2
+            class="text-3xl font-heading font-bold text-praxis-dark-blue mb-6"
+          >
+            Meet the Creator
+          </h2>
+          <p class="text-xl text-praxis-gray mb-12">
+            Kai Roer is the world&rsquo;s leading expert in security culture
+            measurement, whose work has shaped how organizations understand
+            human security behavior.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-praxis-gold mb-2">25+</div>
+              <div class="text-praxis-gray">Years of Research</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-bold text-praxis-gold mb-2">3</div>
+              <div class="text-praxis-gray">Published Books</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-bold text-praxis-gold mb-2">1</div>
+              <div class="text-praxis-gray">Framework Adopted by ENISA</div>
+            </div>
+          </div>
+
+          <div class="bg-praxis-light-gray p-8 rounded-lg mb-8">
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4"
+            >
+              Key Achievements
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">•</span>
+                  <span class="text-praxis-gray"
+                    >Creator of Security Culture Framework (adopted by ENISA)</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">•</span>
+                  <span class="text-praxis-gray"
+                    >Former Chief Research Officer at KnowBe4</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">•</span>
+                  <span class="text-praxis-gray"
+                    >Co-author: &ldquo;The Security Culture Playbook&rdquo;
+                    (Wiley)</span
+                  >
+                </li>
+              </ul>
+              <ul class="space-y-2">
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">•</span>
+                  <span class="text-praxis-gray"
+                    >Ron Knode Service Award recipient (CSA)</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">•</span>
+                  <span class="text-praxis-gray"
+                    >National Cybersecurity Institute Fellow</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <span class="text-praxis-gold mr-2">•</span>
+                  <span class="text-praxis-gray">Adjunct Professor, NTNU</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="/about/kai-roer" class="btn-primary">
+            Learn More About Kai Roer
+          </a>
+        </div>
+      </div>
+    </section>
+
+    {/* Why This Matters */}
+    <section class="py-20 bg-praxis-dark-blue text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h2 class="text-3xl font-heading font-bold mb-6">
+            Why Security Culture Measurement Matters
+          </h2>
+          <p class="text-xl text-praxis-light-blue mb-12">
+            In an era where human error causes 95% of security breaches,
+            measuring and improving security behavior isn&rsquo;t
+            optional&mdash;it&rsquo;s essential.
+          </p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-praxis-gold mb-2">95%</div>
+              <div class="text-sm text-praxis-light-blue">
+                Of breaches involve human error
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-praxis-gold mb-2">$4.45M</div>
+              <div class="text-sm text-praxis-light-blue">
+                Average cost of a data breach
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-praxis-gold mb-2">200%</div>
+              <div class="text-sm text-praxis-light-blue">
+                ROI improvement with measurement
+              </div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-praxis-gold mb-2">70%</div>
+              <div class="text-sm text-praxis-light-blue">
+                Reduction in security incidents
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* CTA Section */}
+    <section class="py-16 bg-praxis-light-gray">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-heading font-bold text-praxis-dark-blue mb-6">
+          Ready to Transform Your Security Culture?
+        </h2>
+        <p class="text-xl text-praxis-gray mb-8">
+          Join organizations worldwide who have moved beyond guesswork to
+          evidence-based security culture improvement.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="btn-accent"> Schedule a Demo</a>
+          <a href="/product" class="btn-secondary"> Explore the Platform</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

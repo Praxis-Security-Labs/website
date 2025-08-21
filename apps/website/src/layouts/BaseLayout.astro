@@ -13,7 +13,15 @@ export interface Props {
   noIndex?: boolean;
   lang?: string;
   structuredData?: Record<string, unknown>;
-  pageType?: 'homepage' | 'content' | 'segment' | 'product' | 'contact';
+  pageType?:
+    | 'homepage'
+    | 'content'
+    | 'segment'
+    | 'product'
+    | 'contact'
+    | 'about'
+    | 'resources'
+    | 'segment-index';
 }
 
 const {
@@ -294,7 +302,7 @@ const organizationSchema = {
       if (typeof window !== 'undefined') {
         // Wait for Cloudflare Web Analytics to load
         const checkAnalytics = () => {
-          if ((window as any).__cfBeacon) {
+          if ((window as { __cfBeacon?: unknown }).__cfBeacon) {
             // Import and initialize monitoring systems
             Promise.all([
               import('../utils/analytics.js'),
@@ -315,6 +323,7 @@ const organizationSchema = {
                 // Log performance report in development
                 if (import.meta.env.MODE === 'development') {
                   setTimeout(() => {
+                    // eslint-disable-next-line no-console
                     console.log(
                       'Performance Report:',
                       performance.generatePerformanceReport()
@@ -323,11 +332,23 @@ const organizationSchema = {
                 }
               })
               .catch(error => {
+                // eslint-disable-next-line no-console
                 console.error('Monitoring initialization error:', error);
 
                 // Try to report to Sentry if available
-                if (typeof window !== 'undefined' && (window as any).Sentry) {
-                  (window as any).Sentry.captureException(error);
+                if (
+                  typeof window !== 'undefined' &&
+                  (
+                    window as {
+                      Sentry?: { captureException: (error: unknown) => void };
+                    }
+                  ).Sentry
+                ) {
+                  (
+                    window as {
+                      Sentry: { captureException: (error: unknown) => void };
+                    }
+                  ).Sentry.captureException(error);
                 }
               });
           } else {
