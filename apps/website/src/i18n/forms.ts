@@ -1,5 +1,51 @@
 export const forms = {
   en: {
+    // Trial Call to Action Section
+    trialCta: {
+      badge: '30-Day Free Trial',
+      headline: 'Ready to Transform Your Security Culture?',
+      subheadline:
+        "Start measuring and improving your organization's security behavior today.",
+      description:
+        'Get full access to all Praxis Navigator features for 30 days. No credit card required, no commitment. Deploy in minutes through Azure Marketplace with familiar enterprise procurement.',
+      benefits: [
+        'Full feature access for 30 days',
+        'No credit card or payment required',
+        'Deploy directly from Azure Marketplace',
+        'Enterprise-grade security from day one',
+        'Dedicated onboarding support',
+        'Cancel anytime during trial',
+      ],
+      ctaTrialText: 'Start Free Trial on Azure',
+      ctaDemoText: 'Schedule a Demo',
+      trustSignals: {
+        title: 'Trusted by Enterprise Organizations',
+        items: [
+          'Microsoft Graph API Integration',
+          'GDPR Compliant & EU Hosted',
+          'Enterprise SSO Support',
+          'SOC 2 Type II Certified',
+        ],
+      },
+      quickStart: {
+        title: 'Quick Start Guide',
+        items: [
+          {
+            label: 'Deployment',
+            value: '< 5 minutes',
+          },
+          {
+            label: 'Billing',
+            value: 'Zero until trial ends',
+          },
+          {
+            label: 'Support',
+            value: 'Dedicated onboarding specialist',
+          },
+        ],
+      },
+    },
+
     // Common form elements
     form: {
       name: 'Full Name',
@@ -122,7 +168,53 @@ export const forms = {
   },
 
   no: {
-    // Common form elements
+    // Trial Call to Action Section
+    trialCta: {
+      badge: '30-Dagers Gratis Prøveversjon',
+      headline: 'Klar til å Transformere Din Sikkerhetskultur?',
+      subheadline:
+        'Start med å måle og forbedre din organisasjons sikkerhetsatferd i dag.',
+      description:
+        'Få full tilgang til alle Praxis Navigator-funksjoner i 30 dager. Ingen kredittkort nødvendig, ingen forpliktelse. Implementer på minutter gjennom Azure Marketplace med kjent virksomhetsanskaffelse.',
+      benefits: [
+        'Full funksjonstilgang i 30 dager',
+        'Ingen kredittkort eller betaling påkrevd',
+        'Implementer direkte fra Azure Marketplace',
+        'Virksomhetsgrad sikkerhet fra dag én',
+        'Dedikert onboarding støtte',
+        'Avbryt når som helst under prøveperioden',
+      ],
+      ctaTrialText: 'Start Gratis Prøveversjon på Azure',
+      ctaDemoText: 'Bestill Demo',
+      trustSignals: {
+        title: 'Klarert av Virksomhetsorganisasjoner',
+        items: [
+          'Microsoft Graph API Integrasjon',
+          'GDPR Kompatibel & EU Hostet',
+          'Virksomhet SSO Støtte',
+          'SOC 2 Type II Sertifisert',
+        ],
+      },
+      quickStart: {
+        title: 'Hurtigstart Guide',
+        items: [
+          {
+            label: 'Implementering',
+            value: '< 5 minutter',
+          },
+          {
+            label: 'Fakturering',
+            value: 'Null til prøveperiode slutter',
+          },
+          {
+            label: 'Support',
+            value: 'Dedikert onboarding spesialist',
+          },
+        ],
+      },
+    },
+
+    // Vanlige form elementer
     form: {
       name: 'Fullt Navn',
       firstName: 'Fornavn',

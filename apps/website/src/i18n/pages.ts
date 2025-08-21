@@ -49,6 +49,94 @@ export const pages = {
       headline: 'Choose Your Security Culture Measurement Plan',
       subheadline: 'Flexible options for organizations of all sizes',
 
+      // Pricing Table Section Content
+      table: {
+        sectionTitle: 'Choose Your Plan',
+        sectionDescription:
+          'Transparent pricing designed for organizations of every size. All plans include our core security culture measurement features.',
+        billingToggle: {
+          monthly: 'Monthly',
+          annual: 'Annual',
+        },
+        saveBadge: 'Save 20%',
+        allPlansInclude: 'All plans include:',
+        supportLevel: 'Support Level',
+        mostPopular: 'Most Popular',
+        commonFeatures: [
+          'Microsoft 365 integration',
+          'Automated reporting',
+          'AI-driven analytics',
+          'Real-time risk tracking',
+          'GDPR compliant',
+          'Hosted in Europe',
+          'Data encryption',
+        ],
+        plans: [
+          {
+            id: 'small',
+            name: 'Small Enterprise',
+            priceAnnual: '€199',
+            priceMonthly: '€249',
+            period: 'per month',
+            description: 'Perfect for organizations up to 199 employees',
+            features: [
+              'Up to 199 employees',
+              'Basic email support',
+              'Standard reporting dashboard',
+              'Monthly security insights',
+              'Core behavioral analytics',
+              'Microsoft Graph integration',
+            ],
+            ctaText: 'Start Free Trial',
+            supportLevel: 'Email support',
+            highlighted: false,
+          },
+          {
+            id: 'medium',
+            name: 'Medium Enterprise',
+            priceAnnual: '€249',
+            priceMonthly: '€299',
+            period: 'per month (starting at)',
+            description: 'Ideal for growing companies with 200+ employees',
+            features: [
+              '200+ employees',
+              'Priority email support',
+              'Advanced reporting suite',
+              'Weekly security insights',
+              'Enhanced behavioral analytics',
+              'Custom integrations',
+              'Benchmark comparisons',
+              'Executive dashboards',
+            ],
+            ctaText: 'Start Free Trial',
+            supportLevel: 'Priority email support',
+            highlighted: true,
+          },
+          {
+            id: 'large',
+            name: 'Large Enterprise',
+            priceAnnual: 'Custom',
+            priceMonthly: 'Custom',
+            period: 'pricing',
+            description: 'Tailored solutions for large organizations',
+            features: [
+              'Unlimited employees',
+              'Phone & email support',
+              'White-label reporting',
+              'Real-time insights',
+              'Advanced AI analytics',
+              'Custom API access',
+              'Dedicated account manager',
+              'SLA guarantee',
+              'Bespoke onboarding',
+            ],
+            ctaText: 'Contact Sales',
+            supportLevel: 'Priority phone & email support with SLA',
+            highlighted: false,
+          },
+        ],
+      },
+
       plans: {
         starter: {
           name: 'Starter',
@@ -115,6 +203,12 @@ export const pages = {
       headline: 'Security Culture Resources',
       subheadline:
         'Research, insights, and best practices for security leaders',
+
+      // Resource Hub Section
+      hub: {
+        title: 'Resource Hub',
+        subtitle: 'Knowledge center for security culture professionals',
+      },
 
       categories: {
         whitepapers: 'Whitepapers',
@@ -245,6 +339,94 @@ export const pages = {
       subheadline:
         'Fleksible alternativer for organisasjoner av alle størrelser',
 
+      // Pricing Table Section Content
+      table: {
+        sectionTitle: 'Velg Din Plan',
+        sectionDescription:
+          'Transparente priser designet for organisasjoner av alle størrelser. Alle planer inkluderer våre kjernefunksjoner for måling av sikkerhetskultur.',
+        billingToggle: {
+          monthly: 'Månedlig',
+          annual: 'Årlig',
+        },
+        saveBadge: 'Spar 20%',
+        allPlansInclude: 'Alle planer inkluderer:',
+        supportLevel: 'Støttenivå',
+        mostPopular: 'Mest Populær',
+        commonFeatures: [
+          'Microsoft 365 integrasjon',
+          'Automatisert rapportering',
+          'AI-drevne analytikk',
+          'Sanntids risikoovervåking',
+          'GDPR kompatibel',
+          'Hostet i Europa',
+          'Datakryptering',
+        ],
+        plans: [
+          {
+            id: 'small',
+            name: 'Liten Virksomhet',
+            priceAnnual: '€199',
+            priceMonthly: '€249',
+            period: 'per måned',
+            description: 'Perfekt for organisasjoner opptil 199 ansatte',
+            features: [
+              'Opptil 199 ansatte',
+              'Grunnleggende e-poststøtte',
+              'Standard rapporteringsdashboard',
+              'Månedlige sikkerhetsinnsikter',
+              'Kjerne atferdsanalytikk',
+              'Microsoft Graph integrasjon',
+            ],
+            ctaText: 'Start Gratis Prøveversjon',
+            supportLevel: 'E-poststøtte',
+            highlighted: false,
+          },
+          {
+            id: 'medium',
+            name: 'Medium Virksomhet',
+            priceAnnual: '€249',
+            priceMonthly: '€299',
+            period: 'per måned (starter på)',
+            description: 'Ideell for voksende bedrifter med 200+ ansatte',
+            features: [
+              '200+ ansatte',
+              'Prioritert e-poststøtte',
+              'Avansert rapporteringssuite',
+              'Ukentlige sikkerhetsinnsikter',
+              'Forbedret atferdsanalytikk',
+              'Tilpassede integrasjoner',
+              'Benchmark sammenligninger',
+              'Lederskap dashboards',
+            ],
+            ctaText: 'Start Gratis Prøveversjon',
+            supportLevel: 'Prioritert e-poststøtte',
+            highlighted: true,
+          },
+          {
+            id: 'large',
+            name: 'Stor Virksomhet',
+            priceAnnual: 'Tilpasset',
+            priceMonthly: 'Tilpasset',
+            period: 'prising',
+            description: 'Skreddersydde løsninger for store organisasjoner',
+            features: [
+              'Ubegrenset ansatte',
+              'Telefon & e-poststøtte',
+              'White-label rapportering',
+              'Sanntids innsikter',
+              'Avansert AI analytikk',
+              'Tilpasset API tilgang',
+              'Dedikert kontoansvarlig',
+              'SLA garanti',
+              'Skreddersydd onboarding',
+            ],
+            ctaText: 'Kontakt Salg',
+            supportLevel: 'Prioritert telefon & e-poststøtte med SLA',
+            highlighted: false,
+          },
+        ],
+      },
+
       plans: {
         starter: {
           name: 'Starter',
@@ -311,6 +493,12 @@ export const pages = {
       headline: 'Sikkerhetskultur Ressurser',
       subheadline:
         'Forskning, innsikter, og beste praksis for sikkerhetsledere',
+
+      // Resource Hub Section
+      hub: {
+        title: 'Ressurs Hub',
+        subtitle: 'Kunnskapssenter for sikkerhetskultur eksperter',
+      },
 
       categories: {
         whitepapers: 'Hvitbøker',

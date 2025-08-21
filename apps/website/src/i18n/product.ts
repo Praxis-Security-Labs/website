@@ -167,6 +167,12 @@ export const product = {
         '24/7 customer success support',
       ],
     },
+
+    // Additional sections
+    benchmarking: {
+      title: 'Industry Benchmarking',
+      subtitle: 'Compare your security culture against industry standards',
+    },
   },
 
   no: {
@@ -337,6 +343,12 @@ export const product = {
         'Trening og onboarding',
         '24/7 kundesuksess støtte',
       ],
+    },
+
+    // Additional sections
+    benchmarking: {
+      title: 'Industri Benchmarking',
+      subtitle: 'Sammenlign din sikkerhetskultur mot industristandarder',
     },
   },
 } as const;

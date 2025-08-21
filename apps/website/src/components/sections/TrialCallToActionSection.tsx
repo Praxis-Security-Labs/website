@@ -1,4 +1,5 @@
 import React from 'react';
+import { forms } from '../../i18n/forms';
 
 interface TrialCallToActionSectionProps {
   language?: 'en' | 'no';
@@ -7,64 +8,8 @@ interface TrialCallToActionSectionProps {
 export const TrialCallToActionSection: React.FC<
   TrialCallToActionSectionProps
 > = ({ language = 'en' }) => {
-  const content = {
-    en: {
-      badge: '30-Day Free Trial',
-      headline: 'Ready to Transform Your Security Culture?',
-      subheadline:
-        "Start measuring and improving your organization's security behavior today.",
-      description:
-        'Get full access to all Praxis Navigator features for 30 days. No credit card required, no commitment. Deploy in minutes through Azure Marketplace with familiar enterprise procurement.',
-      benefits: [
-        'Full feature access for 30 days',
-        'No credit card or payment required',
-        'Deploy directly from Azure Marketplace',
-        'Enterprise-grade security from day one',
-        'Dedicated onboarding support',
-        'Cancel anytime during trial',
-      ],
-      ctaTrialText: 'Start Free Trial on Azure',
-      ctaDemoText: 'Schedule a Demo',
-      trustSignals: {
-        title: 'Trusted by Enterprise Organizations',
-        items: [
-          'Microsoft Graph API Integration',
-          'GDPR Compliant & EU Hosted',
-          'Enterprise SSO Support',
-          'SOC 2 Type II Certified',
-        ],
-      },
-    },
-    no: {
-      badge: '30-Dagers Gratis Prøveversjon',
-      headline: 'Klar til å Transformere Din Sikkerhetskultur?',
-      subheadline:
-        'Start med å måle og forbedre din organisasjons sikkerhetsatferd i dag.',
-      description:
-        'Få full tilgang til alle Praxis Navigator-funksjoner i 30 dager. Ingen kredittkort nødvendig, ingen forpliktelse. Implementer på minutter gjennom Azure Marketplace med kjent virksomhetsanskaffelse.',
-      benefits: [
-        'Full funksjonstilgang i 30 dager',
-        'Ingen kredittkort eller betaling påkrevd',
-        'Implementer direkte fra Azure Marketplace',
-        'Virksomhetsgrad sikkerhet fra dag én',
-        'Dedikert onboarding støtte',
-        'Avbryt når som helst under prøveperioden',
-      ],
-      ctaTrialText: 'Start Gratis Prøveversjon på Azure',
-      ctaDemoText: 'Planlegg en Demo',
-      trustSignals: {
-        title: 'Stolt på av Virksomhetsorganisasjoner',
-        items: [
-          'Microsoft Graph API Integrasjon',
-          'GDPR Kompatibel & EU Hostet',
-          'Virksomhet SSO Støtte',
-          'SOC 2 Type II Sertifisert',
-        ],
-      },
-    },
-  };
+  const t = forms[language].trialCta;
 
-  const t = content[language];
   const marketplaceUrl =
     typeof window !== 'undefined'
       ? window.location.host.includes('localhost')
@@ -206,46 +151,27 @@ export const TrialCallToActionSection: React.FC<
                 </div>
 
                 <h3 className="text-xl font-heading font-bold text-praxis-dark-blue mb-2">
-                  Azure Marketplace
+                  {t.quickStart.title}
                 </h3>
 
                 <p className="text-praxis-dark-blue-600 mb-6">
-                  {language === 'no'
-                    ? 'Enkel implementering gjennom Azure'
-                    : 'Easy deployment through Azure'}
+                  Azure Marketplace Integration
                 </p>
 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between p-3 bg-praxis-blue-50 rounded-lg">
-                    <span className="text-sm font-medium text-praxis-dark-blue">
-                      {language === 'no' ? 'Implementering' : 'Deployment'}
-                    </span>
-                    <span className="text-sm font-bold text-praxis-accent">
-                      {language === 'no' ? '< 5 minutter' : '< 5 minutes'}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between p-3 bg-praxis-blue-50 rounded-lg">
-                    <span className="text-sm font-medium text-praxis-dark-blue">
-                      {language === 'no' ? 'Fakturering' : 'Billing'}
-                    </span>
-                    <span className="text-sm font-bold text-praxis-accent">
-                      {language === 'no'
-                        ? 'Azure integrert'
-                        : 'Azure integrated'}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between p-3 bg-praxis-blue-50 rounded-lg">
-                    <span className="text-sm font-medium text-praxis-dark-blue">
-                      {language === 'no' ? 'Support' : 'Support'}
-                    </span>
-                    <span className="text-sm font-bold text-praxis-accent">
-                      {language === 'no'
-                        ? 'Virksomhetsklasse'
-                        : 'Enterprise-grade'}
-                    </span>
-                  </div>
+                  {t.quickStart.items.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between p-3 bg-praxis-blue-50 rounded-lg"
+                    >
+                      <span className="text-sm font-medium text-praxis-dark-blue">
+                        {item.label}
+                      </span>
+                      <span className="text-sm font-bold text-praxis-accent">
+                        {item.value}
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { pages } from '../../i18n/pages';
 
 interface PricingTableSectionProps {
   language?: 'en' | 'no';
@@ -10,7 +11,7 @@ interface PricingTier {
   price: string;
   period: string;
   description: string;
-  features: string[];
+  features: readonly string[];
   highlighted?: boolean;
   ctaText: string;
   ctaUrl: string;
@@ -24,50 +25,8 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
     'annual'
   );
 
-  const content = {
-    en: {
-      sectionTitle: 'Choose Your Plan',
-      sectionDescription:
-        'Transparent pricing designed for organizations of every size. All plans include our core security culture measurement features.',
-      billingToggle: {
-        monthly: 'Monthly',
-        annual: 'Annual',
-      },
-      saveBadge: 'Save 20%',
-      allPlansInclude: 'All plans include:',
-      commonFeatures: [
-        'Microsoft 365 integration',
-        'Automated reporting',
-        'AI-driven analytics',
-        'Real-time risk tracking',
-        'GDPR compliant',
-        'Hosted in Europe',
-        'Data encryption',
-      ],
-    },
-    no: {
-      sectionTitle: 'Velg Din Plan',
-      sectionDescription:
-        'Transparente priser designet for organisasjoner av alle størrelser. Alle planer inkluderer våre kjernefunksjoner for måling av sikkerhetskultur.',
-      billingToggle: {
-        monthly: 'Månedlig',
-        annual: 'Årlig',
-      },
-      saveBadge: 'Spar 20%',
-      allPlansInclude: 'Alle planer inkluderer:',
-      commonFeatures: [
-        'Microsoft 365 integrasjon',
-        'Automatisert rapportering',
-        'AI-drevne analytikk',
-        'Sanntids risikoovervåking',
-        'GDPR kompatibel',
-        'Hostet i Europa',
-        'Datakryptering',
-      ],
-    },
-  };
+  const t = pages[language].pricing.table;
 
-  const t = content[language];
   const marketplaceUrl =
     typeof window !== 'undefined'
       ? window.location.host.includes('localhost')
@@ -76,133 +35,24 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
           'https://azuremarketplace.microsoft.com'
       : 'https://azuremarketplace.microsoft.com';
 
-  const pricingTiers: PricingTier[] =
-    language === 'en'
-      ? [
-          {
-            id: 'small',
-            name: 'Small Enterprise',
-            price: billingPeriod === 'annual' ? '€199' : '€249',
-            period: 'per month',
-            description: 'Perfect for organizations up to 199 employees',
-            features: [
-              'Up to 199 employees',
-              'Basic email support',
-              'Standard reporting dashboard',
-              'Monthly security insights',
-              'Core behavioral analytics',
-              'Microsoft Graph integration',
-            ],
-            ctaText: 'Start Free Trial',
-            ctaUrl: marketplaceUrl,
-            supportLevel: 'Email support',
-          },
-          {
-            id: 'medium',
-            name: 'Medium Enterprise',
-            price: billingPeriod === 'annual' ? '€249' : '€299',
-            period: 'per month (starting at)',
-            description: 'Ideal for growing companies with 200+ employees',
-            features: [
-              '200+ employees',
-              'Priority email support',
-              'Advanced reporting suite',
-              'Weekly security insights',
-              'Enhanced behavioral analytics',
-              'Custom integrations',
-              'Benchmark comparisons',
-              'Executive dashboards',
-            ],
-            highlighted: true,
-            ctaText: 'Start Free Trial',
-            ctaUrl: marketplaceUrl,
-            supportLevel: 'Priority email support',
-          },
-          {
-            id: 'large',
-            name: 'Large Enterprise',
-            price: 'Custom',
-            period: 'pricing',
-            description: 'Tailored solutions for large organizations',
-            features: [
-              'Unlimited employees',
-              'Phone & email support',
-              'White-label reporting',
-              'Real-time insights',
-              'Advanced AI analytics',
-              'Custom API access',
-              'Dedicated account manager',
-              'SLA guarantee',
-              'Bespoke onboarding',
-            ],
-            ctaText: 'Contact Sales',
-            ctaUrl:
-              (language as 'en' | 'no') === 'no' ? '/no/contact' : '/contact',
-            supportLevel: 'Priority phone & email support with SLA',
-          },
-        ]
-      : [
-          {
-            id: 'small',
-            name: 'Liten Virksomhet',
-            price: billingPeriod === 'annual' ? '€199' : '€249',
-            period: 'per måned',
-            description: 'Perfekt for organisasjoner opptil 199 ansatte',
-            features: [
-              'Opptil 199 ansatte',
-              'Grunnleggende e-poststøtte',
-              'Standard rapporteringsdashboard',
-              'Månedlige sikkerhetsinnsikter',
-              'Kjerne atferdsanalytikk',
-              'Microsoft Graph integrasjon',
-            ],
-            ctaText: 'Start Gratis Prøveversjon',
-            ctaUrl: marketplaceUrl,
-            supportLevel: 'E-poststøtte',
-          },
-          {
-            id: 'medium',
-            name: 'Medium Virksomhet',
-            price: billingPeriod === 'annual' ? '€249' : '€299',
-            period: 'per måned (starter på)',
-            description: 'Ideell for voksende bedrifter med 200+ ansatte',
-            features: [
-              '200+ ansatte',
-              'Prioritert e-poststøtte',
-              'Avansert rapporteringssuite',
-              'Ukentlige sikkerhetsinnsikter',
-              'Forbedret atferdsanalytikk',
-              'Tilpassede integrasjoner',
-              'Benchmark sammenligninger',
-              'Lederskap dashboards',
-            ],
-            highlighted: true,
-            ctaText: 'Start Gratis Prøveversjon',
-            ctaUrl: marketplaceUrl,
-            supportLevel: 'Prioritert e-poststøtte',
-          },
-          {
-            id: 'large',
-            name: 'Stor Virksomhet',
-            price: 'Tilpasset',
-            period: 'prising',
-            description: 'Skreddersydde løsninger for store organisasjoner',
-            features: [
-              'Ubegrenset ansatte',
-              'Telefon & e-poststøtte',
-              'White-label rapportering',
-              'Sanntids innsikter',
-              'Avansert AI analytikk',
-              'Tilpasset API tilgang',
-              'Dedikert kontoansvarlig',
-              'SLA garanti',
-              'Skreddersydd onboarding',
-            ],
-            ctaText: 'Kontakt Salg',
-            ctaUrl: language === 'no' ? '/no/contact' : '/contact',
-            supportLevel: 'Prioritert telefon & e-poststøtte med SLA',
-          },
-        ];
+  // Get pricing plans from translation system
+  const pricingTiers: PricingTier[] = t.plans.map(plan => ({
+    id: plan.id,
+    name: plan.name,
+    price: billingPeriod === 'annual' ? plan.priceAnnual : plan.priceMonthly,
+    period: plan.period,
+    description: plan.description,
+    features: plan.features,
+    highlighted: plan.highlighted,
+    ctaText: plan.ctaText,
+    ctaUrl:
+      plan.id === 'large'
+        ? language === 'no'
+          ? '/no/contact'
+          : '/contact'
+        : marketplaceUrl,
+    supportLevel: plan.supportLevel,
+  }));
 
   return (
     <section className="bg-praxis-blue-50 py-16 md:py-24">
@@ -258,7 +108,7 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
               {tier.highlighted && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <span className="bg-praxis-gold text-praxis-dark-blue px-6 py-2 rounded-full text-sm font-heading font-bold uppercase tracking-brand-wide">
-                    {language === 'no' ? 'Mest Populær' : 'Most Popular'}
+                    {t.mostPopular}
                   </span>
                 </div>
               )}
@@ -337,7 +187,7 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
                 {/* Support Level */}
                 <div className="mt-8 pt-6 border-t border-praxis-blue-200">
                   <div className="text-xs text-praxis-dark-blue-600 uppercase tracking-brand-wide font-heading font-semibold mb-2">
-                    {language === 'no' ? 'Støttenivå' : 'Support Level'}
+                    {t.supportLevel}
                   </div>
                   <div className="text-sm text-praxis-dark-blue">
                     {tier.supportLevel}

@@ -94,6 +94,9 @@ export const segments = {
         ctaPrimary: 'Schedule Demo',
         ctaSecondary: 'Start Free Trial',
       },
+      contact: {
+        executives: 'Contact Executive Team',
+      },
     },
   },
 
@@ -189,6 +192,9 @@ export const segments = {
           'Bli med tusenvis av sikkerhetseksperter som bruker Praxis Navigator',
         ctaPrimary: 'Bestill Demo',
         ctaSecondary: 'Start Gratis Prøveversjon',
+      },
+      contact: {
+        executives: 'Kontakt Lederskap Team',
       },
     },
   },
