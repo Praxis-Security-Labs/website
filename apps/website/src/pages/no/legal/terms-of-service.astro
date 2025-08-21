@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { TermsOfServiceContent } from '../../../components/sections/TermsOfServiceContent';
+
+// SEO and meta configuration
+const title = 'Bruksvilkår | Praxis Navigator';
+const description =
+  'Bedrifts-SaaS bruksvilkår for Praxis Navigator. Omfattende juridisk rammeverk for bruk av sikkerhetstreningsplattform og bedriftsrelasjoner.';
+const keywords =
+  'bruksvilkår, bedrifts-SaaS, juridisk rammeverk, tjenesteavtale, vilkår for sikkerhetsplattform, dataforpliktelser';
+
+// Structured data for legal document
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Bruksvilkår',
+  description: description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+  },
+  lastReviewed: new Date().toISOString().split('T')[0],
+  mainEntity: {
+    '@type': 'DigitalDocument',
+    name: 'Praxis Navigator Bruksvilkår',
+    description: 'Bedrifts-SaaS juridisk rammeverk og tjenesteavtale',
+    dateModified: new Date().toISOString().split('T')[0],
+    inLanguage: 'no',
+    author: {
+      '@type': 'Organization',
+      name: 'Praxis Navigator',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="content"
+  lang="no"
+>
+  <TermsOfServiceContent currentLanguage="no" client:load />
+</BaseLayout>

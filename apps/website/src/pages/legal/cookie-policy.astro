@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CookiePolicyContent } from '../../components/sections/CookiePolicyContent';
+
+// SEO and meta configuration
+const title = 'Cookie Policy | Praxis Navigator';
+const description =
+  'GDPR-compliant cookie policy for Praxis Navigator. Understand how we use cookies and analytics while protecting your privacy with Cloudflare Web Analytics.';
+const keywords =
+  'cookie policy, GDPR compliance, web analytics, Cloudflare analytics, privacy-first analytics, cookie consent management';
+
+// Structured data for legal document
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Cookie Policy',
+  description: description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+  },
+  lastReviewed: new Date().toISOString().split('T')[0],
+  mainEntity: {
+    '@type': 'DigitalDocument',
+    name: 'Praxis Navigator Cookie Policy',
+    description:
+      'GDPR-compliant cookie disclosure and privacy-first analytics policy',
+    dateModified: new Date().toISOString().split('T')[0],
+    inLanguage: 'en',
+    author: {
+      '@type': 'Organization',
+      name: 'Praxis Navigator',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="content"
+>
+  <CookiePolicyContent client:load />
+</BaseLayout>

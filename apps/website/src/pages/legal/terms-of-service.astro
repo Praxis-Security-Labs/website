@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TermsOfServiceContent } from '../../components/sections/TermsOfServiceContent';
+
+// SEO and meta configuration
+const title = 'Terms of Service | Praxis Navigator';
+const description =
+  'Enterprise SaaS terms of service for Praxis Navigator. Comprehensive legal framework for security training platform usage and enterprise relationships.';
+const keywords =
+  'terms of service, enterprise SaaS, legal framework, service agreement, security platform terms, data security obligations';
+
+// Structured data for legal document
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Terms of Service',
+  description: description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+  },
+  lastReviewed: new Date().toISOString().split('T')[0],
+  mainEntity: {
+    '@type': 'DigitalDocument',
+    name: 'Praxis Navigator Terms of Service',
+    description: 'Enterprise SaaS legal framework and service agreement',
+    dateModified: new Date().toISOString().split('T')[0],
+    inLanguage: 'en',
+    author: {
+      '@type': 'Organization',
+      name: 'Praxis Navigator',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="content"
+>
+  <TermsOfServiceContent client:load />
+</BaseLayout>

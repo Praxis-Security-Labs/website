@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { PrivacyPolicyContent } from '../../../components/sections/PrivacyPolicyContent';
+
+// SEO and meta configuration
+const title = 'Personvernpolicy | Praxis Navigator';
+const description =
+  'GDPR-kompatibel personvernpolicy for Praxis Navigator. Lær hvordan vi samler inn, behandler og beskytter dine personlige data i samsvar med sikkerhetsstandarder for bedrifter.';
+const keywords =
+  'personvernpolicy, GDPR-samsvar, databeskyttelse, bedriftssikkerhet, behandling av personopplysninger, brukerrettigheter';
+
+// Structured data for legal document
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Personvernpolicy',
+  description: description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+  },
+  lastReviewed: new Date().toISOString().split('T')[0],
+  mainEntity: {
+    '@type': 'DigitalDocument',
+    name: 'Praxis Navigator Personvernpolicy',
+    description:
+      'GDPR-kompatibel personvernpolicy som adresserer databehandling, lagring og brukerrettigheter',
+    dateModified: new Date().toISOString().split('T')[0],
+    inLanguage: 'no',
+    author: {
+      '@type': 'Organization',
+      name: 'Praxis Navigator',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="content"
+  lang="no"
+>
+  <PrivacyPolicyContent currentLanguage="no" client:load />
+</BaseLayout>

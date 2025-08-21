@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { CookiePolicyContent } from '../../../components/sections/CookiePolicyContent';
+
+// SEO and meta configuration
+const title = 'Informasjonskapselpolicy | Praxis Navigator';
+const description =
+  'GDPR-kompatibel informasjonskapselpolicy for Praxis Navigator. Forstå hvordan vi bruker informasjonskapsler og analyser mens vi beskytter ditt personvern med Cloudflare Web Analytics.';
+const keywords =
+  'informasjonskapselpolicy, GDPR-samsvar, webanalyse, Cloudflare analyser, personvernfokuserte analyser, samtykke til informasjonskapsler';
+
+// Structured data for legal document
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Informasjonskapselpolicy',
+  description: description,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+  },
+  lastReviewed: new Date().toISOString().split('T')[0],
+  mainEntity: {
+    '@type': 'DigitalDocument',
+    name: 'Praxis Navigator Informasjonskapselpolicy',
+    description:
+      'GDPR-kompatibel informasjonskapselpolicy og personvernfokuserte analyser',
+    dateModified: new Date().toISOString().split('T')[0],
+    inLanguage: 'no',
+    author: {
+      '@type': 'Organization',
+      name: 'Praxis Navigator',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="content"
+  lang="no"
+>
+  <CookiePolicyContent currentLanguage="no" client:load />
+</BaseLayout>

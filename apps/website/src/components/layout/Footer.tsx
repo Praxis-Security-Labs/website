@@ -101,19 +101,19 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
   const legalLinks = [
     {
       name: currentLanguage === 'no' ? 'Personvern' : 'Privacy Policy',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/privacy`,
+      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/privacy-policy`,
     },
     {
       name: currentLanguage === 'no' ? 'Vilkår' : 'Terms of Service',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/terms`,
+      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/terms-of-service`,
     },
     {
       name: currentLanguage === 'no' ? 'Cookies' : 'Cookie Policy',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/cookies`,
+      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/cookie-policy`,
     },
     {
-      name: currentLanguage === 'no' ? 'Tilgjengelighet' : 'Accessibility',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/accessibility`,
+      name: currentLanguage === 'no' ? 'Samsvar' : 'Compliance',
+      href: `/${currentLanguage === 'no' ? 'no/' : ''}compliance`,
     },
   ];
 
