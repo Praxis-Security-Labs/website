@@ -1,11 +1,14 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SecurityLeadersHeroSection } from '../../components/sections/SecurityLeadersHeroSection';
-import { ROIDemonstrationSection } from '../../components/sections/ROIDemonstrationSection';
-import { ExecutiveCommunicationSection } from '../../components/sections/ExecutiveCommunicationSection';
-import { TechnicalCredibilitySection } from '../../components/sections/TechnicalCredibilitySection';
-import { SecurityLeadersCaseStudiesSection } from '../../components/sections/SecurityLeadersCaseStudiesSection';
-import { SecurityLeadersContactSection } from '../../components/sections/SecurityLeadersContactSection';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SecurityLeadersHeroSection } from '../../../components/sections/SecurityLeadersHeroSection';
+import { ROIDemonstrationSection } from '../../../components/sections/ROIDemonstrationSection';
+import { ExecutiveCommunicationSection } from '../../../components/sections/ExecutiveCommunicationSection';
+import { TechnicalCredibilitySection } from '../../../components/sections/TechnicalCredibilitySection';
+import { SecurityLeadersCaseStudiesSection } from '../../../components/sections/SecurityLeadersCaseStudiesSection';
+import { SecurityLeadersContactSection } from '../../../components/sections/SecurityLeadersContactSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 const title = 'For Security Leaders & CISOs - Praxis Navigator';
 const description =
@@ -18,6 +21,7 @@ const structuredData = {
   '@type': 'WebPage',
   name: 'Security Leaders & CISOs Solutions',
   description: description,
+  inLanguage: 'en-US',
   audience: {
     '@type': 'Audience',
     audienceType: [
@@ -60,13 +64,14 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="segment"
 >
-  <SecurityLeadersHeroSection client:load />
-  <ROIDemonstrationSection client:load />
-  <ExecutiveCommunicationSection client:load />
-  <TechnicalCredibilitySection client:load />
-  <SecurityLeadersCaseStudiesSection client:load />
-  <SecurityLeadersContactSection client:load />
+  <SecurityLeadersHeroSection language={lang} client:load />
+  <ROIDemonstrationSection language={lang} client:load />
+  <ExecutiveCommunicationSection language={lang} client:load />
+  <TechnicalCredibilitySection language={lang} client:load />
+  <SecurityLeadersCaseStudiesSection language={lang} client:load />
+  <SecurityLeadersContactSection language={lang} client:load />
 </BaseLayout>

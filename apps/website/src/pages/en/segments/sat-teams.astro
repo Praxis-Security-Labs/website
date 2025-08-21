@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SATTeamsHeroSection } from '../../../components/sections/SATTeamsHeroSection';
+import { TrainingEffectivenessSection } from '../../../components/sections/TrainingEffectivenessSection';
+import { ResourceHubSection } from '../../../components/sections/ResourceHubSection';
+import { ThoughtLeadershipSection } from '../../../components/sections/ThoughtLeadershipSection';
+import { SATTeamsContactSection } from '../../../components/sections/SATTeamsContactSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+const title = 'For SAT Teams & Training Coordinators - Praxis Navigator';
+const description =
+  "Enhance your existing training programs with behavioral measurement and optimization. Access Kai Roer's research hub and demonstrate training program ROI to security leadership.";
+const keywords =
+  'SAT teams, security training, training coordinators, learning development, training effectiveness, behavioral measurement, Kai Roer, security culture research, training ROI, program optimization';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'SAT Teams & Training Coordinators Solutions',
+  description: description,
+  inLanguage: 'en-US',
+  audience: {
+    '@type': 'Audience',
+    audienceType: [
+      'Security Training Coordinator',
+      'Learning & Development Specialist',
+      'SAT Team',
+      'Training Manager',
+    ],
+  },
+  mainEntity: {
+    '@type': 'SoftwareApplication',
+    name: 'Praxis Navigator',
+    applicationCategory: 'EducationSoftware',
+    description:
+      'Security training effectiveness and behavioral measurement platform',
+    featureList: [
+      'Training Effectiveness Measurement',
+      'Behavioral Analytics',
+      'Program Optimization',
+      'Research Hub Access',
+      'ROI Demonstration',
+    ],
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Kai Roer',
+    description: 'Security culture research expert and thought leader',
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  lang={lang}
+  structuredData={structuredData}
+  pageType="segment"
+>
+  <SATTeamsHeroSection language={lang} client:load />
+  <TrainingEffectivenessSection language={lang} client:load />
+  <ResourceHubSection language={lang} client:load />
+  <ThoughtLeadershipSection language={lang} client:load />
+  <SATTeamsContactSection language={lang} client:load />
+</BaseLayout>

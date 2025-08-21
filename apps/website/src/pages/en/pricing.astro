@@ -1,10 +1,13 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { PricingHeroSection } from '../components/sections/PricingHeroSection';
-import { PricingTableSection } from '../components/sections/PricingTableSection';
-import { FeatureComparisonSection } from '../components/sections/FeatureComparisonSection';
-import { TrialCallToActionSection } from '../components/sections/TrialCallToActionSection';
-import { EnterpriseContactSection } from '../components/sections/EnterpriseContactSection';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { PricingHeroSection } from '../../components/sections/PricingHeroSection';
+import { PricingTableSection } from '../../components/sections/PricingTableSection';
+import { FeatureComparisonSection } from '../../components/sections/FeatureComparisonSection';
+import { TrialCallToActionSection } from '../../components/sections/TrialCallToActionSection';
+import { EnterpriseContactSection } from '../../components/sections/EnterpriseContactSection';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 const title = 'Pricing & Free Trial - Praxis Navigator';
 const description =
@@ -18,6 +21,7 @@ const structuredData = {
   name: 'Praxis Navigator',
   description:
     'Enterprise security culture measurement and behavioral monitoring platform',
+  inLanguage: 'en-US',
   brand: {
     '@type': 'Brand',
     name: 'Praxis Navigator',
@@ -67,12 +71,13 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="content"
 >
-  <PricingHeroSection client:load />
-  <PricingTableSection client:load />
-  <FeatureComparisonSection client:load />
-  <TrialCallToActionSection client:load />
-  <EnterpriseContactSection client:load />
+  <PricingHeroSection language={lang} client:load />
+  <PricingTableSection language={lang} client:load />
+  <FeatureComparisonSection language={lang} client:load />
+  <TrialCallToActionSection language={lang} client:load />
+  <EnterpriseContactSection language={lang} client:load />
 </BaseLayout>

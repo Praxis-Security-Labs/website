@@ -1,10 +1,13 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { ManagersHeroSection } from '../../components/sections/ManagersHeroSection';
-import { TeamPerformanceSection } from '../../components/sections/TeamPerformanceSection';
-import { BenchmarkingSection } from '../../components/sections/BenchmarkingSection';
-import { ManagerReportingSection } from '../../components/sections/ManagerReportingSection';
-import { ManagersContactSection } from '../../components/sections/ManagersContactSection';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ManagersHeroSection } from '../../../components/sections/ManagersHeroSection';
+import { TeamPerformanceSection } from '../../../components/sections/TeamPerformanceSection';
+import { BenchmarkingSection } from '../../../components/sections/BenchmarkingSection';
+import { ManagerReportingSection } from '../../../components/sections/ManagerReportingSection';
+import { ManagersContactSection } from '../../../components/sections/ManagersContactSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 const title = 'For Department Managers - Praxis Navigator';
 const description =
@@ -17,6 +20,7 @@ const structuredData = {
   '@type': 'WebPage',
   name: 'Department Managers Solutions',
   description: description,
+  inLanguage: 'en-US',
   audience: {
     '@type': 'Audience',
     audienceType: [
@@ -46,12 +50,13 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="segment"
 >
-  <ManagersHeroSection client:load />
-  <TeamPerformanceSection client:load />
-  <BenchmarkingSection client:load />
-  <ManagerReportingSection client:load />
-  <ManagersContactSection client:load />
+  <ManagersHeroSection language={lang} client:load />
+  <TeamPerformanceSection language={lang} client:load />
+  <BenchmarkingSection language={lang} client:load />
+  <ManagerReportingSection language={lang} client:load />
+  <ManagersContactSection language={lang} client:load />
 </BaseLayout>

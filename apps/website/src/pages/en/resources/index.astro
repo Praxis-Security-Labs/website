@@ -1,0 +1,539 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+const title = 'Security Culture Resources & Research | Praxis Navigator';
+const description =
+  'Access comprehensive security culture resources, research papers, implementation guides, and tools. Learn from 25+ years of behavioral security research and practical application.';
+const keywords =
+  'security culture resources, behavioral security research, implementation guides, security awareness tools, culture measurement resources, ENISA framework';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Security Culture Resources',
+  description: description,
+  inLanguage: 'en-US',
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Research & Whitepapers',
+        description:
+          'Academic research and industry insights on security culture measurement',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Implementation Guides',
+        description:
+          'Step-by-step guides for implementing security behavior monitoring',
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: 'Tools & Templates',
+        description:
+          'Practical tools and templates for security culture assessment',
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        name: 'Case Studies',
+        description: 'Real-world success stories and lessons learned',
+      },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  lang={lang}
+  structuredData={structuredData}
+  pageType="resources"
+>
+  <main>
+    {/* Hero Section */}
+    <section
+      class="bg-gradient-to-b from-praxis-dark-blue to-praxis-dark-blue-800 text-white py-20"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-6"
+          >
+            Security Culture <span class="text-praxis-gold">Resources</span>
+          </h1>
+          <p class="text-xl text-praxis-light-blue mb-8">
+            Access our comprehensive library of research, guides, tools, and
+            insights from 25+ years of pioneering work in security culture
+            measurement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* Resource Categories */}
+    <section class="py-20 bg-praxis-light-gray">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Research & Whitepapers */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-blue rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              Research & Whitepapers
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Academic research and industry insights on security culture
+              measurement, behavioral security, and organizational change.
+            </p>
+            <div class="space-y-3">
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-blue-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  The Security Culture Framework
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Foundational research on measuring security culture
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-blue-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Behavioral Security Research
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  25+ years of behavioral research findings
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-blue-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  ENISA Framework Implementation
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Practical guide to ENISA recommendations
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Implementation Guides */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-orange rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              Implementation Guides
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Step-by-step guides for implementing security behavior monitoring
+              and culture improvement programs.
+            </p>
+            <div class="space-y-3">
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-orange-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Getting Started with Behavioral Monitoring
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Complete implementation roadmap
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-orange-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Building Your Security Culture Program
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  From measurement to improvement
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-orange-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Executive Reporting Best Practices
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Communicating results to leadership
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Tools & Templates */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-green rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M22.7,19L13.6,9.9C14.5,7.6 14,4.9 12.1,3C10.1,1 7.1,0.6 4.7,1.7L9,6L6,9L1.6,4.7C0.4,7.1 0.9,10.1 2.9,12.1C4.8,14 7.5,14.5 9.8,13.6L18.9,22.7C19.3,23.1 19.9,23.1 20.3,22.7L22.6,20.4C23.1,20 23.1,19.3 22.7,19Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              Tools & Templates
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Practical tools and templates for security culture assessment,
+              measurement, and reporting.
+            </p>
+            <div class="space-y-3">
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-green-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Culture Assessment Toolkit
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Ready-to-use assessment instruments
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-green-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Reporting Templates
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Executive and board-ready formats
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-green-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  ROI Calculator
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Measure training program value
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Case Studies */}
+          <div
+            class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow"
+          >
+            <div
+              class="w-16 h-16 bg-praxis-purple rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <svg
+                class="w-8 h-8 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z"
+                ></path>
+              </svg>
+            </div>
+            <h3
+              class="text-xl font-heading font-bold text-praxis-dark-blue mb-4 text-center"
+            >
+              Case Studies
+            </h3>
+            <p class="text-praxis-gray text-center mb-6">
+              Real-world success stories, lessons learned, and practical
+              applications from organizations worldwide.
+            </p>
+            <div class="space-y-3">
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-purple-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Fortune 500 Implementation
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Large enterprise transformation
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-purple-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Financial Services Success
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Regulatory compliance achievement
+                </p>
+              </div>
+              <div
+                class="p-3 bg-praxis-light-gray rounded hover:bg-praxis-purple-50 transition-colors"
+              >
+                <h4 class="font-semibold text-praxis-dark-blue text-sm">
+                  Healthcare Security Culture
+                </h4>
+                <p class="text-xs text-praxis-gray">
+                  Patient data protection improvement
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* Featured Research Section */}
+    <section class="py-20 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+          <h2
+            class="text-3xl md:text-4xl font-heading font-bold text-praxis-dark-blue mb-6"
+          >
+            Featured <span class="text-praxis-orange">Research</span>
+          </h2>
+          <p class="text-lg text-praxis-gray">
+            Explore our most impactful research contributions to the security
+            culture field.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* The Security Culture Framework */}
+          <div class="bg-praxis-light-gray rounded-lg p-8">
+            <div class="flex items-start space-x-4">
+              <div
+                class="w-12 h-12 bg-praxis-blue rounded-lg flex-shrink-0 flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3
+                  class="text-xl font-heading font-bold text-praxis-dark-blue mb-3"
+                >
+                  The Security Culture Framework
+                </h3>
+                <p class="text-praxis-gray mb-4">
+                  Our foundational research that established the seven
+                  dimensions of security culture measurement, now used globally
+                  by organizations and researchers.
+                </p>
+                <ul class="text-sm text-praxis-gray space-y-2 mb-6">
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-praxis-green mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                      ></path>
+                    </svg>
+                    Seven validated culture dimensions
+                  </li>
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-praxis-green mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                      ></path>
+                    </svg>
+                    Global industry adoption
+                  </li>
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-praxis-green mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                      ></path>
+                    </svg>
+                    Academic validation and peer review
+                  </li>
+                </ul>
+                <a
+                  href="#download-framework"
+                  class="inline-flex items-center text-praxis-blue hover:text-praxis-blue-dark font-semibold"
+                >
+                  Download Framework
+                  <svg
+                    class="w-4 h-4 ml-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M13,3V9H21L11,19L1,9H9V3H13Z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Behavioral Security Research */}
+          <div class="bg-praxis-light-gray rounded-lg p-8">
+            <div class="flex items-start space-x-4">
+              <div
+                class="w-12 h-12 bg-praxis-orange rounded-lg flex-shrink-0 flex items-center justify-center"
+              >
+                <svg
+                  class="w-6 h-6 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3
+                  class="text-xl font-heading font-bold text-praxis-dark-blue mb-3"
+                >
+                  25+ Years of Behavioral Research
+                </h3>
+                <p class="text-praxis-gray mb-4">
+                  Comprehensive collection of behavioral security research,
+                  studies, and findings that form the foundation of modern
+                  security culture practices.
+                </p>
+                <ul class="text-sm text-praxis-gray space-y-2 mb-6">
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-praxis-green mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                      ></path>
+                    </svg>
+                    Longitudinal behavior studies
+                  </li>
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-praxis-green mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                      ></path>
+                    </svg>
+                    Cross-cultural analysis
+                  </li>
+                  <li class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-praxis-green mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z"
+                      ></path>
+                    </svg>
+                    Industry-specific insights
+                  </li>
+                </ul>
+                <a
+                  href="#access-research"
+                  class="inline-flex items-center text-praxis-orange hover:text-praxis-orange-dark font-semibold"
+                >
+                  Access Research Library
+                  <svg
+                    class="w-4 h-4 ml-2"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M13,3V9H21L11,19L1,9H9V3H13Z"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* CTA Section */}
+    <section class="py-20 bg-praxis-dark-blue text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">
+          Ready to Transform Your Security Culture?
+        </h2>
+        <p class="text-xl text-praxis-light-blue mb-8 max-w-3xl mx-auto">
+          Start implementing evidence-based security culture measurement with
+          our comprehensive resources and proven methodology.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/en/pricing"
+            class="bg-praxis-orange hover:bg-praxis-orange-dark text-white px-8 py-4 rounded-lg font-semibold transition-colors"
+          >
+            Start Free Trial
+          </a>
+          <a
+            href="/contact"
+            class="border border-praxis-light-blue text-praxis-light-blue hover:bg-praxis-light-blue hover:text-praxis-dark-blue px-8 py-4 rounded-lg font-semibold transition-colors"
+          >
+            Contact Our Experts
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

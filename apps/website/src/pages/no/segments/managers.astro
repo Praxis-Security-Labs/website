@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ManagersHeroSection } from '../../../components/sections/ManagersHeroSection';
+import { TeamPerformanceSection } from '../../../components/sections/TeamPerformanceSection';
+import { BenchmarkingSection } from '../../../components/sections/BenchmarkingSection';
+import { ManagerReportingSection } from '../../../components/sections/ManagerReportingSection';
+import { ManagersContactSection } from '../../../components/sections/ManagersContactSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'no'
+
+const title = 'For Department Managers - Praxis Navigator';
+const description =
+  "Monitor and improve your team's security performance with benchmarking capabilities. Get visibility into departmental security culture and demonstrate team improvement to leadership.";
+const keywords =
+  'department managers, team performance, security culture, benchmarking, team management, departmental security, performance metrics, team improvement';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Department Managers Solutions',
+  description: description,
+  inLanguage: 'nb-NO',
+  audience: {
+    '@type': 'Audience',
+    audienceType: [
+      'Department Manager',
+      'Team Leader',
+      'Middle Management',
+      'Operations Manager',
+    ],
+  },
+  mainEntity: {
+    '@type': 'SoftwareApplication',
+    name: 'Praxis Navigator',
+    applicationCategory: 'ManagementSoftware',
+    description: 'Team security performance and benchmarking platform',
+    featureList: [
+      'Team Performance Visibility',
+      'Benchmarking Capabilities',
+      'Departmental Reporting',
+      'Performance Improvement Tracking',
+      'Team Security Culture Metrics',
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  lang={lang}
+  structuredData={structuredData}
+  pageType="segment"
+>
+  <ManagersHeroSection language={lang} client:load />
+  <TeamPerformanceSection language={lang} client:load />
+  <BenchmarkingSection language={lang} client:load />
+  <ManagerReportingSection language={lang} client:load />
+  <ManagersContactSection language={lang} client:load />
+</BaseLayout>

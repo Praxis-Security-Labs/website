@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SecurityComplianceSection } from '../../../components/sections/SecurityComplianceSection';
+import { DataResidencySection } from '../../../components/sections/DataResidencySection';
+import { ComplianceContactSection } from '../../../components/sections/ComplianceContactSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+// SEO and meta configuration
+const title = 'Enterprise Compliance Hub | Praxis Navigator';
+const description =
+  'Comprehensive compliance documentation for enterprise customers. SOC2 Type II, GDPR, ISO 27001 certifications and security frameworks for Praxis Navigator.';
+const keywords =
+  'enterprise compliance, SOC2 Type II, GDPR compliance, ISO 27001, security frameworks, data residency, vendor risk assessment';
+
+// Structured data for compliance page
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Enterprise Compliance Hub',
+  description: description,
+  inLanguage: 'en-US',
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+  },
+  mainEntity: {
+    '@type': 'Organization',
+    name: 'Praxis Navigator',
+    description:
+      'Enterprise security training platform with comprehensive compliance frameworks',
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'SOC 2 Type II',
+        credentialCategory: 'Security Compliance',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'ISO 27001',
+        credentialCategory: 'Information Security Management',
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        name: 'GDPR Compliance',
+        credentialCategory: 'Data Protection',
+      },
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  lang={lang}
+  structuredData={structuredData}
+  pageType="compliance"
+>
+  <SecurityComplianceSection language={lang} client:load />
+  <DataResidencySection language={lang} client:load />
+  <ComplianceContactSection language={lang} client:load />
+</BaseLayout>

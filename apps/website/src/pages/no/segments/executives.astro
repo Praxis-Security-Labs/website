@@ -1,10 +1,13 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { ExecutivesHeroSection } from '../../components/sections/ExecutivesHeroSection';
-import { RegulatoryComplianceSection } from '../../components/sections/RegulatoryComplianceSection';
-import { BusinessImpactSection } from '../../components/sections/BusinessImpactSection';
-import { ExecutiveReportingSection } from '../../components/sections/ExecutiveReportingSection';
-import { ExecutivesContactSection } from '../../components/sections/ExecutivesContactSection';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ExecutivesHeroSection } from '../../../components/sections/ExecutivesHeroSection';
+import { RegulatoryComplianceSection } from '../../../components/sections/RegulatoryComplianceSection';
+import { BusinessImpactSection } from '../../../components/sections/BusinessImpactSection';
+import { ExecutiveReportingSection } from '../../../components/sections/ExecutiveReportingSection';
+import { ExecutivesContactSection } from '../../../components/sections/ExecutivesContactSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'no'
 
 const title = 'For Board Members & Executives - Praxis Navigator';
 const description =
@@ -17,6 +20,7 @@ const structuredData = {
   '@type': 'WebPage',
   name: 'Board Members & Executives Solutions',
   description: description,
+  inLanguage: 'nb-NO',
   audience: {
     '@type': 'Audience',
     audienceType: ['Board Member', 'CEO', 'CFO', 'COO', 'Executive', 'C-Suite'],
@@ -41,12 +45,13 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="segment"
 >
-  <ExecutivesHeroSection client:load />
-  <RegulatoryComplianceSection client:load />
-  <BusinessImpactSection client:load />
-  <ExecutiveReportingSection client:load />
-  <ExecutivesContactSection client:load />
+  <ExecutivesHeroSection language={lang} client:load />
+  <RegulatoryComplianceSection language={lang} client:load />
+  <BusinessImpactSection language={lang} client:load />
+  <ExecutiveReportingSection language={lang} client:load />
+  <ExecutivesContactSection language={lang} client:load />
 </BaseLayout>

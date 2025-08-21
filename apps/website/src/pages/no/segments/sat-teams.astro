@@ -1,10 +1,13 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { SATTeamsHeroSection } from '../../components/sections/SATTeamsHeroSection';
-import { TrainingEffectivenessSection } from '../../components/sections/TrainingEffectivenessSection';
-import { ResourceHubSection } from '../../components/sections/ResourceHubSection';
-import { ThoughtLeadershipSection } from '../../components/sections/ThoughtLeadershipSection';
-import { SATTeamsContactSection } from '../../components/sections/SATTeamsContactSection';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SATTeamsHeroSection } from '../../../components/sections/SATTeamsHeroSection';
+import { TrainingEffectivenessSection } from '../../../components/sections/TrainingEffectivenessSection';
+import { ResourceHubSection } from '../../../components/sections/ResourceHubSection';
+import { ThoughtLeadershipSection } from '../../../components/sections/ThoughtLeadershipSection';
+import { SATTeamsContactSection } from '../../../components/sections/SATTeamsContactSection';
+import { getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'no'
 
 const title = 'For SAT Teams & Training Coordinators - Praxis Navigator';
 const description =
@@ -17,6 +20,7 @@ const structuredData = {
   '@type': 'WebPage',
   name: 'SAT Teams & Training Coordinators Solutions',
   description: description,
+  inLanguage: 'nb-NO',
   audience: {
     '@type': 'Audience',
     audienceType: [
@@ -52,12 +56,13 @@ const structuredData = {
   title={title}
   description={description}
   keywords={keywords}
+  lang={lang}
   structuredData={structuredData}
   pageType="segment"
 >
-  <SATTeamsHeroSection client:load />
-  <TrainingEffectivenessSection client:load />
-  <ResourceHubSection client:load />
-  <ThoughtLeadershipSection client:load />
-  <SATTeamsContactSection client:load />
+  <SATTeamsHeroSection language={lang} client:load />
+  <TrainingEffectivenessSection language={lang} client:load />
+  <ResourceHubSection language={lang} client:load />
+  <ThoughtLeadershipSection language={lang} client:load />
+  <SATTeamsContactSection language={lang} client:load />
 </BaseLayout>
