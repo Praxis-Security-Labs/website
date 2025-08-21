@@ -1,4 +1,5 @@
 import React from 'react';
+import { sections } from '../../i18n/sections';
 
 interface ProblemSolutionSectionProps {
   className?: string;
@@ -9,6 +10,7 @@ export const ProblemSolutionSection: React.FC<ProblemSolutionSectionProps> = ({
   className = '',
   language = 'en',
 }) => {
+  const content = sections[language].problemSolution;
   return (
     <section
       className={`py-20 bg-praxis-tan-50 ${className}`}
@@ -22,14 +24,10 @@ export const ProblemSolutionSection: React.FC<ProblemSolutionSectionProps> = ({
               id="problem-solution-heading"
               className="h2 text-praxis-dark-blue mb-6"
             >
-              {language === 'no'
-                ? 'Sikkerhetsopplæring Målegapet'
-                : 'The Security Training Measurement Gap'}
+              {content.problemHeadline}
             </h2>
             <p className="body-large text-praxis-brown max-w-3xl mx-auto">
-              {language === 'no'
-                ? 'Tradisjonelle sikkerhetsverktøy måler feil ting. Det er på tide å måle det som faktisk betyr noe.'
-                : "Traditional security tools measure the wrong things. It's time to measure what actually matters."}
+              {content.gap}
             </p>
           </div>
 

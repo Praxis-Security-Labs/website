@@ -1,4 +1,5 @@
 import React from 'react';
+import { homepage } from '../../i18n/homepage';
 
 interface HeroSectionProps {
   className?: string;
@@ -9,6 +10,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   className = '',
   language = 'en',
 }) => {
+  const content = homepage[language];
+
   return (
     <section
       className={`relative min-h-screen bg-gradient-to-b from-praxis-dark-blue to-praxis-blue flex items-center ${className}`}
@@ -21,23 +24,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           id="hero-heading"
           className="h1 text-praxis-white mb-6 max-w-4xl mx-auto leading-tight"
         >
-          {language === 'no'
-            ? 'Mål Det Som Betyr Noe: Faktisk Sikkerhetsatferd'
-            : 'Measure What Matters: Actual Security Behaviors'}
+          {content.hero.headline}
         </h1>
 
         {/* Authority Subheadline */}
         <h2 className="h3 text-praxis-gold mb-8 max-w-3xl mx-auto">
-          {language === 'no'
-            ? 'Av Kai Roer, Skaper av Sikkerhetskulturrammeverket adoptert av ENISA'
-            : 'By Kai Roer, Creator of the Security Culture Framework adopted by ENISA'}
+          {content.hero.authority}
         </h2>
 
         {/* Problem Statement */}
         <p className="body-large text-praxis-white mb-12 max-w-4xl mx-auto opacity-90">
-          {language === 'no'
-            ? 'Organisasjoner investerer tungt i Sikkerhetsopplæring, men kan ikke måle adferdsendringer. Slutt å gjette. Begynn å måle. Få evidensbaserte innsikter i din sikkerhetskultur med Microsoft Graph API adferdsovervåking.'
-            : "Organizations invest heavily in Security Awareness Training but can't measure behavioral changes. Stop guessing. Start measuring. Get evidence-based insights into your security culture with Microsoft Graph API behavioral monitoring."}
+          {content.hero.problem}
         </p>
 
         {/* Primary CTAs */}
@@ -51,7 +48,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 : 'Schedule a demo to see how Praxis Navigator works'
             }
           >
-            {language === 'no' ? 'Bestill Demo' : 'Schedule Demo'}
+            {content.hero.ctaPrimary}
           </a>
           <a
             href={`/${language === 'no' ? 'no/' : ''}trial`}
@@ -62,72 +59,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 : 'Start your free trial of Praxis Navigator'
             }
           >
-            {language === 'no'
-              ? 'Start Gratis Prøveversjon'
-              : 'Start Free Trial'}
+            {content.hero.ctaSecondary}
           </a>
         </div>
 
         {/* Product Preview Section */}
         <div className="bg-praxis-white rounded-xl p-8 shadow-2xl max-w-5xl mx-auto">
           <h3 className="h4 text-praxis-dark-blue mb-6">
-            Transform Security Training Into Measurable Business Impact
+            {content.hero.features.title}
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Feature Highlight 1 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-praxis-sky-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-8 h-8 bg-praxis-blue rounded-full"></div>
+            {content.hero.features.items.map((feature, index) => (
+              <div key={index} className="text-center">
+                <div
+                  className={`w-16 h-16 ${
+                    index === 0
+                      ? 'bg-praxis-sky-100'
+                      : index === 1
+                        ? 'bg-praxis-gold-100'
+                        : index === 2
+                          ? 'bg-praxis-tan-100'
+                          : 'bg-praxis-pine-100'
+                  } rounded-full flex items-center justify-center mx-auto mb-4`}
+                >
+                  <div
+                    className={`w-8 h-8 ${
+                      index === 0
+                        ? 'bg-praxis-blue'
+                        : index === 1
+                          ? 'bg-praxis-gold'
+                          : index === 2
+                            ? 'bg-praxis-brown'
+                            : 'bg-praxis-pine'
+                    } rounded-full`}
+                  ></div>
+                </div>
+                <h4 className="h6 text-praxis-dark-blue mb-2">
+                  {feature.title}
+                </h4>
+                <p className="body-small text-praxis-brown">
+                  {feature.description}
+                </p>
               </div>
-              <h4 className="h6 text-praxis-dark-blue mb-2">
-                Behavioral Analytics
-              </h4>
-              <p className="body-small text-praxis-brown">
-                Real-time monitoring of actual security behaviors through
-                Microsoft Graph API
-              </p>
-            </div>
-
-            {/* Feature Highlight 2 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-8 h-8 bg-praxis-gold rounded-full"></div>
-              </div>
-              <h4 className="h6 text-praxis-dark-blue mb-2">Risk Scoring</h4>
-              <p className="body-small text-praxis-brown">
-                Dynamic risk calculations based on actual behaviors, not
-                assumptions
-              </p>
-            </div>
-
-            {/* Feature Highlight 3 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-praxis-tan-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-8 h-8 bg-praxis-brown rounded-full"></div>
-              </div>
-              <h4 className="h6 text-praxis-dark-blue mb-2">
-                Compliance Tracking
-              </h4>
-              <p className="body-small text-praxis-brown">
-                Evidence-based documentation for audits and regulatory
-                requirements
-              </p>
-            </div>
-
-            {/* Feature Highlight 4 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <div className="w-8 h-8 bg-praxis-pine rounded-full"></div>
-              </div>
-              <h4 className="h6 text-praxis-dark-blue mb-2">
-                Executive Reporting
-              </h4>
-              <p className="body-small text-praxis-brown">
-                Board-ready summaries showing security program ROI and business
-                impact
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </div>

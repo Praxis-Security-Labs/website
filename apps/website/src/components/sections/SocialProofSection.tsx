@@ -1,12 +1,16 @@
 import React from 'react';
+import { sections } from '../../i18n/sections';
 
 interface SocialProofSectionProps {
   className?: string;
+  language?: 'en' | 'no';
 }
 
 export const SocialProofSection: React.FC<SocialProofSectionProps> = ({
   className = '',
+  language = 'en',
 }) => {
+  const content = sections[language].socialProof;
   return (
     <section
       className={`py-20 bg-praxis-white ${className}`}
@@ -19,11 +23,10 @@ export const SocialProofSection: React.FC<SocialProofSectionProps> = ({
             id="social-proof-heading"
             className="h2 text-praxis-dark-blue mb-6"
           >
-            Trusted by Enterprise Security Leaders
+            {content.headline}
           </h2>
           <p className="body-large text-praxis-brown mb-16 max-w-3xl mx-auto">
-            Research-backed methodology proven effective across organizations
-            worldwide
+            {content.subtitle}
           </p>
 
           {/* Industry Recognition */}

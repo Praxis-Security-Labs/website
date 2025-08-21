@@ -23,6 +23,31 @@ export const homepage = {
         'Get evidence-based ROI on security investments',
         'Continuous monitoring of security culture evolution',
       ],
+      features: {
+        title: 'Transform Security Training Into Measurable Business Impact',
+        items: [
+          {
+            title: 'Behavioral Analytics',
+            description:
+              'Real-time monitoring of actual security behaviors through Microsoft Graph API',
+          },
+          {
+            title: 'Risk Scoring',
+            description:
+              'Dynamic risk calculations based on actual behaviors, not assumptions',
+          },
+          {
+            title: 'Compliance Tracking',
+            description:
+              'Evidence-based documentation for audits and regulatory requirements',
+          },
+          {
+            title: 'Executive Reporting',
+            description:
+              'Board-ready summaries showing security program ROI and business impact',
+          },
+        ],
+      },
     },
 
     // Authority Section
@@ -193,6 +218,31 @@ export const homepage = {
         'Få evidensbasert ROI på sikkerhetsinvesteringer',
         'Kontinuerlig overvåking av sikkerhetskultur utvikling',
       ],
+      features: {
+        title: 'Transformer Sikkerhetstrening til Målbar Forretningsverdi',
+        items: [
+          {
+            title: 'Adferdsanalyse',
+            description:
+              'Sanntids overvåking av faktisk sikkerhetsadferd gjennom Microsoft Graph API',
+          },
+          {
+            title: 'Risikoscoring',
+            description:
+              'Dynamiske risikocalcuklasjoner basert på faktisk adferd, ikke antagelser',
+          },
+          {
+            title: 'Etterlevelsesporing',
+            description:
+              'Evidensbasert dokumentasjon for revisjoner og regulatoriske krav',
+          },
+          {
+            title: 'Lederrapportering',
+            description:
+              'Styreklar sammendrag som viser sikkerhetsprogram ROI og forretningsverdi',
+          },
+        ],
+      },
     },
 
     // Authority Section

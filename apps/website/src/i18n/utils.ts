@@ -18,3 +18,10 @@ export function getRelativeLocaleUrl(locale: keyof typeof ui, path: string) {
   }
   return `/${locale}${path}`;
 }
+
+// Astro i18n helpers - can be used in .astro files
+export function getLocaleFromUrl(url: URL): keyof typeof ui {
+  const [, lang] = url.pathname.split('/');
+  if (lang in ui) return lang as keyof typeof ui;
+  return defaultLang;
+}
