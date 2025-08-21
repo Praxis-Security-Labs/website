@@ -2,10 +2,12 @@ import React from 'react';
 
 interface AuthoritySectionProps {
   className?: string;
+  language?: 'en' | 'no';
 }
 
 export const AuthoritySection: React.FC<AuthoritySectionProps> = ({
   className = '',
+  language = 'en',
 }) => {
   return (
     <section
@@ -16,7 +18,9 @@ export const AuthoritySection: React.FC<AuthoritySectionProps> = ({
         <div className="max-w-4xl mx-auto text-center">
           {/* Authority Headline */}
           <h2 id="authority-heading" className="h2 text-praxis-dark-blue mb-8">
-            Built on 25+ Years of Security Culture Research
+            {language === 'no'
+              ? 'Bygget på 25+ År med Sikkerhetskultur Forskning'
+              : 'Built on 25+ Years of Security Culture Research'}
           </h2>
 
           <div className="flex flex-col lg:flex-row items-center gap-12">

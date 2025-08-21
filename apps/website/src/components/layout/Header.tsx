@@ -4,6 +4,7 @@ import {
   redirectToPraxisApp,
   isMsalConfigured,
 } from '../../utils/msal-auth';
+import { handleLanguageSwitch } from '../../utils/language-preference';
 
 interface HeaderProps {
   currentPath?: string;
@@ -72,24 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   // Helper function to get the equivalent page in the other language
   const getLanguageSwitchUrl = (targetLanguage: string) => {
-    // Remove the current language prefix from the path
-    let pathWithoutLang = currentPath;
-    if (currentPath.startsWith('/en/')) {
-      pathWithoutLang = currentPath.substring(3); // Remove '/en'
-    } else if (currentPath.startsWith('/no/')) {
-      pathWithoutLang = currentPath.substring(3); // Remove '/no'
-    } else if (currentPath === '/') {
-      pathWithoutLang = '';
-    }
-
-    // If we're switching to the target language, add the prefix
-    if (targetLanguage === 'en') {
-      return pathWithoutLang === '' ? '/en' : `/en${pathWithoutLang}`;
-    } else if (targetLanguage === 'no') {
-      return pathWithoutLang === '' ? '/no' : `/no${pathWithoutLang}`;
-    }
-
-    return '/';
+    return handleLanguageSwitch(targetLanguage as 'en' | 'no', currentPath);
   };
 
   const handleLogin = async () => {

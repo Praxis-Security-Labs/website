@@ -2,9 +2,13 @@ import React from 'react';
 
 interface HeroSectionProps {
   className?: string;
+  language?: 'en' | 'no';
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  className = '',
+  language = 'en',
+}) => {
   return (
     <section
       className={`relative min-h-screen bg-gradient-to-b from-praxis-dark-blue to-praxis-blue flex items-center ${className}`}
@@ -17,38 +21,50 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ className = '' }) => {
           id="hero-heading"
           className="h1 text-praxis-white mb-6 max-w-4xl mx-auto leading-tight"
         >
-          Measure What Matters: Actual Security Behaviors
+          {language === 'no'
+            ? 'Mål Det Som Betyr Noe: Faktisk Sikkerhetsatferd'
+            : 'Measure What Matters: Actual Security Behaviors'}
         </h1>
 
         {/* Authority Subheadline */}
         <h2 className="h3 text-praxis-gold mb-8 max-w-3xl mx-auto">
-          By Kai Roer, Creator of the Security Culture Framework adopted by
-          ENISA
+          {language === 'no'
+            ? 'Av Kai Roer, Skaper av Sikkerhetskulturrammeverket adoptert av ENISA'
+            : 'By Kai Roer, Creator of the Security Culture Framework adopted by ENISA'}
         </h2>
 
         {/* Problem Statement */}
         <p className="body-large text-praxis-white mb-12 max-w-4xl mx-auto opacity-90">
-          Organizations invest heavily in Security Awareness Training but
-          can&apos;t measure behavioral changes. Stop guessing. Start measuring.
-          Get evidence-based insights into your security culture with Microsoft
-          Graph API behavioral monitoring.
+          {language === 'no'
+            ? 'Organisasjoner investerer tungt i Sikkerhetsopplæring, men kan ikke måle adferdsendringer. Slutt å gjette. Begynn å måle. Få evidensbaserte innsikter i din sikkerhetskultur med Microsoft Graph API adferdsovervåking.'
+            : "Organizations invest heavily in Security Awareness Training but can't measure behavioral changes. Stop guessing. Start measuring. Get evidence-based insights into your security culture with Microsoft Graph API behavioral monitoring."}
         </p>
 
         {/* Primary CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 max-w-lg mx-auto">
           <a
-            href="/demo"
+            href={`/${language === 'no' ? 'no/' : ''}demo`}
             className="btn-accent btn-lg hover-lift active-scale focus-ring-gold flex-1"
-            aria-label="Schedule a demo to see how Praxis Navigator works"
+            aria-label={
+              language === 'no'
+                ? 'Bestill en demo for å se hvordan Praxis Navigator fungerer'
+                : 'Schedule a demo to see how Praxis Navigator works'
+            }
           >
-            Schedule Demo
+            {language === 'no' ? 'Bestill Demo' : 'Schedule Demo'}
           </a>
           <a
-            href="/trial"
+            href={`/${language === 'no' ? 'no/' : ''}trial`}
             className="btn-primary btn-lg hover-lift active-scale focus-ring flex-1"
-            aria-label="Start your free trial of Praxis Navigator"
+            aria-label={
+              language === 'no'
+                ? 'Start din gratis prøveversjon av Praxis Navigator'
+                : 'Start your free trial of Praxis Navigator'
+            }
           >
-            Start Free Trial
+            {language === 'no'
+              ? 'Start Gratis Prøveversjon'
+              : 'Start Free Trial'}
           </a>
         </div>
 
