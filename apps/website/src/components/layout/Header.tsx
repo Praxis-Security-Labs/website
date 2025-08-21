@@ -19,6 +19,13 @@ export const Header: React.FC<HeaderProps> = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = useTranslations(currentLanguage as 'en' | 'no');
 
+  // Get marketplace URL with fallback
+  const marketplaceUrl =
+    typeof import.meta !== 'undefined' &&
+    import.meta.env?.ASTRO_PUBLIC_MARKETPLACE_URL
+      ? import.meta.env.ASTRO_PUBLIC_MARKETPLACE_URL
+      : 'https://azuremarketplace.microsoft.com';
+
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -39,12 +46,12 @@ export const Header: React.FC<HeaderProps> = ({
     {
       label: t('nav.product'),
       href: currentLanguage === 'en' ? '/product' : '/no/product',
-      hasDropdown: true,
+      hasDropdown: false,
     },
     {
       label: t('nav.segments'),
       href: currentLanguage === 'en' ? '/segments' : '/no/segments',
-      hasDropdown: true,
+      hasDropdown: false,
     },
     {
       label: t('nav.about'),
@@ -54,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
     {
       label: t('nav.resources'),
       href: currentLanguage === 'en' ? '/resources' : '/no/resources',
-      hasDropdown: true,
+      hasDropdown: false,
     },
     {
       label: t('nav.pricing'),
@@ -218,10 +225,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Azure Marketplace Button */}
             <a
-              href={
-                import.meta.env.ASTRO_PUBLIC_MARKETPLACE_URL ||
-                'https://azuremarketplace.microsoft.com'
-              }
+              href={marketplaceUrl}
               className="btn-accent btn-sm"
               target="_blank"
               rel="noopener noreferrer"
@@ -390,10 +394,7 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
 
               <a
-                href={
-                  import.meta.env.ASTRO_PUBLIC_MARKETPLACE_URL ||
-                  'https://azuremarketplace.microsoft.com'
-                }
+                href={marketplaceUrl}
                 className="btn-accent w-full text-center"
                 target="_blank"
                 rel="noopener noreferrer"
