@@ -2,10 +2,12 @@ import React from 'react';
 
 interface ProblemSolutionSectionProps {
   className?: string;
+  language?: 'en' | 'no';
 }
 
 export const ProblemSolutionSection: React.FC<ProblemSolutionSectionProps> = ({
   className = '',
+  language = 'en',
 }) => {
   return (
     <section
@@ -20,11 +22,14 @@ export const ProblemSolutionSection: React.FC<ProblemSolutionSectionProps> = ({
               id="problem-solution-heading"
               className="h2 text-praxis-dark-blue mb-6"
             >
-              The Security Training Measurement Gap
+              {language === 'no'
+                ? 'Sikkerhetsopplæring Målegapet'
+                : 'The Security Training Measurement Gap'}
             </h2>
             <p className="body-large text-praxis-brown max-w-3xl mx-auto">
-              Traditional security tools measure the wrong things. It&apos;s
-              time to measure what actually matters.
+              {language === 'no'
+                ? 'Tradisjonelle sikkerhetsverktøy måler feil ting. Det er på tide å måle det som faktisk betyr noe.'
+                : "Traditional security tools measure the wrong things. It's time to measure what actually matters."}
             </p>
           </div>
 
