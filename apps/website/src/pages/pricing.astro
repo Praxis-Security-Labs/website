@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { PricingHeroSection } from '../../components/sections/PricingHeroSection';
-import { PricingTableSection } from '../../components/sections/PricingTableSection';
-import { FeatureComparisonSection } from '../../components/sections/FeatureComparisonSection';
-import { TrialCallToActionSection } from '../../components/sections/TrialCallToActionSection';
-import { EnterpriseContactSection } from '../../components/sections/EnterpriseContactSection';
-import { getLangFromUrl } from '../../i18n/utils';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PricingHeroSection } from '../components/sections/PricingHeroSection';
+import { PricingTableSection } from '../components/sections/PricingTableSection';
+import { FeatureComparisonSection } from '../components/sections/FeatureComparisonSection';
+import { TrialCallToActionSection } from '../components/sections/TrialCallToActionSection';
+import { EnterpriseContactSection } from '../components/sections/EnterpriseContactSection';
+import { getLangFromUrl } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url); // Will be 'en'
 

@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getLangFromUrl } from '../../../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
@@ -521,7 +521,7 @@ const structuredData = {
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="/en/pricing"
+            href="/pricing"
             class="bg-praxis-orange hover:bg-praxis-orange-dark text-white px-8 py-4 rounded-lg font-semibold transition-colors"
           >
             Start Free Trial

@@ -38,32 +38,32 @@ export const Header: React.FC<HeaderProps> = ({
   const navigationItems = [
     {
       label: t('nav.product'),
-      href: `/${currentLanguage === 'en' ? '' : 'no/'}product`,
+      href: currentLanguage === 'en' ? '/product' : '/no/product',
       hasDropdown: true,
     },
     {
       label: t('nav.segments'),
-      href: `/${currentLanguage === 'en' ? '' : 'no/'}segments`,
+      href: currentLanguage === 'en' ? '/segments' : '/no/segments',
       hasDropdown: true,
     },
     {
       label: t('nav.about'),
-      href: `/${currentLanguage === 'en' ? '' : 'no/'}about`,
+      href: currentLanguage === 'en' ? '/about' : '/no/about',
       hasDropdown: false,
     },
     {
       label: t('nav.resources'),
-      href: `/${currentLanguage === 'en' ? '' : 'no/'}resources`,
+      href: currentLanguage === 'en' ? '/resources' : '/no/resources',
       hasDropdown: true,
     },
     {
       label: t('nav.pricing'),
-      href: `/${currentLanguage === 'en' ? '' : 'no/'}pricing`,
+      href: currentLanguage === 'en' ? '/pricing' : '/no/pricing',
       hasDropdown: false,
     },
     {
       label: t('nav.contact'),
-      href: `/${currentLanguage === 'en' ? '' : 'no/'}contact`,
+      href: currentLanguage === 'en' ? '/contact' : '/no/contact',
       hasDropdown: false,
     },
   ];

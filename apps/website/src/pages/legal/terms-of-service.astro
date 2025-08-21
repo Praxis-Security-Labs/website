@@ -1,22 +1,22 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { PrivacyPolicyContent } from '../../../components/sections/PrivacyPolicyContent';
-import { getLangFromUrl } from '../../../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TermsOfServiceContent } from '../../components/sections/TermsOfServiceContent';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
 // SEO and meta configuration
-const title = 'Privacy Policy | Praxis Navigator';
+const title = 'Terms of Service | Praxis Navigator';
 const description =
-  'GDPR-compliant privacy policy for Praxis Navigator. Learn how we collect, process, and protect your personal data in accordance with enterprise security standards.';
+  'Enterprise SaaS terms of service for Praxis Navigator. Comprehensive legal framework for security training platform usage and enterprise relationships.';
 const keywords =
-  'privacy policy, GDPR compliance, data protection, enterprise security, personal data processing, user rights';
+  'terms of service, enterprise SaaS, legal framework, service agreement, security platform terms, data security obligations';
 
 // Structured data for legal document
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: 'Privacy Policy',
+  name: 'Terms of Service',
   description: description,
   inLanguage: 'en-US',
   isPartOf: {
@@ -27,9 +27,8 @@ const structuredData = {
   lastReviewed: new Date().toISOString().split('T')[0],
   mainEntity: {
     '@type': 'DigitalDocument',
-    name: 'Praxis Navigator Privacy Policy',
-    description:
-      'GDPR-compliant privacy policy addressing data processing, storage, and user rights',
+    name: 'Praxis Navigator Terms of Service',
+    description: 'Enterprise SaaS legal framework and service agreement',
     dateModified: new Date().toISOString().split('T')[0],
     inLanguage: 'en',
     author: {
@@ -48,5 +47,5 @@ const structuredData = {
   structuredData={structuredData}
   pageType="content"
 >
-  <PrivacyPolicyContent client:load />
+  <TermsOfServiceContent client:load />
 </BaseLayout>

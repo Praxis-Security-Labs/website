@@ -78,16 +78,18 @@ export function shouldRedirectForLanguagePreference(currentPath: string): {
 
   // Build target URL with preferred language
   let pathWithoutLang = currentPath;
-  if (currentPath.startsWith('/en/')) {
+  if (currentPath.startsWith('/no/')) {
     pathWithoutLang = currentPath.substring(3);
-  } else if (currentPath.startsWith('/no/')) {
-    pathWithoutLang = currentPath.substring(3);
-  } else if (currentPath === '/' || currentPath === '/en') {
+  } else if (currentPath === '/no') {
     pathWithoutLang = '';
   }
+  // English pages are at root, so currentPath is already the clean path
 
+  // English is the default locale, so no prefix needed (prefixDefaultLocale: false)
   const targetUrl =
-    storedLanguage === 'en' ? `/en${pathWithoutLang}` : `/no${pathWithoutLang}`;
+    storedLanguage === 'en'
+      ? `/${pathWithoutLang}`.replace('//', '/') || '/'
+      : `/no${pathWithoutLang}` || '/no';
 
   return { shouldRedirect: true, targetUrl };
 }
@@ -117,15 +119,18 @@ export function handleLanguageSwitch(
 
   // Calculate target URL
   let pathWithoutLang = currentPath;
-  if (currentPath.startsWith('/en/')) {
+  if (currentPath.startsWith('/no/')) {
     pathWithoutLang = currentPath.substring(3);
-  } else if (currentPath.startsWith('/no/')) {
-    pathWithoutLang = currentPath.substring(3);
-  } else if (currentPath === '/' || currentPath === '/en') {
+  } else if (currentPath === '/no') {
     pathWithoutLang = '';
   }
+  // English pages are at root, so currentPath is already the clean path
 
-  return targetLanguage === 'en'
-    ? `/en${pathWithoutLang}`
-    : `/no${pathWithoutLang}`;
+  // English is the default locale, so no prefix needed (prefixDefaultLocale: false)
+  const targetPath =
+    targetLanguage === 'en'
+      ? `/${pathWithoutLang}`.replace('//', '/') || '/'
+      : `/no${pathWithoutLang}` || '/no';
+
+  return targetPath;
 }

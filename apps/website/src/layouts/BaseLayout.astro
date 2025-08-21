@@ -282,24 +282,20 @@ const organizationSchema = {
             if (referrerLanguage !== urlLanguage) {
               // Check if this is the same page in different language (manual switch)
               let referrerWithoutLang = referrerPath;
-              if (referrerPath.startsWith('/en/')) {
+              if (referrerPath.startsWith('/no/')) {
                 referrerWithoutLang = referrerPath.substring(3);
-              } else if (referrerPath.startsWith('/no/')) {
-                referrerWithoutLang = referrerPath.substring(3);
-              } else if (referrerPath === '/' || referrerPath === '/en') {
+              } else if (referrerPath === '/no') {
                 referrerWithoutLang = '';
               }
+              // English pages are at root, so referrerPath is already the clean path
 
               let currentWithoutLang = currentPath;
-              if (currentPath.startsWith('/en/')) {
+              if (currentPath.startsWith('/no/')) {
                 currentWithoutLang = currentPath.substring(3);
-              } else if (currentPath.startsWith('/no/')) {
-                currentWithoutLang = currentPath.substring(3);
-              } else if (currentPath === '/' || currentPath === '/en') {
+              } else if (currentPath === '/no') {
                 currentWithoutLang = '';
               }
-
-              // Only update preference if it's the same page (manual language switch)
+              // English pages are at root, so currentPath is already the clean path              // Only update preference if it's the same page (manual language switch)
               if (referrerWithoutLang === currentWithoutLang) {
                 try {
                   localStorage.setItem(LANGUAGE_PREFERENCE_KEY, urlLanguage);
@@ -313,18 +309,17 @@ const organizationSchema = {
 
           // Build target URL with preferred language
           let pathWithoutLang = currentPath;
-          if (currentPath.startsWith('/en/')) {
+          if (currentPath.startsWith('/no/')) {
             pathWithoutLang = currentPath.substring(3);
-          } else if (currentPath.startsWith('/no/')) {
-            pathWithoutLang = currentPath.substring(3);
-          } else if (currentPath === '/' || currentPath === '/en') {
+          } else if (currentPath === '/no') {
             pathWithoutLang = '';
           }
+          // English pages are at root, so currentPath is already the clean path
 
           const targetUrl =
             storedLanguage === 'en'
-              ? `/en${pathWithoutLang}`
-              : `/no${pathWithoutLang}`;
+              ? `/${pathWithoutLang}`.replace('//', '/') || '/'
+              : `/no${pathWithoutLang}` || '/no';
 
           // Perform redirect
           window.location.replace(targetUrl);

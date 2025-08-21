@@ -1,11 +1,11 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getLangFromUrl } from '../../../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url); // Will be 'en'
-import { AboutHeroSection } from '../../../components/sections/AboutHeroSection';
-import { ProfessionalTimelineSection } from '../../../components/sections/ProfessionalTimelineSection';
-import { PublicationsSection } from '../../../components/sections/PublicationsSection';
+import { AboutHeroSection } from '../../components/sections/AboutHeroSection';
+import { ProfessionalTimelineSection } from '../../components/sections/ProfessionalTimelineSection';
+import { PublicationsSection } from '../../components/sections/PublicationsSection';
 
 // SEO Configuration for About Page
 const title =
@@ -164,7 +164,7 @@ const combinedSchema = {
         </li>
         <li>
           <a
-            href="/en/about"
+            href="/about"
             class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
           >
             About

@@ -1,6 +1,6 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getLangFromUrl } from '../../../i18n/utils';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url); // Will be 'en'
 
@@ -25,7 +25,7 @@ const structuredData = {
       '@type': 'Person',
       name: 'Kai Roer',
       jobTitle: 'Security Culture Pioneer',
-      url: '/en/about/kai-roer',
+      url: '/about/kai-roer',
     },
   },
 };

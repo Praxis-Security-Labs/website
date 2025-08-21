@@ -78,18 +78,17 @@
 
     // Build target URL with preferred language
     let pathWithoutLang = currentPath;
-    if (currentPath.startsWith('/en/')) {
+    if (currentPath.startsWith('/no/')) {
       pathWithoutLang = currentPath.substring(3);
-    } else if (currentPath.startsWith('/no/')) {
-      pathWithoutLang = currentPath.substring(3);
-    } else if (currentPath === '/' || currentPath === '/en') {
+    } else if (currentPath === '/no') {
       pathWithoutLang = '';
     }
+    // English pages are at root, so currentPath is already the clean path
 
     const targetUrl =
       storedLanguage === 'en'
-        ? `/en${pathWithoutLang}`
-        : `/no${pathWithoutLang}`;
+        ? `/${pathWithoutLang}`.replace('//', '/') || '/'
+        : `/no${pathWithoutLang}` || '/no';
 
     // Perform redirect
     window.location.replace(targetUrl);
