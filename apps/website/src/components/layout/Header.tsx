@@ -35,39 +35,61 @@ export const Header: React.FC<HeaderProps> = ({
   const navigationItems = [
     {
       label: currentLanguage === 'no' ? 'Produkt' : 'Product',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}product`,
+      href: `/${currentLanguage}/product`,
       hasDropdown: true,
     },
     {
       label: currentLanguage === 'no' ? 'For Din Rolle' : 'For Your Role',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}segments`,
+      href: `/${currentLanguage}/segments`,
       hasDropdown: true,
     },
     {
       label: currentLanguage === 'no' ? 'Om Kai Roer' : 'About Kai Roer',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}about`,
+      href: `/${currentLanguage}/about`,
       hasDropdown: false,
     },
     {
       label: currentLanguage === 'no' ? 'Ressurser' : 'Resources',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}resources`,
+      href: `/${currentLanguage}/resources`,
       hasDropdown: true,
     },
     {
       label:
         currentLanguage === 'no' ? 'Priser & Prøveversjon' : 'Pricing & Trial',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}pricing`,
+      href: `/${currentLanguage}/pricing`,
       hasDropdown: false,
     },
     {
       label: currentLanguage === 'no' ? 'Kontakt & Demo' : 'Contact & Demo',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}contact`,
+      href: `/${currentLanguage}/contact`,
       hasDropdown: false,
     },
   ];
 
   const isActiveLink = (href: string) => {
     return currentPath === href || currentPath.startsWith(href + '/');
+  };
+
+  // Helper function to get the equivalent page in the other language
+  const getLanguageSwitchUrl = (targetLanguage: string) => {
+    // Remove the current language prefix from the path
+    let pathWithoutLang = currentPath;
+    if (currentPath.startsWith('/en/')) {
+      pathWithoutLang = currentPath.substring(3); // Remove '/en'
+    } else if (currentPath.startsWith('/no/')) {
+      pathWithoutLang = currentPath.substring(3); // Remove '/no'
+    } else if (currentPath === '/') {
+      pathWithoutLang = '';
+    }
+
+    // If we're switching to the target language, add the prefix
+    if (targetLanguage === 'en') {
+      return pathWithoutLang === '' ? '/en' : `/en${pathWithoutLang}`;
+    } else if (targetLanguage === 'no') {
+      return pathWithoutLang === '' ? '/no' : `/no${pathWithoutLang}`;
+    }
+
+    return '/';
   };
 
   const handleLogin = async () => {
@@ -153,7 +175,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Language Switcher */}
             <div className="flex items-center border border-praxis-blue-400 rounded-lg overflow-hidden">
               <a
-                href={currentLanguage === 'no' ? '/' : '/no'}
+                href={getLanguageSwitchUrl('en')}
                 className={`
                   px-3 py-1 text-sm font-heading uppercase transition-brand focus-ring-gold
                   ${
@@ -171,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
                 EN
               </a>
               <a
-                href={currentLanguage === 'en' ? '/no' : '/'}
+                href={getLanguageSwitchUrl('no')}
                 className={`
                   px-3 py-1 text-sm font-heading uppercase transition-brand focus-ring-gold
                   ${
@@ -315,7 +337,7 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="pt-4 border-t border-praxis-dark-blue-600">
               <div className="flex space-x-2">
                 <a
-                  href={currentLanguage === 'no' ? '/' : '/no'}
+                  href={getLanguageSwitchUrl('en')}
                   className={`
                     flex-1 text-center py-2 px-4 text-sm font-heading uppercase transition-brand rounded-lg
                     ${
@@ -334,7 +356,7 @@ export const Header: React.FC<HeaderProps> = ({
                   EN
                 </a>
                 <a
-                  href={currentLanguage === 'en' ? '/no' : '/'}
+                  href={getLanguageSwitchUrl('no')}
                   className={`
                     flex-1 text-center py-2 px-4 text-sm font-heading uppercase transition-brand rounded-lg
                     ${

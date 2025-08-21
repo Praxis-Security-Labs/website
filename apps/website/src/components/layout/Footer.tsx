@@ -14,19 +14,19 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
         {
           name:
             currentLanguage === 'no' ? 'Produktoversikt' : 'Platform Overview',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}product`,
+          href: `/${currentLanguage}/product`,
         },
         {
           name: currentLanguage === 'no' ? 'Funksjoner' : 'Features',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}product/features`,
+          href: `/${currentLanguage}/product/features`,
         },
         {
           name: currentLanguage === 'no' ? 'Integrasjoner' : 'Integrations',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}product/integrations`,
+          href: `/${currentLanguage}/product/integrations`,
         },
         {
           name: currentLanguage === 'no' ? 'Sikkerhet' : 'Security',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}product/security`,
+          href: `/${currentLanguage}/product/security`,
         },
       ],
     },
@@ -38,19 +38,19 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
             currentLanguage === 'no'
               ? 'Sikkerhetseksperter'
               : 'Security Leaders',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}segments/security-leaders`,
+          href: `/${currentLanguage}/segments/security-leaders`,
         },
         {
           name: currentLanguage === 'no' ? 'Ledere' : 'Executives',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}segments/executives`,
+          href: `/${currentLanguage}/segments/executives`,
         },
         {
           name: currentLanguage === 'no' ? 'Mellomledere' : 'Managers',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}segments/managers`,
+          href: `/${currentLanguage}/segments/managers`,
         },
         {
           name: currentLanguage === 'no' ? 'SAT-team' : 'SAT Teams',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}segments/sat-teams`,
+          href: `/${currentLanguage}/segments/sat-teams`,
         },
       ],
     },
@@ -59,19 +59,19 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
       links: [
         {
           name: currentLanguage === 'no' ? 'Blogg' : 'Blog',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}resources/blog`,
+          href: `/${currentLanguage}/resources/blog`,
         },
         {
           name: currentLanguage === 'no' ? 'Hvidbøker' : 'Whitepapers',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}resources/whitepapers`,
+          href: `/${currentLanguage}/resources/whitepapers`,
         },
         {
           name: currentLanguage === 'no' ? 'Webinarer' : 'Webinars',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}resources/webinars`,
+          href: `/${currentLanguage}/resources/webinars`,
         },
         {
           name: currentLanguage === 'no' ? 'Kundehistorier' : 'Case Studies',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}resources/case-studies`,
+          href: `/${currentLanguage}/resources/case-studies`,
         },
       ],
     },
@@ -80,19 +80,19 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
       links: [
         {
           name: currentLanguage === 'no' ? 'Kontakt Oss' : 'Contact Us',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}contact`,
+          href: `/${currentLanguage}/contact`,
         },
         {
           name: currentLanguage === 'no' ? 'Book Demo' : 'Book Demo',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}contact/demo`,
+          href: `/${currentLanguage}/contact/demo`,
         },
         {
           name: currentLanguage === 'no' ? 'Kundeservice' : 'Customer Support',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}support`,
+          href: `/${currentLanguage}/support`,
         },
         {
           name: currentLanguage === 'no' ? 'Dokumentasjon' : 'Documentation',
-          href: `/${currentLanguage === 'no' ? 'no/' : ''}support/docs`,
+          href: `/${currentLanguage}/support/docs`,
         },
       ],
     },
@@ -101,19 +101,19 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
   const legalLinks = [
     {
       name: currentLanguage === 'no' ? 'Personvern' : 'Privacy Policy',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/privacy-policy`,
+      href: `/${currentLanguage}/legal/privacy-policy`,
     },
     {
       name: currentLanguage === 'no' ? 'Vilkår' : 'Terms of Service',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/terms-of-service`,
+      href: `/${currentLanguage}/legal/terms-of-service`,
     },
     {
       name: currentLanguage === 'no' ? 'Cookies' : 'Cookie Policy',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}legal/cookie-policy`,
+      href: `/${currentLanguage}/legal/cookie-policy`,
     },
     {
       name: currentLanguage === 'no' ? 'Samsvar' : 'Compliance',
-      href: `/${currentLanguage === 'no' ? 'no/' : ''}compliance`,
+      href: `/${currentLanguage}/compliance`,
     },
   ];
 
