@@ -24,7 +24,7 @@ export interface PerformanceMetrics {
   timestamp: string;
   url: string;
   userAgent: string;
-  connectionType?: string;
+  connectionType?: string | undefined;
   deviceType: 'mobile' | 'tablet' | 'desktop';
 }
 
@@ -252,12 +252,12 @@ export function setupPerformanceObserver(): void {
         if (entry.entryType === 'navigation') {
           const navEntry = entry as PerformanceNavigationTiming;
 
-          // Track additional navigation metrics
+          // Track additional navigation metrics using fetchStart as baseline
           const metrics = {
             domContentLoaded:
-              navEntry.domContentLoadedEventEnd - navEntry.navigationStart,
-            loadComplete: navEntry.loadEventEnd - navEntry.navigationStart,
-            domInteractive: navEntry.domInteractive - navEntry.navigationStart,
+              navEntry.domContentLoadedEventEnd - navEntry.fetchStart,
+            loadComplete: navEntry.loadEventEnd - navEntry.fetchStart,
+            domInteractive: navEntry.domInteractive - navEntry.fetchStart,
           };
 
           Object.entries(metrics).forEach(([key, value]) => {

@@ -20,7 +20,8 @@ export interface ConversionEvent {
     | 'executives'
     | 'managers'
     | 'sat-teams'
-    | 'general';
+    | 'general'
+    | undefined;
 }
 
 // Form submission event
@@ -76,12 +77,24 @@ export function trackConversionEvent(event: ConversionEvent): void {
  * Track form submissions for lead generation metrics
  */
 export function trackFormSubmission(event: FormEvent): void {
+  // Type guard for segment
+  const validSegments = [
+    'security-leaders',
+    'executives',
+    'managers',
+    'sat-teams',
+    'general',
+  ];
+  const segment = validSegments.includes(event.segment)
+    ? (event.segment as ConversionEvent['segment'])
+    : undefined;
+
   trackConversionEvent({
     action: event.formType === 'demo' ? 'demo_request' : 'contact_form',
     category: 'conversion',
     label: `${event.formType}_${event.segment}`,
     value: event.success ? 1 : 0,
-    segment: event.segment as ConversionEvent['segment'],
+    segment: segment,
   });
 
   // Track validation errors for UX improvement (anonymized)
@@ -124,12 +137,25 @@ export function trackMarketplaceClick(source: string): void {
  * Track demo request button clicks
  */
 export function trackDemoRequest(source: string, segment?: string): void {
+  // Type guard for segment
+  const validSegments = [
+    'security-leaders',
+    'executives',
+    'managers',
+    'sat-teams',
+    'general',
+  ];
+  const validSegment =
+    segment && validSegments.includes(segment)
+      ? (segment as ConversionEvent['segment'])
+      : undefined;
+
   trackConversionEvent({
     action: 'demo_request',
     category: 'conversion',
     label: `demo_from_${source}`,
     value: 1,
-    segment: segment as ConversionEvent['segment'],
+    segment: validSegment,
   });
 }
 

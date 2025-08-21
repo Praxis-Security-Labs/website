@@ -4,6 +4,7 @@
  */
 
 import * as Sentry from '@sentry/browser';
+// Remove unused imports for v10 compatibility
 
 // Error categories for filtering and organization
 export enum ErrorCategory {
@@ -24,13 +25,13 @@ export enum ErrorSeverity {
 }
 
 // Custom error context interface
-export interface ErrorContext {
+export interface ErrorContext extends Record<string, unknown> {
   category: ErrorCategory;
-  component?: string;
-  userAction?: string;
-  pageUrl?: string;
-  userAgent?: string;
-  sessionInfo?: Record<string, any>;
+  component?: string | undefined;
+  userAction?: string | undefined;
+  pageUrl?: string | undefined;
+  userAgent?: string | undefined;
+  sessionInfo?: Record<string, unknown> | undefined;
 }
 
 // Performance monitoring configuration
@@ -66,19 +67,8 @@ export function initializeSentry(): void {
 
     // Integrations
     integrations: [
-      new Sentry.BrowserTracing({
-        // Performance monitoring for navigation
-        tracePropagationTargets: [
-          'localhost',
-          /^https:\/\/.*\.praxisnavigator\.io/,
-        ],
-
-        // Track only important interactions
-        tracingOrigins: [
-          /^https:\/\/.*\.praxisnavigator\.io/,
-          /^https:\/\/api\./,
-        ],
-      }),
+      // Remove BrowserTracing as it's causing compatibility issues
+      // Performance monitoring will be handled through Core Web Vitals utility
     ],
 
     // Filter out noise and non-critical errors
@@ -253,30 +243,25 @@ export function trackPerformanceTransaction(
     return operation();
   }
 
-  return Sentry.withScope(async scope => {
-    const transaction = Sentry.startTransaction({
+  // Use simplified performance tracking for Sentry v10 compatibility
+  return Sentry.startSpan(
+    {
       name: context.transaction,
       op: context.operation,
-      tags: context.tags,
-    });
-
-    scope.setSpan(transaction);
-
-    if (context.data) {
-      scope.setContext('transaction_data', context.data);
+      attributes: context.tags || {},
+    },
+    async () => {
+      try {
+        return await operation();
+      } catch (error) {
+        Sentry.captureException(error, {
+          tags: { transaction: context.transaction },
+          contexts: { performance: context.data },
+        });
+        throw error;
+      }
     }
-
-    try {
-      const result = await operation();
-      transaction.setStatus('ok');
-      return result;
-    } catch (error) {
-      transaction.setStatus('internal_error');
-      throw error;
-    } finally {
-      transaction.finish();
-    }
-  });
+  );
 }
 
 /**
