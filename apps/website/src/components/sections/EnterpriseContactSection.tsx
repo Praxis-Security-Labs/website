@@ -10,7 +10,7 @@ interface EnterpriseContactSectionProps {
 const enterpriseContactSchema = z.object({
   firstName: z.string().min(2, 'First name is required'),
   lastName: z.string().min(2, 'Last name is required'),
-  email: z.string().email({ message: 'Please enter a valid email address' }),
+  email: z.string().email('Please enter a valid email address'),
   company: z.string().min(2, 'Company name is required'),
   jobTitle: z.string().min(2, 'Job title is required'),
   employeeCount: z.string().min(1, 'Please select employee count'),
@@ -150,7 +150,7 @@ export const EnterpriseContactSection: React.FC<
       enterpriseContactSchema.extend({
         firstName: z.string().min(2, t.form.validation.firstName),
         lastName: z.string().min(2, t.form.validation.lastName),
-        email: z.string().email({ message: t.form.validation.email }),
+        email: z.string().email(t.form.validation.email),
         company: z.string().min(2, t.form.validation.company),
         jobTitle: z.string().min(2, t.form.validation.jobTitle),
         employeeCount: z.string().min(1, t.form.validation.employeeCount),

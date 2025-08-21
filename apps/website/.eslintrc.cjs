@@ -63,6 +63,9 @@ module.exports = {
         // Disable React rules that don't apply to Astro templates
         'react/no-unknown-property': 'off',
         'react/jsx-key': 'off',
+        // Disable jsx-a11y rules that don't work well with Astro's HTML-like syntax
+        'jsx-a11y/label-has-associated-control': 'off',
+        'jsx-a11y/label-has-for': 'off',
       },
     },
   ],

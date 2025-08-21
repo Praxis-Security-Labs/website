@@ -10,7 +10,7 @@ interface SecurityLeadersContactSectionProps {
 const securityLeadersContactSchema = z.object({
   firstName: z.string().min(2, 'First name is required'),
   lastName: z.string().min(2, 'Last name is required'),
-  email: z.string().email({ message: 'Please enter a valid email address' }),
+  email: z.string().email('Please enter a valid email address'),
   company: z.string().min(2, 'Company name is required'),
   jobTitle: z.string().min(2, 'Job title is required'),
   employeeCount: z.string().min(1, 'Please select employee count'),

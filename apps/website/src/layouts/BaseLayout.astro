@@ -338,17 +338,11 @@ const organizationSchema = {
                 // Try to report to Sentry if available
                 if (
                   typeof window !== 'undefined' &&
-                  (
-                    window as {
-                      Sentry?: { captureException: (error: unknown) => void };
-                    }
-                  ).Sentry
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  (window as any).Sentry
                 ) {
-                  (
-                    window as {
-                      Sentry: { captureException: (error: unknown) => void };
-                    }
-                  ).Sentry.captureException(error);
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  (window as any).Sentry.captureException(error);
                 }
               });
           } else {
