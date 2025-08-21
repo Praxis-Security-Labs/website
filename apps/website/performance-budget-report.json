@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-08-21T07:35:57.651Z",
+  "passed": true,
+  "summary": {
+    "totalSize": "262.6 KB",
+    "assetCount": 12,
+    "budgetUtilization": 26
+  },
+  "budget": {
+    "totalLimit": "1000 KB",
+    "initialBundleLimit": "500 KB",
+    "routeChunkLimit": "200 KB"
+  },
+  "issues": {
+    "errors": [],
+    "warnings": []
+  },
+  "recommendations": []
+}

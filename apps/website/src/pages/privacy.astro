@@ -1,0 +1,674 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Get language from URL or default to English
+const url = Astro.url;
+const isNorwegian = url.pathname.startsWith('/no/');
+const currentLanguage = isNorwegian ? 'no' : 'en';
+
+// Localized content
+const content = {
+  en: {
+    title: 'Privacy Policy - Praxis Navigator',
+    heading: 'Privacy Policy',
+    lastUpdated: 'Last updated',
+    effectiveDate: 'August 21, 2025',
+    sections: {
+      introduction: {
+        title: 'Introduction',
+        content: `Praxis Navigator is committed to protecting your privacy and ensuring transparency about how we collect, use, and protect your information. This privacy policy explains our practices regarding the collection and use of information when you visit our website or use our services.`,
+      },
+      dataController: {
+        title: 'Data Controller',
+        content: `The data controller for this website is:<br><br>
+        <strong>Praxis Navigator</strong><br>
+        Founded by Kai Roer<br>
+        Email: contact@praxisnavigator.io<br><br>
+        For privacy-related inquiries, please contact us at: privacy@praxisnavigator.io`,
+      },
+      informationCollected: {
+        title: 'Information We Collect',
+        content: `We are committed to privacy-first data collection and use the following privacy-compliant methods:`,
+        subsections: {
+          analytics: {
+            title: 'Website Analytics (Cookieless)',
+            content: `We use Cloudflare Web Analytics to understand how visitors use our website. This service:
+            <ul class="list-disc pl-6 mt-2">
+              <li>Does not use cookies or store personal data</li>
+              <li>Does not track users across other websites</li>
+              <li>Collects only aggregated, anonymous usage statistics</li>
+              <li>Is fully GDPR compliant without requiring consent</li>
+              <li>Measures page views, referrers, and basic performance metrics</li>
+            </ul>`,
+          },
+          errorTracking: {
+            title: 'Error Monitoring',
+            content: `For production error tracking, we use Sentry to improve our service quality:
+            <ul class="list-disc pl-6 mt-2">
+              <li>Only activated in production environments</li>
+              <li>Collects technical error information to fix bugs</li>
+              <li>Does not store personal or identifying information</li>
+              <li>Uses anonymized user IDs based on browser characteristics</li>
+              <li>Automatically filters out sensitive data</li>
+            </ul>`,
+          },
+          formData: {
+            title: 'Contact Forms and Demo Requests',
+            content: `When you submit a contact form or demo request, we collect:
+            <ul class="list-disc pl-6 mt-2">
+              <li>Name and email address (required for response)</li>
+              <li>Company information (optional)</li>
+              <li>Message content and inquiry details</li>
+              <li>Timestamp and form source for analytics</li>
+            </ul>`,
+          },
+          technicalData: {
+            title: 'Technical Information',
+            content: `Our servers automatically collect standard technical information:
+            <ul class="list-disc pl-6 mt-2">
+              <li>IP address (for security and spam prevention)</li>
+              <li>Browser type and version (for compatibility)</li>
+              <li>Operating system (for technical support)</li>
+              <li>Referring website (for analytics)</li>
+              <li>Pages visited and time spent (for improvement)</li>
+            </ul>`,
+          },
+        },
+      },
+      legalBasis: {
+        title: 'Legal Basis for Processing',
+        content: `Under GDPR, we process your personal data based on the following legal grounds:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Legitimate Interest:</strong> Website analytics and performance monitoring</li>
+          <li><strong>Consent:</strong> When you submit forms or request information</li>
+          <li><strong>Contract Performance:</strong> When providing requested services</li>
+          <li><strong>Legal Obligation:</strong> Compliance with applicable laws</li>
+        </ul>`,
+      },
+      dataUse: {
+        title: 'How We Use Your Information',
+        content: `We use the collected information for the following purposes:
+        <ul class="list-disc pl-6 mt-2">
+          <li>Responding to your inquiries and demo requests</li>
+          <li>Improving our website performance and user experience</li>
+          <li>Providing customer support and technical assistance</li>
+          <li>Sending requested information about our services</li>
+          <li>Detecting and preventing fraud or abuse</li>
+          <li>Complying with legal obligations</li>
+        </ul>`,
+      },
+      dataSharing: {
+        title: 'Data Sharing and Third Parties',
+        content: `We work with the following trusted service providers who may process your data:`,
+        subsections: {
+          cloudflare: {
+            title: 'Cloudflare (Analytics and CDN)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Purpose: Website hosting, analytics, and performance</li>
+              <li>Data: Anonymized usage statistics only</li>
+              <li>Privacy Policy: <a href="https://www.cloudflare.com/privacypolicy/" class="text-praxis-blue hover:text-praxis-sky">cloudflare.com/privacypolicy</a></li>
+            </ul>`,
+          },
+          hubspot: {
+            title: 'HubSpot (CRM and Forms)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Purpose: Contact form processing and lead management</li>
+              <li>Data: Name, email, company, and inquiry details</li>
+              <li>Privacy Policy: <a href="https://www.hubspot.com/privacy-policy" class="text-praxis-blue hover:text-praxis-sky">hubspot.com/privacy-policy</a></li>
+            </ul>`,
+          },
+          azure: {
+            title: 'Microsoft Azure (Authentication)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Purpose: Single sign-on authentication for application access</li>
+              <li>Data: Only when you choose to log in to our application</li>
+              <li>Privacy Policy: <a href="https://privacy.microsoft.com/privacystatement" class="text-praxis-blue hover:text-praxis-sky">privacy.microsoft.com</a></li>
+            </ul>`,
+          },
+          sentry: {
+            title: 'Sentry (Error Monitoring)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Purpose: Error tracking and performance monitoring</li>
+              <li>Data: Technical error information only (no personal data)</li>
+              <li>Privacy Policy: <a href="https://sentry.io/privacy/" class="text-praxis-blue hover:text-praxis-sky">sentry.io/privacy</a></li>
+            </ul>`,
+          },
+        },
+      },
+      dataRetention: {
+        title: 'Data Retention',
+        content: `We retain different types of data for appropriate periods:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Analytics Data:</strong> Aggregated data retained indefinitely (fully anonymous)</li>
+          <li><strong>Contact Forms:</strong> Personal data retained for 2 years or until you request deletion</li>
+          <li><strong>Error Logs:</strong> Technical data retained for 90 days maximum</li>
+          <li><strong>Support Communications:</strong> Retained for 3 years for quality purposes</li>
+        </ul>`,
+      },
+      yourRights: {
+        title: 'Your Rights Under GDPR',
+        content: `As a data subject, you have the following rights:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Right to Access:</strong> Request a copy of your personal data</li>
+          <li><strong>Right to Rectification:</strong> Correct inaccurate personal data</li>
+          <li><strong>Right to Erasure:</strong> Request deletion of your personal data</li>
+          <li><strong>Right to Restrict Processing:</strong> Limit how we use your data</li>
+          <li><strong>Right to Data Portability:</strong> Receive your data in a portable format</li>
+          <li><strong>Right to Object:</strong> Object to processing based on legitimate interests</li>
+          <li><strong>Right to Withdraw Consent:</strong> Withdraw consent at any time</li>
+        </ul>
+        <br>
+        To exercise any of these rights, contact us at: privacy@praxisnavigator.io`,
+      },
+      cookies: {
+        title: 'Cookies and Tracking',
+        content: `Our commitment to privacy means we operate differently from most websites:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>No Tracking Cookies:</strong> We do not use cookies for tracking or analytics</li>
+          <li><strong>Essential Cookies Only:</strong> We may use strictly necessary cookies for website functionality</li>
+          <li><strong>No Third-Party Tracking:</strong> No advertising or social media tracking pixels</li>
+          <li><strong>Cookieless Analytics:</strong> Our analytics work without cookies</li>
+          <li><strong>Browser Local Storage:</strong> Used only for user preferences (language selection)</li>
+        </ul>`,
+      },
+      security: {
+        title: 'Data Security',
+        content: `We implement appropriate technical and organizational measures to protect your data:
+        <ul class="list-disc pl-6 mt-2">
+          <li>HTTPS encryption for all data transmission</li>
+          <li>Regular security updates and monitoring</li>
+          <li>Access controls and authentication</li>
+          <li>Data minimization and pseudonymization</li>
+          <li>Regular security assessments</li>
+          <li>Incident response procedures</li>
+        </ul>`,
+      },
+      international: {
+        title: 'International Data Transfers',
+        content: `Our services are hosted primarily in the EU/EEA region. When data is transferred outside the EEA:
+        <ul class="list-disc pl-6 mt-2">
+          <li>We ensure appropriate safeguards are in place</li>
+          <li>We rely on adequacy decisions or standard contractual clauses</li>
+          <li>Data processors are carefully vetted for GDPR compliance</li>
+        </ul>`,
+      },
+      updates: {
+        title: 'Changes to This Policy',
+        content: `We may update this privacy policy from time to time. We will notify you of any material changes by:
+        <ul class="list-disc pl-6 mt-2">
+          <li>Posting the updated policy on this page</li>
+          <li>Updating the "Last updated" date above</li>
+          <li>Sending email notification for significant changes (if we have your email)</li>
+        </ul>`,
+      },
+      contact: {
+        title: 'Contact Information',
+        content: `For any privacy-related questions, concerns, or requests, please contact us:
+        <br><br>
+        <strong>Privacy Officer</strong><br>
+        Email: privacy@praxisnavigator.io<br>
+        General Contact: contact@praxisnavigator.io<br><br>
+        
+        <strong>Supervisory Authority</strong><br>
+        You have the right to lodge a complaint with your local data protection authority if you believe we have not handled your personal data in accordance with applicable data protection laws.`,
+      },
+    },
+  },
+  no: {
+    title: 'Personvernerklæring - Praxis Navigator',
+    heading: 'Personvernerklæring',
+    lastUpdated: 'Sist oppdatert',
+    effectiveDate: '21. august 2025',
+    sections: {
+      introduction: {
+        title: 'Introduksjon',
+        content: `Praxis Navigator er forpliktet til å beskytte ditt personvern og sikre åpenhet om hvordan vi samler inn, bruker og beskytter din informasjon. Denne personvernerklæringen forklarer våre praksis angående innsamling og bruk av informasjon når du besøker vår nettside eller bruker våre tjenester.`,
+      },
+      dataController: {
+        title: 'Databehandlingsansvarlig',
+        content: `Databehandlingsansvarlig for denne nettsiden er:<br><br>
+        <strong>Praxis Navigator</strong><br>
+        Grunnlagt av Kai Roer<br>
+        E-post: contact@praxisnavigator.io<br><br>
+        For personvernrelaterte henvendelser, vennligst kontakt oss på: privacy@praxisnavigator.io`,
+      },
+      informationCollected: {
+        title: 'Informasjon Vi Samler Inn',
+        content: `Vi er forpliktet til personvernvennlig datainnsamling og bruker følgende personvernkompatible metoder:`,
+        subsections: {
+          analytics: {
+            title: 'Nettside-analyse (Uten informasjonskapsler)',
+            content: `Vi bruker Cloudflare Web Analytics for å forstå hvordan besøkende bruker vår nettside. Denne tjenesten:
+            <ul class="list-disc pl-6 mt-2">
+              <li>Bruker ikke informasjonskapsler eller lagrer persondata</li>
+              <li>Sporer ikke brukere på tvers av andre nettsider</li>
+              <li>Samler kun aggregerte, anonyme bruksstatistikker</li>
+              <li>Er fullt GDPR-kompatibel uten å kreve samtykke</li>
+              <li>Måler sidevisninger, referanser og grunnleggende ytelsesmålinger</li>
+            </ul>`,
+          },
+          errorTracking: {
+            title: 'Feilovervåking',
+            content: `For produksjonsfeilovervåking bruker vi Sentry for å forbedre servicekvaliteten:
+            <ul class="list-disc pl-6 mt-2">
+              <li>Kun aktivert i produksjonsmiljøer</li>
+              <li>Samler teknisk feilinformasjon for å fikse feil</li>
+              <li>Lagrer ikke personlig eller identifiserende informasjon</li>
+              <li>Bruker anonymiserte bruker-IDer basert på nettleseregenskaper</li>
+              <li>Filtrerer automatisk ut sensitive data</li>
+            </ul>`,
+          },
+          formData: {
+            title: 'Kontaktskjemaer og Demoforespørsler',
+            content: `Når du sender inn et kontaktskjema eller demoforespørsel, samler vi inn:
+            <ul class="list-disc pl-6 mt-2">
+              <li>Navn og e-postadresse (nødvendig for svar)</li>
+              <li>Bedriftsinformasjon (valgfritt)</li>
+              <li>Meldingsinnhold og henvendelsesdetaljer</li>
+              <li>Tidsstempel og skjemakilde for analyse</li>
+            </ul>`,
+          },
+          technicalData: {
+            title: 'Teknisk Informasjon',
+            content: `Våre servere samler automatisk standard teknisk informasjon:
+            <ul class="list-disc pl-6 mt-2">
+              <li>IP-adresse (for sikkerhet og spam-forebygging)</li>
+              <li>Nettlesertype og versjon (for kompatibilitet)</li>
+              <li>Operativsystem (for teknisk støtte)</li>
+              <li>Henvisende nettside (for analyse)</li>
+              <li>Besøkte sider og tid brukt (for forbedring)</li>
+            </ul>`,
+          },
+        },
+      },
+      legalBasis: {
+        title: 'Rettslig Grunnlag for Behandling',
+        content: `Under GDPR behandler vi dine persondata basert på følgende rettslige grunnlag:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Berettiget Interesse:</strong> Nettside-analyse og ytelsesovervåking</li>
+          <li><strong>Samtykke:</strong> Når du sender inn skjemaer eller ber om informasjon</li>
+          <li><strong>Kontraktsoppfyllelse:</strong> Når vi leverer forespurte tjenester</li>
+          <li><strong>Juridisk Forpliktelse:</strong> Overholdelse av gjeldende lover</li>
+        </ul>`,
+      },
+      dataUse: {
+        title: 'Hvordan Vi Bruker Din Informasjon',
+        content: `Vi bruker den innsamlede informasjonen til følgende formål:
+        <ul class="list-disc pl-6 mt-2">
+          <li>Svare på dine henvendelser og demoforespørsler</li>
+          <li>Forbedre vår nettside-ytelse og brukeropplevelse</li>
+          <li>Yte kundestøtte og teknisk assistanse</li>
+          <li>Sende forespurt informasjon om våre tjenester</li>
+          <li>Oppdage og forhindre svindel eller misbruk</li>
+          <li>Overholde juridiske forpliktelser</li>
+        </ul>`,
+      },
+      dataSharing: {
+        title: 'Datadeling og Tredjeparter',
+        content: `Vi samarbeider med følgende pålitelige tjenesteleverandører som kan behandle dine data:`,
+        subsections: {
+          cloudflare: {
+            title: 'Cloudflare (Analyse og CDN)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Formål: Nettside-hosting, analyse og ytelse</li>
+              <li>Data: Kun anonymiserte bruksstatistikker</li>
+              <li>Personvernerklæring: <a href="https://www.cloudflare.com/privacypolicy/" class="text-praxis-blue hover:text-praxis-sky">cloudflare.com/privacypolicy</a></li>
+            </ul>`,
+          },
+          hubspot: {
+            title: 'HubSpot (CRM og Skjemaer)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Formål: Kontaktskjemabehandling og kundeemneadministrasjon</li>
+              <li>Data: Navn, e-post, bedrift og henvendelsesdetaljer</li>
+              <li>Personvernerklæring: <a href="https://www.hubspot.com/privacy-policy" class="text-praxis-blue hover:text-praxis-sky">hubspot.com/privacy-policy</a></li>
+            </ul>`,
+          },
+          azure: {
+            title: 'Microsoft Azure (Autentisering)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Formål: Enkel pålogging for applikasjonstilgang</li>
+              <li>Data: Kun når du velger å logge inn på vår applikasjon</li>
+              <li>Personvernerklæring: <a href="https://privacy.microsoft.com/privacystatement" class="text-praxis-blue hover:text-praxis-sky">privacy.microsoft.com</a></li>
+            </ul>`,
+          },
+          sentry: {
+            title: 'Sentry (Feilovervåking)',
+            content: `<ul class="list-disc pl-6 mt-2">
+              <li>Formål: Feilsporing og ytelsesovervåking</li>
+              <li>Data: Kun teknisk feilinformasjon (ingen persondata)</li>
+              <li>Personvernerklæring: <a href="https://sentry.io/privacy/" class="text-praxis-blue hover:text-praxis-sky">sentry.io/privacy</a></li>
+            </ul>`,
+          },
+        },
+      },
+      dataRetention: {
+        title: 'Dataoppbevaring',
+        content: `Vi oppbevarer ulike typer data i passende perioder:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Analysedata:</strong> Aggregerte data oppbevart på ubestemt tid (fullstendig anonymt)</li>
+          <li><strong>Kontaktskjemaer:</strong> Persondata oppbevart i 2 år eller til du ber om sletting</li>
+          <li><strong>Feillogger:</strong> Tekniske data oppbevart maksimalt 90 dager</li>
+          <li><strong>Støttekommunikasjon:</strong> Oppbevart i 3 år for kvalitetsformål</li>
+        </ul>`,
+      },
+      yourRights: {
+        title: 'Dine Rettigheter Under GDPR',
+        content: `Som registrert har du følgende rettigheter:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Rett til Tilgang:</strong> Be om en kopi av dine persondata</li>
+          <li><strong>Rett til Retting:</strong> Korrigere unøyaktige persondata</li>
+          <li><strong>Rett til Sletting:</strong> Be om sletting av dine persondata</li>
+          <li><strong>Rett til Begrensing:</strong> Begrense hvordan vi bruker dine data</li>
+          <li><strong>Rett til Dataportabilitet:</strong> Motta dine data i et portabelt format</li>
+          <li><strong>Rett til Innsigelse:</strong> Protestere mot behandling basert på berettigede interesser</li>
+          <li><strong>Rett til å Trekke Samtykke:</strong> Trekke samtykke når som helst</li>
+        </ul>
+        <br>
+        For å utøve noen av disse rettighetene, kontakt oss på: privacy@praxisnavigator.io`,
+      },
+      cookies: {
+        title: 'Informasjonskapsler og Sporing',
+        content: `Vår forpliktelse til personvern betyr at vi opererer annerledes enn de fleste nettsider:
+        <ul class="list-disc pl-6 mt-2">
+          <li><strong>Ingen Sporingskapsler:</strong> Vi bruker ikke informasjonskapsler for sporing eller analyse</li>
+          <li><strong>Kun Essensielle Kapsler:</strong> Vi kan bruke strengt nødvendige informasjonskapsler for nettsidefunksjonalitet</li>
+          <li><strong>Ingen Tredjeparts Sporing:</strong> Ingen reklame- eller sosiale medier-sporingspixler</li>
+          <li><strong>Informasjonskapselløs Analyse:</strong> Vår analyse fungerer uten informasjonskapsler</li>
+          <li><strong>Nettleser Lokal Lagring:</strong> Brukes kun for brukerpreferanser (språkvalg)</li>
+        </ul>`,
+      },
+      security: {
+        title: 'Datasikkerhet',
+        content: `Vi implementerer passende tekniske og organisatoriske tiltak for å beskytte dine data:
+        <ul class="list-disc pl-6 mt-2">
+          <li>HTTPS-kryptering for all dataoverføring</li>
+          <li>Regelmessige sikkerhetsoppdateringer og overvåking</li>
+          <li>Tilgangskontroll og autentisering</li>
+          <li>Dataminimering og pseudonymisering</li>
+          <li>Regelmessige sikkerhetsvurderinger</li>
+          <li>Hendelsesresponsprosedyrer</li>
+        </ul>`,
+      },
+      international: {
+        title: 'Internasjonale Dataoverføringer',
+        content: `Våre tjenester er hovedsakelig hostet i EU/EØS-regionen. Når data overføres utenfor EØS:
+        <ul class="list-disc pl-6 mt-2">
+          <li>Vi sikrer at passende sikkerhetstiltak er på plass</li>
+          <li>Vi stoler på adekvansavgjørelser eller standard kontraktuelle klausuler</li>
+          <li>Databehandlere er nøye kontrollert for GDPR-overholdelse</li>
+        </ul>`,
+      },
+      updates: {
+        title: 'Endringer i Denne Policyen',
+        content: `Vi kan oppdatere denne personvernerklæringen fra tid til annen. Vi vil varsle deg om vesentlige endringer ved å:
+        <ul class="list-disc pl-6 mt-2">
+          <li>Legge ut den oppdaterte policyen på denne siden</li>
+          <li>Oppdatere "Sist oppdatert"-datoen ovenfor</li>
+          <li>Sende e-postvarsel for betydelige endringer (hvis vi har din e-post)</li>
+        </ul>`,
+      },
+      contact: {
+        title: 'Kontaktinformasjon',
+        content: `For personvernrelaterte spørsmål, bekymringer eller forespørsler, vennligst kontakt oss:
+        <br><br>
+        <strong>Personvernansvarlig</strong><br>
+        E-post: privacy@praxisnavigator.io<br>
+        Generell Kontakt: contact@praxisnavigator.io<br><br>
+        
+        <strong>Tilsynsmyndighet</strong><br>
+        Du har rett til å inngi klage til din lokale datatilsynsmyndighet hvis du mener vi ikke har håndtert dine persondata i samsvar med gjeldende personvernlover.`,
+      },
+    },
+  },
+};
+
+const t = content[currentLanguage];
+
+// Structured data for the privacy policy
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: t.title,
+  description: t.sections.introduction.content.substring(0, 160),
+  url: Astro.url.href,
+  mainEntity: {
+    '@type': 'Article',
+    headline: t.heading,
+    dateModified: '2025-08-21',
+    author: {
+      '@type': 'Organization',
+      name: 'Praxis Navigator',
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={t.title}
+  description={t.sections.introduction.content.substring(0, 160)}
+  lang={currentLanguage}
+  structuredData={structuredData}
+  pageType="content"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header -->
+    <div class="mb-12">
+      <h1 class="h1 mb-4">{t.heading}</h1>
+      <p class="body-base text-praxis-brown">
+        {t.lastUpdated}: {t.effectiveDate}
+      </p>
+    </div>
+
+    <!-- Content -->
+    <div class="prose max-w-none">
+      <!-- Introduction -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.introduction.title}</h2>
+        <p
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.introduction.content}
+        />
+      </section>
+
+      <!-- Data Controller -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.dataController.title}</h2>
+        <p
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.dataController.content}
+        />
+      </section>
+
+      <!-- Information We Collect -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.informationCollected.title}</h2>
+        <p
+          class="body-base text-praxis-black leading-relaxed mb-4"
+          set:html={t.sections.informationCollected.content}
+        />
+
+        {
+          Object.entries(t.sections.informationCollected.subsections).map(
+            ([, subsection]) => (
+              <div class="mb-6">
+                <h3 class="h5 mb-3">{subsection.title}</h3>
+                <div
+                  class="body-base text-praxis-black leading-relaxed"
+                  set:html={subsection.content}
+                />
+              </div>
+            )
+          )
+        }
+      </section>
+
+      <!-- Legal Basis -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.legalBasis.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.legalBasis.content}
+        />
+      </section>
+
+      <!-- How We Use Your Information -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.dataUse.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.dataUse.content}
+        />
+      </section>
+
+      <!-- Data Sharing -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.dataSharing.title}</h2>
+        <p
+          class="body-base text-praxis-black leading-relaxed mb-4"
+          set:html={t.sections.dataSharing.content}
+        />
+
+        {
+          Object.entries(t.sections.dataSharing.subsections).map(
+            ([, subsection]) => (
+              <div class="mb-6">
+                <h3 class="h5 mb-3">{subsection.title}</h3>
+                <div
+                  class="body-base text-praxis-black leading-relaxed"
+                  set:html={subsection.content}
+                />
+              </div>
+            )
+          )
+        }
+      </section>
+
+      <!-- Data Retention -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.dataRetention.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.dataRetention.content}
+        />
+      </section>
+
+      <!-- Your Rights -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.yourRights.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.yourRights.content}
+        />
+      </section>
+
+      <!-- Cookies -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.cookies.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.cookies.content}
+        />
+      </section>
+
+      <!-- Security -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.security.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.security.content}
+        />
+      </section>
+
+      <!-- International Transfers -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.international.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.international.content}
+        />
+      </section>
+
+      <!-- Updates -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.updates.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.updates.content}
+        />
+      </section>
+
+      <!-- Contact -->
+      <section class="mb-8">
+        <h2 class="h3 mb-4">{t.sections.contact.title}</h2>
+        <div
+          class="body-base text-praxis-black leading-relaxed"
+          set:html={t.sections.contact.content}
+        />
+      </section>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="mt-12 pt-8 border-t border-praxis-gray">
+      <div class="flex flex-col sm:flex-row gap-4 justify-between items-start">
+        <div class="text-praxis-brown body-small">
+          {
+            currentLanguage === 'no'
+              ? 'Denne policyen er tilgjengelig på norsk og engelsk.'
+              : 'This policy is available in Norwegian and English.'
+          }
+        </div>
+
+        <div class="flex gap-4">
+          <a
+            href={`/${currentLanguage === 'no' ? 'no/' : ''}contact`}
+            class="btn-secondary btn-sm"
+          >
+            {currentLanguage === 'no' ? 'Kontakt Oss' : 'Contact Us'}
+          </a>
+
+          <a
+            href={`/${currentLanguage === 'no' ? '' : 'no/'}privacy`}
+            class="btn-outline btn-sm"
+          >
+            {currentLanguage === 'no' ? 'English' : 'Norsk'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Enhance readability for legal content */
+  .prose ul {
+    @apply my-4;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose strong {
+    @apply text-praxis-dark-blue font-heading;
+  }
+
+  .prose a {
+    @apply transition-all duration-brand ease-brand;
+  }
+
+  .prose a:hover {
+    @apply underline;
+  }
+
+  /* Section spacing */
+  section {
+    scroll-margin-top: 2rem;
+  }
+
+  /* Responsive improvements for mobile */
+  @media (max-width: 640px) {
+    .prose ul {
+      @apply pl-4;
+    }
+  }
+</style>

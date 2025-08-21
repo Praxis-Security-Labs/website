@@ -1,0 +1,352 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Get language from URL or default to English
+const url = Astro.url;
+const isNorwegian = url.pathname.startsWith('/no/');
+const currentLanguage = isNorwegian ? 'no' : 'en';
+
+// Localized content
+const content = {
+  en: {
+    title: 'Page Not Found - Praxis Navigator',
+    heading: 'Oops! Page Not Found',
+    subheading: "The page you're looking for seems to have wandered off.",
+    description:
+      "Don't worry, even the best security systems have their blind spots. Let's get you back on track.",
+    homeButton: 'Go Home',
+    searchButton: 'Search Our Site',
+    contactButton: 'Contact Support',
+    popularPagesTitle: 'Popular Pages',
+    popularPages: [
+      {
+        title: 'Product Overview',
+        href: '/product',
+        description: 'Learn about our security culture platform',
+      },
+      {
+        title: 'For Security Leaders',
+        href: '/segments/security-leaders',
+        description: 'Solutions for CISOs and security teams',
+      },
+      {
+        title: 'Pricing & Trial',
+        href: '/pricing',
+        description: 'Explore our plans and start your trial',
+      },
+      {
+        title: 'Resources',
+        href: '/resources',
+        description: 'Whitepapers, blog posts, and more',
+      },
+      {
+        title: 'Contact Us',
+        href: '/contact',
+        description: 'Get in touch with our team',
+      },
+      {
+        title: 'About Kai Roer',
+        href: '/about',
+        description: 'Meet our founder and security culture expert',
+      },
+    ],
+    helpTitle: 'Need Help?',
+    helpDescription:
+      'Our support team is here to assist you with any questions.',
+    errorCode: 'Error 404',
+  },
+  no: {
+    title: 'Side Ikke Funnet - Praxis Navigator',
+    heading: 'Ups! Side Ikke Funnet',
+    subheading: 'Siden du leter etter ser ut til å ha forsvunnet.',
+    description:
+      'Ikke bekymre deg, selv de beste sikkerhetssystemene har blinde flekker. La oss få deg tilbake på rett spor.',
+    homeButton: 'Gå Hjem',
+    searchButton: 'Søk På Siden',
+    contactButton: 'Kontakt Support',
+    popularPagesTitle: 'Populære Sider',
+    popularPages: [
+      {
+        title: 'Produktoversikt',
+        href: '/no/product',
+        description: 'Lær om vår sikkerhetskultur-plattform',
+      },
+      {
+        title: 'For Sikkerhetseksperter',
+        href: '/no/segments/security-leaders',
+        description: 'Løsninger for CISOer og sikkerhetsteam',
+      },
+      {
+        title: 'Priser & Prøveversjon',
+        href: '/no/pricing',
+        description: 'Utforsk våre planer og start prøveversjonen',
+      },
+      {
+        title: 'Ressurser',
+        href: '/no/resources',
+        description: 'Hvidbøker, blogginnlegg og mer',
+      },
+      {
+        title: 'Kontakt Oss',
+        href: '/no/contact',
+        description: 'Ta kontakt med vårt team',
+      },
+      {
+        title: 'Om Kai Roer',
+        href: '/no/about',
+        description: 'Møt vår grunnlegger og sikkerhetskultur-ekspert',
+      },
+    ],
+    helpTitle: 'Trenger Du Hjelp?',
+    helpDescription: 'Vårt supportteam er her for å hjelpe deg med spørsmål.',
+    errorCode: 'Feil 404',
+  },
+};
+
+const t = content[currentLanguage];
+
+// Structured data for the error page
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: t.title,
+  description: t.description,
+  url: Astro.url.href,
+  mainEntity: {
+    '@type': 'Thing',
+    name: '404 Error Page',
+    description: t.description,
+  },
+};
+---
+
+<BaseLayout
+  title={t.title}
+  description={t.description}
+  lang={currentLanguage}
+  structuredData={structuredData}
+  noIndex={true}
+  pageType="content"
+>
+  <div
+    class="min-h-screen flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Error Code and Visual -->
+      <div class="mb-8">
+        <div
+          class="inline-flex items-center justify-center w-24 h-24 bg-praxis-gold rounded-full mb-6"
+        >
+          <svg
+            class="w-12 h-12 text-praxis-dark-blue"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-3-4.5v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+        <p
+          class="body-small text-praxis-brown uppercase tracking-brand-widest font-heading"
+        >
+          {t.errorCode}
+        </p>
+      </div>
+
+      <!-- Main Error Message -->
+      <div class="mb-12">
+        <h1 class="h1 mb-6">{t.heading}</h1>
+        <p class="body-large text-praxis-brown mb-6 max-w-2xl mx-auto">
+          {t.subheading}
+        </p>
+        <p class="body-base text-praxis-black max-w-3xl mx-auto">
+          {t.description}
+        </p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div
+        class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+      >
+        <a
+          href={currentLanguage === 'no' ? '/no' : '/'}
+          class="btn-primary"
+          aria-label={currentLanguage === 'no'
+            ? 'Gå til hjemmesiden'
+            : 'Go to homepage'}
+        >
+          {t.homeButton}
+        </a>
+
+        <a
+          href={`/${currentLanguage === 'no' ? 'no/' : ''}search`}
+          class="btn-outline"
+          aria-label={currentLanguage === 'no'
+            ? 'Søk på nettstedet'
+            : 'Search the website'}
+        >
+          {t.searchButton}
+        </a>
+
+        <a
+          href={`/${currentLanguage === 'no' ? 'no/' : ''}contact`}
+          class="btn-secondary"
+          aria-label={currentLanguage === 'no'
+            ? 'Kontakt support'
+            : 'Contact support'}
+        >
+          {t.contactButton}
+        </a>
+      </div>
+
+      <!-- Popular Pages Section -->
+      <div class="max-w-5xl mx-auto">
+        <div class="mb-8">
+          <h2 class="h3 mb-6">{t.popularPagesTitle}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {
+            t.popularPages.map(page => (
+              <div class="card card-hoverable">
+                <div class="card-body">
+                  <h3 class="h5 mb-3">
+                    <a
+                      href={page.href}
+                      class="text-praxis-dark-blue hover:text-praxis-blue transition-brand focus-ring rounded"
+                    >
+                      {page.title}
+                    </a>
+                  </h3>
+                  <p class="body-base text-praxis-black">{page.description}</p>
+                  <div class="mt-4">
+                    <a
+                      href={page.href}
+                      class="text-praxis-blue hover:text-praxis-sky transition-brand font-heading uppercase text-sm tracking-brand-wide focus-ring rounded"
+                      aria-label={`${currentLanguage === 'no' ? 'Besøk' : 'Visit'} ${page.title}`}
+                    >
+                      {currentLanguage === 'no' ? 'Besøk side' : 'Visit page'} →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Help Section -->
+        <div class="bg-praxis-tan-50 rounded-lg p-8 text-center">
+          <div class="max-w-2xl mx-auto">
+            <h2 class="h4 mb-4 text-praxis-dark-blue">{t.helpTitle}</h2>
+            <p class="body-base text-praxis-black mb-6">
+              {t.helpDescription}
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={`/${currentLanguage === 'no' ? 'no/' : ''}contact`}
+                class="btn-primary"
+              >
+                {
+                  currentLanguage === 'no'
+                    ? 'Kontakt Support'
+                    : 'Contact Support'
+                }
+              </a>
+
+              <a
+                href={`/${currentLanguage === 'no' ? 'no/' : ''}support/docs`}
+                class="btn-outline"
+              >
+                {
+                  currentLanguage === 'no'
+                    ? 'Se Dokumentasjon'
+                    : 'View Documentation'
+                }
+              </a>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="mt-8 pt-8 border-t border-praxis-brown-200">
+              <p class="body-small text-praxis-brown mb-2">
+                {
+                  currentLanguage === 'no'
+                    ? 'Eller send oss en e-post direkte:'
+                    : 'Or email us directly:'
+                }
+              </p>
+              <a
+                href="mailto:support@praxisnavigator.io"
+                class="text-praxis-blue hover:text-praxis-sky transition-brand font-heading focus-ring rounded"
+              >
+                support@praxisnavigator.io
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Structured Data Script -->
+  <script
+    type="application/ld+json"
+    is:inline
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: t.title,
+      description: t.description,
+      url: Astro.url.href,
+      breadcrumb: {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: currentLanguage === 'no' ? 'Hjem' : 'Home',
+            item: `${Astro.site}${currentLanguage === 'no' ? 'no' : ''}`,
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: t.errorCode,
+            item: Astro.url.href,
+          },
+        ],
+      },
+    })}
+  />
+</BaseLayout>
+
+<style>
+  /* Additional styles for 404 page specific animations */
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card {
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+
+  /* High contrast mode adjustments */
+  @media (prefers-contrast: high) {
+    .card {
+      border-width: 2px;
+    }
+  }
+
+  /* Focus management for card links */
+  .card:focus-within {
+    outline: 2px solid #0071b3;
+    outline-offset: 4px;
+  }
+</style>
