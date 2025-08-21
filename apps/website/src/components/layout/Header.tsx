@@ -71,9 +71,15 @@ export const Header: React.FC<HeaderProps> = ({
     return currentPath === href || currentPath.startsWith(href + '/');
   };
 
-  // Helper function to get the equivalent page in the other language
-  const getLanguageSwitchUrl = (targetLanguage: string) => {
-    return handleLanguageSwitch(targetLanguage as 'en' | 'no', currentPath);
+  // Handle language switch with localStorage update
+  const handleLanguageClick = (
+    targetLanguage: 'en' | 'no',
+    event: React.MouseEvent
+  ) => {
+    event.preventDefault();
+    const targetUrl = handleLanguageSwitch(targetLanguage, currentPath);
+    // Navigate to the new URL
+    window.location.href = targetUrl;
   };
 
   const handleLogin = async () => {
@@ -158,8 +164,8 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="hidden md:flex items-center space-x-4">
             {/* Language Switcher */}
             <div className="flex items-center border border-praxis-blue-400 rounded-lg overflow-hidden">
-              <a
-                href={getLanguageSwitchUrl('en')}
+              <button
+                onClick={e => handleLanguageClick('en', e)}
                 className={`
                   px-3 py-1 text-sm font-heading uppercase transition-brand focus-ring-gold
                   ${
@@ -175,9 +181,9 @@ export const Header: React.FC<HeaderProps> = ({
                 }
               >
                 EN
-              </a>
-              <a
-                href={getLanguageSwitchUrl('no')}
+              </button>
+              <button
+                onClick={e => handleLanguageClick('no', e)}
                 className={`
                   px-3 py-1 text-sm font-heading uppercase transition-brand focus-ring-gold
                   ${
@@ -193,7 +199,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }
               >
                 NO
-              </a>
+              </button>
             </div>
 
             {/* Login Button */}
@@ -320,8 +326,11 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Mobile Language Switcher */}
             <div className="pt-4 border-t border-praxis-dark-blue-600">
               <div className="flex space-x-2">
-                <a
-                  href={getLanguageSwitchUrl('en')}
+                <button
+                  onClick={e => {
+                    closeMobileMenu();
+                    handleLanguageClick('en', e);
+                  }}
                   className={`
                     flex-1 text-center py-2 px-4 text-sm font-heading uppercase transition-brand rounded-lg
                     ${
@@ -330,7 +339,6 @@ export const Header: React.FC<HeaderProps> = ({
                         : 'text-praxis-white border border-praxis-blue-400 hover:bg-praxis-dark-blue-700'
                     }
                   `}
-                  onClick={closeMobileMenu}
                   aria-label={
                     currentLanguage === 'no'
                       ? 'Switch to English'
@@ -338,9 +346,12 @@ export const Header: React.FC<HeaderProps> = ({
                   }
                 >
                   EN
-                </a>
-                <a
-                  href={getLanguageSwitchUrl('no')}
+                </button>
+                <button
+                  onClick={e => {
+                    closeMobileMenu();
+                    handleLanguageClick('no', e);
+                  }}
                   className={`
                     flex-1 text-center py-2 px-4 text-sm font-heading uppercase transition-brand rounded-lg
                     ${
@@ -349,7 +360,6 @@ export const Header: React.FC<HeaderProps> = ({
                         : 'text-praxis-white border border-praxis-blue-400 hover:bg-praxis-dark-blue-700'
                     }
                   `}
-                  onClick={closeMobileMenu}
                   aria-label={
                     currentLanguage === 'en'
                       ? 'Switch to Norwegian'
@@ -357,7 +367,7 @@ export const Header: React.FC<HeaderProps> = ({
                   }
                 >
                   NO
-                </a>
+                </button>
               </div>
             </div>
 

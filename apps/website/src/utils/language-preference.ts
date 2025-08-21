@@ -103,6 +103,18 @@ export function handleLanguageSwitch(
   // Store the user's preference
   setStoredLanguagePreference(targetLanguage);
 
+  // Mark that a manual switch occurred (prevent auto-redirect interference)
+  if (typeof window !== 'undefined') {
+    try {
+      sessionStorage.setItem(
+        'praxis-language-switch-timestamp',
+        Date.now().toString()
+      );
+    } catch {
+      // sessionStorage not available
+    }
+  }
+
   // Calculate target URL
   let pathWithoutLang = currentPath;
   if (currentPath.startsWith('/en/')) {
