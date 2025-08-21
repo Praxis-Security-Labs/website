@@ -360,8 +360,9 @@ lhci autorun --upload.target=temporary-public-storage
 
 **Build Failures:**
 - Check Node.js version is set to 18
-- Verify build command: `cd apps/website && npm run build:fast`
+- Verify build command: `cd apps/website && npm run build`
 - Check build output directory: `apps/website/dist`
+- **Common TypeScript Error**: If you see "vitest.config.ts" errors, ensure `vitest.config.ts` is excluded in `tsconfig.json`
 
 **Environment Variable Issues:**
 - Ensure variables are set in Cloudflare Pages dashboard
