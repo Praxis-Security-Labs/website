@@ -36,7 +36,7 @@ With regulatory frameworks like NIS2 requiring executive accountability and cybe
 **FR6:** Pricing tables must display transparent pricing structure with clear feature tiers and prominent 30-day free trial messaging  
 **FR7:** Language switcher must provide seamless toggling between English and Norwegian with complete content localization  
 **FR8:** MSAL authentication integration must enable popup login that redirects authenticated users to https://app.praxisnavigator.io  
-**FR9:** Azure Marketplace integration must provide direct navigation from signup buttons to the Azure Marketplace listing URL for Praxis Navigator (URL to be provided during development)  
+**FR9:** Azure Marketplace integration must provide direct navigation from signup buttons to the Azure Marketplace listing URL for Praxis Navigator (URL configured via ASTRO_PUBLIC_MARKETPLACE_URL environment variable)  
 **FR10:** Resource/Content Hub must serve as landing page for whitepapers, case studies, and industry-specific content showcasing Kai Roer's thought leadership  
 **FR11:** Privacy Policy and Terms of Service pages must meet GDPR compliance requirements for enterprise trust  
 **FR12:** SEO foundation must optimize for "security behavior monitoring," "SAT effectiveness," "Microsoft Graph security," and related behavioral security keywords with comprehensive organic traffic optimization  
@@ -111,6 +111,8 @@ Comprehensive testing strategy including unit testing with Vitest for component 
 - **Styling & Design System:** Tailwind CSS with Praxis CSS theme integration via @theme settings, ensuring pixel-perfect consistency with application design system
 - **Deployment Strategy:** Cloudflare Pages with GitHub integration for automatic deployments on main branch push, preview environments for pull request testing
 - **Authentication Integration:** Microsoft Authentication Library (MSAL) for popup login with seamless redirect to app.praxisnavigator.io
+- **CRM Integration:** HubSpot CRM for lead management, contact creation, and automated email workflows with direct API integration
+- **Azure Marketplace URL:** Configured via ASTRO_PUBLIC_MARKETPLACE_URL environment variable for easy updates and deployment flexibility
 - **Internationalization:** Astro i18n framework with English and Norwegian initial support, structured for additional language expansion
 - **Content Management:** Git-based workflow with Markdown frontmatter for structured, translatable content
 - **SEO Optimization:** Comprehensive organic traffic strategy including JSON-LD structured data, strategic internal linking, content clusters, and full technical SEO implementation

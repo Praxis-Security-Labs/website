@@ -475,7 +475,7 @@ Tier 3: Early-Stage Leads
 
 #### 2. Hero Section CTAs
 - **Primary CTA**: "Start Free Trial"
-- **Destination**: Azure Marketplace listing
+- **Destination**: Azure Marketplace listing (URL from ASTRO_PUBLIC_MARKETPLACE_URL)
 - **Analytics**: Track marketplace attribution
 
 #### 3. Pricing Page
@@ -484,7 +484,7 @@ Tier 3: Early-Stage Leads
 - **Benefits**: Simplified billing, enterprise compliance
 
 #### 4. Post-Demo Follow-up
-- **Email Template**: Include Azure Marketplace link
+- **Email Template**: Include Azure Marketplace link (URL from environment variable)
 - **Sales Handoff**: Marketplace-specific benefits
 - **Implementation**: Azure-native deployment guide
 
@@ -494,9 +494,9 @@ Tier 3: Early-Stage Leads
 // Authentication popup implementation
 const msalConfig = {
   auth: {
-    clientId: process.env.AZURE_CLIENT_ID,
-    authority: process.env.AZURE_AUTHORITY,
-    redirectUri: "https://app.praxisnavigator.io"
+    clientId: import.meta.env.ASTRO_PUBLIC_AZURE_CLIENT_ID,
+    authority: import.meta.env.ASTRO_PUBLIC_AZURE_AUTHORITY,
+    redirectUri: import.meta.env.ASTRO_PUBLIC_PRAXIS_APP_URL
   }
 }
 
@@ -509,7 +509,7 @@ const authRequest = {
 const handleLogin = async () => {
   try {
     const loginResponse = await msalInstance.loginPopup(authRequest)
-    window.location.href = "https://app.praxisnavigator.io"
+    window.location.href = import.meta.env.ASTRO_PUBLIC_PRAXIS_APP_URL
   } catch (error) {
     console.error("Login failed:", error)
   }

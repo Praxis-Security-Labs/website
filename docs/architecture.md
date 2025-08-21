@@ -69,7 +69,7 @@ graph TB
     R --> LOGIN[Login Redirect Flow]
     R --> FORMS[Cloudflare Workers]
     APP --> CMS[Headless CMS]
-    FORMS --> EMAIL[Email Service]
+    FORMS --> HUBSPOT[HubSpot CRM]
     LOGIN --> PRAXIS_APP[app.praxisnavigator.io]
     LOGIN --> AAD[Azure AD B2B /organizations/]
     
@@ -131,7 +131,7 @@ graph TB
 | **Hosting Platform** | Cloudflare Pages | - | Static hosting with CDN | PRD requirement, global performance |
 | **Serverless Functions** | Cloudflare Workers | - | Form processing, API calls | Integrated with hosting, edge performance |
 | **Analytics** | Cloudflare Web Analytics | - | Privacy-first analytics | GDPR compliance requirement |
-| **Email Service** | Cloudflare Email Workers | - | Form submission handling | Integrated workflow for lead capture |
+| **CRM Integration** | HubSpot CRM | Latest | Lead management and email automation | Direct API integration for comprehensive lead management |
 | **Monitoring** | Sentry | ^7.0.0 | Error tracking and performance | Production debugging and monitoring |
 | **Testing Framework** | Vitest | ^0.34.0 | Unit and integration testing | Vite integration, fast execution |
 | **E2E Testing** | Playwright | ^1.37.0 | End-to-end testing | Cross-browser testing, reliability |
@@ -476,7 +476,7 @@ Based on the UX architecture and Praxis Design System, here are the major system
 - Cloudflare Workers API endpoints
 - Email notification systems
 
-**Dependencies**: React Hook Form, Zod validation, Cloudflare Workers, email service integration
+**Dependencies**: React Hook Form, Zod validation, Cloudflare Workers, HubSpot CRM integration
 
 **Technology Stack**: React Hook Form with TypeScript, Zod schemas, Cloudflare Workers serverless functions
 
@@ -518,7 +518,7 @@ graph TD
     D --> G[Login Redirect Service]
     E --> H[Workers API]
     C --> I[CMS Integration]
-    H --> J[Email Service]
+    H --> J[HubSpot CRM]
     G --> K[app.praxisnavigator.io]
     G --> L[Azure AD B2B /organizations/]
     
@@ -568,14 +568,29 @@ graph TD
 
 - **Purpose**: External product listing where customers can view and purchase Praxis Navigator
 - **Documentation**: https://docs.microsoft.com/en-us/azure/marketplace/
-- **Base URL(s)**: https://azuremarketplace.microsoft.com/marketplace/apps/praxis-navigator-app-id
+- **Base URL(s)**: Configured via ASTRO_PUBLIC_MARKETPLACE_URL environment variable
 - **Authentication**: None required (public listing)
 - **Rate Limits**: No specific limits for external links
 
 **Key URLs Used**:
-- Direct marketplace listing page for Praxis Navigator
+- Azure Marketplace listing page for Praxis Navigator (URL stored in environment variable)
 
-**Integration Notes**: Simple external links with UTM tracking for attribution, no API integration required
+**Integration Notes**: Simple external links with UTM tracking for attribution, URL configured via environment variable for easy updates
+
+### HubSpot CRM API
+
+- **Purpose**: Lead management, contact creation, and email automation workflows
+- **Documentation**: https://developers.hubspot.com/docs/api/overview
+- **Base URL(s)**: https://api.hubapi.com/
+- **Authentication**: API key authentication
+- **Rate Limits**: 100 requests per 10 seconds (standard tier)
+
+**Key Endpoints Used**:
+- `POST /crm/v3/objects/contacts` - Create lead/contact in HubSpot
+- `POST /crm/v3/objects/deals` - Create deal for qualified leads
+- `GET /crm/v3/properties/contacts` - Retrieve contact properties
+
+**Integration Notes**: Direct API integration for comprehensive lead management, automated email workflows through HubSpot
 
 ### Cloudflare Workers API
 
@@ -607,14 +622,14 @@ sequenceDiagram
     participant AA as Azure AD B2B
     participant APP as app.praxisnavigator.io
     participant MP as Azure Marketplace
-    participant E as Email Service
+    participant H as HubSpot CRM
 
     Note over U,E: Lead Generation Workflow
     U->>A: Visit segment page
     A->>R: Load form component
     U->>R: Fill demo request form
     R->>W: Submit form data
-    W->>E: Send notification email
+    W->>H: Create lead in HubSpot CRM
     W->>R: Return success response
     R->>U: Show thank you message
 
@@ -1014,7 +1029,7 @@ class ApiClient {
   }
 
   openMarketplaceListing(utmParams?: Record<string, string>): void {
-    const baseUrl = 'https://azuremarketplace.microsoft.com/marketplace/apps/praxis-navigator-app-id';
+    const baseUrl = import.meta.env.ASTRO_PUBLIC_MARKETPLACE_URL;
     const params = new URLSearchParams(utmParams);
     const url = params.toString() ? `${baseUrl}?${params.toString()}` : baseUrl;
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -1027,22 +1042,20 @@ export const apiClient = new ApiClient();
 #### Service Example
 
 ```typescript
-// services/leadService.ts
+// services/hubspotService.ts
 import { apiClient } from './apiClient';
-import { useSessionStore } from '@/stores/sessionStore';
 import type { LeadSubmission } from '@/types/forms';
 
-export class LeadService {
-  static async submitLead(
+export class HubSpotService {
+  static async createLead(
     formData: Omit<LeadSubmission, 'id' | 'submittedAt' | 'utm' | 'source'>
-  ): Promise<{ success: boolean; leadId?: string; error?: string }> {
-    const { utm } = useSessionStore.getState();
+  ): Promise<{ success: boolean; contactId?: string; error?: string }> {
     
     const leadData: LeadSubmission = {
       ...formData,
       id: crypto.randomUUID(),
       submittedAt: new Date(),
-      utm,
+      utm: this.getUTMParameters(),
       source: document.referrer || 'direct'
     };
 
@@ -1051,10 +1064,21 @@ export class LeadService {
     if (response.success) {
       // Track successful submission
       this.trackConversion(leadData.type, leadData.segment);
-      return { success: true, leadId: response.data?.leadId };
+      return { success: true, contactId: response.data?.contactId };
     } else {
       return { success: false, error: response.error?.message };
     }
+  }
+
+  private static getUTMParameters(): UTMParameters {
+    const urlParams = new URLSearchParams(window.location.search);
+    return {
+      source: urlParams.get('utm_source') || undefined,
+      medium: urlParams.get('utm_medium') || undefined,
+      campaign: urlParams.get('utm_campaign') || undefined,
+      term: urlParams.get('utm_term') || undefined,
+      content: urlParams.get('utm_content') || undefined,
+    };
   }
 
   private static trackConversion(type: string, segment: string): void {
@@ -1085,7 +1109,7 @@ functions/
 ├── forms/
 │   ├── submit.ts              # Form submission handler
 │   ├── validate.ts            # Form validation utilities
-│   └── email.ts               # Email notification handler
+│   └── hubspot.ts             # HubSpot CRM integration
 ├── marketplace/
 │   └── redirect.ts            # Marketplace redirect handler  
 ├── utils/
@@ -1103,13 +1127,13 @@ functions/
 import { z } from 'zod';
 import { leadSubmissionSchema } from '@/types/forms';
 import { validateRequest } from '../utils/validation';
-import { sendNotificationEmail } from './email';
+import { createHubSpotLead } from './hubspot';
 import { rateLimiter } from '../utils/rate-limit';
 
 interface Env {
   FORM_SUBMISSIONS: KVNamespace;
-  EMAIL_API_KEY: string;
-  NOTIFICATION_EMAIL: string;
+  HUBSPOT_API_KEY: string;
+  HUBSPOT_PORTAL_ID: string;
 }
 
 export async function onRequest(context: EventContext<Env, string, any>) {
@@ -1146,8 +1170,8 @@ export async function onRequest(context: EventContext<Env, string, any>) {
       retryCount: 0
     }), { expirationTtl: 604800 }); // 7 days
 
-    // Send notification email
-    await sendNotificationEmail(leadData, env);
+    // Create lead in HubSpot CRM
+    await createHubSpotLead(leadData, env);
 
     return new Response(JSON.stringify({
       success: true,
@@ -1357,12 +1381,12 @@ ASTRO_PUBLIC_SITE_URL=http://localhost:3000
 ASTRO_PUBLIC_AZURE_CLIENT_ID=your_azure_b2b_client_id
 ASTRO_PUBLIC_AZURE_AUTHORITY=https://login.microsoftonline.com/organizations
 ASTRO_PUBLIC_PRAXIS_APP_URL=https://app.praxisnavigator.io
-ASTRO_PUBLIC_MARKETPLACE_URL=https://azuremarketplace.microsoft.com/marketplace/apps/praxis-navigator-app-id
+ASTRO_PUBLIC_MARKETPLACE_URL=https://portal.azure.com/#view/Microsoft_Azure_Marketplace/GalleryItemDetailsBladeNopdl/id/praxissecuritylabsas1742323332583.praxis-navigator-core-preview/selectionMode~/false/resourceGroupId//resourceGroupLocation//dontDiscardJourney~/false/selectedMenuId/privateOffers/launchingContext~/%7B%22galleryItemId%22%3A%22praxissecuritylabsas1742323332583.praxis-navigator-core-previewtest-plan-praxis%22%2C%22source%22%3A%5B%22GalleryFeaturedMenuItemPart%22%2C%22VirtualizedTileDetails%22%5D%2C%22telemetryId%22%3A%220b371afa-ac22-4bf4-bc97-bdcbf34cbac9%22%7D
 
 # Cloudflare Workers (.env)
 FORM_SUBMISSIONS_KV=your_kv_namespace_id
-EMAIL_API_KEY=your_email_service_api_key
-NOTIFICATION_EMAIL=notifications@praxislabs.com
+HUBSPOT_API_KEY=your_hubspot_api_key
+HUBSPOT_PORTAL_ID=your_hubspot_portal_id
 SENTRY_DSN=your_sentry_dsn
 
 # Content Management
