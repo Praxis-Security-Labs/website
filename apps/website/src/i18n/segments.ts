@@ -123,17 +123,17 @@ export const segments = {
     executives: {
       title: 'For Ledere | Sikkerhetskultur ROI & Forretningsverdi',
       description:
-        'Styreklar sikkerhetskultur metrikker og ROI demonstrasjon for C-nivå ledere. Ta informerte beslutninger om sikkerhetsinvesteringer.',
+        'Styreklar sikkerhetskultur metrikker og ROI demonstrasjon for toppledelse. Ta informerte beslutninger om sikkerhetsinvesteringer.',
       hero: {
-        headline: 'Transformer Sikkerhetsrisiko til Forretningsfordel',
+        headline: 'Transformer Sikkerhetsrisiko til Konkurransefordel',
         subheadline:
-          'Styreklar metrikker som demonstrerer sikkerhetsprogram ROI',
+          'Styreklar dokumentasjon som demonstrerer målbar forretningsverdi',
         problem:
-          'Du må ta strategiske beslutninger om sikkerhetsinvesteringer, men tradisjonelle rapporter viser ikke faktisk forretningsverdi eller adferdsendring.',
+          'Som leder må du ta strategiske beslutninger om sikkerhetsinvesteringer, men tradisjonelle rapporter viser ikke faktisk forretningsverdi eller adferdsendring.',
         solution:
-          'Få leder-nivå sikkerhetskultur intelligens med klare ROI metrikker og styreklar rapporter som demonstrerer målbar forretningsverdi.',
-        ctaPrimary: 'Bestill Leder Briefing',
-        ctaSecondary: 'Last Ned ROI Kalkulator',
+          'Få lederskap-orientert sikkerhetskultur innsikt med klare ROI metrikker og styreklar dokumentasjon som demonstrerer målbar forretningsverdi.',
+        ctaPrimary: 'Bestill Lederskap Briefing',
+        ctaSecondary: 'Last Ned ROI Analyse',
       },
     },
 

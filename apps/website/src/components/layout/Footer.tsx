@@ -1,4 +1,5 @@
 import React from 'react';
+import { ui } from '../../i18n';
 
 interface FooterProps {
   currentLanguage?: string;
@@ -6,93 +7,98 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
   const currentYear = new Date().getFullYear();
+  const t = ui[currentLanguage as keyof typeof ui] || ui.en;
+
+  // Helper function to create correct URLs
+  const createUrl = (path: string) => {
+    if (currentLanguage === 'no') {
+      return `/no${path}`;
+    }
+    return path;
+  };
 
   const footerNavigation = {
     product: {
-      title: currentLanguage === 'no' ? 'Produkt' : 'Product',
+      title: t['nav.product'],
       links: [
         {
-          name:
-            currentLanguage === 'no' ? 'Produktoversikt' : 'Platform Overview',
-          href: `/${currentLanguage}/product`,
+          name: t['footer.productOverview'],
+          href: createUrl('/product'),
         },
         {
-          name: currentLanguage === 'no' ? 'Funksjoner' : 'Features',
-          href: `/${currentLanguage}/product/features`,
+          name: t['footer.features'],
+          href: createUrl('/product/features'),
         },
         {
-          name: currentLanguage === 'no' ? 'Integrasjoner' : 'Integrations',
-          href: `/${currentLanguage}/product/integrations`,
+          name: t['footer.integrations'],
+          href: createUrl('/product/integrations'),
         },
         {
-          name: currentLanguage === 'no' ? 'Sikkerhet' : 'Security',
-          href: `/${currentLanguage}/product/security`,
+          name: t['footer.security'],
+          href: createUrl('/product/security'),
         },
       ],
     },
     segments: {
-      title: currentLanguage === 'no' ? 'For Din Rolle' : 'For Your Role',
+      title: t['nav.segments'],
       links: [
         {
-          name:
-            currentLanguage === 'no'
-              ? 'Sikkerhetseksperter'
-              : 'Security Leaders',
-          href: `/${currentLanguage}/segments/security-leaders`,
+          name: t['footer.securityLeaders'],
+          href: createUrl('/segments/security-leaders'),
         },
         {
-          name: currentLanguage === 'no' ? 'Ledere' : 'Executives',
-          href: `/${currentLanguage}/segments/executives`,
+          name: t['footer.executives'],
+          href: createUrl('/segments/executives'),
         },
         {
-          name: currentLanguage === 'no' ? 'Mellomledere' : 'Managers',
-          href: `/${currentLanguage}/segments/managers`,
+          name: t['footer.managers'],
+          href: createUrl('/segments/managers'),
         },
         {
-          name: currentLanguage === 'no' ? 'SAT-team' : 'SAT Teams',
-          href: `/${currentLanguage}/segments/sat-teams`,
+          name: t['footer.satTeams'],
+          href: createUrl('/segments/sat-teams'),
         },
       ],
     },
     resources: {
-      title: currentLanguage === 'no' ? 'Ressurser' : 'Resources',
+      title: t['nav.resources'],
       links: [
         {
-          name: currentLanguage === 'no' ? 'Blogg' : 'Blog',
-          href: `/${currentLanguage}/resources/blog`,
+          name: t['footer.blog'],
+          href: createUrl('/resources/blog'),
         },
         {
-          name: currentLanguage === 'no' ? 'Hvidbøker' : 'Whitepapers',
-          href: `/${currentLanguage}/resources/whitepapers`,
+          name: t['footer.whitepapers'],
+          href: createUrl('/resources/whitepapers'),
         },
         {
-          name: currentLanguage === 'no' ? 'Webinarer' : 'Webinars',
-          href: `/${currentLanguage}/resources/webinars`,
+          name: t['footer.webinars'],
+          href: createUrl('/resources/webinars'),
         },
         {
-          name: currentLanguage === 'no' ? 'Kundehistorier' : 'Case Studies',
-          href: `/${currentLanguage}/resources/case-studies`,
+          name: t['footer.caseStudies'],
+          href: createUrl('/resources/case-studies'),
         },
       ],
     },
     support: {
-      title: currentLanguage === 'no' ? 'Støtte' : 'Support',
+      title: t['footer.support'],
       links: [
         {
-          name: currentLanguage === 'no' ? 'Kontakt Oss' : 'Contact Us',
-          href: `/${currentLanguage}/contact`,
+          name: t['nav.contact'],
+          href: createUrl('/contact'),
         },
         {
-          name: currentLanguage === 'no' ? 'Book Demo' : 'Book Demo',
-          href: `/${currentLanguage}/contact/demo`,
+          name: t['footer.bookDemo'],
+          href: createUrl('/contact/demo'),
         },
         {
-          name: currentLanguage === 'no' ? 'Kundeservice' : 'Customer Support',
-          href: `/${currentLanguage}/support`,
+          name: t['footer.customerSupport'],
+          href: createUrl('/support'),
         },
         {
-          name: currentLanguage === 'no' ? 'Dokumentasjon' : 'Documentation',
-          href: `/${currentLanguage}/support/docs`,
+          name: t['footer.documentation'],
+          href: createUrl('/support/docs'),
         },
       ],
     },
@@ -100,20 +106,20 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
 
   const legalLinks = [
     {
-      name: currentLanguage === 'no' ? 'Personvern' : 'Privacy Policy',
-      href: `/${currentLanguage}/legal/privacy-policy`,
+      name: t['footer.privacyPolicy'],
+      href: createUrl('/legal/privacy-policy'),
     },
     {
-      name: currentLanguage === 'no' ? 'Vilkår' : 'Terms of Service',
-      href: `/${currentLanguage}/legal/terms-of-service`,
+      name: t['footer.termsOfService'],
+      href: createUrl('/legal/terms-of-service'),
     },
     {
-      name: currentLanguage === 'no' ? 'Cookies' : 'Cookie Policy',
-      href: `/${currentLanguage}/legal/cookie-policy`,
+      name: t['footer.cookiePolicy'],
+      href: createUrl('/legal/cookie-policy'),
     },
     {
-      name: currentLanguage === 'no' ? 'Samsvar' : 'Compliance',
-      href: `/${currentLanguage}/compliance`,
+      name: t['footer.compliance'],
+      href: createUrl('/compliance'),
     },
   ];
 
@@ -163,7 +169,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
               {/* Logo */}
               <div className="mb-6">
                 <a
-                  href={`/${currentLanguage === 'no' ? 'no' : ''}`}
+                  href={createUrl('/')}
                   className="focus-ring rounded-lg p-1"
                   aria-label={
                     currentLanguage === 'no'
@@ -205,7 +211,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
                     {currentLanguage === 'no' ? 'Grunnlegger:' : 'Founder:'}
                   </span>{' '}
                   <a
-                    href={`/${currentLanguage === 'no' ? 'no/' : ''}about`}
+                    href={createUrl('/about')}
                     className="hover:text-praxis-gold transition-brand focus-ring rounded"
                   >
                     Kai Roer
@@ -297,7 +303,7 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
                 </span>
                 <span className="hidden lg:inline">•</span>
                 <a
-                  href={`/${currentLanguage === 'no' ? 'no/' : ''}about/kai-roer`}
+                  href={createUrl('/about/kai-roer')}
                   className="hover:text-praxis-gold transition-brand focus-ring rounded"
                 >
                   {currentLanguage === 'no' ? 'Av Kai Roer' : 'By Kai Roer'}

@@ -187,12 +187,14 @@ export const forms = {
       ctaTrialText: 'Start Gratis Prøveversjon på Azure',
       ctaDemoText: 'Bestill Demo',
       trustSignals: {
-        title: 'Klarert av Virksomhetsorganisasjoner',
+        title: 'Godkjent av Norske Virksomheter',
         items: [
           'Microsoft Graph API Integrasjon',
-          'GDPR Kompatibel & EU Hostet',
-          'Virksomhet SSO Støtte',
-          'SOC 2 Type II Sertifisert',
+          'GDPR og Personopplysningsloven kompatibel',
+          'Virksomhet SSO støtte',
+          'SOC 2 Type II sertifisert',
+          'Hostet i EU/EØS',
+          'NS-ISO 27001 kompatibel',
         ],
       },
       quickStart: {
@@ -246,9 +248,18 @@ export const forms = {
       // GDPR and compliance
       gdpr: {
         consent:
-          'Jeg samtykker til behandling av mine personopplysninger i henhold til Personvernerklæringen',
-        newsletter: 'Jeg ønsker å motta oppdateringer om Praxis Navigator',
-        required: 'Vennligst aksepter vår personvernerklæring for å fortsette',
+          'Jeg samtykker til behandling av mine personopplysninger i henhold til Personvernerklæringen og Personopplysningsloven',
+        newsletter:
+          'Jeg ønsker å motta nyttig informasjon om Praxis Navigator (valgfritt)',
+        required: 'Du må akseptere vår personvernerklæring for å fortsette',
+        dataController:
+          'Praxis Navigator er behandlingsansvarlig for dine personopplysninger',
+        rights:
+          'Du har rett til innsyn, retting, sletting og portabilitet av dine data',
+        retention:
+          'Vi oppbevarer dine data kun så lenge som nødvendig for formålet',
+        thirdParty:
+          'Vi deler ikke dine data med tredjeparter uten ditt samtykke',
       },
     },
 
