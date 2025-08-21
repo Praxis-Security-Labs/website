@@ -5,6 +5,7 @@ import {
   isMsalConfigured,
 } from '../../utils/msal-auth';
 import { handleLanguageSwitch } from '../../utils/language-preference';
+import { useTranslations } from '../../i18n/utils';
 
 interface HeaderProps {
   currentPath?: string;
@@ -16,6 +17,7 @@ export const Header: React.FC<HeaderProps> = ({
   currentLanguage = 'en',
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const t = useTranslations(currentLanguage as 'en' | 'no');
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -32,37 +34,36 @@ export const Header: React.FC<HeaderProps> = ({
     }
   };
 
-  // Navigation items based on story requirements
+  // Navigation items using translations
   const navigationItems = [
     {
-      label: currentLanguage === 'no' ? 'Produkt' : 'Product',
-      href: `/${currentLanguage}/product`,
+      label: t('nav.product'),
+      href: `/${currentLanguage === 'en' ? '' : 'no/'}product`,
       hasDropdown: true,
     },
     {
-      label: currentLanguage === 'no' ? 'For Din Rolle' : 'For Your Role',
-      href: `/${currentLanguage}/segments`,
+      label: t('nav.segments'),
+      href: `/${currentLanguage === 'en' ? '' : 'no/'}segments`,
       hasDropdown: true,
     },
     {
-      label: currentLanguage === 'no' ? 'Om Kai Roer' : 'About Kai Roer',
-      href: `/${currentLanguage}/about`,
+      label: t('nav.about'),
+      href: `/${currentLanguage === 'en' ? '' : 'no/'}about`,
       hasDropdown: false,
     },
     {
-      label: currentLanguage === 'no' ? 'Ressurser' : 'Resources',
-      href: `/${currentLanguage}/resources`,
+      label: t('nav.resources'),
+      href: `/${currentLanguage === 'en' ? '' : 'no/'}resources`,
       hasDropdown: true,
     },
     {
-      label:
-        currentLanguage === 'no' ? 'Priser & Prøveversjon' : 'Pricing & Trial',
-      href: `/${currentLanguage}/pricing`,
+      label: t('nav.pricing'),
+      href: `/${currentLanguage === 'en' ? '' : 'no/'}pricing`,
       hasDropdown: false,
     },
     {
-      label: currentLanguage === 'no' ? 'Kontakt & Demo' : 'Contact & Demo',
-      href: `/${currentLanguage}/contact`,
+      label: t('nav.contact'),
+      href: `/${currentLanguage === 'en' ? '' : 'no/'}contact`,
       hasDropdown: false,
     },
   ];
@@ -212,7 +213,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'Log in to Praxis Navigator'
               }
             >
-              {currentLanguage === 'no' ? 'Logg Inn' : 'Login'}
+              {t('nav.login')}
             </button>
 
             {/* Azure Marketplace Button */}
@@ -230,7 +231,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'Start trial on Azure Marketplace'
               }
             >
-              {currentLanguage === 'no' ? 'Start Prøveversjon' : 'Start Trial'}
+              {t('nav.trial')}
             </a>
           </div>
 
@@ -385,7 +386,7 @@ export const Header: React.FC<HeaderProps> = ({
                     : 'Log in to Praxis Navigator'
                 }
               >
-                {currentLanguage === 'no' ? 'Logg Inn' : 'Login'}
+                {t('nav.login')}
               </button>
 
               <a
@@ -403,9 +404,7 @@ export const Header: React.FC<HeaderProps> = ({
                     : 'Start trial on Azure Marketplace'
                 }
               >
-                {currentLanguage === 'no'
-                  ? 'Start Prøveversjon'
-                  : 'Start Trial'}
+                {t('nav.trial')}
               </a>
             </div>
           </div>
