@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SATTeamsHeroSection } from '../../components/sections/SATTeamsHeroSection';
+import { TrainingEffectivenessSection } from '../../components/sections/TrainingEffectivenessSection';
+import { ResourceHubSection } from '../../components/sections/ResourceHubSection';
+import { ThoughtLeadershipSection } from '../../components/sections/ThoughtLeadershipSection';
+import { SATTeamsContactSection } from '../../components/sections/SATTeamsContactSection';
+
+const title = 'For SAT Teams & Training Coordinators - Praxis Navigator';
+const description =
+  "Enhance your existing training programs with behavioral measurement and optimization. Access Kai Roer's research hub and demonstrate training program ROI to security leadership.";
+const keywords =
+  'SAT teams, security training, training coordinators, learning development, training effectiveness, behavioral measurement, Kai Roer, security culture research, training ROI, program optimization';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'SAT Teams & Training Coordinators Solutions',
+  description: description,
+  audience: {
+    '@type': 'Audience',
+    audienceType: [
+      'Security Training Coordinator',
+      'Learning & Development Specialist',
+      'SAT Team',
+      'Training Manager',
+    ],
+  },
+  mainEntity: {
+    '@type': 'SoftwareApplication',
+    name: 'Praxis Navigator',
+    applicationCategory: 'EducationSoftware',
+    description:
+      'Security training effectiveness and behavioral measurement platform',
+    featureList: [
+      'Training Effectiveness Measurement',
+      'Behavioral Analytics',
+      'Program Optimization',
+      'Research Hub Access',
+      'ROI Demonstration',
+    ],
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Kai Roer',
+    description: 'Security culture research expert and thought leader',
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="segment"
+>
+  <SATTeamsHeroSection client:load />
+  <TrainingEffectivenessSection client:load />
+  <ResourceHubSection client:load />
+  <ThoughtLeadershipSection client:load />
+  <SATTeamsContactSection client:load />
+</BaseLayout>

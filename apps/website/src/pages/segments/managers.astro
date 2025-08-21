@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ManagersHeroSection } from '../../components/sections/ManagersHeroSection';
+import { TeamPerformanceSection } from '../../components/sections/TeamPerformanceSection';
+import { BenchmarkingSection } from '../../components/sections/BenchmarkingSection';
+import { ManagerReportingSection } from '../../components/sections/ManagerReportingSection';
+import { ManagersContactSection } from '../../components/sections/ManagersContactSection';
+
+const title = 'For Department Managers - Praxis Navigator';
+const description =
+  "Monitor and improve your team's security performance with benchmarking capabilities. Get visibility into departmental security culture and demonstrate team improvement to leadership.";
+const keywords =
+  'department managers, team performance, security culture, benchmarking, team management, departmental security, performance metrics, team improvement';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Department Managers Solutions',
+  description: description,
+  audience: {
+    '@type': 'Audience',
+    audienceType: [
+      'Department Manager',
+      'Team Leader',
+      'Middle Management',
+      'Operations Manager',
+    ],
+  },
+  mainEntity: {
+    '@type': 'SoftwareApplication',
+    name: 'Praxis Navigator',
+    applicationCategory: 'ManagementSoftware',
+    description: 'Team security performance and benchmarking platform',
+    featureList: [
+      'Team Performance Visibility',
+      'Benchmarking Capabilities',
+      'Departmental Reporting',
+      'Performance Improvement Tracking',
+      'Team Security Culture Metrics',
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="segment"
+>
+  <ManagersHeroSection client:load />
+  <TeamPerformanceSection client:load />
+  <BenchmarkingSection client:load />
+  <ManagerReportingSection client:load />
+  <ManagersContactSection client:load />
+</BaseLayout>

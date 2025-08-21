@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import {
+  loginWithAzureAD,
+  redirectToPraxisApp,
+  isMsalConfigured,
+} from '../../utils/msal-auth';
 
 interface HeaderProps {
   currentPath?: string;
@@ -63,6 +68,20 @@ export const Header: React.FC<HeaderProps> = ({
 
   const isActiveLink = (href: string) => {
     return currentPath === href || currentPath.startsWith(href + '/');
+  };
+
+  const handleLogin = async () => {
+    if (isMsalConfigured()) {
+      try {
+        await loginWithAzureAD();
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Login failed, falling back to direct redirect:', error);
+        redirectToPraxisApp('/login');
+      }
+    } else {
+      redirectToPraxisApp('/login');
+    }
   };
 
   return (
@@ -172,11 +191,9 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             {/* Login Button */}
-            <a
-              href={`${import.meta.env.ASTRO_PUBLIC_PRAXIS_APP_URL || 'https://app.praxisnavigator.io'}/login`}
+            <button
+              onClick={handleLogin}
               className="btn-secondary btn-sm"
-              target="_blank"
-              rel="noopener noreferrer"
               aria-label={
                 currentLanguage === 'no'
                   ? 'Logg inn på Praxis Navigator'
@@ -184,7 +201,7 @@ export const Header: React.FC<HeaderProps> = ({
               }
             >
               {currentLanguage === 'no' ? 'Logg Inn' : 'Login'}
-            </a>
+            </button>
 
             {/* Azure Marketplace Button */}
             <a
@@ -340,12 +357,12 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Mobile Action Buttons */}
             <div className="pt-4 space-y-3">
-              <a
-                href={`${import.meta.env.ASTRO_PUBLIC_PRAXIS_APP_URL || 'https://app.praxisnavigator.io'}/login`}
+              <button
+                onClick={() => {
+                  closeMobileMenu();
+                  handleLogin();
+                }}
                 className="btn-secondary w-full text-center"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={closeMobileMenu}
                 aria-label={
                   currentLanguage === 'no'
                     ? 'Logg inn på Praxis Navigator'
@@ -353,7 +370,7 @@ export const Header: React.FC<HeaderProps> = ({
                 }
               >
                 {currentLanguage === 'no' ? 'Logg Inn' : 'Login'}
-              </a>
+              </button>
 
               <a
                 href={

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SecurityLeadersHeroSection } from '../../components/sections/SecurityLeadersHeroSection';
+import { ROIDemonstrationSection } from '../../components/sections/ROIDemonstrationSection';
+import { ExecutiveCommunicationSection } from '../../components/sections/ExecutiveCommunicationSection';
+import { TechnicalCredibilitySection } from '../../components/sections/TechnicalCredibilitySection';
+import { SecurityLeadersCaseStudiesSection } from '../../components/sections/SecurityLeadersCaseStudiesSection';
+import { SecurityLeadersContactSection } from '../../components/sections/SecurityLeadersContactSection';
+
+const title = 'For Security Leaders & CISOs - Praxis Navigator';
+const description =
+  'Measure security training ROI and generate board-ready reports with behavioral monitoring. Praxis Navigator provides CISOs with data-driven security culture insights for 500-10,000+ employee organizations.';
+const keywords =
+  'CISO tools, security culture measurement, security training ROI, compliance reporting, behavioral monitoring, enterprise security, security leadership, board reporting, security governance';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Security Leaders & CISOs Solutions',
+  description: description,
+  audience: {
+    '@type': 'Audience',
+    audienceType: [
+      'CISO',
+      'IT Security Manager',
+      'Security Leader',
+      'Chief Information Security Officer',
+    ],
+  },
+  mainEntity: {
+    '@type': 'SoftwareApplication',
+    name: 'Praxis Navigator',
+    applicationCategory: 'SecuritySoftware',
+    operatingSystem: 'Web-based',
+    description:
+      'Enterprise security culture measurement platform for security leaders',
+    featureList: [
+      'Security Training ROI Measurement',
+      'Board-Ready Compliance Reports',
+      'Behavioral Risk Analytics',
+      'Executive Communication Tools',
+      'Microsoft Graph Integration',
+    ],
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'EUR',
+      price: '249',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        price: '249',
+        priceCurrency: 'EUR',
+        billingDuration: 'P1M',
+      },
+    },
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="segment"
+>
+  <SecurityLeadersHeroSection client:load />
+  <ROIDemonstrationSection client:load />
+  <ExecutiveCommunicationSection client:load />
+  <TechnicalCredibilitySection client:load />
+  <SecurityLeadersCaseStudiesSection client:load />
+  <SecurityLeadersContactSection client:load />
+</BaseLayout>

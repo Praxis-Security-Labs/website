@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ExecutivesHeroSection } from '../../components/sections/ExecutivesHeroSection';
+import { RegulatoryComplianceSection } from '../../components/sections/RegulatoryComplianceSection';
+import { BusinessImpactSection } from '../../components/sections/BusinessImpactSection';
+import { ExecutiveReportingSection } from '../../components/sections/ExecutiveReportingSection';
+import { ExecutivesContactSection } from '../../components/sections/ExecutivesContactSection';
+
+const title = 'For Board Members & Executives - Praxis Navigator';
+const description =
+  'Transform security risks into business language with regulatory compliance value. Board-ready security governance reports that demonstrate measurable business impact and regulatory readiness.';
+const keywords =
+  'board members, executives, C-suite, security governance, regulatory compliance, business risk, NIS2, security investment, board reporting, risk oversight';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Board Members & Executives Solutions',
+  description: description,
+  audience: {
+    '@type': 'Audience',
+    audienceType: ['Board Member', 'CEO', 'CFO', 'COO', 'Executive', 'C-Suite'],
+  },
+  mainEntity: {
+    '@type': 'SoftwareApplication',
+    name: 'Praxis Navigator',
+    applicationCategory: 'BusinessSoftware',
+    description: 'Executive security governance and risk oversight platform',
+    featureList: [
+      'Board-Ready Security Reports',
+      'Regulatory Compliance Tracking',
+      'Business Risk Translation',
+      'Investment ROI Measurement',
+      'Executive Dashboard',
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="segment"
+>
+  <ExecutivesHeroSection client:load />
+  <RegulatoryComplianceSection client:load />
+  <BusinessImpactSection client:load />
+  <ExecutiveReportingSection client:load />
+  <ExecutivesContactSection client:load />
+</BaseLayout>

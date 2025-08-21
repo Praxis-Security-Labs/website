@@ -1,0 +1,78 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { PricingHeroSection } from '../components/sections/PricingHeroSection';
+import { PricingTableSection } from '../components/sections/PricingTableSection';
+import { FeatureComparisonSection } from '../components/sections/FeatureComparisonSection';
+import { TrialCallToActionSection } from '../components/sections/TrialCallToActionSection';
+import { EnterpriseContactSection } from '../components/sections/EnterpriseContactSection';
+
+const title = 'Pricing & Free Trial - Praxis Navigator';
+const description =
+  'Transparent pricing for enterprise security culture measurement. Start your 30-day free trial on Azure Marketplace. Plans from €0.80 per employee per month.';
+const keywords =
+  'praxis navigator pricing, security culture pricing, azure marketplace trial, enterprise security software pricing, cybersecurity training pricing';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Praxis Navigator',
+  description:
+    'Enterprise security culture measurement and behavioral monitoring platform',
+  brand: {
+    '@type': 'Brand',
+    name: 'Praxis Navigator',
+  },
+  offers: [
+    {
+      '@type': 'Offer',
+      name: 'Small Enterprise',
+      price: '199',
+      priceCurrency: 'EUR',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        price: '199',
+        priceCurrency: 'EUR',
+        billingDuration: 'P1M',
+        description: 'Up to 199 employees',
+      },
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'Praxis Navigator',
+      },
+    },
+    {
+      '@type': 'Offer',
+      name: 'Medium Enterprise',
+      price: '249',
+      priceCurrency: 'EUR',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        price: '249',
+        priceCurrency: 'EUR',
+        billingDuration: 'P1M',
+        description: '200+ employees, starting price',
+      },
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'Praxis Navigator',
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  structuredData={structuredData}
+  pageType="content"
+>
+  <PricingHeroSection client:load />
+  <PricingTableSection client:load />
+  <FeatureComparisonSection client:load />
+  <TrialCallToActionSection client:load />
+  <EnterpriseContactSection client:load />
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { SecurityLeadersHeroSection } from '../../../components/sections/SecurityLeadersHeroSection';
+import { ROIDemonstrationSection } from '../../../components/sections/ROIDemonstrationSection';
+import { ExecutiveCommunicationSection } from '../../../components/sections/ExecutiveCommunicationSection';
+import { TechnicalCredibilitySection } from '../../../components/sections/TechnicalCredibilitySection';
+import { SecurityLeadersCaseStudiesSection } from '../../../components/sections/SecurityLeadersCaseStudiesSection';
+import { SecurityLeadersContactSection } from '../../../components/sections/SecurityLeadersContactSection';
+
+const title = 'For Sikkerhetsledere & CISOs - Praxis Navigator';
+const description =
+  'Mål sikkerhetsopplæring ROI og generer styreklar rapporter med atferdsovervåking. Praxis Navigator gir CISOs datadrevne sikkerhetskulturelle innsikter for 500-10,000+ ansatte organisasjoner.';
+const keywords =
+  'CISO verktøy, sikkerhetskultur måling, sikkerhetsopplæring ROI, compliance rapportering, atferdsovervåking, virksomhet sikkerhet, sikkerhetsledelse, styre rapportering, sikkerhets styring';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Sikkerhetsledere & CISOs Løsninger',
+  description: description,
+  inLanguage: 'nb-NO',
+  audience: {
+    '@type': 'Audience',
+    audienceType: [
+      'CISO',
+      'IT Sikkerhetssjef',
+      'Sikkerhetsleder',
+      'Informasjonssikkerhetssjef',
+    ],
+  },
+  mainEntity: {
+    '@type': 'SoftwareApplication',
+    name: 'Praxis Navigator',
+    applicationCategory: 'SecuritySoftware',
+    operatingSystem: 'Web-basert',
+    description:
+      'Virksomhet sikkerhetskultur måleplattform for sikkerhetsledere',
+    featureList: [
+      'Sikkerhetsopplæring ROI Måling',
+      'Styreklar Compliance Rapporter',
+      'Atferds Risikoanalytikk',
+      'Lederskap Kommunikasjonsverktøy',
+      'Microsoft Graph Integrasjon',
+    ],
+  },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  lang="no"
+  structuredData={structuredData}
+  pageType="segment"
+>
+  <SecurityLeadersHeroSection language="no" client:load />
+  <ROIDemonstrationSection language="no" client:load />
+  <ExecutiveCommunicationSection language="no" client:load />
+  <TechnicalCredibilitySection language="no" client:load />
+  <SecurityLeadersCaseStudiesSection language="no" client:load />
+  <SecurityLeadersContactSection language="no" client:load />
+</BaseLayout>
