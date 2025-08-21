@@ -1,9 +1,9 @@
 # Frontend Component Architecture
 
-**Status**: Approved  
+**Status**: Updated  
 **Created**: 2025-08-20  
 **Author**: Winston (Architect)  
-**Last Updated**: 2025-08-20
+**Last Updated**: 2025-08-21
 
 ## 📋 Overview
 
@@ -29,458 +29,397 @@ This document outlines the frontend component architecture for the Praxis Naviga
 src/
 ├── components/
 │   ├── layout/           # Layout and navigation components
-│   │   ├── Header.astro
-│   │   ├── Footer.astro
-│   │   ├── Navigation.astro
-│   │   └── Layout.astro
-│   ├── sections/         # Page section components
-│   │   ├── Hero.astro
-│   │   ├── Features.astro
-│   │   ├── Testimonials.astro
-│   │   └── CTA.astro
+│   │   ├── Header.tsx    # React component for navigation
+│   │   ├── Footer.tsx    # React component for footer
+│   │   └── Navigation.tsx (if separate)
+│   ├── sections/         # Page section components (React)
+│   │   ├── HeroSection.tsx
+│   │   ├── AboutHeroSection.tsx
+│   │   ├── PricingHeroSection.tsx
+│   │   ├── FeatureComparisonSection.tsx
+│   │   ├── ContactSection.tsx
+│   │   └── [Various specialized sections]
 │   ├── ui/              # Reusable UI components
-│   │   ├── Button.astro
-│   │   ├── Card.astro
-│   │   ├── Icon.astro
-│   │   └── Badge.astro
-│   ├── forms/           # Interactive form components (React)
-│   │   ├── HubSpotForm.tsx
-│   │   ├── ContactForm.tsx
-│   │   └── DemoRequestForm.tsx
-│   └── widgets/         # Interactive widgets (React)
-│       ├── LanguageToggle.tsx
-│       ├── ThemeToggle.tsx
-│       └── Analytics.tsx
-└── layouts/
-    └── BaseLayout.astro
+│   │   ├── Button.tsx
+│   │   ├── Card.tsx
+│   │   └── [Other UI components]
+│   └── forms/           # Form components with validation
+│       ├── EnterpriseContactSection.tsx
+│       ├── SecurityLeadersContactSection.tsx
+│       └── ComplianceContactSection.tsx
+├── layouts/
+│   └── BaseLayout.astro  # Main layout component
+├── pages/               # File-based routing with i18n
+│   ├── index.astro      # Root redirect page
+│   ├── 404.astro        # Error page
+│   ├── api/             # API endpoints
+│   ├── en/              # English pages
+│   │   ├── about/
+│   │   ├── product/
+│   │   ├── segments/
+│   │   ├── pricing.astro
+│   │   └── contact/
+│   └── no/              # Norwegian pages (mirrors en/)
+│       ├── about/
+│       ├── product/
+│       ├── segments/
+│       ├── pricing.astro
+│       └── contact/
+├── i18n/               # Internationalization
+│   ├── ui.ts           # Translation strings
+│   └── utils.ts        # i18n utility functions
+├── utils/              # Utility functions
+│   ├── msal-auth.ts    # Azure authentication
+│   ├── analytics.js    # Analytics utilities
+│   ├── performance.js  # Performance monitoring
+│   └── sentry.js       # Error tracking
+└── styles/
+    └── globals.css     # Global CSS with Tailwind
 ```
 
 ## 🧩 Core Components
 
-### Layout Components (Astro)
+### Layout Components
 
 #### BaseLayout.astro
+The main layout component handling SEO, meta tags, language detection, and i18n routing.
+
 ```astro
 ---
-interface Props {
+export interface Props {
   title: string;
-  description: string;
-  lang?: 'en' | 'no';
+  description?: string;
+  keywords?: string;
   ogImage?: string;
+  ogType?: string;
+  canonicalUrl?: string;
+  noIndex?: boolean;
+  lang?: string;
+  structuredData?: Record<string, unknown>;
+  pageType?: 'homepage' | 'content' | 'segment' | 'product' | 'contact' | 'about' | 'resources' | 'compliance' | 'segment-index';
 }
 
-const { title, description, lang = 'en', ogImage } = Astro.props;
+const {
+  title,
+  description = 'Default description...',
+  keywords = 'default, keywords',
+  ogImage = '/images/og-praxis-navigator-default.png',
+  ogType = 'website',
+  canonicalUrl,
+  noIndex = false,
+  lang = 'en',
+  structuredData,
+  pageType = 'content',
+} = Astro.props;
+
+// Get current path for navigation
+const currentPath = Astro.url.pathname;
+
+// Determine language from path or lang prop
+const isNorwegian = lang === 'no' || currentPath.startsWith('/no');
+const currentLanguage = isNorwegian ? 'no' : 'en';
 ---
 
-<!DOCTYPE html>
-<html lang={lang}>
+<!doctype html>
+<html lang={currentLanguage} class="h-full">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title}</title>
-  <meta name="description" content={description}>
-  {ogImage && <meta property="og:image" content={ogImage}>}
-  
-  <!-- Praxis Design System CSS -->
-  <link rel="stylesheet" href="/styles/praxis-theme.css">
-  
-  <!-- HubSpot Tracking Script -->
-  <script type="text/javascript" id="hs-script-loader" 
-          async defer src="//js.hsforms.net/forms/v2.js"></script>
+  <!-- Comprehensive SEO and meta tags -->
+  <!-- Language alternate URLs for i18n -->
+  <!-- Performance optimizations -->
+  <!-- Analytics and monitoring -->
 </head>
-<body class="bg-praxis-bg text-praxis-text">
-  <Header />
-  <main>
+<body>
+  <Header currentPath={currentPath} currentLanguage={currentLanguage} client:load />
+  <main id="main-content" class="flex-grow" role="main" tabindex="-1">
     <slot />
   </main>
-  <Footer />
-  
-  <!-- Analytics Island -->
-  <Analytics client:load />
+  <Footer currentLanguage={currentLanguage} />
 </body>
 </html>
 ```
 
-#### Header.astro
-```astro
----
-import Navigation from './Navigation.astro';
-import LanguageToggle from '../widgets/LanguageToggle.tsx';
----
+#### Header.tsx (React Component)
+Language-aware navigation with explicit URL prefixes for both languages.
 
-<header class="bg-praxis-primary text-white sticky top-0 z-50">
-  <div class="container mx-auto px-4 py-4">
-    <div class="flex items-center justify-between">
-      <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2">
-        <img src="/logo-white.svg" alt="Praxis Navigator" class="h-8 w-auto">
-        <span class="text-xl font-bold">Praxis Navigator</span>
-      </a>
-      
-      <!-- Navigation -->
-      <Navigation />
-      
-      <!-- Controls -->
-      <div class="flex items-center space-x-4">
-        <LanguageToggle client:load />
-        <a href="/auth/login" 
-           class="btn-secondary">
-          Get Started
-        </a>
-      </div>
-    </div>
-  </div>
-</header>
+```tsx
+interface HeaderProps {
+  currentPath?: string;
+  currentLanguage?: string;
+}
+
+export const Header: React.FC<HeaderProps> = ({
+  currentPath = '/',
+  currentLanguage = 'en',
+}) => {
+  // Navigation items with consistent language prefixes
+  const navigationItems = [
+    {
+      label: currentLanguage === 'no' ? 'Produkt' : 'Product',
+      href: `/${currentLanguage}/product`,
+      hasDropdown: true,
+    },
+    {
+      label: currentLanguage === 'no' ? 'For Din Rolle' : 'For Your Role',
+      href: `/${currentLanguage}/segments`,
+      hasDropdown: true,
+    },
+    // ... more items with CONSISTENT /${currentLanguage}/ pattern
+  ];
+
+  // Context-aware language switching
+  const getLanguageSwitchUrl = (targetLanguage: string) => {
+    let pathWithoutLang = currentPath;
+    if (currentPath.startsWith('/en/')) {
+      pathWithoutLang = currentPath.substring(3);
+    } else if (currentPath.startsWith('/no/')) {
+      pathWithoutLang = currentPath.substring(3);
+    }
+    
+    return pathWithoutLang === '' 
+      ? `/${targetLanguage}` 
+      : `/${targetLanguage}${pathWithoutLang}`;
+  };
+
+  return (
+    <header className="bg-praxis-dark-blue border-b border-praxis-dark-blue-600">
+      {/* Navigation implementation */}
+    </header>
+  );
+};
 ```
 
-### Section Components (Astro)
+### Section Components (React)
 
-#### Hero.astro
-```astro
----
-interface Props {
+Page sections are implemented as React components for consistent props handling and interactivity.
+
+#### HeroSection.tsx
+```tsx
+interface HeroSectionProps {
   title: string;
   subtitle: string;
   ctaText: string;
   ctaHref: string;
+  currentLanguage?: 'en' | 'no';
   backgroundImage?: string;
-  segment: 'security-leaders' | 'executives' | 'managers' | 'sat-teams';
+  segment?: 'security-leaders' | 'executives' | 'managers' | 'sat-teams';
 }
 
-const { title, subtitle, ctaText, ctaHref, backgroundImage, segment } = Astro.props;
----
-
-<section class="hero-section relative min-h-screen flex items-center justify-center">
-  {backgroundImage && (
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-         style={`background-image: url(${backgroundImage})`}></div>
-  )}
-  
-  <div class="relative z-10 container mx-auto px-4 text-center">
-    <h1 class="text-5xl md:text-7xl font-bold mb-6 text-praxis-primary">
-      {title}
-    </h1>
-    
-    <p class="text-xl md:text-2xl mb-8 text-praxis-secondary max-w-3xl mx-auto">
-      {subtitle}
-    </p>
-    
-    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href={ctaHref} 
-         class="btn-primary text-lg px-8 py-4"
-         data-segment={segment}>
-        {ctaText}
-      </a>
-      
-      <a href="/demo" 
-         class="btn-secondary text-lg px-8 py-4">
-        Watch Demo
-      </a>
-    </div>
-  </div>
-</section>
-```
-
-#### Features.astro
-```astro
----
-import FeatureCard from '../ui/FeatureCard.astro';
-
-interface Feature {
-  title: string;
-  description: string;
-  icon: string;
-  benefits: string[];
-}
-
-interface Props {
-  title: string;
-  features: Feature[];
-}
-
-const { title, features } = Astro.props;
----
-
-<section class="py-20 bg-praxis-bg-alt">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-16 text-praxis-primary">
-      {title}
-    </h2>
-    
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {features.map((feature) => (
-        <FeatureCard 
-          title={feature.title}
-          description={feature.description}
-          icon={feature.icon}
-          benefits={feature.benefits}
+export const HeroSection: React.FC<HeroSectionProps> = ({
+  title,
+  subtitle,
+  ctaText,
+  ctaHref,
+  currentLanguage = 'en',
+  backgroundImage,
+  segment
+}) => {
+  return (
+    <section className="hero-section relative min-h-screen flex items-center justify-center">
+      {backgroundImage && (
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
         />
-      ))}
-    </div>
-  </div>
-</section>
+      )}
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-4 text-center">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-praxis-dark-blue">
+          {title}
+        </h1>
+        
+        <p className="text-xl md:text-2xl mb-8 text-praxis-blue max-w-3xl mx-auto">
+          {subtitle}
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a 
+            href={ctaHref} 
+            className="btn-primary text-lg px-8 py-4"
+            data-segment={segment}
+          >
+            {ctaText}
+          </a>
+          
+          <a 
+            href={`/${currentLanguage}/contact`} 
+            className="btn-secondary text-lg px-8 py-4"
+          >
+            {currentLanguage === 'no' ? 'Kontakt Demo' : 'Request Demo'}
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
 ```
 
-### UI Components (Astro)
+#### Contact Forms with Validation
+Contact forms use react-hook-form with Zod validation:
 
-#### FeatureCard.astro
-```astro
----
-interface Props {
-  title: string;
-  description: string;
-  icon: string;
-  benefits: string[];
-  ctaText?: string;
-  ctaHref?: string;
-}
+```tsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
-const { title, description, icon, benefits, ctaText, ctaHref } = Astro.props;
----
+const contactSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  company: z.string().min(2, 'Company name required'),
+  message: z.string().min(10, 'Please provide more details'),
+});
 
-<div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
-  <div class="flex items-center mb-4">
-    <div class="w-12 h-12 bg-praxis-primary rounded-lg flex items-center justify-center mr-4">
-      <i class={`${icon} text-white text-xl`}></i>
-    </div>
-    <h3 class="text-xl font-semibold text-praxis-primary">{title}</h3>
-  </div>
-  
-  <p class="text-praxis-text mb-4">{description}</p>
-  
-  <ul class="space-y-2 mb-6">
-    {benefits.map((benefit) => (
-      <li class="flex items-center text-sm text-praxis-secondary">
-        <i class="fas fa-check text-praxis-accent mr-2"></i>
-        {benefit}
-      </li>
-    ))}
-  </ul>
-  
-  {ctaText && ctaHref && (
-    <a href={ctaHref} class="btn-outline w-full">
-      {ctaText}
-    </a>
-  )}
-</div>
+export const EnterpriseContactSection: React.FC<Props> = ({ currentLanguage }) => {
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    resolver: zodResolver(contactSchema),
+  });
+
+  const onSubmit = async (data: FormData) => {
+    // Handle form submission to API endpoint
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      
+      if (response.ok) {
+        // Success handling
+      }
+    } catch (error) {
+      // Error handling
+    }
+  };
+
+  return (
+    <section className="py-16 bg-praxis-white">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        {/* Form fields with error handling */}
+      </form>
+    </section>
+  );
+};
 ```
 
-#### Button.astro
+## 🌐 Internationalization (i18n) Architecture
+
+### **CRITICAL: Folder-Based Routing with Explicit Language Prefixes**
+
+Our i18n implementation uses explicit language prefixes for ALL pages:
+
+```
+src/pages/
+├── index.astro           # Root redirect to default language
+├── 404.astro            # Error page
+├── api/                 # API endpoints
+├── en/                  # English pages (/en/*)
+│   ├── about/
+│   ├── product/
+│   ├── segments/
+│   ├── pricing.astro
+│   └── contact/
+└── no/                  # Norwegian pages (/no/*)
+    ├── about/           # Mirrors en/ structure
+    ├── product/
+    ├── segments/
+    ├── pricing.astro
+    └── contact/
+```
+
+### URL Pattern Standards
+- **English:** `/en/path` (explicit prefix required)
+- **Norwegian:** `/no/path` (explicit prefix required)
+- **Root:** `/` redirects to `/en/` (default language)
+
+### Language Detection in BaseLayout
 ```astro
 ---
-interface Props {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-  href?: string;
-  type?: 'button' | 'submit' | 'reset';
-  disabled?: boolean;
-  class?: string;
-}
-
-const { 
-  variant = 'primary', 
-  size = 'md', 
-  href, 
-  type = 'button',
-  disabled = false,
-  class: className = ''
-} = Astro.props;
-
-const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
-
-const variantClasses = {
-  primary: 'bg-praxis-primary text-white hover:bg-praxis-primary-dark focus:ring-praxis-primary',
-  secondary: 'bg-praxis-secondary text-white hover:bg-praxis-secondary-dark focus:ring-praxis-secondary',
-  outline: 'border-2 border-praxis-primary text-praxis-primary hover:bg-praxis-primary hover:text-white',
-  ghost: 'text-praxis-primary hover:bg-praxis-primary hover:bg-opacity-10'
-};
-
-const sizeClasses = {
-  sm: 'px-3 py-2 text-sm',
-  md: 'px-4 py-2',
-  lg: 'px-6 py-3 text-lg'
-};
-
-const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+// Language detection from URL path
+const currentPath = Astro.url.pathname;
+const isNorwegian = lang === 'no' || currentPath.startsWith('/no');
+const currentLanguage = isNorwegian ? 'no' : 'en';
 ---
+```
 
-{href ? (
-  <a href={href} class={classes}>
-    <slot />
-  </a>
-) : (
-  <button type={type} disabled={disabled} class={classes}>
-    <slot />
-  </button>
-)}
+### Navigation Links Requirements
+**MANDATORY:** All navigation links must use `/${currentLanguage}/` pattern:
+
+```tsx
+// ✅ CORRECT - Consistent language prefixes
+const navigationItems = [
+  {
+    label: currentLanguage === 'no' ? 'Produkt' : 'Product',
+    href: `/${currentLanguage}/product`,
+  },
+  {
+    label: currentLanguage === no' ? 'For Din Rolle' : 'For Your Role',
+    href: `/${currentLanguage}/segments`,
+  },
+];
+
+// ❌ WRONG - Conditional logic creates inconsistency
+href: `/${currentLanguage === 'no' ? 'no/' : ''}product`
+```
+
+### Translation System
+```typescript
+// src/i18n/ui.ts
+export const languages = {
+  en: 'English',
+  no: 'Norsk',
+};
+
+export const defaultLang = 'en';
+
+export const ui = {
+  en: {
+    'nav.home': 'Home',
+    'nav.about': 'About',
+    // ...
+  },
+  no: {
+    'nav.home': 'Hjem',
+    'nav.about': 'Om Oss',
+    // ...
+  },
+} as const;
+
+// Usage in components
+import { useTranslations } from '../../i18n/utils';
+const t = useTranslations(currentLanguage);
 ```
 
 ## 🚀 Interactive Components (React Islands)
 
-### HubSpot Form Integration
+### Authentication Integration
 
-#### HubSpotForm.tsx
-```typescript
-import React, { useEffect, useRef } from 'react';
+#### MSAL (Microsoft Authentication Library)
+```tsx
+// src/utils/msal-auth.ts
+import { PublicClientApplication } from '@azure/msal-browser';
 
-interface HubSpotFormProps {
-  formId: string;
-  portalId: string;
-  onFormSubmit?: () => void;
-  onFormReady?: () => void;
-  className?: string;
-}
+export const loginWithAzureAD = async () => {
+  // Azure AD login implementation
+};
 
-const HubSpotForm: React.FC<HubSpotFormProps> = ({
-  formId,
-  portalId,
-  onFormSubmit,
-  onFormReady,
-  className = ''
-}) => {
-  const formRef = useRef<HTMLDivElement>(null);
+export const redirectToPraxisApp = (path: string) => {
+  // Redirect to main application
+};
 
-  useEffect(() => {
-    if (formRef.current && window.hbspt) {
-      window.hbspt.forms.create({
-        portalId: portalId,
-        formId: formId,
-        target: formRef.current,
-        onFormSubmit: () => {
-          // Track conversion
-          if (window.gtag) {
-            window.gtag('event', 'conversion', {
-              send_to: 'AW-CONVERSION_ID/CONVERSION_LABEL'
-            });
-          }
-          onFormSubmit?.();
-        },
-        onFormReady: onFormReady,
-        css: '',  // Use our custom CSS instead
-      });
+// Usage in Header component
+const handleLogin = async () => {
+  if (isMsalConfigured()) {
+    try {
+      await loginWithAzureAD();
+    } catch (error) {
+      redirectToPraxisApp('/login');
     }
-  }, [formId, portalId, onFormSubmit, onFormReady]);
-
-  return (
-    <div 
-      ref={formRef} 
-      className={`hubspot-form ${className}`}
-    />
-  );
+  } else {
+    redirectToPraxisApp('/login');
+  }
 };
-
-export default HubSpotForm;
 ```
 
-#### ContactForm.tsx
-```typescript
-import React from 'react';
-import HubSpotForm from './HubSpotForm';
-
-interface ContactFormProps {
-  segment: 'security-leaders' | 'executives' | 'managers' | 'sat-teams';
-  className?: string;
-}
-
-const ContactForm: React.FC<ContactFormProps> = ({ segment, className }) => {
-  const handleFormSubmit = () => {
-    // Track form submission by segment
-    if (window.gtag) {
-      window.gtag('event', 'form_submit', {
-        event_category: 'engagement',
-        event_label: `contact_${segment}`,
-        value: 1
-      });
-    }
-    
-    // Show thank you message
-    setTimeout(() => {
-      window.location.href = '/thank-you';
-    }, 1000);
-  };
-
-  return (
-    <div className={`contact-form ${className}`}>
-      <div className="mb-6">
-        <h3 className="text-2xl font-bold text-praxis-primary mb-2">
-          Get in Touch
-        </h3>
-        <p className="text-praxis-secondary">
-          Ready to transform your security assessment process? Let's talk.
-        </p>
-      </div>
-      
-      <HubSpotForm
-        formId="contact-form-id"
-        portalId="your-portal-id"
-        onFormSubmit={handleFormSubmit}
-        className="praxis-form"
-      />
-    </div>
-  );
-};
-
-export default ContactForm;
-```
-
-### Language and Theme Toggles
-
-#### LanguageToggle.tsx
-```typescript
-import React, { useState, useEffect } from 'react';
-import { useStore } from '../store/appStore';
-
-const LanguageToggle: React.FC = () => {
-  const { language, setLanguage } = useStore();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleLanguage = (newLang: 'en' | 'no') => {
-    setLanguage(newLang);
-    setIsOpen(false);
-    
-    // Update URL if using language-based routing
-    const currentPath = window.location.pathname;
-    const newPath = currentPath.replace(/^\/(en|no)/, `/${newLang}`);
-    window.history.pushState({}, '', newPath);
-  };
-
-  return (
-    <div className="relative">
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 text-white hover:text-praxis-accent transition-colors"
-      >
-        <i className="fas fa-globe"></i>
-        <span className="uppercase">{language}</span>
-        <i className={`fas fa-chevron-down transition-transform ${isOpen ? 'rotate-180' : ''}`}></i>
-      </button>
-      
-      {isOpen && (
-        <div className="absolute top-full right-0 mt-2 bg-white rounded-lg shadow-lg py-2 min-w-[100px]">
-          <button
-            onClick={() => toggleLanguage('en')}
-            className={`w-full px-4 py-2 text-left hover:bg-gray-100 ${
-              language === 'en' ? 'text-praxis-primary font-medium' : 'text-gray-700'
-            }`}
-          >
-            English
-          </button>
-          <button
-            onClick={() => toggleLanguage('no')}
-            className={`w-full px-4 py-2 text-left hover:bg-gray-100 ${
-              language === 'no' ? 'text-praxis-primary font-medium' : 'text-gray-700'
-            }`}
-          >
-            Norsk
-          </button>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default LanguageToggle;
-```
+### Form Components with Validation
 
 ## 🎨 Design System Integration
 
@@ -489,27 +428,91 @@ export default LanguageToggle;
 #### tailwind.config.js
 ```javascript
 module.exports = {
-  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,vue}',
+    './components/**/*.{js,ts,jsx,tsx,vue}',
+    './layouts/**/*.{js,ts,jsx,tsx,vue}',
+    './src/**/*.{js,ts,jsx,tsx,vue,astro}',
+  ],
   theme: {
     extend: {
       colors: {
-        praxis: {
-          primary: '#1B365D',
-          'primary-dark': '#0F1B2E',
-          secondary: '#2E5984',
-          'secondary-dark': '#1E3A56',
-          accent: '#FF6B35',
-          'accent-light': '#FF8A65',
-          bg: '#FFFFFF',
-          'bg-alt': '#F8FAFC',
-          text: '#1F2937',
-          'text-light': '#6B7280',
-          border: '#E5E7EB',
+        // Primary Blues
+        'praxis-dark-blue': {
+          DEFAULT: '#013E75',
+          50: '#E6EEF5',
+          100: '#CCDCEB',
+          200: '#99B9D7',
+          300: '#6696C3',
+          400: '#3373AF',
+          500: '#013E75',
+          600: '#013264',
+          700: '#012653',
+          800: '#011A42',
+          900: '#000E31'
         },
+        'praxis-blue': {
+          DEFAULT: '#0071B3',
+          50: '#E6F2F9',
+          100: '#CCE5F3',
+          200: '#99CBE7',
+          300: '#66B1DB',
+          400: '#3397CF',
+          500: '#0071B3',
+          600: '#005B91',
+          700: '#00456F',
+          800: '#002F4D',
+          900: '#00192B'
+        },
+        'praxis-sky': {
+          DEFAULT: '#00A5DB',
+          50: '#E6F5FB',
+          100: '#CCEBF7',
+          200: '#99D7EF',
+          300: '#66C3E7',
+          400: '#33AFDF',
+          500: '#00A5DB',
+          600: '#0085B2',
+          700: '#006589',
+          800: '#004560',
+          900: '#002537'
+        },
+        // Warm Accents
+        'praxis-gold': {
+          DEFAULT: '#DFB03C',
+          50: '#FAF6EA',
+          100: '#F5EDD5',
+          200: '#EBDBAB',
+          300: '#E1C981',
+          400: '#D7B757',
+          500: '#DFB03C',
+          600: '#C89A30',
+          700: '#A17D26',
+          800: '#7A5F1D',
+          900: '#534113'
+        },
+        // Additional colors...
+        'praxis-black': '#222223',
+        'praxis-gray': '#BDBDBD',
+        'praxis-white': '#FBFBF9',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        heading: ['Poppins', 'system-ui', 'sans-serif'],
+        'sans': ['Avenir', 'Open Sans', 'system-ui', '-apple-system', 'sans-serif'],
+        'heading': ['Avenir Black', 'Open Sans', 'system-ui', 'sans-serif'],
+        'body': ['Avenir Medium', 'Open Sans', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        'brand-tight': '-0.01em',
+        'brand-normal': '0',
+        'brand-wide': '0.025em',
+        'brand-wider': '0.05em',
+        'brand-widest': '0.2em',
+      },
+      transitionDuration: {
+        'brand': '200ms',
+      },
+      transitionTimingFunction: {
+        'brand': 'cubic-bezier(0.4, 0, 0.2, 1)',
       },
     },
   },
@@ -521,50 +524,31 @@ module.exports = {
 
 #### Button Styles
 ```css
-/* Button component classes */
+/* Design system button classes */
 .btn-primary {
-  @apply bg-praxis-primary text-white hover:bg-praxis-primary-dark 
-         focus:ring-2 focus:ring-praxis-primary focus:ring-offset-2
-         px-4 py-2 rounded-lg font-medium transition-colors;
+  @apply bg-praxis-dark-blue text-white hover:bg-praxis-dark-blue-700 
+         focus:ring-2 focus:ring-praxis-dark-blue focus:ring-offset-2
+         px-4 py-2 rounded-lg font-medium transition-brand;
 }
 
 .btn-secondary {
-  @apply bg-praxis-secondary text-white hover:bg-praxis-secondary-dark
-         focus:ring-2 focus:ring-praxis-secondary focus:ring-offset-2
-         px-4 py-2 rounded-lg font-medium transition-colors;
+  @apply bg-praxis-blue text-white hover:bg-praxis-blue-700
+         focus:ring-2 focus:ring-praxis-blue focus:ring-offset-2
+         px-4 py-2 rounded-lg font-medium transition-brand;
 }
 
-.btn-outline {
-  @apply border-2 border-praxis-primary text-praxis-primary 
-         hover:bg-praxis-primary hover:text-white
-         focus:ring-2 focus:ring-praxis-primary focus:ring-offset-2
-         px-4 py-2 rounded-lg font-medium transition-colors;
-}
-```
-
-#### HubSpot Form Styling
-```css
-/* HubSpot form customization */
-.hubspot-form .hs-form {
-  @apply space-y-4;
+.btn-accent {
+  @apply bg-praxis-gold text-praxis-dark-blue hover:bg-praxis-gold-600
+         focus:ring-2 focus:ring-praxis-gold focus:ring-offset-2
+         px-4 py-2 rounded-lg font-medium transition-brand;
 }
 
-.hubspot-form .hs-form-field > label {
-  @apply block text-sm font-medium text-praxis-text mb-1;
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-praxis-gold focus:ring-offset-2;
 }
 
-.hubspot-form .hs-input {
-  @apply w-full px-3 py-2 border border-praxis-border rounded-lg
-         focus:ring-2 focus:ring-praxis-primary focus:border-transparent
-         transition-colors;
-}
-
-.hubspot-form .hs-button {
-  @apply btn-primary w-full;
-}
-
-.hubspot-form .hs-error-msg {
-  @apply text-red-600 text-sm mt-1;
+.transition-brand {
+  @apply transition-all duration-brand ease-brand;
 }
 ```
 
@@ -572,44 +556,156 @@ module.exports = {
 
 ### Mobile-First Approach
 ```astro
-<!-- Mobile-first responsive hero -->
-<section class="
-  px-4 py-12           /* Mobile: compact spacing */
-  md:px-8 md:py-20     /* Tablet: medium spacing */
-  lg:px-16 lg:py-32    /* Desktop: generous spacing */
+<!-- Mobile-first responsive sections -->
+<section className="
+  py-12 sm:py-16 lg:py-20                    // Responsive spacing
+  px-4 sm:px-6 lg:px-8                      // Responsive padding
 ">
-  <h1 class="
-    text-3xl             /* Mobile: readable size */
-    md:text-5xl          /* Tablet: larger impact */
-    lg:text-7xl          /* Desktop: maximum impact */
-    font-bold text-center
-  ">
-    Transform Security Assessments
-  </h1>
+  <div className="max-w-7xl mx-auto">
+    <h1 className="
+      text-3xl sm:text-4xl md:text-5xl lg:text-7xl  // Responsive typography
+      font-bold text-center mb-6 sm:mb-8 lg:mb-12  // Responsive margins
+      text-praxis-dark-blue
+    ">
+      Transform Security Culture
+    </h1>
+  </div>
 </section>
 ```
 
 ### Grid System
-```astro
+```tsx
 <!-- Responsive feature grid -->
-<div class="
-  grid gap-6
-  grid-cols-1          /* Mobile: single column */
-  md:grid-cols-2       /* Tablet: two columns */
-  lg:grid-cols-3       /* Desktop: three columns */
-  xl:grid-cols-4       /* Large: four columns */
+<div className="
+  grid gap-6 sm:gap-8 lg:gap-12
+  grid-cols-1                    // Mobile: single column
+  md:grid-cols-2                 // Tablet: two columns
+  lg:grid-cols-3                 // Desktop: three columns
+  xl:grid-cols-4                 // Large: four columns
 ">
-  {features.map(feature => <FeatureCard {...feature} />)}
+  {features.map(feature => <FeatureCard key={feature.id} {...feature} />)}
 </div>
+```
+
+## 🔍 Monitoring and Analytics
+
+### Performance Monitoring
+```typescript
+// src/utils/performance.js
+import { getCLS, getFID, getFCP, getLCP, getTTFB } from 'web-vitals';
+
+export const initializeCoreWebVitals = () => {
+  getCLS(sendToAnalytics);
+  getFID(sendToAnalytics);
+  getFCP(sendToAnalytics);
+  getLCP(sendToAnalytics);
+  getTTFB(sendToAnalytics);
+};
+
+function sendToAnalytics(metric) {
+  // Send to analytics service
+  if (window.gtag) {
+    window.gtag('event', metric.name, {
+      event_category: 'Web Vitals',
+      value: Math.round(metric.value),
+      non_interaction: true,
+    });
+  }
+}
+```
+
+### Error Tracking
+```typescript
+// src/utils/sentry.js
+import * as Sentry from '@sentry/browser';
+
+export const initializeSentry = () => {
+  if (import.meta.env.PROD) {
+    Sentry.init({
+      dsn: import.meta.env.ASTRO_PUBLIC_SENTRY_DSN,
+      environment: import.meta.env.MODE,
+      tracesSampleRate: 0.1,
+    });
+  }
+};
+```
+
+## 🚀 Performance Optimization
+
+### Astro Configuration
+```javascript
+// astro.config.mjs
+export default defineConfig({
+  output: 'static',
+  site: 'https://praxisnavigator.io',
+  build: {
+    format: 'directory',
+    inlineStylesheets: 'auto',
+    assets: '_astro',
+  },
+  compressHTML: true,
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover',
+  },
+  vite: {
+    build: {
+      target: 'es2020',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+          }
+        }
+      }
+    },
+  }
+});
+```
+
+### Component Hydration Strategy
+```astro
+<!-- Selective hydration based on interaction needs -->
+<Header currentPath={currentPath} currentLanguage={currentLanguage} client:load />
+<HeroSection title={title} client:idle />
+<ContactForm segment="executives" client:visible />
+<Footer currentLanguage={currentLanguage} />  <!-- No hydration needed -->
 ```
 
 ## 🔗 Related Documentation
 
-- [State Management](./state-management.md) - Zustand store implementation
-- [Routing](./routing.md) - Astro routing and navigation
+- [Astro Tech Brief](../development/astro-tech-brief.md) - Complete development standards and patterns
+- [State Management](./state-management.md) - State management implementation
+- [Routing](./routing.md) - i18n routing and navigation patterns
 - [Design System](./design-system.md) - Praxis design tokens and components
-- [Performance](./performance.md) - Optimization and Core Web Vitals
+- [Performance](./performance.md) - Optimization and Core Web Vitals monitoring
+
+## 📋 Component Development Checklist
+
+### For New Components
+- [ ] Follow TypeScript interface patterns
+- [ ] Include `currentLanguage` prop where needed
+- [ ] Use consistent Praxis design system classes
+- [ ] Implement proper accessibility (ARIA labels, semantic HTML)
+- [ ] Add responsive design patterns
+- [ ] Include error boundaries for React components
+- [ ] Test in both English and Norwegian contexts
+
+### For Page Components
+- [ ] Create both `/en/` and `/no/` versions
+- [ ] Use `getLangFromUrl()` for language detection
+- [ ] Include proper SEO meta tags via BaseLayout
+- [ ] Implement structured data where appropriate
+- [ ] Test language switching maintains page context
+- [ ] Verify all internal links use language prefixes
+
+### For Navigation Updates
+- [ ] Use `/${currentLanguage}/` pattern consistently
+- [ ] Update both Header and Footer components
+- [ ] Test breadcrumb navigation
+- [ ] Verify language switcher functionality
+- [ ] Check mobile navigation behavior
 
 ---
 
-*This component architecture balances static performance with selective interactivity, following Astro's islands architecture while maintaining strict adherence to the Praxis Design System.*
+*This component architecture documentation reflects the current implementation with folder-based i18n routing, React components for interactivity, and the complete Praxis design system integration.*
