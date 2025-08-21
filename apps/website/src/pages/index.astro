@@ -1,28 +1,58 @@
 ---
-import '@/styles/globals.css';
-import { SampleComponent } from '@/components/ui/SampleComponent';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { HeroSection } from '../components/sections/HeroSection';
+import { AuthoritySection } from '../components/sections/AuthoritySection';
+import { ProblemSolutionSection } from '../components/sections/ProblemSolutionSection';
+import { SocialProofSection } from '../components/sections/SocialProofSection';
+
+// SEO Configuration
+const title = 'Security Behavior Monitoring | Praxis Navigator by Kai Roer';
+const description =
+  'Measure actual security behaviors with Microsoft Graph API monitoring. Stop guessing, start measuring. Evidence-based security culture improvement by security expert Kai Roer.';
+const keywords =
+  'security behavior monitoring, SAT effectiveness, Microsoft Graph security, security culture measurement, behavioral analytics, Kai Roer, security training ROI';
+
+// Structured Data for Homepage
+const homepageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Praxis Navigator',
+  applicationCategory: 'Security Software',
+  operatingSystem: 'Microsoft 365',
+  description: description,
+  author: {
+    '@type': 'Person',
+    name: 'Kai Roer',
+    jobTitle: 'Security Culture Expert',
+    url: 'https://praxisnavigator.io/about/kai-roer',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free trial available',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.8',
+    bestRating: '5',
+    worstRating: '1',
+    ratingCount: '47',
+  },
+};
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Praxis Security Labs - Setup Complete</title>
-  </head>
-  <body class="bg-praxis-white min-h-screen">
-    <div class="container mx-auto p-8">
-      <h1 class="h1 mb-8">Praxis Security Labs</h1>
-      <p class="body-large mb-8 text-praxis-brown">
-        Development Environment Setup Complete
-      </p>
-
-      <SampleComponent
-        client:load
-        title="Praxis Design System Test"
-        message="This component demonstrates the Praxis design system integration with Tailwind CSS theme configuration."
-      />
-    </div>
-  </body>
-</html>
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="homepage"
+  structuredData={homepageSchema}
+  ogImage="/images/og-praxis-navigator-homepage.png"
+  ogType="website"
+>
+  <HeroSection client:load />
+  <AuthoritySection />
+  <ProblemSolutionSection />
+  <SocialProofSection />
+</BaseLayout>

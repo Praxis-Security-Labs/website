@@ -1,0 +1,338 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { AboutHeroSection } from '../../components/sections/AboutHeroSection';
+import { ProfessionalTimelineSection } from '../../components/sections/ProfessionalTimelineSection';
+import { PublicationsSection } from '../../components/sections/PublicationsSection';
+
+// SEO Configuration for About Page
+const title =
+  'About Kai Roer - Security Culture Pioneer & Framework Creator | Praxis Navigator';
+const description =
+  'Learn about Kai Roer, creator of the Security Culture Framework adopted by ENISA, co-author of The Security Culture Playbook, and pioneer of behavioral security monitoring.';
+const keywords =
+  'Kai Roer, security culture expert, ENISA framework, Security Culture Playbook, behavioral monitoring pioneer, security culture research, KnowBe4 research officer, CLTRe founder';
+
+// Structured Data for Kai Roer Person Entity
+const kaiRoerPersonSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Kai Roer',
+  jobTitle: 'Security Culture Pioneer & Behavioral Monitoring Expert',
+  description:
+    'Creator of the Security Culture Framework adopted by ENISA, co-author of The Security Culture Playbook, and pioneer of behavioral security monitoring.',
+  url: 'https://praxisnavigator.io/about/kai-roer',
+  image:
+    'https://praxisnavigator.io/images/about/kai-roer-professional-large.jpg',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Praxis Navigator',
+    url: 'https://praxisnavigator.io',
+  },
+  alumniOf: [
+    {
+      '@type': 'Organization',
+      name: 'KnowBe4',
+      description: 'Former Chief Research Officer',
+    },
+    {
+      '@type': 'Organization',
+      name: 'CLTRe',
+      description: 'Founder (Acquired by KnowBe4)',
+    },
+    {
+      '@type': 'Organization',
+      name: 'The Roer Group',
+      description: 'Founder',
+    },
+  ],
+  award: [
+    'Ron Knode Service Award - Cloud Security Alliance',
+    'National Cybersecurity Institute Fellowship',
+  ],
+  knowsAbout: [
+    'Security Culture',
+    'Behavioral Security Monitoring',
+    'Cybersecurity Awareness',
+    'Human Factors in Security',
+    'Microsoft Graph API',
+    'Security Training Effectiveness',
+  ],
+  author: [
+    {
+      '@type': 'Book',
+      name: 'The Security Culture Playbook',
+      publisher: 'Wiley',
+      datePublished: '2022',
+      isbn: '978-1-119-87528-5',
+    },
+    {
+      '@type': 'Book',
+      name: 'Build a Security Culture',
+      publisher: 'Independent',
+      datePublished: '2015',
+    },
+  ],
+  affiliation: [
+    {
+      '@type': 'Organization',
+      name: 'ENISA',
+      description: 'Security Culture Framework Adopted for EU Guidelines',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Norwegian University of Science and Technology',
+      description: 'Adjunct Professor',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Cloud Security Alliance',
+      description: 'Award Recipient',
+    },
+    {
+      '@type': 'Organization',
+      name: 'National Cybersecurity Institute',
+      description: 'Fellowship Recipient',
+    },
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/kairoer',
+    'https://twitter.com/kairoer',
+    'https://scholar.google.com/citations?user=kairoer',
+  ],
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://praxisnavigator.io',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'About',
+      item: 'https://praxisnavigator.io/about',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Kai Roer',
+      item: 'https://praxisnavigator.io/about/kai-roer',
+    },
+  ],
+};
+
+// Combine structured data as a single schema
+const combinedSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [kaiRoerPersonSchema, breadcrumbSchema],
+} as Record<string, unknown>;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="content"
+  structuredData={combinedSchema}
+  ogImage="/images/about/kai-roer-og-image.png"
+  ogType="profile"
+>
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="Breadcrumb" class="bg-praxis-tan-50 py-4">
+    <div class="container mx-auto px-6">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a
+            href="/"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Home
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li>
+          <a
+            href="/about"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            About
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li aria-current="page" class="text-praxis-dark-blue font-medium">
+          Kai Roer
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <AboutHeroSection client:load />
+  <ProfessionalTimelineSection />
+  <PublicationsSection />
+
+  <!-- Research Connection Section -->
+  <section class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="h2 text-praxis-dark-blue mb-8">
+          From Research to Revolutionary Platform
+        </h2>
+
+        <p class="body-large text-praxis-brown mb-12">
+          Praxis Navigator represents the evolution of 25+ years of security
+          culture research into a practical, measurable solution. Every feature
+          and methodology is backed by peer-reviewed research and real-world
+          validation.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div class="bg-praxis-sky-50 rounded-xl p-6">
+            <h3 class="h5 text-praxis-dark-blue mb-4">Research Foundation</h3>
+            <p class="body-base text-praxis-pine">
+              Academic rigor meets practical application in every measurement
+              methodology
+            </p>
+          </div>
+          <div class="bg-praxis-gold-50 rounded-xl p-6">
+            <h3 class="h5 text-praxis-dark-blue mb-4">Industry Validation</h3>
+            <p class="body-base text-praxis-pine">
+              Proven at scale through KnowBe4 integration and enterprise
+              deployments
+            </p>
+          </div>
+          <div class="bg-praxis-tan-50 rounded-xl p-6">
+            <h3 class="h5 text-praxis-dark-blue mb-4">Continuous Innovation</h3>
+            <p class="body-base text-praxis-pine">
+              Microsoft Graph API integration represents the latest advancement
+              in behavioral monitoring
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/product"
+            class="btn-primary btn-lg hover-lift active-scale focus-ring"
+            aria-label="Explore how research translates to platform capabilities"
+          >
+            Explore the Platform
+          </a>
+          <a
+            href="/demo"
+            class="btn-accent btn-lg hover-lift active-scale focus-ring-gold"
+            aria-label="Request a demo to see research-backed methodology in action"
+          >
+            See Research in Action
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Engagement Section -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="h2 text-praxis-dark-blue mb-8">Connect with Kai</h2>
+
+        <p class="body-large text-praxis-brown mb-12">
+          Interested in speaking engagements, research collaborations, or
+          learning more about security culture measurement?
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="bg-praxis-white rounded-xl p-6 shadow-md">
+            <h3 class="h5 text-praxis-dark-blue mb-4">
+              Speaking & Conferences
+            </h3>
+            <p class="body-base text-praxis-brown mb-4">
+              Available for keynotes, panels, and workshops on security culture
+              and behavioral monitoring.
+            </p>
+            <a
+              href="/contact"
+              class="btn-outline hover-lift active-scale focus-ring"
+            >
+              Speaking Inquiries
+            </a>
+          </div>
+          <div class="bg-praxis-white rounded-xl p-6 shadow-md">
+            <h3 class="h5 text-praxis-dark-blue mb-4">
+              Research Collaboration
+            </h3>
+            <p class="body-base text-praxis-brown mb-4">
+              Open to academic partnerships and joint research initiatives in
+              security culture.
+            </p>
+            <a
+              href="/contact"
+              class="btn-outline hover-lift active-scale focus-ring"
+            >
+              Research Partnerships
+            </a>
+          </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="bg-praxis-blue-50 rounded-xl p-8">
+          <h3 class="h4 text-praxis-dark-blue mb-4">
+            Research Updates & Insights
+          </h3>
+          <p class="body-base text-praxis-pine mb-6">
+            Subscribe to receive latest research findings, industry insights,
+            and platform updates.
+          </p>
+          <div class="max-w-md mx-auto">
+            <form class="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                class="input flex-grow"
+                required
+                aria-label="Email address for research updates"
+              />
+              <button
+                type="submit"
+                class="btn-secondary hover-lift active-scale focus-ring"
+                aria-label="Subscribe to research updates"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Professional Bio Download -->
+        <div class="mt-12">
+          <a
+            href="/downloads/kai-roer-professional-bio.pdf"
+            class="btn-outline hover-lift active-scale focus-ring"
+            aria-label="Download Kai Roer's professional biography"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Download Professional Biography
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb navigation styles */
+  nav[aria-label='Breadcrumb'] {
+    border-bottom: 1px solid #e5e5e5;
+  }
+</style>
