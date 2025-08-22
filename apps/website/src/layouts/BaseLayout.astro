@@ -70,27 +70,123 @@ const finalKeywords =
     ? norwegianDefaults.keywords
     : keywords;
 
-// Structured data for organization
+// Structured data for organization and website
+
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'Praxis Navigator',
+  '@id': 'https://praxisnavigator.io/#organization',
+  name: 'Praxis Security Labs',
+  alternateName: 'Praxis Navigator',
   url: 'https://praxisnavigator.io',
-  logo: 'https://praxisnavigator.io/images/praxis-navigator-logo.png',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://praxisnavigator.io/images/praxis-navigator-logo.png',
+    width: 400,
+    height: 100,
+  },
   description: finalDescription,
+  slogan: 'Measure. Improve. Secure.',
   founder: {
     '@type': 'Person',
+    '@id': 'https://praxisnavigator.io/about/kai-roer#person',
     name: 'Kai Roer',
+    jobTitle: 'Security Culture Pioneer & CEO',
+    url: 'https://praxisnavigator.io/about/kai-roer',
+    image: 'https://praxisnavigator.io/images/team/kai-roer-headshot.jpg',
+    sameAs: [
+      'https://www.linkedin.com/in/kairoer',
+      'https://twitter.com/kairoer',
+      'https://www.securityculturebook.com',
+    ],
   },
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer service',
-    email: 'contact@praxisnavigator.io',
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      email: 'contact@praxisnavigator.io',
+      availableLanguage: ['English', 'Norwegian'],
+      areaServed: 'Worldwide',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      email: 'sales@praxisnavigator.io',
+      availableLanguage: ['English', 'Norwegian'],
+      areaServed: 'Worldwide',
+    },
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'NO',
+    addressRegion: 'Rogaland',
+    addressLocality: 'Stavanger',
   },
   sameAs: [
     'https://www.linkedin.com/company/praxis-navigator',
     'https://twitter.com/praxisnavigator',
+    'https://github.com/praxis-security-labs',
   ],
+  knowsAbout: [
+    'Behavioral Security Monitoring',
+    'Security Culture Assessment',
+    'Microsoft Graph Security',
+    'Cybersecurity Awareness Training',
+    'Risk Management',
+    'Compliance Monitoring',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Security Solutions',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'SoftwareApplication',
+          name: 'Praxis Navigator Platform',
+          applicationCategory: 'Security Software',
+          operatingSystem: 'Microsoft 365',
+        },
+      },
+    ],
+  },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': 'https://praxisnavigator.io/#website',
+  name: 'Praxis Navigator',
+  alternateName: 'Praxis Security Labs Website',
+  url: 'https://praxisnavigator.io',
+  description: finalDescription,
+  publisher: {
+    '@id': 'https://praxisnavigator.io/#organization',
+  },
+  inLanguage: [
+    {
+      '@type': 'Language',
+      name: 'English',
+      alternateName: 'en',
+    },
+    {
+      '@type': 'Language',
+      name: 'Norwegian',
+      alternateName: 'no',
+    },
+  ],
+  copyrightYear: new Date().getFullYear(),
+  copyrightHolder: {
+    '@id': 'https://praxisnavigator.io/#organization',
+  },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: 'https://praxisnavigator.io/search?q={search_term_string}',
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 ---
 
@@ -143,19 +239,54 @@ const organizationSchema = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={finalDescription} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${title} - Praxis Navigator`} />
     <meta property="og:site_name" content="Praxis Navigator" />
     <meta
       property="og:locale"
       content={currentLanguage === 'no' ? 'nb_NO' : 'en_US'}
     />
+    {
+      currentLanguage === 'no' && (
+        <meta property="og:locale:alternate" content="en_US" />
+      )
+    }
+    {
+      currentLanguage === 'en' && (
+        <meta property="og:locale:alternate" content="nb_NO" />
+      )
+    }
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@praxisnavigator" />
+    <meta property="twitter:creator" content="@kairoer" />
     <meta property="twitter:url" content={finalCanonicalUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={finalDescription} />
     <meta property="twitter:image" content={ogImage} />
-    <meta property="twitter:site" content="@praxisnavigator" />
+    <meta
+      property="twitter:image:alt"
+      content={`${title} - Praxis Navigator`}
+    />
+
+    <!-- LinkedIn specific optimization -->
+    <meta
+      property="article:author"
+      content="https://www.linkedin.com/in/kairoer"
+    />
+    <meta
+      property="article:publisher"
+      content="https://www.linkedin.com/company/praxis-navigator"
+    />
+
+    <!-- Additional social media optimization -->
+    <meta
+      property="og:see_also"
+      content="https://www.linkedin.com/company/praxis-navigator"
+    />
+    <meta property="og:updated_time" content={new Date().toISOString()} />
 
     <!-- Additional Security Headers -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -175,6 +306,11 @@ const organizationSchema = {
       type="application/ld+json"
       is:inline
       set:html={JSON.stringify(organizationSchema)}
+    />
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(websiteSchema)}
     />
     {
       structuredData && (

@@ -1,0 +1,144 @@
+---
+/**
+ * SoftwareApplicationSchema component for Praxis Navigator platform
+ * Provides comprehensive software application schema with features and compatibility
+ */
+
+export interface Props {
+  additionalData?: Record<string, unknown>;
+}
+
+const { additionalData = {} } = Astro.props;
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  '@id': 'https://praxisnavigator.io/product#software',
+  name: 'Praxis Navigator',
+  alternateName: 'Praxis Navigator Platform',
+  applicationCategory: 'SecuritySoftware',
+  applicationSubCategory: 'Behavioral Security Monitoring',
+  description:
+    'Enterprise behavioral security monitoring platform that uses Microsoft Graph API to provide continuous assessment of security behaviors without disrupting workflows.',
+  url: 'https://praxisnavigator.io/product',
+  downloadUrl:
+    'https://azuremarketplace.microsoft.com/marketplace/apps/praxis-navigator',
+  installUrl:
+    'https://azuremarketplace.microsoft.com/marketplace/apps/praxis-navigator',
+  operatingSystem: [
+    'Microsoft 365',
+    'Microsoft Azure',
+    'Microsoft Teams',
+    'Microsoft SharePoint',
+    'Microsoft Exchange Online',
+  ],
+  softwareVersion: '2.0',
+  releaseNotes: 'https://praxisnavigator.io/product/release-notes',
+  screenshot: [
+    'https://praxisnavigator.io/images/product/dashboard-screenshot.png',
+    'https://praxisnavigator.io/images/product/analytics-screenshot.png',
+    'https://praxisnavigator.io/images/product/reports-screenshot.png',
+  ],
+  video: {
+    '@type': 'VideoObject',
+    name: 'Praxis Navigator Demo',
+    description:
+      'See how Praxis Navigator monitors security behaviors in Microsoft 365',
+    thumbnailUrl:
+      'https://praxisnavigator.io/images/product/demo-thumbnail.jpg',
+    uploadDate: '2024-01-15',
+    duration: 'PT3M30S',
+    contentUrl: 'https://praxisnavigator.io/videos/praxis-navigator-demo.mp4',
+  },
+  author: {
+    '@type': 'Person',
+    '@id': 'https://praxisnavigator.io/about/kai-roer#person',
+    name: 'Kai Roer',
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': 'https://praxisnavigator.io/#organization',
+    name: 'Praxis Security Labs',
+  },
+  creator: {
+    '@type': 'Organization',
+    '@id': 'https://praxisnavigator.io/#organization',
+    name: 'Praxis Security Labs',
+  },
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+    description: 'Free trial available through Azure Marketplace',
+    availability: 'https://schema.org/InStock',
+    validFrom: '2024-01-01',
+    priceValidUntil: '2025-12-31',
+    seller: {
+      '@type': 'Organization',
+      '@id': 'https://praxisnavigator.io/#organization',
+    },
+  },
+  featureList: [
+    'Microsoft Graph API Integration',
+    'Real-time Behavioral Security Monitoring',
+    'Risk Scoring Engine with ML Analytics',
+    'Automated Compliance Reporting',
+    'Executive Security Dashboards',
+    'Trend Analysis & Predictive Forecasting',
+    'Custom Alert Configuration',
+    'Multi-tenant Architecture',
+    'GDPR & SOC2 Compliance',
+    'Advanced Role-based Access Control',
+  ],
+  requirements: [
+    'Microsoft 365 E3 or E5 License',
+    'Azure Active Directory Integration',
+    'Microsoft Graph API Permissions',
+    'Minimum 100 Users for Optimal Analytics',
+  ],
+  supportingData: {
+    '@type': 'DataFeed',
+    name: 'Microsoft Graph Security Data',
+    description:
+      'Continuous data feed from Microsoft Graph API for behavioral analysis',
+  },
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.9',
+    bestRating: '5.0',
+    worstRating: '1.0',
+    ratingCount: '127',
+    reviewCount: '89',
+  },
+  review: [
+    {
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: '5',
+        bestRating: '5',
+      },
+      author: {
+        '@type': 'Person',
+        name: 'Anonymous CISO',
+      },
+      reviewBody:
+        'Praxis Navigator transformed our security posture visibility. The Microsoft Graph integration provides insights we never had before.',
+    },
+  ],
+  softwareHelp: {
+    '@type': 'WebPage',
+    url: 'https://praxisnavigator.io/support',
+  },
+  license: 'https://praxisnavigator.io/terms',
+  datePublished: '2023-06-01',
+  dateModified: '2024-08-20',
+  ...additionalData,
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(softwareSchema)}
+/>

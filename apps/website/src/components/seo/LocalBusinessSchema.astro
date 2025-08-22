@@ -1,0 +1,185 @@
+---
+/**
+ * LocalBusinessSchema component for location-based SEO
+ * Provides comprehensive local business schema with contact information and service areas
+ */
+
+export interface Props {
+  additionalData?: Record<string, unknown>;
+}
+
+const { additionalData = {} } = Astro.props;
+
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://praxisnavigator.io/#localbusiness',
+  name: 'Praxis Security Labs',
+  description:
+    'Leading provider of behavioral security monitoring solutions using Microsoft Graph API for enterprise security culture assessment.',
+  url: 'https://praxisnavigator.io',
+  logo: {
+    '@type': 'ImageObject',
+    url: 'https://praxisnavigator.io/images/praxis-navigator-logo.png',
+    width: 400,
+    height: 100,
+  },
+  image: [
+    'https://praxisnavigator.io/images/praxis-labs-office.jpg',
+    'https://praxisnavigator.io/images/team/team-photo.jpg',
+  ],
+  founder: {
+    '@type': 'Person',
+    '@id': 'https://praxisnavigator.io/about/kai-roer#person',
+    name: 'Kai Roer',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Technology Park',
+    addressLocality: 'Stavanger',
+    addressRegion: 'Rogaland',
+    postalCode: '4021',
+    addressCountry: 'NO',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: '58.9700',
+    longitude: '5.7331',
+  },
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      contactType: 'customer service',
+      telephone: '+47-xxx-xxxxx',
+      email: 'contact@praxisnavigator.io',
+      availableLanguage: ['English', 'Norwegian'],
+      areaServed: 'Worldwide',
+      hoursAvailable: {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '17:00',
+        timeZone: 'Europe/Oslo',
+      },
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+      telephone: '+47-xxx-xxxxx',
+      email: 'sales@praxisnavigator.io',
+      availableLanguage: ['English', 'Norwegian'],
+      areaServed: 'Worldwide',
+    },
+    {
+      '@type': 'ContactPoint',
+      contactType: 'technical support',
+      email: 'support@praxisnavigator.io',
+      availableLanguage: ['English'],
+      areaServed: 'Worldwide',
+    },
+  ],
+  serviceArea: {
+    '@type': 'GeoCircle',
+    geoMidpoint: {
+      '@type': 'GeoCoordinates',
+      latitude: '58.9700',
+      longitude: '5.7331',
+    },
+    geoRadius: '20000000', // Global service area (20,000 km radius)
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Security Solutions',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Behavioral Security Monitoring',
+          description:
+            'Continuous monitoring of security behaviors using Microsoft Graph API',
+          serviceType: 'Security Software',
+          provider: {
+            '@id': 'https://praxisnavigator.io/#organization',
+          },
+        },
+        price: 'Contact for pricing',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Security Culture Assessment',
+          description:
+            'Comprehensive evaluation of organizational security culture maturity',
+          serviceType: 'Consulting Service',
+          provider: {
+            '@id': 'https://praxisnavigator.io/#organization',
+          },
+        },
+        price: 'Contact for pricing',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Security Training Effectiveness Measurement',
+          description:
+            'Measure and improve the ROI of security awareness training programs',
+          serviceType: 'Analytics Service',
+          provider: {
+            '@id': 'https://praxisnavigator.io/#organization',
+          },
+        },
+        price: 'Contact for pricing',
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+      },
+    ],
+  },
+  sameAs: [
+    'https://www.linkedin.com/company/praxis-navigator',
+    'https://twitter.com/praxisnavigator',
+    'https://github.com/praxis-security-labs',
+    'https://azuremarketplace.microsoft.com/marketplace/apps/praxis-navigator',
+  ],
+  openingHours: ['Mo-Fr 09:00-17:00'],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    opens: '09:00',
+    closes: '17:00',
+    timeZone: 'Europe/Oslo',
+  },
+  priceRange: '$$',
+  currenciesAccepted: ['USD', 'EUR', 'NOK'],
+  paymentAccepted: ['Credit Card', 'Bank Transfer', 'Invoice'],
+  foundingDate: '2020',
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    minValue: 10,
+    maxValue: 50,
+  },
+  knowsAbout: [
+    'Behavioral Security Monitoring',
+    'Security Culture Assessment',
+    'Microsoft Graph Security',
+    'Cybersecurity Awareness Training',
+    'Risk Management',
+    'Compliance Monitoring',
+    'Security Metrics',
+    'Human Factors in Security',
+  ],
+  ...additionalData,
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(localBusinessSchema)}
+/>

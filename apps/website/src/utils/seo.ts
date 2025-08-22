@@ -390,3 +390,185 @@ export function createFAQSchema(
     })),
   };
 }
+
+/**
+ * Create Article structured data for blog posts and resources
+ */
+export function createArticleSchema(article: {
+  title: string;
+  description: string;
+  author?: string;
+  publishedDate: string;
+  modifiedDate?: string;
+  image?: string;
+  url: string;
+  category?: string;
+  keywords?: string[];
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    image:
+      article.image ||
+      'https://praxisnavigator.io/images/og-praxis-navigator-default.png',
+    author: {
+      '@type': 'Person',
+      name: article.author || 'Kai Roer',
+      url: 'https://praxisnavigator.io/about/kai-roer',
+    },
+    publisher: createOrganizationSchema(),
+    datePublished: article.publishedDate,
+    dateModified: article.modifiedDate || article.publishedDate,
+    url: article.url,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': article.url,
+    },
+    articleSection: article.category || 'Security Culture',
+    keywords:
+      article.keywords?.join(', ') || 'security culture, behavioral monitoring',
+  };
+}
+
+/**
+ * Create LocalBusiness structured data for location-based SEO
+ */
+export function createLocalBusinessSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://praxisnavigator.io/#business',
+    name: 'Praxis Security Labs',
+    description:
+      'Leading provider of behavioral security monitoring solutions using Microsoft Graph API for enterprise security culture assessment.',
+    url: 'https://praxisnavigator.io',
+    logo: 'https://praxisnavigator.io/images/praxis-navigator-logo.png',
+    image: 'https://praxisnavigator.io/images/praxis-labs-office.jpg',
+    founder: createPersonSchema(),
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'NO',
+      addressRegion: 'Rogaland',
+      addressLocality: 'Stavanger',
+    },
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        email: 'contact@praxisnavigator.io',
+        availableLanguage: ['English', 'Norwegian'],
+        areaServed: ['Global', 'Europe', 'North America'],
+      },
+      {
+        '@type': 'ContactPoint',
+        contactType: 'sales',
+        email: 'sales@praxisnavigator.io',
+        availableLanguage: ['English', 'Norwegian'],
+        areaServed: ['Global'],
+      },
+    ],
+    serviceArea: {
+      '@type': 'GeoCircle',
+      geoMidpoint: {
+        '@type': 'GeoCoordinates',
+        latitude: '58.9700',
+        longitude: '5.7331',
+      },
+      geoRadius: '20000000', // Global service area
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Security Solutions',
+      itemListElement: [
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Behavioral Security Monitoring',
+            description:
+              'Continuous monitoring of security behaviors using Microsoft Graph API',
+          },
+        },
+        {
+          '@type': 'Offer',
+          itemOffered: {
+            '@type': 'Service',
+            name: 'Security Culture Assessment',
+            description:
+              'Comprehensive evaluation of organizational security culture maturity',
+          },
+        },
+      ],
+    },
+    sameAs: [
+      'https://www.linkedin.com/company/praxis-navigator',
+      'https://twitter.com/praxisnavigator',
+    ],
+    openingHours: 'Mo-Fr 09:00-17:00',
+    priceRange: '$$',
+  };
+}
+
+/**
+ * Create WebSite structured data with search action
+ */
+export function createWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://praxisnavigator.io/#website',
+    name: 'Praxis Navigator',
+    description:
+      'Enterprise behavioral security monitoring platform using Microsoft Graph API for continuous security culture assessment.',
+    url: 'https://praxisnavigator.io',
+    publisher: createOrganizationSchema(),
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://praxisnavigator.io/search?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+    inLanguage: ['en-US', 'nb-NO'],
+    copyrightYear: new Date().getFullYear(),
+    copyrightHolder: createOrganizationSchema(),
+  };
+}
+
+/**
+ * Create HowTo structured data for step-by-step guides
+ */
+export function createHowToSchema(howTo: {
+  name: string;
+  description: string;
+  image?: string;
+  estimatedCost?: string;
+  totalTime?: string;
+  steps: Array<{
+    name: string;
+    text: string;
+    image?: string;
+    url?: string;
+  }>;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'HowTo',
+    name: howTo.name,
+    description: howTo.description,
+    image: howTo.image,
+    estimatedCost: howTo.estimatedCost,
+    totalTime: howTo.totalTime,
+    step: howTo.steps.map((step, index) => ({
+      '@type': 'HowToStep',
+      position: index + 1,
+      name: step.name,
+      text: step.text,
+      image: step.image,
+      url: step.url,
+    })),
+  };
+}

@@ -1,0 +1,41 @@
+---
+/**
+ * BreadcrumbListSchema component for navigation hierarchy
+ * Provides structured data for breadcrumb navigation across all pages
+ */
+
+export interface Props {
+  breadcrumbs: Array<{
+    name: string;
+    url: string;
+  }>;
+  additionalData?: Record<string, unknown>;
+}
+
+const { breadcrumbs, additionalData = {} } = Astro.props;
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${Astro.url.href}#breadcrumb`,
+  itemListElement: breadcrumbs.map((crumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: crumb.name,
+    item: {
+      '@type': 'WebPage',
+      '@id': crumb.url,
+      url: crumb.url,
+      name: crumb.name,
+    },
+  })),
+  numberOfItems: breadcrumbs.length,
+  ...additionalData,
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(breadcrumbSchema)}
+/>

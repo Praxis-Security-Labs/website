@@ -1,0 +1,117 @@
+---
+/**
+ * ArticleSchema component for blog posts and resource content
+ * Provides comprehensive article schema with author, publisher, and content details
+ */
+
+export interface Props {
+  title: string;
+  description: string;
+  author?: string;
+  publishedDate: string;
+  modifiedDate?: string;
+  image?: string;
+  url: string;
+  category?: string;
+  keywords?: string[];
+  wordCount?: number;
+  readingTime?: string;
+  additionalData?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  author = 'Kai Roer',
+  publishedDate,
+  modifiedDate,
+  image = 'https://praxisnavigator.io/images/og-praxis-navigator-default.png',
+  url,
+  category = 'Security Culture',
+  keywords = ['security culture', 'behavioral monitoring'],
+  wordCount,
+  readingTime,
+  additionalData = {},
+} = Astro.props;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${url}#article`,
+  headline: title,
+  description: description,
+  image: {
+    '@type': 'ImageObject',
+    url: image,
+    width: 1200,
+    height: 630,
+  },
+  author: {
+    '@type': 'Person',
+    '@id': 'https://praxisnavigator.io/about/kai-roer#person',
+    name: author,
+    url: 'https://praxisnavigator.io/about/kai-roer',
+  },
+  publisher: {
+    '@type': 'Organization',
+    '@id': 'https://praxisnavigator.io/#organization',
+    name: 'Praxis Security Labs',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://praxisnavigator.io/images/praxis-navigator-logo.png',
+      width: 400,
+      height: 100,
+    },
+  },
+  datePublished: publishedDate,
+  dateModified: modifiedDate || publishedDate,
+  url: url,
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': url,
+  },
+  articleSection: category,
+  keywords: keywords.join(', '),
+  wordCount: wordCount,
+  timeRequired: readingTime,
+  inLanguage: 'en-US',
+  isAccessibleForFree: true,
+  about: [
+    {
+      '@type': 'Thing',
+      name: 'Security Culture',
+      sameAs: 'https://en.wikipedia.org/wiki/Security_culture',
+    },
+    {
+      '@type': 'Thing',
+      name: 'Behavioral Security',
+      description:
+        'The study and monitoring of human security behaviors in organizational contexts',
+    },
+    {
+      '@type': 'Thing',
+      name: 'Cybersecurity',
+      sameAs: 'https://en.wikipedia.org/wiki/Computer_security',
+    },
+  ],
+  mentions: [
+    {
+      '@type': 'SoftwareApplication',
+      '@id': 'https://praxisnavigator.io/product#software',
+      name: 'Praxis Navigator',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Microsoft',
+      sameAs: 'https://www.microsoft.com',
+    },
+  ],
+  ...additionalData,
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(articleSchema)}
+/>

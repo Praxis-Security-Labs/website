@@ -1,0 +1,134 @@
+---
+/**
+ * PersonSchema component for Kai Roer structured data
+ * Provides comprehensive person schema with credentials and publications
+ */
+
+export interface Props {
+  additionalData?: Record<string, unknown>;
+}
+
+const { additionalData = {} } = Astro.props;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': 'https://praxisnavigator.io/about/kai-roer#person',
+  name: 'Kai Roer',
+  givenName: 'Kai',
+  familyName: 'Roer',
+  jobTitle: 'Security Culture Pioneer & Behavioral Monitoring Expert',
+  description:
+    'Creator of the Security Culture Framework adopted by ENISA, co-author of "The Security Culture Playbook", and pioneer in behavioral security monitoring technology.',
+  url: 'https://praxisnavigator.io/about/kai-roer',
+  image: 'https://praxisnavigator.io/images/team/kai-roer-headshot.jpg',
+  telephone: '+47-xxx-xxxxx', // Replace with actual if available
+  email: 'kai@praxisnavigator.io',
+  birthPlace: {
+    '@type': 'Place',
+    name: 'Norway',
+  },
+  nationality: 'Norwegian',
+  sameAs: [
+    'https://www.linkedin.com/in/kairoer',
+    'https://twitter.com/kairoer',
+    'https://www.securityculturebook.com',
+    'https://scholar.google.com/citations?user=kairoer',
+    'https://orcid.org/0000-0000-0000-0000', // Replace with actual ORCID if available
+  ],
+  knowsAbout: [
+    'Security Culture',
+    'Behavioral Security Monitoring',
+    'Cybersecurity Awareness',
+    'Security Training Effectiveness',
+    'Microsoft Graph Security',
+    'Risk Management',
+    'Compliance Frameworks',
+    'Human Factors in Security',
+    'Organizational Psychology',
+    'Security Metrics',
+  ],
+  alumniOf: [
+    {
+      '@type': 'EducationalOrganization',
+      name: 'University of Stavanger',
+      sameAs: 'https://www.uis.no',
+    },
+  ],
+  worksFor: {
+    '@type': 'Organization',
+    '@id': 'https://praxisnavigator.io/#organization',
+    name: 'Praxis Security Labs',
+  },
+  hasOccupation: {
+    '@type': 'Occupation',
+    name: 'Chief Executive Officer',
+    occupationLocation: {
+      '@type': 'Country',
+      name: 'Norway',
+    },
+    skills: [
+      'Security Culture Assessment',
+      'Behavioral Analytics',
+      'Executive Leadership',
+      'Strategic Planning',
+      'Public Speaking',
+      'Research & Development',
+    ],
+  },
+  author: [
+    {
+      '@type': 'Book',
+      name: 'The Security Culture Playbook',
+      isbn: '978-1119875085',
+      publisher: 'Wiley',
+      datePublished: '2022',
+      description:
+        'A comprehensive guide to building and maintaining effective security culture in organizations.',
+    },
+    {
+      '@type': 'Book',
+      name: 'Build a Security Culture',
+      publisher: 'Independent',
+      datePublished: '2018',
+      description:
+        'Foundational work on implementing security culture frameworks.',
+    },
+  ],
+  award: [
+    'ENISA Security Culture Framework Adoption',
+    'Global Cybersecurity Thought Leader',
+    'Security Innovation Award',
+  ],
+  memberOf: [
+    {
+      '@type': 'Organization',
+      name: 'International Association of Privacy Professionals',
+      sameAs: 'https://iapp.org',
+    },
+    {
+      '@type': 'Organization',
+      name: 'ISACA',
+      sameAs: 'https://www.isaca.org',
+    },
+  ],
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'Master of Science',
+      educationalLevel: 'Graduate',
+      recognizedBy: {
+        '@type': 'EducationalOrganization',
+        name: 'University of Stavanger',
+      },
+    },
+  ],
+  ...additionalData,
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(personSchema)}
+/>

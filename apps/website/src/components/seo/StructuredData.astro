@@ -1,7 +1,7 @@
 ---
 /**
  * StructuredData component for consistent JSON-LD schema markup
- * Supports Organization, Person, SoftwareApplication, and FAQ schemas
+ * Supports Organization, Person, SoftwareApplication, FAQ, Article, LocalBusiness, WebSite, and HowTo schemas
  */
 
 export interface Props {
@@ -11,10 +11,38 @@ export interface Props {
     | 'software'
     | 'faq'
     | 'breadcrumb'
+    | 'article'
+    | 'localbusiness'
+    | 'website'
+    | 'howto'
     | 'custom';
   data?: Record<string, unknown>;
   faqs?: Array<{ question: string; answer: string }>;
   breadcrumbs?: Array<{ name: string; url: string }>;
+  article?: {
+    title: string;
+    description: string;
+    author?: string;
+    publishedDate: string;
+    modifiedDate?: string;
+    image?: string;
+    url: string;
+    category?: string;
+    keywords?: string[];
+  };
+  howTo?: {
+    name: string;
+    description: string;
+    image?: string;
+    estimatedCost?: string;
+    totalTime?: string;
+    steps: Array<{
+      name: string;
+      text: string;
+      image?: string;
+      url?: string;
+    }>;
+  };
 }
 
 import {
@@ -23,9 +51,13 @@ import {
   createSoftwareApplicationSchema,
   createFAQSchema,
   createBreadcrumbSchema,
+  createArticleSchema,
+  createLocalBusinessSchema,
+  createWebSiteSchema,
+  createHowToSchema,
 } from '../../utils/seo';
 
-const { type, data, faqs = [], breadcrumbs = [] } = Astro.props;
+const { type, data, faqs = [], breadcrumbs = [], article, howTo } = Astro.props;
 
 let schemaData: Record<string, unknown> = {};
 
@@ -44,6 +76,22 @@ switch (type) {
     break;
   case 'breadcrumb':
     schemaData = createBreadcrumbSchema(breadcrumbs);
+    break;
+  case 'article':
+    if (article) {
+      schemaData = createArticleSchema(article);
+    }
+    break;
+  case 'localbusiness':
+    schemaData = createLocalBusinessSchema();
+    break;
+  case 'website':
+    schemaData = createWebSiteSchema();
+    break;
+  case 'howto':
+    if (howTo) {
+      schemaData = createHowToSchema(howTo);
+    }
     break;
   case 'custom':
     schemaData = data || {};

@@ -1,27 +1,104 @@
 # Robots.txt for Praxis Navigator
+# Optimized for search engine crawling and SEO performance
 # https://praxisnavigator.io/robots.txt
 
+# Allow all robots to crawl most content
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://praxisnavigator.io/sitemap-index.xml
-
-# Block staging and development environments
-Disallow: /staging/
-Disallow: /dev/
-Disallow: /test/
-
-# Block internal paths that shouldn't be indexed
+# Disallow admin and staging areas
 Disallow: /admin/
+Disallow: /staging/
 Disallow: /_astro/
-Disallow: /api/internal/
+Disallow: /api/
+Disallow: /test/
+Disallow: /dev/
 
-# Allow search engines to crawl assets and resources
+# Disallow duplicate content patterns from tracking parameters
+Disallow: /*?utm_*
+Disallow: /*?ref=*
+Disallow: /*?source=*
+Disallow: /*?campaign=*
+Disallow: /*?track=*
+Disallow: /*?fbclid=*
+Disallow: /*?gclid=*
+
+# Allow essential static assets for proper rendering
 Allow: /images/
 Allow: /fonts/
 Allow: /css/
 Allow: /js/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.jpeg
+Allow: /*.gif
+Allow: /*.svg
+Allow: /*.webp
+Allow: /*.ico
 
-# Crawl-delay for respectful crawling (optional)
-# Crawl-delay: 1
+# Search engine specific configurations
+User-agent: Googlebot
+Crawl-delay: 1
+Allow: /
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /_astro/
+Disallow: /api/
+
+User-agent: Bingbot
+Crawl-delay: 2
+Allow: /
+Disallow: /admin/
+Disallow: /staging/
+Disallow: /_astro/
+Disallow: /api/
+
+User-agent: LinkedInBot
+Crawl-delay: 5
+Allow: /
+Disallow: /admin/
+Disallow: /staging/
+
+# Block aggressive crawlers and spam bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MegaIndex
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# Allow social media crawlers for proper sharing
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+# Sitemap locations for automated discovery
+Sitemap: https://praxisnavigator.io/sitemap-index.xml
+Sitemap: https://praxisnavigator.io/sitemap-0.xml
+
+# Host specification for primary domain preference
+Host: https://praxisnavigator.io
+
+# Default crawl delay for unspecified bots
+Crawl-delay: 10

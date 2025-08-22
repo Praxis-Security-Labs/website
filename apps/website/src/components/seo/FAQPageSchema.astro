@@ -1,0 +1,64 @@
+---
+/**
+ * FAQPageSchema component for common security training questions and answers
+ * Provides structured data for FAQ pages to target featured snippets
+ */
+
+export interface Props {
+  faqs: Array<{
+    question: string;
+    answer: string;
+    category?: string;
+  }>;
+  additionalData?: Record<string, unknown>;
+}
+
+const { faqs, additionalData = {} } = Astro.props;
+
+const faqPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${Astro.url.href}#faqpage`,
+  name: 'Frequently Asked Questions about Security Culture and Behavioral Monitoring',
+  description:
+    'Common questions and answers about security culture assessment, behavioral monitoring, and the Praxis Navigator platform.',
+  url: Astro.url.href,
+  mainEntity: faqs.map((faq, index) => ({
+    '@type': 'Question',
+    '@id': `${Astro.url.href}#question-${index + 1}`,
+    name: faq.question,
+    text: faq.question,
+    answerCount: 1,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      '@id': `${Astro.url.href}#answer-${index + 1}`,
+      text: faq.answer,
+      inLanguage: 'en-US',
+      author: {
+        '@type': 'Organization',
+        '@id': 'https://praxisnavigator.io/#organization',
+        name: 'Praxis Security Labs',
+      },
+    },
+    ...(faq.category && {
+      category: faq.category,
+    }),
+  })),
+  inLanguage: 'en-US',
+  isAccessibleForFree: true,
+  publisher: {
+    '@type': 'Organization',
+    '@id': 'https://praxisnavigator.io/#organization',
+    name: 'Praxis Security Labs',
+  },
+  datePublished: new Date().toISOString().split('T')[0],
+  dateModified: new Date().toISOString().split('T')[0],
+  ...additionalData,
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(faqPageSchema)}
+/>
