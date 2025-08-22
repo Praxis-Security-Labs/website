@@ -88,7 +88,7 @@
     const targetUrl =
       storedLanguage === 'en'
         ? `/${pathWithoutLang}`.replace('//', '/') || '/'
-        : `/no${pathWithoutLang}` || '/no';
+        : `/no${pathWithoutLang === '' ? '' : `/${pathWithoutLang}`}`;
 
     // Perform redirect
     window.location.replace(targetUrl);

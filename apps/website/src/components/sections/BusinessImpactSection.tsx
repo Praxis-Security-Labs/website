@@ -1,4 +1,6 @@
-export const BusinessImpactSection: React.FC<{ language?: 'en' | 'no' }> = ({
+import type { FC } from 'react';
+
+export const BusinessImpactSection: FC<{ language?: 'en' | 'no' }> = ({
   language = 'en',
 }) => (
   <section className="bg-praxis-blue-50 py-16">

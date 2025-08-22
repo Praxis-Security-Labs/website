@@ -226,7 +226,7 @@ async function main() {
       });
       log('✅ Build completed successfully\n', colors.green);
     } catch (error) {
-      log('❌ Build failed', colors.red);
+      log(`❌ Build failed: ${error.message}`, colors.red);
       process.exit(1);
     }
 

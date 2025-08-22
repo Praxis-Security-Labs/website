@@ -329,6 +329,7 @@ test.describe('Error Tracking', () => {
         throw new Error('Test error for error tracking');
       } catch (error) {
         // Check if error tracking is working
+        console.log('Test error caught:', error);
         return typeof window !== 'undefined';
       }
     });

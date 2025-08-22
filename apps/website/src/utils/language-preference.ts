@@ -89,7 +89,7 @@ export function shouldRedirectForLanguagePreference(currentPath: string): {
   const targetUrl =
     storedLanguage === 'en'
       ? `/${pathWithoutLang}`.replace('//', '/') || '/'
-      : `/no${pathWithoutLang}` || '/no';
+      : `/no${pathWithoutLang === '' ? '' : `/${pathWithoutLang}`}`;
 
   return { shouldRedirect: true, targetUrl };
 }
@@ -130,7 +130,7 @@ export function handleLanguageSwitch(
   const targetPath =
     targetLanguage === 'en'
       ? `/${pathWithoutLang}`.replace('//', '/') || '/'
-      : `/no${pathWithoutLang}` || '/no';
+      : `/no${pathWithoutLang === '' ? '' : `/${pathWithoutLang}`}`;
 
   return targetPath;
 }
