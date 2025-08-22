@@ -1,37 +1,14 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
 interface SecurityLeadersContactSectionProps {
   language?: 'en' | 'no';
 }
-
-const securityLeadersContactSchema = z.object({
-  firstName: z.string().min(2, 'First name is required'),
-  lastName: z.string().min(2, 'Last name is required'),
-  email: z.string().email('Please enter a valid email address'),
-  company: z.string().min(2, 'Company name is required'),
-  jobTitle: z.string().min(2, 'Job title is required'),
-  employeeCount: z.string().min(1, 'Please select employee count'),
-  currentChallenges: z
-    .array(z.string())
-    .min(1, 'Please select at least one challenge'),
-  interestArea: z.string().min(1, 'Please select area of interest'),
-  message: z.string().optional(),
-  segment: z.literal('security-leaders'),
-});
-
-type SecurityLeadersContactFormData = z.infer<
-  typeof securityLeadersContactSchema
->;
 
 export const SecurityLeadersContactSection: React.FC<
   SecurityLeadersContactSectionProps
 > = ({ language = 'en' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [selectedChallenges, setSelectedChallenges] = useState<string[]>([]);
 
   const content = {
     en: {
@@ -50,252 +27,181 @@ export const SecurityLeadersContactSection: React.FC<
           'Technical architecture review',
           '30-day pilot program design',
         ],
-        testimonial: {
-          quote:
-            'The consultation helped us build a compelling business case that secured board approval for our security culture initiative.',
-          author: 'Sarah M., CISO at Global Manufacturing',
-          company: '8,500 employees',
+        contactInfo: {
+          title: 'Direct Line to Leadership',
+          email: 'ciso@praxisnavigator.io',
+          phone: '+47 900 12 345',
+          availability: 'Available for calls: EU/US business hours',
         },
       },
       form: {
-        title: 'Request CISO Consultation',
+        title: 'Schedule CISO Consultation',
         firstName: 'First Name',
         lastName: 'Last Name',
         email: 'Business Email',
         company: 'Company',
         jobTitle: 'Job Title',
         employeeCount: 'Organization Size',
-        currentChallenges:
-          'Current Security Leadership Challenges (select all that apply)',
-        interestArea: 'Primary Area of Interest',
-        message: 'Specific Questions or Requirements (Optional)',
+        currentChallenges: 'Current Security Challenges',
+        interestArea: 'Primary Interest Area',
+        message: 'Specific Questions (Optional)',
         employeeOptions: [
           { value: '', label: 'Select organization size...' },
           { value: '500-999', label: '500-999 employees' },
-          { value: '1000-2499', label: '1,000-2,499 employees' },
-          { value: '2500-4999', label: '2,500-4,999 employees' },
+          { value: '1000-4999', label: '1,000-4,999 employees' },
           { value: '5000-9999', label: '5,000-9,999 employees' },
           { value: '10000+', label: '10,000+ employees' },
         ],
         challengeOptions: [
-          {
-            value: 'roi-measurement',
-            label: 'Proving training ROI to leadership',
-          },
-          {
-            value: 'board-reporting',
-            label: 'Creating compelling board reports',
-          },
-          { value: 'compliance', label: 'Meeting regulatory requirements' },
-          {
-            value: 'budget-justification',
-            label: 'Justifying security investments',
-          },
-          {
-            value: 'culture-measurement',
-            label: 'Measuring security culture maturity',
-          },
-          {
-            value: 'incident-reduction',
-            label: 'Reducing human-error incidents',
-          },
+          'Security awareness training effectiveness',
+          'Incident response and breach preparedness',
+          'Regulatory compliance (SOC2, ISO27001, etc.)',
+          'Board reporting and security metrics',
+          'Zero trust architecture implementation',
+          'Third-party risk management',
+          'Cloud security governance',
+          'Security culture measurement',
         ],
         interestOptions: [
           { value: '', label: 'Select primary interest...' },
+          { value: 'culture-assessment', label: 'Security Culture Assessment' },
+          { value: 'behavioral-monitoring', label: 'Behavioral Monitoring' },
+          { value: 'compliance-automation', label: 'Compliance Automation' },
           {
-            value: 'roi-demonstration',
-            label: 'ROI Measurement & Business Case',
+            value: 'incident-response',
+            label: 'Incident Response Enhancement',
           },
-          {
-            value: 'board-communications',
-            label: 'Board & Executive Reporting',
-          },
-          { value: 'compliance-automation', label: 'Regulatory Compliance' },
-          {
-            value: 'technical-integration',
-            label: 'Technical Integration & Security',
-          },
-          { value: 'pilot-program', label: '30-Day Pilot Program' },
-          { value: 'full-deployment', label: 'Enterprise Deployment Planning' },
+          { value: 'roi-analysis', label: 'ROI Analysis & Business Case' },
+          { value: 'pilot-program', label: 'Pilot Program Design' },
         ],
-        submitText: 'Request Consultation',
-        submittingText: 'Submitting...',
+        submitText: 'Schedule Consultation',
+        submittingText: 'Scheduling...',
         successMessage:
-          'Thank you! A member of our security leadership team will contact you within 24 hours to schedule your consultation.',
+          'Thank you! A member of our leadership team will contact you within 4 business hours.',
       },
     },
     no: {
-      sectionTitle: 'Snakk med Vårt Sikkerhetsledelse Team',
+      sectionTitle: 'Snakk med Vårt Sikkerhets-ledelse Team',
       sectionDescription:
         'Få personlig veiledning fra CISOs og sikkerhetseksperter som forstår dine utfordringer.',
       leftContent: {
         headline: 'Ekspert CISO Konsultasjon',
         description:
-          'Vårt team inkluderer tidligere CISOs og sikkerhetsledere fra Fortune 500 bedrifter som forstår de unike utfordringene ved virksomhet sikkerhetsledelse.',
+          'Vårt team inkluderer tidligere CISOs og sikkerhetsledere fra Fortune 500 selskaper som forstår de unike utfordringene innen virksomhetssikkerhetsledelse.',
         benefits: [
-          'Strategisk sikkerhetskultur vurdering',
-          'ROI beregning og forretnings case utvikling',
-          'Styre presentasjon mal og veiledning',
+          'Strategisk sikkerhetskulturell vurdering',
+          'ROI beregning og business case utvikling',
+          'Styrerapport mal og veiledning',
           'Regulatorisk compliance veikart planlegging',
           'Teknisk arkitektur gjennomgang',
           '30-dagers pilot program design',
         ],
-        testimonial: {
-          quote:
-            'Konsultasjonen hjalp oss med å bygge en overbevisende forretnings case som sikret styre godkjenning for vårt sikkerhetskultur initiativ.',
-          author: 'Sarah M., CISO ved Global Produksjon',
-          company: '8,500 ansatte',
+        contactInfo: {
+          title: 'Direkte Linje til Ledelse',
+          email: 'ciso@praxisnavigator.io',
+          phone: '+47 900 12 345',
+          availability: 'Tilgjengelig for samtaler: EU/US arbeidstid',
         },
       },
       form: {
-        title: 'Be om CISO Konsultasjon',
+        title: 'Planlegg CISO Konsultasjon',
         firstName: 'Fornavn',
         lastName: 'Etternavn',
         email: 'Arbeids-epost',
         company: 'Bedrift',
         jobTitle: 'Stillingstittel',
-        employeeCount: 'Organisasjon Størrelse',
-        currentChallenges:
-          'Nåværende Sikkerhetsledelse Utfordringer (velg alle som gjelder)',
-        interestArea: 'Primært Interesseområde',
-        message: 'Spesifikke Spørsmål eller Krav (Valgfritt)',
+        employeeCount: 'Organisasjonsstørrelse',
+        currentChallenges: 'Nåværende Sikkerhetsutfordringer',
+        interestArea: 'Primær Interesseområde',
+        message: 'Spesifikke Spørsmål (Valgfritt)',
         employeeOptions: [
-          { value: '', label: 'Velg organisasjon størrelse...' },
+          { value: '', label: 'Velg organisasjonsstørrelse...' },
           { value: '500-999', label: '500-999 ansatte' },
-          { value: '1000-2499', label: '1,000-2,499 ansatte' },
-          { value: '2500-4999', label: '2,500-4,999 ansatte' },
+          { value: '1000-4999', label: '1,000-4,999 ansatte' },
           { value: '5000-9999', label: '5,000-9,999 ansatte' },
           { value: '10000+', label: '10,000+ ansatte' },
         ],
         challengeOptions: [
-          {
-            value: 'roi-measurement',
-            label: 'Bevise opplæring ROI til ledelse',
-          },
-          {
-            value: 'board-reporting',
-            label: 'Skape overbevisende styre rapporter',
-          },
-          { value: 'compliance', label: 'Møte regulatoriske krav' },
-          {
-            value: 'budget-justification',
-            label: 'Rettferdiggjøre sikkerhetsinvesteringer',
-          },
-          {
-            value: 'culture-measurement',
-            label: 'Måle sikkerhetskultur modenhet',
-          },
-          {
-            value: 'incident-reduction',
-            label: 'Redusere menneskellige feil hendelser',
-          },
+          'Sikkerhetsbevissthet trening effektivitet',
+          'Hendelseshåndtering og brudd beredskap',
+          'Regulatorisk compliance (SOC2, ISO27001, etc.)',
+          'Styrerapportering og sikkerhet målinger',
+          'Zero trust arkitektur implementering',
+          'Tredjeparters risikostyring',
+          'Sky sikkerhet styring',
+          'Sikkerhetskultur måling',
         ],
         interestOptions: [
           { value: '', label: 'Velg primær interesse...' },
+          { value: 'culture-assessment', label: 'Sikkerhetskultur Vurdering' },
+          { value: 'behavioral-monitoring', label: 'Atferdsovervåking' },
           {
-            value: 'roi-demonstration',
-            label: 'ROI Måling & Forretnings Case',
+            value: 'compliance-automation',
+            label: 'Compliance Automatisering',
           },
           {
-            value: 'board-communications',
-            label: 'Styre & Lederskap Rapportering',
+            value: 'incident-response',
+            label: 'Hendelseshåndtering Forbedring',
           },
-          { value: 'compliance-automation', label: 'Regulatorisk Compliance' },
-          {
-            value: 'technical-integration',
-            label: 'Teknisk Integrasjon & Sikkerhet',
-          },
-          { value: 'pilot-program', label: '30-Dagers Pilot Program' },
-          {
-            value: 'full-deployment',
-            label: 'Virksomhet Implementering Planlegging',
-          },
+          { value: 'roi-analysis', label: 'ROI Analyse & Business Case' },
+          { value: 'pilot-program', label: 'Pilot Program Design' },
         ],
-        submitText: 'Be om Konsultasjon',
-        submittingText: 'Sender...',
+        submitText: 'Planlegg Konsultasjon',
+        submittingText: 'Planlegger...',
         successMessage:
-          'Takk! Et medlem av vårt sikkerhetsledelse team vil kontakte deg innen 24 timer for å planlegge din konsultasjon.',
+          'Takk! Et medlem av vårt ledelsesteam vil kontakte deg innen 4 arbeidstimer.',
       },
     },
   };
 
   const t = content[language];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    setValue,
-  } = useForm<SecurityLeadersContactFormData>({
-    resolver: zodResolver(securityLeadersContactSchema),
-    defaultValues: {
-      segment: 'security-leaders',
-      currentChallenges: [],
-    },
-  });
-
-  const handleChallengeChange = (challengeValue: string, checked: boolean) => {
-    let updatedChallenges: string[];
-    if (checked) {
-      updatedChallenges = [...selectedChallenges, challengeValue];
-    } else {
-      updatedChallenges = selectedChallenges.filter(c => c !== challengeValue);
-    }
-    setSelectedChallenges(updatedChallenges);
-    setValue('currentChallenges', updatedChallenges);
-  };
-
-  const onSubmit = async (data: SecurityLeadersContactFormData) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setIsSubmitting(true);
 
+    const formData = new FormData(event.currentTarget);
+
+    // Handle multiple checkbox values for challenges
+    const challengeElements = event.currentTarget.querySelectorAll(
+      'input[name="currentChallenges"]:checked'
+    ) as NodeListOf<HTMLInputElement>;
+    const challenges = Array.from(challengeElements).map(el => el.value);
+
+    const data = {
+      firstName: formData.get('firstName'),
+      lastName: formData.get('lastName'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      jobTitle: formData.get('jobTitle'),
+      employeeCount: formData.get('employeeCount'),
+      currentChallenges: challenges,
+      interestArea: formData.get('interestArea'),
+      message: formData.get('message'),
+      segment: 'security-leaders',
+      formType: 'security-leaders-contact',
+      language,
+    };
+
     try {
+      // Submit to HubSpot or backend API
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...data,
-          formType: 'security-leaders-contact',
-          language,
-          utmSource: new URLSearchParams(window.location.search).get(
-            'utm_source'
-          ),
-          utmMedium: new URLSearchParams(window.location.search).get(
-            'utm_medium'
-          ),
-          utmCampaign: new URLSearchParams(window.location.search).get(
-            'utm_campaign'
-          ),
-        }),
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
         setIsSubmitted(true);
-        reset();
-
-        if (
-          typeof window !== 'undefined' &&
-          (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
-        ) {
-          (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-            'event',
-            'form_submit',
-            {
-              form_name: 'security_leaders_contact',
-              segment: 'security-leaders',
-              employee_count: data.employeeCount,
-              interest_area: data.interestArea,
-            }
-          );
-        }
+        // Reset form
+        (event.target as HTMLFormElement).reset();
       } else {
-        throw new Error('Form submission failed');
+        console.error('Form submission failed');
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Form submission error:', error);
+      console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -303,16 +209,15 @@ export const SecurityLeadersContactSection: React.FC<
 
   if (isSubmitted) {
     return (
-      <section className="bg-praxis-white py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
+        <div className="container mx-auto px-6 py-20">
           <div className="text-center">
-            <div className="w-20 h-20 bg-praxis-accent rounded-full flex items-center justify-center mx-auto mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full mb-6">
               <svg
-                className="w-10 h-10 text-praxis-white"
+                className="w-8 h-8"
                 fill="none"
-                viewBox="0 0 24 24"
                 stroke="currentColor"
-                aria-hidden="true"
+                viewBox="0 0 24 24"
               >
                 <path
                   strokeLinecap="round"
@@ -322,22 +227,12 @@ export const SecurityLeadersContactSection: React.FC<
                 />
               </svg>
             </div>
-            <h3 className="text-3xl font-heading font-bold text-praxis-dark-blue mb-6">
-              {language === 'no'
-                ? 'Takk for din forespørsel!'
-                : 'Thank you for your request!'}
-            </h3>
-            <p className="text-xl text-praxis-dark-blue-600 mb-8">
+            <h2 className="text-3xl font-heading font-bold text-white mb-4">
+              Thank You!
+            </h2>
+            <p className="text-xl text-praxis-blue-100 max-w-2xl mx-auto">
               {t.form.successMessage}
             </p>
-            <a
-              href={`/${language === 'no' ? 'no/' : ''}resources/security-leadership-guide`}
-              className="btn-secondary btn-lg"
-            >
-              {language === 'no'
-                ? 'Last ned Sikkerhetsledelse Guide i mellomtiden'
-                : 'Download Security Leadership Guide in the meantime'}
-            </a>
           </div>
         </div>
       </section>
@@ -345,26 +240,25 @@ export const SecurityLeadersContactSection: React.FC<
   }
 
   return (
-    <section className="bg-praxis-white py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
+      <div className="container mx-auto px-6 py-20">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-praxis-dark-blue mb-6">
+          <h2 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
             {t.sectionTitle}
           </h2>
-          <p className="text-xl text-praxis-dark-blue-600 max-w-4xl mx-auto">
+          <p className="text-xl text-praxis-blue-100 max-w-3xl mx-auto">
             {t.sectionDescription}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Info */}
-          <div>
-            <h3 className="text-2xl font-heading font-bold text-praxis-dark-blue mb-6">
+          <div className="text-white">
+            <h3 className="text-3xl font-heading font-bold mb-6">
               {t.leftContent.headline}
             </h3>
-
-            <p className="text-lg text-praxis-dark-blue-600 mb-8">
+            <p className="text-lg text-praxis-blue-100 mb-8">
               {t.leftContent.description}
             </p>
 
@@ -372,47 +266,101 @@ export const SecurityLeadersContactSection: React.FC<
             <ul className="space-y-4 mb-12">
               {t.leftContent.benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start">
+                  <div className="flex-shrink-0 w-6 h-6 bg-praxis-pine rounded-full flex items-center justify-center mt-0.5 mr-3">
+                    <svg
+                      className="w-3 h-3 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-praxis-blue-100">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Direct Contact Info */}
+            <div className="bg-praxis-charcoal/50 backdrop-blur rounded-lg p-6 border border-praxis-pine">
+              <h4 className="text-xl font-semibold mb-4">
+                {t.leftContent.contactInfo.title}
+              </h4>
+              <div className="space-y-3">
+                <div className="flex items-center">
                   <svg
-                    className="h-6 w-6 text-praxis-accent mr-3 mt-0.5 flex-shrink-0"
+                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
-                    aria-hidden="true"
+                    viewBox="0 0 24 24"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
-                  <span className="text-praxis-dark-blue">{benefit}</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Testimonial */}
-            <div className="bg-praxis-blue-50 rounded-xl p-6">
-              <blockquote className="text-praxis-dark-blue italic mb-4">
-                &ldquo;{t.leftContent.testimonial.quote}&rdquo;
-              </blockquote>
-              <cite className="text-praxis-dark-blue-600 font-medium not-italic">
-                — {t.leftContent.testimonial.author}
-                <br />
-                <span className="text-sm">
-                  {t.leftContent.testimonial.company}
-                </span>
-              </cite>
+                  <a
+                    href={`mailto:${t.leftContent.contactInfo.email}`}
+                    className="text-praxis-blue-100 hover:text-white transition-colors"
+                  >
+                    {t.leftContent.contactInfo.email}
+                  </a>
+                </div>
+                <div className="flex items-center">
+                  <svg
+                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                  <a
+                    href={`tel:${t.leftContent.contactInfo.phone}`}
+                    className="text-praxis-blue-100 hover:text-white transition-colors"
+                  >
+                    {t.leftContent.contactInfo.phone}
+                  </a>
+                </div>
+                <div className="flex items-start">
+                  <svg
+                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <span className="text-praxis-blue-100 text-sm">
+                    {t.leftContent.contactInfo.availability}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
           {/* Right Column - Form */}
-          <div className="bg-praxis-blue-50 rounded-2xl p-8">
+          <div className="bg-praxis-white rounded-2xl shadow-xl p-8">
             <h3 className="text-2xl font-heading font-bold text-praxis-dark-blue mb-6">
               {t.form.title}
             </h3>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -423,22 +371,13 @@ export const SecurityLeadersContactSection: React.FC<
                     {t.form.firstName} *
                   </label>
                   <input
-                    {...register('firstName')}
                     type="text"
+                    name="firstName"
                     id="firstName"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.firstName
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                   />
-                  {errors.firstName && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.firstName.message}
-                    </p>
-                  )}
                 </div>
-
                 <div>
                   <label
                     htmlFor="lastName"
@@ -447,20 +386,12 @@ export const SecurityLeadersContactSection: React.FC<
                     {t.form.lastName} *
                   </label>
                   <input
-                    {...register('lastName')}
                     type="text"
+                    name="lastName"
                     id="lastName"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.lastName
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                   />
-                  {errors.lastName && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.lastName.message}
-                    </p>
-                  )}
                 </div>
               </div>
 
@@ -473,69 +404,46 @@ export const SecurityLeadersContactSection: React.FC<
                   {t.form.email} *
                 </label>
                 <input
-                  {...register('email')}
                   type="email"
+                  name="email"
                   id="email"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                    errors.email ? 'border-red-500' : 'border-praxis-blue-300'
-                  }`}
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                 />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.email.message}
-                  </p>
-                )}
               </div>
 
-              {/* Company and Job Title */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="company"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.company} *
-                  </label>
-                  <input
-                    {...register('company')}
-                    type="text"
-                    id="company"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.company
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
-                  />
-                  {errors.company && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.company.message}
-                    </p>
-                  )}
-                </div>
+              {/* Company */}
+              <div>
+                <label
+                  htmlFor="company"
+                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
+                >
+                  {t.form.company} *
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  id="company"
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                />
+              </div>
 
-                <div>
-                  <label
-                    htmlFor="jobTitle"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.jobTitle} *
-                  </label>
-                  <input
-                    {...register('jobTitle')}
-                    type="text"
-                    id="jobTitle"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.jobTitle
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
-                  />
-                  {errors.jobTitle && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.jobTitle.message}
-                    </p>
-                  )}
-                </div>
+              {/* Job Title */}
+              <div>
+                <label
+                  htmlFor="jobTitle"
+                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
+                >
+                  {t.form.jobTitle} *
+                </label>
+                <input
+                  type="text"
+                  name="jobTitle"
+                  id="jobTitle"
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                />
               </div>
 
               {/* Employee Count */}
@@ -547,13 +455,10 @@ export const SecurityLeadersContactSection: React.FC<
                   {t.form.employeeCount} *
                 </label>
                 <select
-                  {...register('employeeCount')}
+                  name="employeeCount"
                   id="employeeCount"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                    errors.employeeCount
-                      ? 'border-red-500'
-                      : 'border-praxis-blue-300'
-                  }`}
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                 >
                   {t.form.employeeOptions.map(option => (
                     <option key={option.value} value={option.value}>
@@ -561,47 +466,28 @@ export const SecurityLeadersContactSection: React.FC<
                     </option>
                   ))}
                 </select>
-                {errors.employeeCount && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.employeeCount.message}
-                  </p>
-                )}
               </div>
 
               {/* Current Challenges */}
               <div>
-                <label className="block text-sm font-medium text-praxis-dark-blue mb-3">
+                <label className="block text-sm font-medium text-praxis-dark-blue mb-2">
                   {t.form.currentChallenges} *
                 </label>
                 <div className="space-y-2">
-                  {t.form.challengeOptions.map(challenge => (
-                    <div key={challenge.value} className="flex items-start">
+                  {t.form.challengeOptions.map((challenge, index) => (
+                    <label key={index} className="flex items-start">
                       <input
                         type="checkbox"
-                        id={challenge.value}
-                        value={challenge.value}
-                        onChange={e =>
-                          handleChallengeChange(
-                            challenge.value,
-                            e.target.checked
-                          )
-                        }
-                        className="mt-1 h-4 w-4 text-praxis-blue focus:ring-praxis-blue border-praxis-blue-300 rounded"
+                        name="currentChallenges"
+                        value={challenge}
+                        className="mt-1 rounded border-praxis-blue-300 text-praxis-blue focus:ring-praxis-blue"
                       />
-                      <label
-                        htmlFor={challenge.value}
-                        className="ml-3 text-sm text-praxis-dark-blue"
-                      >
-                        {challenge.label}
-                      </label>
-                    </div>
+                      <span className="ml-2 text-sm text-praxis-dark-blue">
+                        {challenge}
+                      </span>
+                    </label>
                   ))}
                 </div>
-                {errors.currentChallenges && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.currentChallenges.message}
-                  </p>
-                )}
               </div>
 
               {/* Interest Area */}
@@ -613,13 +499,10 @@ export const SecurityLeadersContactSection: React.FC<
                   {t.form.interestArea} *
                 </label>
                 <select
-                  {...register('interestArea')}
+                  name="interestArea"
                   id="interestArea"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                    errors.interestArea
-                      ? 'border-red-500'
-                      : 'border-praxis-blue-300'
-                  }`}
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                 >
                   {t.form.interestOptions.map(option => (
                     <option key={option.value} value={option.value}>
@@ -627,11 +510,6 @@ export const SecurityLeadersContactSection: React.FC<
                     </option>
                   ))}
                 </select>
-                {errors.interestArea && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.interestArea.message}
-                  </p>
-                )}
               </div>
 
               {/* Message */}
@@ -643,10 +521,11 @@ export const SecurityLeadersContactSection: React.FC<
                   {t.form.message}
                 </label>
                 <textarea
-                  {...register('message')}
+                  name="message"
                   id="message"
                   rows={4}
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors resize-vertical"
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors resize-y"
+                  placeholder="Tell us about your specific security challenges..."
                 />
               </div>
 
@@ -654,11 +533,7 @@ export const SecurityLeadersContactSection: React.FC<
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-4 px-6 rounded-lg font-heading font-semibold text-lg transition-all duration-200 ${
-                  isSubmitting
-                    ? 'bg-praxis-blue-300 text-praxis-white cursor-not-allowed'
-                    : 'bg-praxis-accent text-praxis-white hover:bg-praxis-accent-600 shadow-lg hover:shadow-xl'
-                }`}
+                className="w-full bg-praxis-blue hover:bg-praxis-blue-700 disabled:bg-praxis-blue-300 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-praxis-blue focus:ring-offset-2"
               >
                 {isSubmitting ? t.form.submittingText : t.form.submitText}
               </button>

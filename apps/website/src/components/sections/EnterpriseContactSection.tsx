@@ -1,25 +1,8 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
 
 interface EnterpriseContactSectionProps {
   language?: 'en' | 'no';
 }
-
-const enterpriseContactSchema = z.object({
-  firstName: z.string().min(2, 'First name is required'),
-  lastName: z.string().min(2, 'Last name is required'),
-  email: z.string().email('Please enter a valid email address'),
-  company: z.string().min(2, 'Company name is required'),
-  jobTitle: z.string().min(2, 'Job title is required'),
-  employeeCount: z.string().min(1, 'Please select employee count'),
-  phone: z.string().optional(),
-  message: z.string().optional(),
-  segment: z.literal('enterprise'),
-});
-
-type EnterpriseContactFormData = z.infer<typeof enterpriseContactSchema>;
 
 export const EnterpriseContactSection: React.FC<
   EnterpriseContactSectionProps
@@ -72,14 +55,6 @@ export const EnterpriseContactSection: React.FC<
         submittingText: 'Submitting...',
         successMessage:
           "Thank you! We'll be in touch within 24 hours to schedule your demo.",
-        validation: {
-          firstName: 'First name is required',
-          lastName: 'Last name is required',
-          email: 'Please enter a valid email address',
-          company: 'Company name is required',
-          jobTitle: 'Job title is required',
-          employeeCount: 'Please select employee count',
-        },
       },
     },
     no: {
@@ -125,44 +100,31 @@ export const EnterpriseContactSection: React.FC<
         submitText: 'Be om Demo',
         submittingText: 'Sender...',
         successMessage:
-          'Takk! Vi tar kontakt innen 24 timer for å planlegge din demo.',
-        validation: {
-          firstName: 'Fornavn er påkrevd',
-          lastName: 'Etternavn er påkrevd',
-          email: 'Vennligst skriv inn en gyldig e-postadresse',
-          company: 'Bedriftsnavn er påkrevd',
-          jobTitle: 'Stillingstittel er påkrevd',
-          employeeCount: 'Vennligst velg antall ansatte',
-        },
+          'Takk! Vi tar kontakt innen 24 timer for å planlegge demoen din.',
       },
     },
   };
 
   const t = content[language];
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<EnterpriseContactFormData>({
-    resolver: zodResolver(
-      enterpriseContactSchema.extend({
-        firstName: z.string().min(2, t.form.validation.firstName),
-        lastName: z.string().min(2, t.form.validation.lastName),
-        email: z.string().email(t.form.validation.email),
-        company: z.string().min(2, t.form.validation.company),
-        jobTitle: z.string().min(2, t.form.validation.jobTitle),
-        employeeCount: z.string().min(1, t.form.validation.employeeCount),
-      })
-    ),
-    defaultValues: {
-      segment: 'enterprise',
-    },
-  });
-
-  const onSubmit = async (data: EnterpriseContactFormData) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setIsSubmitting(true);
+
+    const formData = new FormData(event.currentTarget);
+    const data = {
+      firstName: formData.get('firstName'),
+      lastName: formData.get('lastName'),
+      email: formData.get('email'),
+      company: formData.get('company'),
+      jobTitle: formData.get('jobTitle'),
+      employeeCount: formData.get('employeeCount'),
+      phone: formData.get('phone'),
+      message: formData.get('message'),
+      segment: 'enterprise',
+      formType: 'enterprise-contact',
+      language,
+    };
 
     try {
       // Submit to HubSpot or backend API
@@ -171,48 +133,18 @@ export const EnterpriseContactSection: React.FC<
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...data,
-          formType: 'enterprise-contact',
-          language,
-          utmSource: new URLSearchParams(window.location.search).get(
-            'utm_source'
-          ),
-          utmMedium: new URLSearchParams(window.location.search).get(
-            'utm_medium'
-          ),
-          utmCampaign: new URLSearchParams(window.location.search).get(
-            'utm_campaign'
-          ),
-        }),
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
         setIsSubmitted(true);
-        reset();
-
-        // Analytics tracking
-        if (
-          typeof window !== 'undefined' &&
-          (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag
-        ) {
-          (window as unknown as { gtag: (...args: unknown[]) => void }).gtag(
-            'event',
-            'form_submit',
-            {
-              form_name: 'enterprise_contact',
-              segment: 'enterprise',
-              employee_count: data.employeeCount,
-            }
-          );
-        }
+        // Reset form
+        (event.target as HTMLFormElement).reset();
       } else {
-        throw new Error('Form submission failed');
+        console.error('Form submission failed');
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Form submission error:', error);
-      // Handle error (show error message to user)
+      console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -220,16 +152,15 @@ export const EnterpriseContactSection: React.FC<
 
   if (isSubmitted) {
     return (
-      <section className="bg-praxis-blue-50 py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
+        <div className="container mx-auto px-6 py-20">
           <div className="text-center">
-            <div className="w-16 h-16 bg-praxis-accent rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full mb-6">
               <svg
-                className="w-8 h-8 text-praxis-white"
+                className="w-8 h-8"
                 fill="none"
-                viewBox="0 0 24 24"
                 stroke="currentColor"
-                aria-hidden="true"
+                viewBox="0 0 24 24"
               >
                 <path
                   strokeLinecap="round"
@@ -239,12 +170,10 @@ export const EnterpriseContactSection: React.FC<
                 />
               </svg>
             </div>
-            <h3 className="text-2xl font-heading font-bold text-praxis-dark-blue mb-4">
-              {language === 'no'
-                ? 'Takk for din forespørsel!'
-                : 'Thank you for your inquiry!'}
-            </h3>
-            <p className="text-lg text-praxis-dark-blue-600">
+            <h2 className="text-3xl font-heading font-bold text-white mb-4">
+              Thank You!
+            </h2>
+            <p className="text-xl text-praxis-blue-100 max-w-2xl mx-auto">
               {t.form.successMessage}
             </p>
           </div>
@@ -254,26 +183,25 @@ export const EnterpriseContactSection: React.FC<
   }
 
   return (
-    <section className="bg-praxis-blue-50 py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
+      <div className="container mx-auto px-6 py-20">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-praxis-dark-blue mb-6">
+          <h2 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
             {t.sectionTitle}
           </h2>
-          <p className="text-xl text-praxis-dark-blue-600 max-w-3xl mx-auto">
+          <p className="text-xl text-praxis-blue-100 max-w-3xl mx-auto">
             {t.sectionDescription}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Info */}
-          <div>
-            <h3 className="text-2xl font-heading font-bold text-praxis-dark-blue mb-4">
+          <div className="text-white">
+            <h3 className="text-3xl font-heading font-bold mb-6">
               {t.leftContent.headline}
             </h3>
-
-            <p className="text-lg text-praxis-dark-blue-600 mb-8">
+            <p className="text-lg text-praxis-blue-100 mb-8">
               {t.leftContent.description}
             </p>
 
@@ -281,60 +209,57 @@ export const EnterpriseContactSection: React.FC<
             <ul className="space-y-4 mb-12">
               {t.leftContent.benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start">
-                  <svg
-                    className="h-6 w-6 text-praxis-accent mr-3 mt-0.5 flex-shrink-0"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span className="text-praxis-dark-blue">{benefit}</span>
+                  <div className="flex-shrink-0 w-6 h-6 bg-praxis-pine rounded-full flex items-center justify-center mt-0.5 mr-3">
+                    <svg
+                      className="w-3 h-3 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <span className="text-praxis-blue-100">{benefit}</span>
                 </li>
               ))}
             </ul>
 
-            {/* Contact Info */}
-            <div className="bg-praxis-white rounded-lg p-6 shadow-lg">
-              <h4 className="text-lg font-heading font-semibold text-praxis-dark-blue mb-4">
+            {/* Direct Contact Info */}
+            <div className="bg-praxis-charcoal/50 backdrop-blur rounded-lg p-6 border border-praxis-pine">
+              <h4 className="text-xl font-semibold mb-4">
                 {t.leftContent.contactInfo.title}
               </h4>
               <div className="space-y-3">
                 <div className="flex items-center">
                   <svg
-                    className="w-5 h-5 text-praxis-blue mr-3"
+                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
-                    aria-hidden="true"
+                    viewBox="0 0 24 24"
                   >
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
                   <a
                     href={`mailto:${t.leftContent.contactInfo.email}`}
-                    className="text-praxis-dark-blue hover:text-praxis-blue transition-colors"
+                    className="text-praxis-blue-100 hover:text-white transition-colors"
                   >
                     {t.leftContent.contactInfo.email}
                   </a>
                 </div>
                 <div className="flex items-center">
                   <svg
-                    className="w-5 h-5 text-praxis-blue mr-3"
+                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
                     fill="none"
-                    viewBox="0 0 24 24"
                     stroke="currentColor"
-                    aria-hidden="true"
+                    viewBox="0 0 24 24"
                   >
                     <path
                       strokeLinecap="round"
@@ -345,7 +270,7 @@ export const EnterpriseContactSection: React.FC<
                   </svg>
                   <a
                     href={`tel:${t.leftContent.contactInfo.phone}`}
-                    className="text-praxis-dark-blue hover:text-praxis-blue transition-colors"
+                    className="text-praxis-blue-100 hover:text-white transition-colors"
                   >
                     {t.leftContent.contactInfo.phone}
                   </a>
@@ -360,7 +285,7 @@ export const EnterpriseContactSection: React.FC<
               {t.form.title}
             </h3>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -371,22 +296,13 @@ export const EnterpriseContactSection: React.FC<
                     {t.form.firstName} *
                   </label>
                   <input
-                    {...register('firstName')}
                     type="text"
+                    name="firstName"
                     id="firstName"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.firstName
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                   />
-                  {errors.firstName && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.firstName.message}
-                    </p>
-                  )}
                 </div>
-
                 <div>
                   <label
                     htmlFor="lastName"
@@ -395,20 +311,12 @@ export const EnterpriseContactSection: React.FC<
                     {t.form.lastName} *
                   </label>
                   <input
-                    {...register('lastName')}
                     type="text"
+                    name="lastName"
                     id="lastName"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.lastName
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
+                    required
+                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                   />
-                  {errors.lastName && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.lastName.message}
-                    </p>
-                  )}
                 </div>
               </div>
 
@@ -421,116 +329,84 @@ export const EnterpriseContactSection: React.FC<
                   {t.form.email} *
                 </label>
                 <input
-                  {...register('email')}
                   type="email"
+                  name="email"
                   id="email"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                    errors.email ? 'border-red-500' : 'border-praxis-blue-300'
-                  }`}
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
                 />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-600">
-                    {errors.email.message}
-                  </p>
-                )}
               </div>
 
-              {/* Company and Job Title */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="company"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.company} *
-                  </label>
-                  <input
-                    {...register('company')}
-                    type="text"
-                    id="company"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.company
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
-                  />
-                  {errors.company && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.company.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="jobTitle"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.jobTitle} *
-                  </label>
-                  <input
-                    {...register('jobTitle')}
-                    type="text"
-                    id="jobTitle"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.jobTitle
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
-                  />
-                  {errors.jobTitle && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.jobTitle.message}
-                    </p>
-                  )}
-                </div>
+              {/* Company */}
+              <div>
+                <label
+                  htmlFor="company"
+                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
+                >
+                  {t.form.company} *
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  id="company"
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                />
               </div>
 
-              {/* Employee Count and Phone */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="employeeCount"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.employeeCount} *
-                  </label>
-                  <select
-                    {...register('employeeCount')}
-                    id="employeeCount"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors ${
-                      errors.employeeCount
-                        ? 'border-red-500'
-                        : 'border-praxis-blue-300'
-                    }`}
-                  >
-                    {t.form.employeeOptions.map(option => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.employeeCount && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.employeeCount.message}
-                    </p>
-                  )}
-                </div>
+              {/* Job Title */}
+              <div>
+                <label
+                  htmlFor="jobTitle"
+                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
+                >
+                  {t.form.jobTitle} *
+                </label>
+                <input
+                  type="text"
+                  name="jobTitle"
+                  id="jobTitle"
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                />
+              </div>
 
-                <div>
-                  <label
-                    htmlFor="phone"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.phone}
-                  </label>
-                  <input
-                    {...register('phone')}
-                    type="tel"
-                    id="phone"
-                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
-                  />
-                </div>
+              {/* Employee Count */}
+              <div>
+                <label
+                  htmlFor="employeeCount"
+                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
+                >
+                  {t.form.employeeCount} *
+                </label>
+                <select
+                  name="employeeCount"
+                  id="employeeCount"
+                  required
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                >
+                  {t.form.employeeOptions.map(option => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Phone */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
+                >
+                  {t.form.phone}
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                />
               </div>
 
               {/* Message */}
@@ -542,10 +418,11 @@ export const EnterpriseContactSection: React.FC<
                   {t.form.message}
                 </label>
                 <textarea
-                  {...register('message')}
+                  name="message"
                   id="message"
                   rows={4}
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors resize-vertical"
+                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors resize-y"
+                  placeholder="Tell us about your specific requirements..."
                 />
               </div>
 
@@ -553,11 +430,7 @@ export const EnterpriseContactSection: React.FC<
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-4 px-6 rounded-lg font-heading font-semibold text-lg transition-all duration-200 ${
-                  isSubmitting
-                    ? 'bg-praxis-blue-300 text-praxis-white cursor-not-allowed'
-                    : 'bg-praxis-accent text-praxis-white hover:bg-praxis-accent-600 shadow-lg hover:shadow-xl'
-                }`}
+                className="w-full bg-praxis-blue hover:bg-praxis-blue-700 disabled:bg-praxis-blue-300 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-praxis-blue focus:ring-offset-2"
               >
                 {isSubmitting ? t.form.submittingText : t.form.submitText}
               </button>
