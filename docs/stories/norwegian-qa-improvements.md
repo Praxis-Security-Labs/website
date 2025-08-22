@@ -7,7 +7,7 @@
 #### 1. Spelling Consistency Issues
 **Location**: `/src/pages/no/index.astro`
 - **Issue**: "Sikkerheitsatferd" should be "Sikkerhetsadferd" (consistent with other files)
-- **Issue**: "Sikkerheitskultur" should be "Sikkerhetskultur" (consistent with other files)
+- **Issue**: "sikkerhetskultur" should be "Sikkerhetskultur" (consistent with other files)
 - **Issue**: "atferdsanalyse" should be "adferdsanalyse" (consistent with other files)
 
 #### 2. Norwegian Business Language Review
