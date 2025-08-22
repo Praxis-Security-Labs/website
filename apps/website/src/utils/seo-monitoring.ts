@@ -456,7 +456,6 @@ export function trackSEOMetrics(metrics: {
     } catch (error) {
       // Silent fail for analytics
       if (import.meta.env.MODE === 'development') {
-        // eslint-disable-next-line no-console
         console.error('SEO metrics tracking error:', error);
       }
     }

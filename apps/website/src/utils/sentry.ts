@@ -49,7 +49,7 @@ export function initializeSentry(): void {
   // Only initialize in production or if DSN is explicitly provided
   const dsn = import.meta.env.SENTRY_DSN;
   if (!dsn || import.meta.env.MODE === 'development') {
-    console.log('Sentry: Disabled in development mode');
+    console.warn('Sentry: Disabled in development mode');
     return;
   }
 
@@ -239,7 +239,7 @@ export function trackPerformanceTransaction(
   operation: () => Promise<any>
 ): Promise<any> {
   if (import.meta.env.MODE === 'development') {
-    console.log('Performance Transaction (dev mode):', context);
+    console.warn('Performance Transaction (dev mode):', context);
     return operation();
   }
 

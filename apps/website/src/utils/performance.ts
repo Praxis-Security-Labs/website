@@ -119,7 +119,7 @@ function sendMetrics(metrics: Partial<PerformanceMetrics>): void {
 
   // Development logging
   if (import.meta.env.MODE === 'development') {
-    console.log('Core Web Vitals:', metrics);
+    console.warn('Core Web Vitals:', metrics);
   }
 }
 

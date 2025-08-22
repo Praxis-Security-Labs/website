@@ -391,8 +391,12 @@ export const ComplianceContactSection: React.FC<
       setSubmitted(true);
     } catch (error) {
       // Log error in production to monitoring system if available
-      if (typeof window !== 'undefined' && (window as any).Sentry) {
-        (window as any).Sentry.captureException(error);
+      if (typeof window !== 'undefined' && 'Sentry' in window) {
+        (
+          window as unknown as {
+            Sentry: { captureException: (error: unknown) => void };
+          }
+        ).Sentry.captureException(error);
       }
       alert('There was an error submitting your inquiry. Please try again.');
     } finally {

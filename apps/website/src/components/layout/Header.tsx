@@ -95,7 +95,6 @@ export const Header: React.FC<HeaderProps> = ({
       try {
         await loginWithAzureAD();
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Login failed, falling back to direct redirect:', error);
         redirectToPraxisApp('/login');
       }

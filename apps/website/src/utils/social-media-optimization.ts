@@ -339,7 +339,6 @@ export function trackSocialShare(
     } catch (error) {
       // Error tracking failed - continue silently
       if (import.meta.env.MODE === 'development') {
-        // eslint-disable-next-line no-console
         console.error('Social sharing tracking error:', error);
       }
     }
@@ -347,7 +346,6 @@ export function trackSocialShare(
 
   // Development logging
   if (import.meta.env.MODE === 'development') {
-    // eslint-disable-next-line no-console
     console.log(`Social share tracked: ${platform} - ${title} - ${url}`);
   }
 }

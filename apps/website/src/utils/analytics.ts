@@ -47,15 +47,19 @@ export interface NavigationEvent {
 export function trackConversionEvent(event: ConversionEvent): void {
   // Only track in production and if analytics is enabled
   if (import.meta.env.MODE === 'development') {
-    console.log('Analytics (dev mode):', event);
+    console.warn('Analytics (dev mode):', event);
     return;
   }
 
   // Check if Cloudflare Web Analytics is loaded
-  if (typeof window !== 'undefined' && (window as any).__cfBeacon) {
+  if (typeof window !== 'undefined' && '__cfBeacon' in window) {
     try {
       // Send custom event to Cloudflare Analytics
-      (window as any).__cfBeacon.trackEvent({
+      (
+        window as unknown as {
+          __cfBeacon: { trackEvent: (event: Record<string, unknown>) => void };
+        }
+      ).__cfBeacon.trackEvent({
         category: event.category,
         action: event.action,
         label: event.label || '',

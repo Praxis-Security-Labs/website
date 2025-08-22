@@ -142,7 +142,6 @@ export function reportPerformanceMetrics(metrics: PerformanceMetric[]) {
   // In production, this would send to Cloudflare Analytics
   // For now, just log to console in development
   if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
     console.group('📊 Performance Metrics');
     metrics.forEach(metric => {
       const emoji =
@@ -151,12 +150,10 @@ export function reportPerformanceMetrics(metrics: PerformanceMetric[]) {
           : metric.rating === 'needs-improvement'
             ? '⚠️'
             : '❌';
-      // eslint-disable-next-line no-console
       console.log(
         `${emoji} ${metric.name}: ${metric.value.toFixed(2)}ms (${metric.rating})`
       );
     });
-    // eslint-disable-next-line no-console
     console.groupEnd();
   }
 
@@ -182,21 +179,15 @@ async function measureAndReport() {
 
   const resourceMetrics = measureResourcePerformance();
   if (resourceMetrics && import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
     console.group('📦 Resource Performance');
-    // eslint-disable-next-line no-console
     console.log(`Total resources: ${resourceMetrics.totalResources}`);
-    // eslint-disable-next-line no-console
     console.log(
       `Total load time: ${resourceMetrics.totalLoadTime.toFixed(2)}ms`
     );
-    // eslint-disable-next-line no-console
     console.log(
       `Estimated total size: ${(resourceMetrics.totalSize / 1024).toFixed(2)}KB`
     );
-    // eslint-disable-next-line no-console
     console.log('Resource types:', resourceMetrics.resourceTypes);
-    // eslint-disable-next-line no-console
     console.groupEnd();
   }
 }

@@ -25,7 +25,6 @@ const msalConfig: Configuration = {
     loggerOptions: {
       loggerCallback: (_level, message) => {
         if (import.meta.env.MODE === 'development') {
-          // eslint-disable-next-line no-console
           console.log(`[MSAL] ${message}`);
         }
       },
@@ -67,7 +66,6 @@ export const loginWithAzureAD = async (): Promise<void> => {
   const msal = getMsalInstance();
 
   if (!msal) {
-    // eslint-disable-next-line no-console
     console.error('MSAL not initialized');
     // Fallback to direct redirect to app login
     window.location.href = `${import.meta.env.ASTRO_PUBLIC_PRAXIS_APP_URL || 'https://app.praxisnavigator.io'}/login`;
@@ -121,7 +119,6 @@ export const loginWithAzureAD = async (): Promise<void> => {
       window.location.href = redirectUrl.toString();
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Azure AD login failed:', error);
 
     // Fallback to direct redirect to app login
@@ -140,7 +137,6 @@ export const loginWithAzureADRedirect = async (): Promise<void> => {
   const msal = getMsalInstance();
 
   if (!msal) {
-    // eslint-disable-next-line no-console
     console.error('MSAL not initialized');
     // Fallback to direct redirect to app login
     window.location.href = `${import.meta.env.ASTRO_PUBLIC_PRAXIS_APP_URL || 'https://app.praxisnavigator.io'}/login`;
@@ -155,7 +151,6 @@ export const loginWithAzureADRedirect = async (): Promise<void> => {
 
     await msal.loginRedirect(redirectRequest);
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Azure AD redirect login failed:', error);
 
     // Fallback to direct redirect to app login
@@ -233,14 +228,12 @@ export const initializeMsal = async (): Promise<void> => {
 
     if (response) {
       // Successful authentication via redirect
-      // eslint-disable-next-line no-console
       console.log('Authentication successful via redirect');
 
       // Redirect to main application
       redirectToPraxisApp();
     }
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('MSAL initialization error:', error);
   }
 };

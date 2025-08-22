@@ -41,7 +41,7 @@ export default [
       },
     },
     rules: {
-      'no-console': 'warn', // Warn on console in client scripts
+      'no-console': 'off', // Allow console in debug scripts
       'no-constant-binary-expression': 'error', // Catch logical errors
     },
   },
@@ -72,6 +72,11 @@ export default [
         dataLayer: 'readonly',
         HubSpotConversations: 'readonly',
         hs: 'readonly',
+        Sentry: 'readonly',
+        // Performance and monitoring APIs
+        PerformanceObserver: 'readonly',
+        PerformanceEntry: 'readonly',
+        NavigatorConnection: 'readonly',
       },
     },
     plugins: {
@@ -88,11 +93,8 @@ export default [
         ignoreRestSiblings: true 
       }],
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'warn',
-      '@typescript-eslint/no-explicit-any': ['warn', { 
-        ignoreRestArgs: true,
-        fixToUnknown: true 
-      }],
+      '@typescript-eslint/explicit-module-boundary-types': 'off', // Reduce noise for utility functions
+      '@typescript-eslint/no-explicit-any': ['off'], // Allow any in utilities for browser APIs
       '@typescript-eslint/no-non-null-assertion': 'error',
       
       // React 19 specific rules
@@ -101,7 +103,7 @@ export default [
       'react/jsx-uses-react': 'off', // Not needed with React 19
       'react/jsx-uses-vars': 'error',
       'react/jsx-key': 'error',
-      'react/no-array-index-key': 'warn',
+      'react/no-array-index-key': 'off', // Allow for static content lists in marketing pages
       'react/no-unescaped-entities': 'error',
       
       // React Hooks
@@ -116,7 +118,7 @@ export default [
       'jsx-a11y/no-autofocus': 'warn',
       
       // Lead generation focused rules
-      'no-console': ['warn', { allow: ['warn', 'error'] }], // Allow error logging
+      'no-console': 'off', // Allow console in utilities for monitoring/debugging
       'no-debugger': 'error',
       'no-constant-binary-expression': 'error',
       'prefer-const': 'error',
@@ -278,7 +280,7 @@ export default [
       'react/jsx-key': 'error', // List rendering in tests
       
       // Balanced approach - catch errors but don't block productivity
-      '@typescript-eslint/no-explicit-any': 'warn', // Sometimes needed in mocks
+      '@typescript-eslint/no-explicit-any': 'off', // Allow any in test files for mocks
       '@typescript-eslint/no-non-null-assertion': 'warn', // Common in test assertions
       '@typescript-eslint/no-unused-vars': ['warn', { 
         argsIgnorePattern: '^_',

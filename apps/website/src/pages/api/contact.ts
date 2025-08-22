@@ -145,7 +145,6 @@ export const POST: APIRoute = async ({ request }) => {
     // 5. Schedule follow-up in Norwegian business hours
 
     // For now, we'll log the enhanced submission
-    // eslint-disable-next-line no-console
     console.log('Enhanced form submission received:', {
       formType: enhancedFormData.formType,
       segment: enhancedFormData.segment,
@@ -183,7 +182,6 @@ export const POST: APIRoute = async ({ request }) => {
       }
     );
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Contact form submission error:', error);
 
     const errorMessage =
