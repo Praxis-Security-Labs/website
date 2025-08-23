@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TrustOverview } from '../../components/sections/TrustOverview';
+import { SecurityTestimonials } from '../../components/sections/SecurityTestimonials';
+
+const title = 'Sikkerhet & Tillit - Praxis Navigator';
+const description =
+  'Lær om Praxis Navigator sine sikkerhetstiltak, compliance sertifiseringer og databeskyttelsespraksis. SOC 2, GDPR kompatibel sikkerhetskultur analytikk.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/no/trust"
+  lang="no"
+  keywords="sikkerhets compliance, SOC 2, GDPR, databeskyttelse, sikkerhets sertifiseringer, compliance rammeverk"
+>
+  <main>
+    <!-- Trust Overview Section -->
+    <TrustOverview language="no" />
+
+    <!-- Security-Focused Testimonials -->
+    <SecurityTestimonials language="no" />
+  </main>
+</BaseLayout>

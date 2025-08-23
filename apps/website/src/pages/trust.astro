@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TrustOverview } from '../components/sections/TrustOverview';
+import { SecurityTestimonials } from '../components/sections/SecurityTestimonials';
+
+const title = 'Security & Trust - Praxis Navigator';
+const description =
+  "Learn about Praxis Navigator's security measures, compliance certifications, and data protection practices. SOC 2, GDPR compliant security culture analytics.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/trust"
+  keywords="security compliance, SOC 2, GDPR, data protection, security certifications, compliance framework"
+>
+  <main>
+    <!-- Trust Overview Section -->
+    <TrustOverview language="en" />
+
+    <!-- Security-Focused Testimonials -->
+    <SecurityTestimonials language="en" />
+  </main>
+</BaseLayout>
