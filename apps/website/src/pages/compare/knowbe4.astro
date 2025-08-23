@@ -1,0 +1,362 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ComparisonTable } from '../../components/sections/ComparisonTable';
+import { CompetitorNarrative } from '../../components/sections/CompetitorNarrative';
+import { PricingComparison } from '../../components/sections/PricingComparison';
+import { PersonaCTA } from '../../components/ui/PersonaCTA';
+import { knowbe4ComparisonData } from '../../content/comparisons/knowbe4';
+
+const title =
+  'Praxis Navigator vs KnowBe4 - Security Culture Analytics Comparison';
+const description =
+  'Compare Praxis Navigator and KnowBe4 for security awareness and culture analytics. See features, pricing, and key differences to choose the right solution for your organization.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/compare/knowbe4"
+  keywords="praxis navigator vs knowbe4, security awareness training comparison, security culture analytics, cybersecurity training platforms"
+>
+  <main>
+    <div class="container mx-auto px-4 py-8 lg:py-16">
+      <!-- Hero Section -->
+      <div class="text-center mb-16">
+        <div class="flex items-center justify-center space-x-6 mb-8">
+          <img
+            src="/images/praxis-logo.svg"
+            alt="Praxis Navigator"
+            class="h-12 w-auto"
+          />
+          <span class="text-4xl font-heading font-bold text-praxis-dark-blue"
+            >vs</span
+          >
+          <img
+            src="/images/competitors/knowbe4-logo.svg"
+            alt="KnowBe4"
+            class="h-12 w-auto"
+          />
+        </div>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-praxis-dark-blue mb-6"
+        >
+          Praxis Navigator vs KnowBe4
+        </h1>
+        <p
+          class="text-xl text-praxis-blue-700 leading-relaxed max-w-4xl mx-auto"
+        >
+          Compare security culture analytics and awareness training platforms.
+          Understand the key differences between behavior-focused analytics and
+          training-first approaches to make the right choice for your
+          organization.
+        </p>
+      </div>
+
+      <!-- Quick Overview Cards -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <div
+          class="bg-gradient-to-br from-praxis-accent to-praxis-accent-dark rounded-2xl p-8 text-white"
+        >
+          <div class="flex items-center space-x-3 mb-4">
+            <img
+              src="/images/praxis-logo-white.svg"
+              alt="Praxis Navigator"
+              class="h-8 w-auto"
+            />
+            <h2 class="text-2xl font-heading font-bold">Praxis Navigator</h2>
+          </div>
+          <p class="text-lg mb-6 opacity-95">
+            Security culture analytics and behavioral risk assessment with
+            native Microsoft 365 integration.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Real-time behavior analytics</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Microsoft 365 native integration</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Zero data storage architecture</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>1-2 hour implementation</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border-2 border-praxis-blue-200 rounded-2xl p-8">
+          <div class="flex items-center space-x-3 mb-4">
+            <img
+              src="/images/competitors/knowbe4-logo.svg"
+              alt="KnowBe4"
+              class="h-8 w-auto"
+            />
+            <h2 class="text-2xl font-heading font-bold text-praxis-dark-blue">
+              KnowBe4
+            </h2>
+          </div>
+          <p class="text-lg mb-6 text-praxis-blue-700">
+            Security awareness training platform with extensive content library
+            and phishing simulation capabilities.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Extensive training content library</span
+              >
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Advanced phishing simulations</span
+              >
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Comprehensive training management</span
+              >
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Established market presence</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature Comparison Table -->
+      <section class="mb-16">
+        <ComparisonTable
+          competitorName={knowbe4ComparisonData.competitorName}
+          competitorLogo={knowbe4ComparisonData.competitorLogo}
+          features={knowbe4ComparisonData.features}
+          language="en"
+          client:load
+        />
+      </section>
+
+      <!-- Narrative Comparison -->
+      <section class="mb-16">
+        <CompetitorNarrative
+          competitorName={knowbe4ComparisonData.competitorName}
+          competitorLogo={knowbe4ComparisonData.competitorLogo}
+          introduction={knowbe4ComparisonData.narrative.introduction}
+          sections={knowbe4ComparisonData.narrative.sections}
+          conclusion={knowbe4ComparisonData.narrative.conclusion}
+          language="en"
+          client:load
+        />
+      </section>
+
+      <!-- Pricing Comparison -->
+      <section class="mb-16">
+        <PricingComparison
+          competitorName={knowbe4ComparisonData.competitorName}
+          competitorLogo={knowbe4ComparisonData.competitorLogo}
+          tiers={knowbe4ComparisonData.pricing.tiers}
+          additionalComparisons={knowbe4ComparisonData.pricing
+            .additionalComparisons}
+          language="en"
+          client:load
+        />
+      </section>
+
+      <!-- Persona-Specific CTA -->
+      <section class="mb-16">
+        <div
+          class="bg-gradient-to-br from-praxis-blue-50 to-white rounded-2xl p-8 lg:p-12"
+        >
+          <div class="text-center mb-8">
+            <h2
+              class="text-3xl md:text-4xl font-heading font-bold text-praxis-dark-blue mb-4"
+            >
+              Ready to See the Difference?
+            </h2>
+            <p class="text-xl text-praxis-blue-700 max-w-3xl mx-auto">
+              Experience how Praxis Navigator's security culture analytics
+              complement traditional training approaches. See real behavioral
+              insights in action.
+            </p>
+          </div>
+
+          <PersonaCTA
+            segment="security-leaders"
+            size="lg"
+            variant="comparison"
+            customHeadline="Compare Security Culture Analytics"
+            language="en"
+            client:load
+          />
+        </div>
+      </section>
+
+      <!-- Related Comparisons -->
+      <section>
+        <div class="text-center mb-8">
+          <h2
+            class="text-2xl md:text-3xl font-heading font-bold text-praxis-dark-blue mb-4"
+          >
+            Other Platform Comparisons
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <a
+            href="/compare/junglemap"
+            class="group bg-white rounded-xl border border-praxis-blue-200 p-6 hover:border-praxis-accent transition-colors"
+          >
+            <div class="flex items-center space-x-4 mb-4">
+              <img
+                src="/images/praxis-logo.svg"
+                alt="Praxis Navigator"
+                class="h-6 w-auto"
+              />
+              <span class="text-lg font-medium text-praxis-dark-blue">vs</span>
+              <img
+                src="/images/competitors/junglemap-logo.svg"
+                alt="Junglemap"
+                class="h-6 w-auto"
+              />
+            </div>
+            <h3
+              class="text-lg font-heading font-bold text-praxis-dark-blue mb-2 group-hover:text-praxis-accent transition-colors"
+            >
+              Praxis Navigator vs Junglemap
+            </h3>
+            <p class="text-praxis-blue-700">
+              Compare security culture analytics with cybersecurity posture
+              management platforms.
+            </p>
+          </a>
+
+          <a
+            href="/compare"
+            class="group bg-white rounded-xl border border-praxis-blue-200 p-6 hover:border-praxis-accent transition-colors"
+          >
+            <div class="text-center">
+              <svg
+                class="w-12 h-12 text-praxis-blue-400 mx-auto mb-4 group-hover:text-praxis-accent transition-colors"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+              <h3
+                class="text-lg font-heading font-bold text-praxis-dark-blue mb-2 group-hover:text-praxis-accent transition-colors"
+              >
+                View All Comparisons
+              </h3>
+              <p class="text-praxis-blue-700">
+                See how Praxis Navigator compares with other security platforms
+                and solutions.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

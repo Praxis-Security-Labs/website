@@ -1,0 +1,363 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ComparisonTable } from '../../../components/sections/ComparisonTable';
+import { CompetitorNarrative } from '../../../components/sections/CompetitorNarrative';
+import { PricingComparison } from '../../../components/sections/PricingComparison';
+import { PersonaCTA } from '../../../components/ui/PersonaCTA';
+import { knowbe4ComparisonData } from '../../../content/comparisons/knowbe4';
+
+const title =
+  'Praxis Navigator vs KnowBe4 - Sammenligning av Sikkerhetskultur Analytikk';
+const description =
+  'Sammenlign Praxis Navigator og KnowBe4 for sikkerhetsbevissthet og kulturanalytikk. Se funksjoner, priser og viktige forskjeller for å velge riktig løsning for din organisasjon.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/no/compare/knowbe4"
+  lang="no"
+  keywords="praxis navigator vs knowbe4, sammenligning sikkerhetsbevissthet trening, sikkerhetskultur analytikk, cybersikkerhet trening plattformer"
+>
+  <main>
+    <div class="container mx-auto px-4 py-8 lg:py-16">
+      <!-- Hero Section -->
+      <div class="text-center mb-16">
+        <div class="flex items-center justify-center space-x-6 mb-8">
+          <img
+            src="/images/praxis-logo.svg"
+            alt="Praxis Navigator"
+            class="h-12 w-auto"
+          />
+          <span class="text-4xl font-heading font-bold text-praxis-dark-blue"
+            >vs</span
+          >
+          <img
+            src="/images/competitors/knowbe4-logo.svg"
+            alt="KnowBe4"
+            class="h-12 w-auto"
+          />
+        </div>
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-praxis-dark-blue mb-6"
+        >
+          Praxis Navigator vs KnowBe4
+        </h1>
+        <p
+          class="text-xl text-praxis-blue-700 leading-relaxed max-w-4xl mx-auto"
+        >
+          Sammenlign sikkerhetskultur analytikk og sikkerhetsbevissthet
+          treningsplattformer. Forstå viktige forskjeller mellom atferdsfokusert
+          analytikk og treningsfokuserte tilnærminger for å ta rett valg for din
+          organisasjon.
+        </p>
+      </div>
+
+      <!-- Quick Overview Cards -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <div
+          class="bg-gradient-to-br from-praxis-accent to-praxis-accent-dark rounded-2xl p-8 text-white"
+        >
+          <div class="flex items-center space-x-3 mb-4">
+            <img
+              src="/images/praxis-logo-white.svg"
+              alt="Praxis Navigator"
+              class="h-8 w-auto"
+            />
+            <h2 class="text-2xl font-heading font-bold">Praxis Navigator</h2>
+          </div>
+          <p class="text-lg mb-6 opacity-95">
+            Sikkerhetskultur analytikk og atferdsmessig risikovurdering med
+            native Microsoft 365 integrasjon.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Sanntids atferdsanalytikk</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Microsoft 365 native integrasjon</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>Null datalagring arkitektur</span>
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span>1-2 timer implementering</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-white border-2 border-praxis-blue-200 rounded-2xl p-8">
+          <div class="flex items-center space-x-3 mb-4">
+            <img
+              src="/images/competitors/knowbe4-logo.svg"
+              alt="KnowBe4"
+              class="h-8 w-auto"
+            />
+            <h2 class="text-2xl font-heading font-bold text-praxis-dark-blue">
+              KnowBe4
+            </h2>
+          </div>
+          <p class="text-lg mb-6 text-praxis-blue-700">
+            Sikkerhetsbevissthet treningsplattform med omfattende
+            innholdsbibliotek og phishing simuleringsmuligheter.
+          </p>
+          <ul class="space-y-2">
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Omfattende treningsinnhold bibliotek</span
+              >
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Avanserte phishing simuleringer</span
+              >
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Omfattende treningshåndtering</span
+              >
+            </li>
+            <li class="flex items-center space-x-2">
+              <svg
+                class="w-5 h-5 text-praxis-accent"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"></path>
+              </svg>
+              <span class="text-praxis-dark-blue"
+                >Etablert markedstilstedeværelse</span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Feature Comparison Table -->
+      <section class="mb-16">
+        <ComparisonTable
+          competitorName={knowbe4ComparisonData.competitorName}
+          competitorLogo={knowbe4ComparisonData.competitorLogo}
+          features={knowbe4ComparisonData.features}
+          language="no"
+          client:load
+        />
+      </section>
+
+      <!-- Narrative Comparison -->
+      <section class="mb-16">
+        <CompetitorNarrative
+          competitorName={knowbe4ComparisonData.competitorName}
+          competitorLogo={knowbe4ComparisonData.competitorLogo}
+          introduction={knowbe4ComparisonData.narrative.introduction}
+          sections={knowbe4ComparisonData.narrative.sections}
+          conclusion={knowbe4ComparisonData.narrative.conclusion}
+          language="no"
+          client:load
+        />
+      </section>
+
+      <!-- Pricing Comparison -->
+      <section class="mb-16">
+        <PricingComparison
+          competitorName={knowbe4ComparisonData.competitorName}
+          competitorLogo={knowbe4ComparisonData.competitorLogo}
+          tiers={knowbe4ComparisonData.pricing.tiers}
+          additionalComparisons={knowbe4ComparisonData.pricing
+            .additionalComparisons}
+          language="no"
+          client:load
+        />
+      </section>
+
+      <!-- Persona-Specific CTA -->
+      <section class="mb-16">
+        <div
+          class="bg-gradient-to-br from-praxis-blue-50 to-white rounded-2xl p-8 lg:p-12"
+        >
+          <div class="text-center mb-8">
+            <h2
+              class="text-3xl md:text-4xl font-heading font-bold text-praxis-dark-blue mb-4"
+            >
+              Klar til å Se Forskjellen?
+            </h2>
+            <p class="text-xl text-praxis-blue-700 max-w-3xl mx-auto">
+              Opplev hvordan Praxis Navigator sin sikkerhetskultur analytikk
+              komplementerer tradisjonelle treningsmetoder. Se ekte
+              atferdsinnsikt i aksjon.
+            </p>
+          </div>
+
+          <PersonaCTA
+            segment="security-leaders"
+            size="lg"
+            variant="comparison"
+            customHeadline="Sammenlign Sikkerhetskultur Analytikk"
+            language="no"
+            client:load
+          />
+        </div>
+      </section>
+
+      <!-- Related Comparisons -->
+      <section>
+        <div class="text-center mb-8">
+          <h2
+            class="text-2xl md:text-3xl font-heading font-bold text-praxis-dark-blue mb-4"
+          >
+            Andre Plattformsammenligninger
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <a
+            href="/no/compare/junglemap"
+            class="group bg-white rounded-xl border border-praxis-blue-200 p-6 hover:border-praxis-accent transition-colors"
+          >
+            <div class="flex items-center space-x-4 mb-4">
+              <img
+                src="/images/praxis-logo.svg"
+                alt="Praxis Navigator"
+                class="h-6 w-auto"
+              />
+              <span class="text-lg font-medium text-praxis-dark-blue">vs</span>
+              <img
+                src="/images/competitors/junglemap-logo.svg"
+                alt="Junglemap"
+                class="h-6 w-auto"
+              />
+            </div>
+            <h3
+              class="text-lg font-heading font-bold text-praxis-dark-blue mb-2 group-hover:text-praxis-accent transition-colors"
+            >
+              Praxis Navigator vs Junglemap
+            </h3>
+            <p class="text-praxis-blue-700">
+              Sammenlign sikkerhetskultur analytikk med cybersikkerhet holdning
+              administrasjon plattformer.
+            </p>
+          </a>
+
+          <a
+            href="/no/compare"
+            class="group bg-white rounded-xl border border-praxis-blue-200 p-6 hover:border-praxis-accent transition-colors"
+          >
+            <div class="text-center">
+              <svg
+                class="w-12 h-12 text-praxis-blue-400 mx-auto mb-4 group-hover:text-praxis-accent transition-colors"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                ></path>
+              </svg>
+              <h3
+                class="text-lg font-heading font-bold text-praxis-dark-blue mb-2 group-hover:text-praxis-accent transition-colors"
+              >
+                Se Alle Sammenligninger
+              </h3>
+              <p class="text-praxis-blue-700">
+                Se hvordan Praxis Navigator sammenlignes med andre
+                sikkerhetsplattformer og løsninger.
+              </p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>

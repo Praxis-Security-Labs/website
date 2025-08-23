@@ -4,10 +4,11 @@ import React from 'react';
 interface PersonaCTAProps {
   segment: 'sat-teams' | 'security-leaders' | 'executives' | 'managers';
   language?: 'en' | 'no';
-  variant?: 'primary' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary' | 'comparison' | 'hero';
+  size?: 'sm' | 'md' | 'lg' | 'large';
   className?: string;
   onClick?: () => void;
+  customHeadline?: string;
 }
 
 export const PersonaCTA: React.FC<PersonaCTAProps> = ({
@@ -17,6 +18,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
   size = 'lg',
   className = '',
   onClick,
+  customHeadline,
 }) => {
   // Persona-specific CTA configurations based on PRD requirements
   const ctaConfig = {
@@ -107,7 +109,16 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
     },
   };
 
-  const config = ctaConfig[segment][language][variant];
+  // Get config, fallback to primary if variant doesn't exist
+  const variantToUse = ['comparison', 'hero'].includes(variant)
+    ? 'primary'
+    : variant;
+  const config =
+    ctaConfig[segment][language][variantToUse as 'primary' | 'secondary'];
+
+  // Use custom text if provided for special variants
+  const displayText = customHeadline || config.text;
+  const displayHref = config.href;
 
   // Analytics tracking for persona-specific CTAs
   const handleClick = () => {
@@ -118,8 +129,8 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
         event_label: `${segment}-${variant}`,
         segment: segment,
         language: language,
-        cta_text: config.text,
-        destination: config.href,
+        cta_text: displayText,
+        destination: displayHref,
       });
     }
 
@@ -136,26 +147,29 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
     primary: 'btn-accent hover:bg-praxis-accent-dark text-praxis-white',
     secondary:
       'btn-secondary hover:bg-praxis-blue-100 text-praxis-dark-blue border-2 border-praxis-blue-300',
+    comparison: 'btn-accent hover:bg-praxis-accent-dark text-praxis-white',
+    hero: 'btn-accent hover:bg-praxis-accent-dark text-praxis-white',
   };
 
   const sizeClasses = {
     sm: 'px-4 py-2 text-sm rounded-lg',
     md: 'px-6 py-3 text-base rounded-xl',
     lg: 'px-8 py-4 text-lg rounded-xl',
+    large: 'px-8 py-4 text-lg rounded-xl',
   };
 
   const combinedClasses = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
 
   return (
     <a
-      href={config.href}
+      href={displayHref}
       className={combinedClasses}
       onClick={handleClick}
       data-segment={segment}
       data-variant={variant}
       data-language={language}
     >
-      {config.text}
+      {displayText}
       <svg
         className="ml-2 -mr-1 h-5 w-5 group-hover:translate-x-1 transition-transform"
         fill="none"
