@@ -22,7 +22,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
   const ctaConfig = {
     'sat-teams': {
       en: {
-        primary: { text: 'Start Free Trial', href: '/trial-signup' },
+        primary: { text: 'Start Free Trial', href: '/trial-explainer' },
         secondary: {
           text: 'View Training ROI Guide',
           href: '/resources/training-roi',
@@ -31,7 +31,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       no: {
         primary: {
           text: 'Start Gratis Prøveperiode',
-          href: '/no/trial-signup',
+          href: '/no/trial-explainer',
         },
         secondary: {
           text: 'Se Opplæring ROI Guide',

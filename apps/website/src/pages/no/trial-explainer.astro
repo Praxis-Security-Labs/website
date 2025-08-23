@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { TrialExplainerFlow } from '../../components/sections/TrialExplainerFlow';
+import { SupportContactSection } from '../../components/sections/SupportContactSection';
+
+const title = 'Start Din Gratis Prøveperiode - Praxis Navigator';
+const description =
+  'Lær hvordan du setter opp din gratis Praxis Navigator prøveperiode på minutter. Trinn-for-trinn guide for å få sikkerhetskultur analytikk for ditt Microsoft 365 miljø.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/no/trial-explainer"
+  lang="no"
+>
+  <main>
+    <!-- Trial Explainer Flow Section -->
+    <TrialExplainerFlow language="no" />
+
+    <!-- Support Contact Section -->
+    <SupportContactSection language="no" variant="trial-support" />
+  </main>
+</BaseLayout>

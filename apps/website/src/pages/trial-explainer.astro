@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { TrialExplainerFlow } from '../components/sections/TrialExplainerFlow';
+import { SupportContactSection } from '../components/sections/SupportContactSection';
+
+const title = 'Start Your Free Trial - Praxis Navigator';
+const description =
+  'Learn how to set up your free Praxis Navigator trial in minutes. Step-by-step guide to get security culture analytics for your Microsoft 365 environment.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl="/trial-explainer"
+>
+  <main>
+    <!-- Trial Explainer Flow Section -->
+    <TrialExplainerFlow language="en" />
+
+    <!-- Support Contact Section -->
+    <SupportContactSection language="en" variant="trial-support" />
+  </main>
+</BaseLayout>
