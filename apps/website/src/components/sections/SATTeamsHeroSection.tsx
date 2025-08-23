@@ -1,4 +1,5 @@
 import React from 'react';
+import { PersonaCTA } from '../ui/PersonaCTA';
 
 interface SATTeamsHeroSectionProps {
   language?: 'en' | 'no';
@@ -111,35 +112,20 @@ export const SATTeamsHeroSection: React.FC<SATTeamsHeroSectionProps> = ({
               ))}
             </ul>
 
-            {/* CTAs */}
+            {/* CTAs - Using PersonaCTA component for persona-specific targeting */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <a
-                href={`/${language === 'no' ? 'no/' : ''}contact?segment=sat-teams`}
-                className="btn-accent btn-lg inline-flex items-center justify-center group"
-              >
-                {t.ctaPrimaryText}
-                <svg
-                  className="ml-2 -mr-1 h-5 w-5 group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </a>
-
-              <a
-                href={`/${language === 'no' ? 'no/' : ''}resources/research-hub`}
-                className="btn-secondary btn-lg"
-              >
-                {t.ctaSecondaryText}
-              </a>
+              <PersonaCTA
+                segment="sat-teams"
+                language={language}
+                variant="primary"
+                size="lg"
+              />
+              <PersonaCTA
+                segment="sat-teams"
+                language={language}
+                variant="secondary"
+                size="lg"
+              />
             </div>
 
             {/* Kai Roer Authority */}
