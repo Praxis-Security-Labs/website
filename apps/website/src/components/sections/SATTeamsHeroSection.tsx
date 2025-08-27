@@ -66,7 +66,7 @@ export const SATTeamsHeroSection: React.FC<SATTeamsHeroSectionProps> = ({
   const t = content[language];
 
   return (
-    <section className="bg-gradient-to-br from-praxis-accent via-praxis-blue to-praxis-dark-blue py-16 md:py-24">
+    <section className="bg-gradient-to-br from-praxis-dark-blue via-praxis-dark-blue-600 to-praxis-blue py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Content Column */}
@@ -94,7 +94,7 @@ export const SATTeamsHeroSection: React.FC<SATTeamsHeroSectionProps> = ({
               {t.keyBenefits.map((benefit, index) => (
                 <li key={index} className="flex items-center text-praxis-white">
                   <svg
-                    className="h-6 w-6 text-praxis-gold mr-3 flex-shrink-0"
+                    className="h-6 w-6 text-praxis-accent mr-3 flex-shrink-0"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
