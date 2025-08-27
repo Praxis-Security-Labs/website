@@ -69,6 +69,10 @@
     @apply btn bg-praxis-brick text-praxis-white hover:bg-praxis-brick-600 focus:ring-praxis-brick-300;
   }
 
+  .btn-outline-white {
+    @apply btn bg-transparent border-2 border-praxis-white text-praxis-white hover:bg-praxis-white hover:text-praxis-dark-blue focus:ring-praxis-white focus:ring-opacity-50;
+  }
+
   .btn-sm {
     @apply px-4 py-2 text-sm;
   }
