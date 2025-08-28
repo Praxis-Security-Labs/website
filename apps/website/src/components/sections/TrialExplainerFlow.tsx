@@ -469,29 +469,11 @@ export const TrialExplainerFlow: React.FC<TrialExplainerFlowProps> = ({
   const t = content[language];
 
   const handleTrialStart = () => {
-    // Track trial start analytics
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'trial_start_click', {
-        source: 'trial_explainer',
-        language: language,
-        page_location: window.location.href,
-      });
-    }
-
-    // Redirect to Azure Marketplace with UTM tracking
-    const azureMarketplaceUrl = `https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator?utm_source=website&utm_medium=trial_explainer&utm_campaign=trial_signup&utm_content=${language}`;
-    window.open(azureMarketplaceUrl, '_blank');
-  };
-
-  const handleSupportRequest = () => {
-    // Track support request analytics
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'support_request_click', {
-        source: 'trial_explainer',
-        language: language,
-        page_location: window.location.href,
-      });
-    }
+    // Navigate to Azure Marketplace
+    window.open(
+      'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxisnavigator1692887606830.praxis_navigator',
+      '_blank'
+    );
   };
 
   return (
@@ -517,8 +499,8 @@ export const TrialExplainerFlow: React.FC<TrialExplainerFlowProps> = ({
             {t.description}
           </p>
 
-          {/* Primary CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          {/* Primary CTA */}
+          <div className="flex justify-center mb-12">
             <button
               onClick={handleTrialStart}
               className="btn-accent btn-lg inline-flex items-center justify-center group"
@@ -538,13 +520,6 @@ export const TrialExplainerFlow: React.FC<TrialExplainerFlowProps> = ({
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </button>
-
-            <button
-              onClick={handleSupportRequest}
-              className="btn-secondary btn-lg"
-            >
-              {t.ctaSecondary}
             </button>
           </div>
         </div>
