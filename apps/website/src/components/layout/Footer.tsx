@@ -177,10 +177,11 @@ export const Footer: React.FC<FooterProps> = ({ currentLanguage = 'en' }) => {
                       : 'Praxis Navigator Home'
                   }
                 >
-                  <div className="logo-md font-heading">
-                    <span className="text-praxis-gold">PRAXIS</span>{' '}
-                    <span className="text-praxis-white">NAVIGATOR</span>
-                  </div>
+                  <img
+                    src="/images/logos/praxis-navigator-logo.svg"
+                    alt="Praxis Navigator"
+                    className="h-12 md:h-16"
+                  />
                 </a>
               </div>
 
