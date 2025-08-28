@@ -25,8 +25,8 @@ export const TrialCallToActionSection: React.FC<
           {/* Content */}
           <div className="text-center lg:text-left">
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-praxis-accent bg-opacity-20 border border-praxis-accent rounded-full mb-6">
-              <span className="text-praxis-accent text-sm font-heading font-bold uppercase tracking-brand-wide">
+            <div className="inline-flex items-center px-4 py-2 bg-praxis-gold bg-opacity-20 border border-praxis-gold rounded-full mb-6">
+              <span className="text-praxis-gold text-sm font-heading font-bold uppercase tracking-brand-wide">
                 {t.badge}
               </span>
             </div>
@@ -36,16 +36,16 @@ export const TrialCallToActionSection: React.FC<
               {t.headline}
             </h2>
 
-            <p className="text-xl text-praxis-blue-100 mb-6">{t.subheadline}</p>
+            <p className="text-xl text-praxis-sky-100 mb-6">{t.subheadline}</p>
 
-            <p className="text-lg text-praxis-blue-200 mb-8">{t.description}</p>
+            <p className="text-lg text-praxis-sky-200 mb-8">{t.description}</p>
 
             {/* Benefits */}
             <ul className="space-y-3 mb-10">
               {t.benefits.map((benefit, index) => (
                 <li key={index} className="flex items-center text-praxis-white">
                   <svg
-                    className="h-5 w-5 text-praxis-accent mr-3 flex-shrink-0"
+                    className="h-5 w-5 text-praxis-gold mr-3 flex-shrink-0"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -110,7 +110,7 @@ export const TrialCallToActionSection: React.FC<
                 {t.trustSignals.items.map((item, index) => (
                   <div
                     key={index}
-                    className="flex items-center text-praxis-blue-100"
+                    className="flex items-center text-praxis-sky-100"
                   >
                     <svg
                       className="h-4 w-4 text-praxis-gold mr-2 flex-shrink-0"
@@ -167,7 +167,7 @@ export const TrialCallToActionSection: React.FC<
                       <span className="text-sm font-medium text-praxis-dark-blue">
                         {item.label}
                       </span>
-                      <span className="text-sm font-bold text-praxis-accent">
+                      <span className="text-sm font-bold text-praxis-gold">
                         {item.value}
                       </span>
                     </div>
@@ -177,7 +177,7 @@ export const TrialCallToActionSection: React.FC<
             </div>
 
             {/* Floating elements */}
-            <div className="absolute -top-4 -left-4 bg-praxis-accent text-praxis-white p-3 rounded-full shadow-lg">
+            <div className="absolute -top-4 -left-4 bg-praxis-gold text-praxis-dark-blue p-3 rounded-full shadow-lg">
               <svg
                 className="w-6 h-6"
                 fill="none"

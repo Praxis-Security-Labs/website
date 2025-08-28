@@ -152,10 +152,10 @@ export const EnterpriseContactSection: React.FC<
 
   if (isSubmitted) {
     return (
-      <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
+      <section className="bg-gradient-to-br from-praxis-pine to-praxis-pine-800 border-t border-praxis-pine">
         <div className="container mx-auto px-6 py-20">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-praxis-pine text-white rounded-full mb-6">
               <svg
                 className="w-8 h-8"
                 fill="none"
@@ -173,7 +173,7 @@ export const EnterpriseContactSection: React.FC<
             <h2 className="text-3xl font-heading font-bold text-white mb-4">
               Thank You!
             </h2>
-            <p className="text-xl text-praxis-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl text-praxis-sky-100 max-w-2xl mx-auto">
               {t.form.successMessage}
             </p>
           </div>
@@ -183,14 +183,14 @@ export const EnterpriseContactSection: React.FC<
   }
 
   return (
-    <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
+    <section className="bg-gradient-to-br from-praxis-pine to-praxis-pine-800 border-t border-praxis-pine">
       <div className="container mx-auto px-6 py-20">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
             {t.sectionTitle}
           </h2>
-          <p className="text-xl text-praxis-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-praxis-sky-100 max-w-3xl mx-auto">
             {t.sectionDescription}
           </p>
         </div>
@@ -201,7 +201,7 @@ export const EnterpriseContactSection: React.FC<
             <h3 className="text-3xl font-heading font-bold mb-6">
               {t.leftContent.headline}
             </h3>
-            <p className="text-lg text-praxis-blue-100 mb-8">
+            <p className="text-lg text-praxis-sky-100 mb-8">
               {t.leftContent.description}
             </p>
 
@@ -209,9 +209,9 @@ export const EnterpriseContactSection: React.FC<
             <ul className="space-y-4 mb-12">
               {t.leftContent.benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start">
-                  <div className="flex-shrink-0 w-6 h-6 bg-praxis-pine rounded-full flex items-center justify-center mt-0.5 mr-3">
+                  <div className="flex-shrink-0 w-6 h-6 bg-praxis-gold rounded-full flex items-center justify-center mt-0.5 mr-3">
                     <svg
-                      className="w-3 h-3 text-white"
+                      className="w-3 h-3 text-praxis-dark-blue"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -222,20 +222,20 @@ export const EnterpriseContactSection: React.FC<
                       />
                     </svg>
                   </div>
-                  <span className="text-praxis-blue-100">{benefit}</span>
+                  <span className="text-praxis-sky-100">{benefit}</span>
                 </li>
               ))}
             </ul>
 
             {/* Direct Contact Info */}
-            <div className="bg-praxis-charcoal/50 backdrop-blur rounded-lg p-6 border border-praxis-pine">
+            <div className="bg-praxis-pine-700 backdrop-blur rounded-lg p-6 border border-praxis-pine-600">
               <h4 className="text-xl font-semibold mb-4">
                 {t.leftContent.contactInfo.title}
               </h4>
               <div className="space-y-3">
                 <div className="flex items-center">
                   <svg
-                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
+                    className="w-5 h-5 text-praxis-sky mr-3 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -249,14 +249,14 @@ export const EnterpriseContactSection: React.FC<
                   </svg>
                   <a
                     href={`mailto:${t.leftContent.contactInfo.email}`}
-                    className="text-praxis-blue-100 hover:text-white transition-colors"
+                    className="text-praxis-sky-100 hover:text-white transition-colors"
                   >
                     {t.leftContent.contactInfo.email}
                   </a>
                 </div>
                 <div className="flex items-center">
                   <svg
-                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
+                    className="w-5 h-5 text-praxis-sky mr-3 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -270,7 +270,7 @@ export const EnterpriseContactSection: React.FC<
                   </svg>
                   <a
                     href={`tel:${t.leftContent.contactInfo.phone}`}
-                    className="text-praxis-blue-100 hover:text-white transition-colors"
+                    className="text-praxis-sky-100 hover:text-white transition-colors"
                   >
                     {t.leftContent.contactInfo.phone}
                   </a>
@@ -300,7 +300,7 @@ export const EnterpriseContactSection: React.FC<
                     name="firstName"
                     id="firstName"
                     required
-                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                   />
                 </div>
                 <div>
@@ -315,7 +315,7 @@ export const EnterpriseContactSection: React.FC<
                     name="lastName"
                     id="lastName"
                     required
-                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                    className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                   />
                 </div>
               </div>
@@ -333,7 +333,7 @@ export const EnterpriseContactSection: React.FC<
                   name="email"
                   id="email"
                   required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
               </div>
 
@@ -350,7 +350,7 @@ export const EnterpriseContactSection: React.FC<
                   name="company"
                   id="company"
                   required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
               </div>
 
@@ -367,7 +367,7 @@ export const EnterpriseContactSection: React.FC<
                   name="jobTitle"
                   id="jobTitle"
                   required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
               </div>
 
@@ -383,7 +383,7 @@ export const EnterpriseContactSection: React.FC<
                   name="employeeCount"
                   id="employeeCount"
                   required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 >
                   {t.form.employeeOptions.map(option => (
                     <option key={option.value} value={option.value}>
@@ -405,7 +405,7 @@ export const EnterpriseContactSection: React.FC<
                   type="tel"
                   name="phone"
                   id="phone"
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
               </div>
 
@@ -421,7 +421,7 @@ export const EnterpriseContactSection: React.FC<
                   name="message"
                   id="message"
                   rows={4}
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors resize-y"
+                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors resize-y"
                   placeholder="Tell us about your specific requirements..."
                 />
               </div>
@@ -430,7 +430,7 @@ export const EnterpriseContactSection: React.FC<
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-praxis-blue hover:bg-praxis-blue-700 disabled:bg-praxis-blue-300 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-praxis-blue focus:ring-offset-2"
+                className="w-full bg-praxis-sky hover:bg-praxis-sky-600 disabled:bg-praxis-sky-300 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-praxis-sky focus:ring-offset-2"
               >
                 {isSubmitting ? t.form.submittingText : t.form.submitText}
               </button>

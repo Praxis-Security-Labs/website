@@ -19,13 +19,6 @@ export const Header: React.FC<HeaderProps> = ({
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const t = useTranslations(currentLanguage as 'en' | 'no');
 
-  // Get marketplace URL with fallback
-  const marketplaceUrl =
-    typeof import.meta !== 'undefined' &&
-    import.meta.env?.ASTRO_PUBLIC_MARKETPLACE_URL
-      ? import.meta.env.ASTRO_PUBLIC_MARKETPLACE_URL
-      : 'https://azuremarketplace.microsoft.com';
-
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -224,16 +217,14 @@ export const Header: React.FC<HeaderProps> = ({
               {t('nav.login')}
             </button>
 
-            {/* Azure Marketplace Button */}
+            {/* Trial Button */}
             <a
-              href={marketplaceUrl}
+              href="/trial-explainer"
               className="btn-accent btn-sm"
-              target="_blank"
-              rel="noopener noreferrer"
               aria-label={
                 currentLanguage === 'no'
-                  ? 'Prøv gratis på Azure Marketplace'
-                  : 'Start trial on Azure Marketplace'
+                  ? 'Start gratis prøveperiode'
+                  : 'Start free trial'
               }
             >
               {t('nav.trial')}
@@ -395,15 +386,13 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
 
               <a
-                href={marketplaceUrl}
+                href="/trial-explainer"
                 className="btn-accent w-full text-center"
-                target="_blank"
-                rel="noopener noreferrer"
                 onClick={closeMobileMenu}
                 aria-label={
                   currentLanguage === 'no'
-                    ? 'Start prøveversjon på Azure Marketplace'
-                    : 'Start trial on Azure Marketplace'
+                    ? 'Start gratis prøveperiode'
+                    : 'Start free trial'
                 }
               >
                 {t('nav.trial')}
