@@ -169,11 +169,11 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
         ],
       },
       ctaSection: {
-        title: 'Join the Security Culture Research Community',
+        title: 'Start Your Free Trial Today',
         description:
-          'Get unlimited access to research, tools, and expert insights to advance your security culture programs.',
-        primaryText: 'Start Free Research Access',
-        secondaryText: 'Download Sample Resources',
+          'Get instant access to Praxis Navigator with a 30-day free trial. No credit card required.',
+        primaryText: 'Install from Azure Marketplace',
+        secondaryText: 'Watch Product Demo',
       },
     },
     no: {
@@ -339,11 +339,11 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
         ],
       },
       ctaSection: {
-        title: 'Bli Med i Sikkerhetskultur Forsknings Samfunnet',
+        title: 'Start Din Gratis Prøveperiode I Dag',
         description:
-          'Få ubegrenset tilgang til forskning, verktøy og ekspert innsikter for å fremme dine sikkerhetskultur programmer.',
-        primaryText: 'Start Gratis Forsknings Tilgang',
-        secondaryText: 'Last ned Prøve Ressurser',
+          'Få øyeblikkelig tilgang til Praxis Navigator med en 30-dagers gratis prøveperiode. Ingen kredittkort påkrevd.',
+        primaryText: 'Installer fra Azure Marketplace',
+        secondaryText: 'Se Produkt Demo',
       },
     },
   };
@@ -409,9 +409,6 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
                     <span className="bg-praxis-accent text-praxis-white px-3 py-1 rounded-full text-xs font-semibold">
                       {resource.type}
                     </span>
-                    <span className="text-sm text-praxis-dark-blue-600">
-                      {resource.date}
-                    </span>
                   </div>
 
                   <h4 className="text-lg font-heading font-bold text-praxis-dark-blue mb-3">
@@ -422,11 +419,7 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
                     {resource.description}
                   </p>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-praxis-dark-blue-600">
-                      {resource.downloadCount}{' '}
-                      {language === 'no' ? 'nedlastinger' : 'downloads'}
-                    </span>
+                  <div className="flex items-center justify-end">
                     <button className="text-praxis-accent hover:text-praxis-dark-blue font-semibold text-sm">
                       {language === 'no' ? 'Last ned →' : 'Download →'}
                     </button>
@@ -475,7 +468,21 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
             {t.ctaSection.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="btn-accent">{t.ctaSection.primaryText}</button>
+            <a
+              href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-accent inline-flex items-center justify-center"
+            >
+              <svg
+                className="w-5 h-5 mr-2"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M3.055 3.055A1 1 0 014 3h16a1 1 0 01.945.55l.78 2.337A1 1 0 0121 7H3a1 1 0 01-.945-1.113l.78-2.337A1 1 0 013.055 3.055zM3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+              </svg>
+              {t.ctaSection.primaryText}
+            </a>
             <button className="btn-outline-white">
               {t.ctaSection.secondaryText}
             </button>

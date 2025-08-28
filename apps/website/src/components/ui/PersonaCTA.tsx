@@ -24,7 +24,10 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
   const ctaConfig = {
     'sat-teams': {
       en: {
-        primary: { text: 'Start Free Trial', href: '/trial-explainer' },
+        primary: {
+          text: 'Start Free Trial',
+          href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator',
+        },
         secondary: {
           text: 'View Training ROI Guide',
           href: '/resources/training-roi',
@@ -33,7 +36,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       no: {
         primary: {
           text: 'Start Gratis Prøveperiode',
-          href: '/no/trial-explainer',
+          href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator',
         },
         secondary: {
           text: 'Se Opplæring ROI Guide',
@@ -44,8 +47,8 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
     'security-leaders': {
       en: {
         primary: {
-          text: 'Request CISO Demo',
-          href: '/contact?segment=security-leaders',
+          text: 'Start Free Trial',
+          href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator',
         },
         secondary: {
           text: 'View ROI Calculator',
@@ -54,8 +57,8 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       },
       no: {
         primary: {
-          text: 'Be om CISO Demo',
-          href: '/no/contact?segment=security-leaders',
+          text: 'Start Gratis Prøveperiode',
+          href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator',
         },
         secondary: {
           text: 'Se ROI Kalkulator',
@@ -119,6 +122,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
   // Use custom text if provided for special variants
   const displayText = customHeadline || config.text;
   const displayHref = config.href;
+  const isExternalLink = displayHref.startsWith('http');
 
   // Analytics tracking for persona-specific CTAs
   const handleClick = () => {
@@ -168,6 +172,10 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       data-segment={segment}
       data-variant={variant}
       data-language={language}
+      {...(isExternalLink && {
+        target: '_blank',
+        rel: 'noopener noreferrer',
+      })}
     >
       {displayText}
       <svg

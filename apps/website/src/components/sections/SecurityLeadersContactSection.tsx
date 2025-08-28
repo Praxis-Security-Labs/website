@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface SecurityLeadersContactSectionProps {
   language?: 'en' | 'no';
@@ -7,240 +7,61 @@ interface SecurityLeadersContactSectionProps {
 export const SecurityLeadersContactSection: React.FC<
   SecurityLeadersContactSectionProps
 > = ({ language = 'en' }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
   const content = {
     en: {
-      sectionTitle: 'Speak with Our Security Leadership Team',
+      sectionTitle: 'Try Praxis Navigator Free for 30 Days',
       sectionDescription:
-        'Get personalized guidance from CISOs and security experts who understand your challenges.',
+        'Start measuring your security culture today with no commitment. Install directly from Microsoft Azure Marketplace.',
       leftContent: {
-        headline: 'Expert CISO Consultation',
+        headline: '30-Day Free Trial Benefits',
         description:
-          'Our team includes former CISOs and security leaders from Fortune 500 companies who understand the unique challenges of enterprise security leadership.',
+          'Get full access to Praxis Navigator through Microsoft Azure Marketplace. No credit card required, no strings attached.',
         benefits: [
-          'Strategic security culture assessment',
-          'ROI calculation and business case development',
-          'Board presentation template and guidance',
-          'Regulatory compliance roadmap planning',
-          'Technical architecture review',
-          '30-day pilot program design',
+          'Complete security culture assessment for your organization',
+          'Behavioral risk analytics and insights dashboard',
+          'Board-ready compliance reports and metrics',
+          'Training effectiveness measurement tools',
+          'Microsoft Graph integration for seamless deployment',
+          'Expert onboarding and setup guidance included',
         ],
         contactInfo: {
-          title: 'Direct Line to Leadership',
-          email: 'ciso@praxisnavigator.io',
+          title: 'Questions About Your Trial?',
+          email: 'support@praxisnavigator.io',
           phone: '+47 900 12 345',
-          availability: 'Available for calls: EU/US business hours',
+          availability: 'Support available: EU/US business hours',
         },
-      },
-      form: {
-        title: 'Schedule CISO Consultation',
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        email: 'Business Email',
-        company: 'Company',
-        jobTitle: 'Job Title',
-        employeeCount: 'Organization Size',
-        currentChallenges: 'Current Security Challenges',
-        interestArea: 'Primary Interest Area',
-        message: 'Specific Questions (Optional)',
-        employeeOptions: [
-          { value: '', label: 'Select organization size...' },
-          { value: '500-999', label: '500-999 employees' },
-          { value: '1000-4999', label: '1,000-4,999 employees' },
-          { value: '5000-9999', label: '5,000-9,999 employees' },
-          { value: '10000+', label: '10,000+ employees' },
-        ],
-        challengeOptions: [
-          'Security awareness training effectiveness',
-          'Incident response and breach preparedness',
-          'Regulatory compliance (SOC2, ISO27001, etc.)',
-          'Board reporting and security metrics',
-          'Zero trust architecture implementation',
-          'Third-party risk management',
-          'Cloud security governance',
-          'Security culture measurement',
-        ],
-        interestOptions: [
-          { value: '', label: 'Select primary interest...' },
-          { value: 'culture-assessment', label: 'Security Culture Assessment' },
-          { value: 'behavioral-monitoring', label: 'Behavioral Monitoring' },
-          { value: 'compliance-automation', label: 'Compliance Automation' },
-          {
-            value: 'incident-response',
-            label: 'Incident Response Enhancement',
-          },
-          { value: 'roi-analysis', label: 'ROI Analysis & Business Case' },
-          { value: 'pilot-program', label: 'Pilot Program Design' },
-        ],
-        submitText: 'Schedule Consultation',
-        submittingText: 'Scheduling...',
-        successMessage:
-          'Thank you! A member of our leadership team will contact you within 4 business hours.',
       },
     },
     no: {
-      sectionTitle: 'Snakk med Vårt Sikkerhets-ledelse Team',
+      sectionTitle: 'Prøv Praxis Navigator Gratis i 30 Dager',
       sectionDescription:
-        'Få personlig veiledning fra CISOs og sikkerhetseksperter som forstår dine utfordringer.',
+        'Start måling av din sikkerhetskultur i dag uten forpliktelser. Installer direkte fra Microsoft Azure Marketplace.',
       leftContent: {
-        headline: 'Ekspert CISO Konsultasjon',
+        headline: '30-Dagers Gratis Prøveperiode Fordeler',
         description:
-          'Vårt team inkluderer tidligere CISOs og sikkerhetsledere fra Fortune 500 selskaper som forstår de unike utfordringene innen virksomhetssikkerhetsledelse.',
+          'Få full tilgang til Praxis Navigator gjennom Microsoft Azure Marketplace. Ingen kredittkort påkrevd, ingen forpliktelser.',
         benefits: [
-          'Strategisk sikkerhetskulturell vurdering',
-          'ROI beregning og business case utvikling',
-          'Styrerapport mal og veiledning',
-          'Regulatorisk compliance veikart planlegging',
-          'Teknisk arkitektur gjennomgang',
-          '30-dagers pilot program design',
+          'Komplett sikkerhetskultur vurdering for din organisasjon',
+          'Atferdsrisiko analytikk og innsikt dashbord',
+          'Styreklare compliance rapporter og målinger',
+          'Opplæring effektivitet måling verktøy',
+          'Microsoft Graph integrasjon for sømløs utplassering',
+          'Ekspert innføring og oppsett veiledning inkludert',
         ],
         contactInfo: {
-          title: 'Direkte Linje til Ledelse',
-          email: 'ciso@praxisnavigator.io',
+          title: 'Spørsmål Om Din Prøveperiode?',
+          email: 'support@praxisnavigator.io',
           phone: '+47 900 12 345',
-          availability: 'Tilgjengelig for samtaler: EU/US arbeidstid',
+          availability: 'Support tilgjengelig: EU/US arbeidstid',
         },
-      },
-      form: {
-        title: 'Planlegg CISO Konsultasjon',
-        firstName: 'Fornavn',
-        lastName: 'Etternavn',
-        email: 'Arbeids-epost',
-        company: 'Bedrift',
-        jobTitle: 'Stillingstittel',
-        employeeCount: 'Organisasjonsstørrelse',
-        currentChallenges: 'Nåværende Sikkerhetsutfordringer',
-        interestArea: 'Primær Interesseområde',
-        message: 'Spesifikke Spørsmål (Valgfritt)',
-        employeeOptions: [
-          { value: '', label: 'Velg organisasjonsstørrelse...' },
-          { value: '500-999', label: '500-999 ansatte' },
-          { value: '1000-4999', label: '1,000-4,999 ansatte' },
-          { value: '5000-9999', label: '5,000-9,999 ansatte' },
-          { value: '10000+', label: '10,000+ ansatte' },
-        ],
-        challengeOptions: [
-          'Sikkerhetsbevissthet trening effektivitet',
-          'Hendelseshåndtering og brudd beredskap',
-          'Regulatorisk compliance (SOC2, ISO27001, etc.)',
-          'Styrerapportering og sikkerhet målinger',
-          'Zero trust arkitektur implementering',
-          'Tredjeparters risikostyring',
-          'Sky sikkerhet styring',
-          'Sikkerhetskultur måling',
-        ],
-        interestOptions: [
-          { value: '', label: 'Velg primær interesse...' },
-          { value: 'culture-assessment', label: 'Sikkerhetskultur Vurdering' },
-          { value: 'behavioral-monitoring', label: 'Atferdsovervåking' },
-          {
-            value: 'compliance-automation',
-            label: 'Compliance Automatisering',
-          },
-          {
-            value: 'incident-response',
-            label: 'Hendelseshåndtering Forbedring',
-          },
-          { value: 'roi-analysis', label: 'ROI Analyse & Business Case' },
-          { value: 'pilot-program', label: 'Pilot Program Design' },
-        ],
-        submitText: 'Planlegg Konsultasjon',
-        submittingText: 'Planlegger...',
-        successMessage:
-          'Takk! Et medlem av vårt ledelsesteam vil kontakte deg innen 4 arbeidstimer.',
       },
     },
   };
 
   const t = content[language];
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-
-    const formData = new FormData(event.currentTarget);
-
-    // Handle multiple checkbox values for challenges
-    const challengeElements = event.currentTarget.querySelectorAll(
-      'input[name="currentChallenges"]:checked'
-    ) as NodeListOf<HTMLInputElement>;
-    const challenges = Array.from(challengeElements).map(el => el.value);
-
-    const data = {
-      firstName: formData.get('firstName'),
-      lastName: formData.get('lastName'),
-      email: formData.get('email'),
-      company: formData.get('company'),
-      jobTitle: formData.get('jobTitle'),
-      employeeCount: formData.get('employeeCount'),
-      currentChallenges: challenges,
-      interestArea: formData.get('interestArea'),
-      message: formData.get('message'),
-      segment: 'security-leaders',
-      formType: 'security-leaders-contact',
-      language,
-    };
-
-    try {
-      // Submit to HubSpot or backend API
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        // Reset form
-        (event.target as HTMLFormElement).reset();
-      } else {
-        console.error('Form submission failed');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  if (isSubmitted) {
-    return (
-      <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
-        <div className="container mx-auto px-6 py-20">
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full mb-6">
-              <svg
-                className="w-8 h-8"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <h2 className="text-3xl font-heading font-bold text-white mb-4">
-              Thank You!
-            </h2>
-            <p className="text-xl text-praxis-blue-100 max-w-2xl mx-auto">
-              {t.form.successMessage}
-            </p>
-          </div>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section className="bg-gradient-to-br from-praxis-charcoal to-praxis-charcoal/95 border-t border-praxis-pine">
+    <section className="bg-gradient-to-br from-praxis-dark-blue to-praxis-dark-blue-800 border-t border-praxis-blue-300">
       <div className="container mx-auto px-6 py-20">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -266,7 +87,7 @@ export const SecurityLeadersContactSection: React.FC<
             <ul className="space-y-4 mb-12">
               {t.leftContent.benefits.map((benefit, index) => (
                 <li key={index} className="flex items-start">
-                  <div className="flex-shrink-0 w-6 h-6 bg-praxis-pine rounded-full flex items-center justify-center mt-0.5 mr-3">
+                  <div className="flex-shrink-0 w-6 h-6 bg-praxis-accent rounded-full flex items-center justify-center mt-0.5 mr-3">
                     <svg
                       className="w-3 h-3 text-white"
                       fill="currentColor"
@@ -285,14 +106,14 @@ export const SecurityLeadersContactSection: React.FC<
             </ul>
 
             {/* Direct Contact Info */}
-            <div className="bg-praxis-charcoal/50 backdrop-blur rounded-lg p-6 border border-praxis-pine">
+            <div className="bg-praxis-dark-blue-700/50 backdrop-blur rounded-lg p-6 border border-praxis-blue-400">
               <h4 className="text-xl font-semibold mb-4">
                 {t.leftContent.contactInfo.title}
               </h4>
               <div className="space-y-3">
                 <div className="flex items-center">
                   <svg
-                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
+                    className="w-5 h-5 text-praxis-blue-200 mr-3 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -313,7 +134,7 @@ export const SecurityLeadersContactSection: React.FC<
                 </div>
                 <div className="flex items-center">
                   <svg
-                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0"
+                    className="w-5 h-5 text-praxis-blue-200 mr-3 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -334,7 +155,7 @@ export const SecurityLeadersContactSection: React.FC<
                 </div>
                 <div className="flex items-start">
                   <svg
-                    className="w-5 h-5 text-praxis-blue mr-3 flex-shrink-0 mt-0.5"
+                    className="w-5 h-5 text-praxis-blue-200 mr-3 flex-shrink-0 mt-0.5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -354,190 +175,153 @@ export const SecurityLeadersContactSection: React.FC<
             </div>
           </div>
 
-          {/* Right Column - Form */}
+          {/* Right Column - Free Trial CTA */}
           <div className="bg-praxis-white rounded-2xl shadow-xl p-8">
-            <h3 className="text-2xl font-heading font-bold text-praxis-dark-blue mb-6">
-              {t.form.title}
-            </h3>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Name Fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.firstName} *
-                  </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    id="firstName"
-                    required
-                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-praxis-accent rounded-full mb-6">
+                <svg
+                  className="w-8 h-8 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
                   />
-                </div>
-                <div>
-                  <label
-                    htmlFor="lastName"
-                    className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                  >
-                    {t.form.lastName} *
-                  </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    id="lastName"
-                    required
-                    className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
-                  />
-                </div>
+                </svg>
               </div>
+              <h3 className="text-2xl font-heading font-bold text-praxis-dark-blue mb-4">
+                {language === 'no'
+                  ? 'Start Din Gratis Prøveperiode'
+                  : 'Start Your Free Trial'}
+              </h3>
+              <p className="text-praxis-dark-blue-600 mb-6">
+                {language === 'no'
+                  ? 'Installer Praxis Navigator direkte fra Microsoft Azure Marketplace og få umiddelbar tilgang til alle funksjoner.'
+                  : 'Install Praxis Navigator directly from Microsoft Azure Marketplace and get instant access to all features.'}
+              </p>
+            </div>
 
-              {/* Email */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                >
-                  {t.form.email} *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
-                />
-              </div>
+            {/* Trial Features */}
+            <div className="mb-8">
+              <h4 className="text-lg font-heading font-bold text-praxis-dark-blue mb-4">
+                {language === 'no'
+                  ? 'Inkludert i Prøveperioden:'
+                  : 'Included in Your Trial:'}
+              </h4>
+              <ul className="space-y-3">
+                {[
+                  language === 'no'
+                    ? 'Komplett sikkerhetskultur vurdering'
+                    : 'Complete security culture assessment',
+                  language === 'no'
+                    ? 'Atferdsrisiko dashbord'
+                    : 'Behavioral risk dashboard',
+                  language === 'no'
+                    ? 'Compliance rapporter'
+                    : 'Compliance reports',
+                  language === 'no'
+                    ? 'Microsoft Graph integrasjon'
+                    : 'Microsoft Graph integration',
+                  language === 'no' ? 'Ekspert support' : 'Expert support',
+                ].map((feature, index) => (
+                  <li key={index} className="flex items-center">
+                    <div className="flex-shrink-0 w-5 h-5 bg-praxis-accent rounded-full flex items-center justify-center mr-3">
+                      <svg
+                        className="w-3 h-3 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-praxis-dark-blue-600">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              {/* Company */}
-              <div>
-                <label
-                  htmlFor="company"
-                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                >
-                  {t.form.company} *
-                </label>
-                <input
-                  type="text"
-                  name="company"
-                  id="company"
-                  required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
-                />
-              </div>
-
-              {/* Job Title */}
-              <div>
-                <label
-                  htmlFor="jobTitle"
-                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                >
-                  {t.form.jobTitle} *
-                </label>
-                <input
-                  type="text"
-                  name="jobTitle"
-                  id="jobTitle"
-                  required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
-                />
-              </div>
-
-              {/* Employee Count */}
-              <div>
-                <label
-                  htmlFor="employeeCount"
-                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                >
-                  {t.form.employeeCount} *
-                </label>
-                <select
-                  name="employeeCount"
-                  id="employeeCount"
-                  required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
-                >
-                  {t.form.employeeOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Current Challenges */}
-              <div>
-                <label className="block text-sm font-medium text-praxis-dark-blue mb-2">
-                  {t.form.currentChallenges} *
-                </label>
-                <div className="space-y-2">
-                  {t.form.challengeOptions.map((challenge, index) => (
-                    <label key={index} className="flex items-start">
-                      <input
-                        type="checkbox"
-                        name="currentChallenges"
-                        value={challenge}
-                        className="mt-1 rounded border-praxis-blue-300 text-praxis-blue focus:ring-praxis-blue"
-                      />
-                      <span className="ml-2 text-sm text-praxis-dark-blue">
-                        {challenge}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {/* Interest Area */}
-              <div>
-                <label
-                  htmlFor="interestArea"
-                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                >
-                  {t.form.interestArea} *
-                </label>
-                <select
-                  name="interestArea"
-                  id="interestArea"
-                  required
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors"
-                >
-                  {t.form.interestOptions.map(option => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Message */}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-praxis-dark-blue mb-2"
-                >
-                  {t.form.message}
-                </label>
-                <textarea
-                  name="message"
-                  id="message"
-                  rows={4}
-                  className="w-full px-4 py-3 border border-praxis-blue-300 rounded-lg focus:ring-2 focus:ring-praxis-blue focus:border-transparent transition-colors resize-y"
-                  placeholder="Tell us about your specific security challenges..."
-                />
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-praxis-blue hover:bg-praxis-blue-700 disabled:bg-praxis-blue-300 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-praxis-blue focus:ring-offset-2"
+            {/* CTA Buttons */}
+            <div className="space-y-4">
+              <a
+                href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary w-full flex items-center justify-center"
               >
-                {isSubmitting ? t.form.submittingText : t.form.submitText}
+                <svg
+                  className="w-5 h-5 mr-2"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M3.055 3.055A1 1 0 014 3h16a1 1 0 01.945.55l.78 2.337A1 1 0 0121 7H3a1 1 0 01-.945-1.113l.78-2.337A1 1 0 013.055 3.055zM3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                </svg>
+                {language === 'no'
+                  ? 'Installer fra Azure Marketplace'
+                  : 'Install from Azure Marketplace'}
+              </a>
+
+              <button className="btn btn-outline w-full">
+                {language === 'no' ? 'Se Produkt Demo' : 'Watch Product Demo'}
               </button>
-            </form>
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="mt-8 pt-6 border-t border-praxis-blue-100">
+              <div className="flex items-center justify-center space-x-4 text-sm text-praxis-dark-blue-600">
+                <div className="flex items-center">
+                  <svg
+                    className="w-4 h-4 mr-1 text-green-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {language === 'no' ? 'Ingen kredittkort' : 'No credit card'}
+                </div>
+                <div className="flex items-center">
+                  <svg
+                    className="w-4 h-4 mr-1 text-green-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {language === 'no' ? '30 dager gratis' : '30 days free'}
+                </div>
+                <div className="flex items-center">
+                  <svg
+                    className="w-4 h-4 mr-1 text-green-500"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {language === 'no'
+                    ? 'Øyeblikkelig tilgang'
+                    : 'Instant access'}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
