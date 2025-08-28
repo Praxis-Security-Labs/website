@@ -54,11 +54,6 @@ export const Header: React.FC<HeaderProps> = ({
       hasDropdown: false,
     },
     {
-      label: t('nav.about'),
-      href: currentLanguage === 'en' ? '/about' : '/no/about',
-      hasDropdown: false,
-    },
-    {
       label: t('nav.resources'),
       href: currentLanguage === 'en' ? '/resources' : '/no/resources',
       hasDropdown: false,
@@ -69,8 +64,8 @@ export const Header: React.FC<HeaderProps> = ({
       hasDropdown: false,
     },
     {
-      label: t('nav.contact'),
-      href: currentLanguage === 'en' ? '/contact' : '/no/contact',
+      label: t('nav.about'),
+      href: currentLanguage === 'en' ? '/about' : '/no/about',
       hasDropdown: false,
     },
   ];
@@ -121,9 +116,16 @@ export const Header: React.FC<HeaderProps> = ({
                   : 'Praxis Navigator Home'
               }
             >
-              <div className="logo-sm text-praxis-white font-heading">
-                <span className="text-praxis-gold">PRAXIS</span>{' '}
-                <span className="text-praxis-white">NAVIGATOR</span>
+              <div className="flex items-center space-x-3">
+                <img
+                  src="/images/logos/praxisLogoSquare.svg"
+                  alt="Praxis Navigator Icon"
+                  className="h-8 w-8 md:h-10 md:w-10"
+                />
+                <div className="text-praxis-white font-heading">
+                  <span className="text-praxis-gold">PRAXIS</span>{' '}
+                  <span className="text-praxis-white">NAVIGATOR</span>
+                </div>
               </div>
             </a>
           </div>
@@ -230,7 +232,7 @@ export const Header: React.FC<HeaderProps> = ({
               rel="noopener noreferrer"
               aria-label={
                 currentLanguage === 'no'
-                  ? 'Start prøveversjon på Azure Marketplace'
+                  ? 'Prøv gratis på Azure Marketplace'
                   : 'Start trial on Azure Marketplace'
               }
             >
