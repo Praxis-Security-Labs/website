@@ -162,20 +162,13 @@ export const SocialProofSection: React.FC<SocialProofSectionProps> = ({
             <h3 className="h4 text-praxis-dark-blue mb-6">
               Join Industry Leaders Measuring What Matters
             </h3>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
-              <a
-                href="/product/demo"
-                className="btn-accent btn-lg hover-lift active-scale focus-ring-gold flex-1"
-                aria-label="Request a personalized demo to see proven results"
-              >
-                Request Demo
-              </a>
+            <div className="flex justify-center max-w-lg mx-auto">
               <a
                 href="/trial-explainer"
-                className="btn-secondary btn-lg hover-lift active-scale focus-ring flex-1"
-                aria-label="Start your free trial"
+                className="btn-accent btn-xl hover-lift active-scale focus-ring-gold w-full text-lg font-bold shadow-2xl"
+                aria-label="Sign up today to start your free trial"
               >
-                Start Free Trial
+                Sign up today
               </a>
             </div>
           </div>

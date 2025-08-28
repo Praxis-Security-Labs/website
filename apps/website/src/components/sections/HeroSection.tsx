@@ -37,29 +37,18 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           {content.hero.problem}
         </p>
 
-        {/* Primary CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16 max-w-lg mx-auto">
+        {/* Primary CTA */}
+        <div className="flex justify-center mb-16 max-w-lg mx-auto">
           <a
-            href={`/${language === 'no' ? 'no/' : ''}demo`}
-            className="btn-accent btn-lg hover-lift active-scale focus-ring-gold flex-1"
+            href="/trial-explainer"
+            className="btn-accent btn-xl hover-lift active-scale focus-ring-gold w-full text-lg font-bold shadow-2xl"
             aria-label={
               language === 'no'
-                ? 'Bestill en demo for å se hvordan Praxis Navigator fungerer'
-                : 'Schedule a demo to see how Praxis Navigator works'
+                ? 'Registrer deg i dag for å starte din gratis prøveversjon'
+                : 'Sign up today to start your free trial'
             }
           >
-            {content.hero.ctaPrimary}
-          </a>
-          <a
-            href={`/${language === 'no' ? 'no/' : ''}trial`}
-            className="btn-primary btn-lg hover-lift active-scale focus-ring flex-1"
-            aria-label={
-              language === 'no'
-                ? 'Start din gratis prøveversjon av Praxis Navigator'
-                : 'Start your free trial of Praxis Navigator'
-            }
-          >
-            {content.hero.ctaSecondary}
+            {language === 'no' ? 'Registrer deg i dag' : 'Sign up today'}
           </a>
         </div>
 
