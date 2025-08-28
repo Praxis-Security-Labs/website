@@ -26,7 +26,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       en: {
         primary: {
           text: 'Start Free Trial',
-          href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator',
+          href: '/trial-explainer',
         },
         secondary: {
           text: 'View Training ROI Guide',
@@ -36,7 +36,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       no: {
         primary: {
           text: 'Start Gratis Prøveperiode',
-          href: 'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator',
+          href: '/trial-explainer',
         },
         secondary: {
           text: 'Se Opplæring ROI Guide',

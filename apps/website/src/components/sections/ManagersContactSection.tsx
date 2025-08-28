@@ -251,9 +251,7 @@ export const ManagersContactSection: React.FC<ManagersContactSectionProps> = ({
             {/* CTA Buttons */}
             <div className="space-y-4">
               <a
-                href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/trial-explainer"
                 className="btn btn-primary w-full flex items-center justify-center"
               >
                 <svg
@@ -264,8 +262,8 @@ export const ManagersContactSection: React.FC<ManagersContactSectionProps> = ({
                   <path d="M3.055 3.055A1 1 0 014 3h16a1 1 0 01.945.55l.78 2.337A1 1 0 0121 7H3a1 1 0 01-.945-1.113l.78-2.337A1 1 0 013.055 3.055zM3 9h18v10a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                 </svg>
                 {language === 'no'
-                  ? 'Installer fra Azure Marketplace'
-                  : 'Install from Azure Marketplace'}
+                  ? 'Start Gratis Prøveperiode'
+                  : 'Start Free Trial'}
               </a>
 
               <button className="btn btn-outline w-full">

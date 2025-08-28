@@ -27,14 +27,6 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
 
   const t = pages[language].pricing.table;
 
-  const marketplaceUrl =
-    typeof window !== 'undefined'
-      ? window.location.host.includes('localhost')
-        ? 'https://azuremarketplace.microsoft.com'
-        : import.meta.env.ASTRO_PUBLIC_MARKETPLACE_URL ||
-          'https://azuremarketplace.microsoft.com'
-      : 'https://azuremarketplace.microsoft.com';
-
   // Get pricing plans from translation system
   const pricingTiers: PricingTier[] = t.plans.map(plan => ({
     id: plan.id,
@@ -50,7 +42,7 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
         ? language === 'no'
           ? '/no/contact'
           : '/contact'
-        : marketplaceUrl,
+        : '/trial-explainer',
     supportLevel: plan.supportLevel,
   }));
 

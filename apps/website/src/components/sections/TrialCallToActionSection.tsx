@@ -10,14 +10,6 @@ export const TrialCallToActionSection: React.FC<
 > = ({ language = 'en' }) => {
   const t = forms[language].trialCta;
 
-  const marketplaceUrl =
-    typeof window !== 'undefined'
-      ? window.location.host.includes('localhost')
-        ? 'https://azuremarketplace.microsoft.com'
-        : import.meta.env.ASTRO_PUBLIC_MARKETPLACE_URL ||
-          'https://azuremarketplace.microsoft.com'
-      : 'https://azuremarketplace.microsoft.com';
-
   return (
     <section className="bg-gradient-to-br from-praxis-dark-blue via-praxis-dark-blue-600 to-praxis-blue py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,14 +58,12 @@ export const TrialCallToActionSection: React.FC<
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <a
-                href={marketplaceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/trial-explainer"
                 className="btn-accent btn-lg inline-flex items-center justify-center group"
                 aria-label={
                   language === 'no'
-                    ? 'Start gratis prøveversjon på Azure Marketplace'
-                    : 'Start free trial on Azure Marketplace'
+                    ? 'Start gratis prøveversjon'
+                    : 'Start free trial'
                 }
               >
                 {t.ctaTrialText}
@@ -88,7 +78,7 @@ export const TrialCallToActionSection: React.FC<
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
               </a>

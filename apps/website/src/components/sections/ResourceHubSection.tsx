@@ -172,7 +172,7 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
         title: 'Start Your Free Trial Today',
         description:
           'Get instant access to Praxis Navigator with a 30-day free trial. No credit card required.',
-        primaryText: 'Install from Azure Marketplace',
+        primaryText: 'Start Free Trial',
         secondaryText: 'Watch Product Demo',
       },
     },
@@ -342,7 +342,7 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
         title: 'Start Din Gratis Prøveperiode I Dag',
         description:
           'Få øyeblikkelig tilgang til Praxis Navigator med en 30-dagers gratis prøveperiode. Ingen kredittkort påkrevd.',
-        primaryText: 'Installer fra Azure Marketplace',
+        primaryText: 'Start Gratis Prøveperiode',
         secondaryText: 'Se Produkt Demo',
       },
     },
@@ -469,9 +469,7 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxis-security.praxis-navigator"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/trial-explainer"
               className="btn-accent inline-flex items-center justify-center"
             >
               <svg

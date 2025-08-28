@@ -171,13 +171,11 @@ export const SocialProofSection: React.FC<SocialProofSectionProps> = ({
                 Request Demo
               </a>
               <a
-                href="https://azuremarketplace.microsoft.com/praxis-navigator"
+                href="/trial-explainer"
                 className="btn-secondary btn-lg hover-lift active-scale focus-ring flex-1"
-                aria-label="Start your trial through Azure Marketplace"
-                target="_blank"
-                rel="noopener noreferrer"
+                aria-label="Start your free trial"
               >
-                Azure Marketplace
+                Start Free Trial
               </a>
             </div>
           </div>
