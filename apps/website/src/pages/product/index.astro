@@ -74,26 +74,6 @@ const productSchema = {
   },
 };
 
-// Breadcrumb Schema for Product Page
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: 'https://praxisnavigator.io',
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Product',
-      item: 'https://praxisnavigator.io/product',
-    },
-  ],
-};
-
 // FAQ Schema for Technical Questions
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -129,7 +109,7 @@ const faqSchema = {
 // Combine structured data
 const combinedSchema = {
   '@context': 'https://schema.org',
-  '@graph': [productSchema, breadcrumbSchema, faqSchema],
+  '@graph': [productSchema, faqSchema],
 } as Record<string, unknown>;
 ---
 
@@ -143,28 +123,6 @@ const combinedSchema = {
   ogType="website"
   lang={lang}
 >
-  <!-- Breadcrumb Navigation -->
-  <nav aria-label="Breadcrumb" class="bg-praxis-tan-50 py-4">
-    <div class="container mx-auto px-6">
-      <ol class="flex items-center space-x-2 text-sm">
-        <li>
-          <a
-            href="/en"
-            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
-          >
-            Home
-          </a>
-        </li>
-        <li class="text-praxis-gray">
-          <span aria-hidden="true">/</span>
-        </li>
-        <li aria-current="page" class="text-praxis-dark-blue font-medium">
-          Product Overview
-        </li>
-      </ol>
-    </div>
-  </nav>
-
   <!-- Page Content -->
   <ProductHeroSection client:load />
   <ProcessFlowSection />
@@ -315,10 +273,3 @@ const combinedSchema = {
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  /* Breadcrumb navigation styles */
-  nav[aria-label='Breadcrumb'] {
-    border-bottom: 1px solid #e5e5e5;
-  }
-</style>

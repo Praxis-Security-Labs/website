@@ -10,17 +10,18 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
   const books = [
     {
       title: 'The Security Culture Playbook',
-      subtitle: 'An Executive Guide to Reducing Risk Through Behavior Change',
+      subtitle:
+        'An Executive Guide To Reducing Risk and Developing Your Human Defense Layer',
       authors: 'Kai Roer & Perry Carpenter',
       publisher: 'Wiley',
       year: '2022',
-      isbn: '978-1-119-87528-5',
+      isbn: '978-1119875239',
       description:
         'The definitive guide to building and measuring security culture in organizations. Synthesizes decades of research into practical strategies for executives and security leaders.',
-      image: '/images/about/book-security-culture-playbook.jpg',
+      image: '/images/books/the-security-culture-playbook.jpg',
       featured: true,
       amazonUrl:
-        'https://amazon.com/Security-Culture-Playbook-Executive-Reducing/dp/1119875285',
+        'https://www.amazon.co.uk/Security-Culture-Playbook-Executive-Developing/dp/1119875234',
       color: 'praxis-gold',
     },
     {
@@ -28,27 +29,46 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
       subtitle:
         'Transform Your Organization into a Security-Conscious Community',
       authors: 'Kai Roer',
-      publisher: 'Independent',
+      publisher: 'IT Governance Publishing',
       year: '2015',
+      isbn: '978-1849287166',
       description:
-        'Foundational work on organizational security culture development. Established core principles and methodologies for systematic culture change.',
-      image: '/images/about/book-build-security-culture.jpg',
+        'Foundational work on organizational security culture development. Established core principles and methodologies for systematic culture change that became the basis for the ENISA framework.',
+      image: '/images/books/build-a-security-culture.png',
       featured: true,
       amazonUrl:
-        'https://amazon.com/Build-Security-Culture-Transform-Security-Conscious/dp/1519234567',
+        'https://www.amazon.co.uk/Build-Security-Culture-Fundamentals-Roer/dp/1849287163/',
+      color: 'praxis-pine',
+    },
+    {
+      title: 'Protecting Our Future, Volume 1',
+      subtitle: 'Educating a Cybersecurity Workforce',
+      authors: 'Kai Roer (Contributor)',
+      publisher: 'Hudson Whitman',
+      year: '2016',
+      isbn: '978-1944079048',
+      description:
+        'Comprehensive volume focusing on cybersecurity education and workforce development. Kai Roer contributed expertise on security culture and behavioral aspects of cybersecurity training.',
+      image: '/images/books/protecting-our-future.jpeg?v=1',
+      featured: false,
+      amazonUrl:
+        'https://www.amazon.co.uk/Protecting-Our-Future-Educating-Cybersecurity/dp/0989845117',
       color: 'praxis-blue',
     },
     {
-      title: 'Security Culture in Organizations',
-      subtitle: 'Research Methods and Practical Applications',
-      authors: 'Kai Roer',
-      publisher: 'Academic Press',
-      year: '2019',
+      title: 'The Cloud Security Rules',
+      subtitle: 'Best Practices for Securing Cloud Computing',
+      authors: 'Kai Roer (Editor)',
+      publisher: 'Independent',
+      year: '2012',
+      isbn: '978-1463691783',
       description:
-        'Academic publication detailing research methodologies and statistical approaches to security culture measurement and analysis.',
-      image: '/images/about/book-security-culture-research.jpg',
+        'Practical guide to cloud security best practices. Kai Roer served as editor for this essential collection of rules and guidelines for organizations moving to cloud infrastructure.',
+      image: '/images/books/cloudSecurityRules.jpg?v=1',
       featured: false,
-      color: 'praxis-pine',
+      amazonUrl:
+        'https://www.amazon.co.uk/Cloud-Security-Rules-Technology-friend/dp/1463691785/',
+      color: 'praxis-sky',
     },
   ];
 
@@ -137,13 +157,26 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                     <div className="flex flex-col lg:flex-row gap-6">
                       {/* Book Cover */}
                       <div className="lg:w-1/3 flex-shrink-0">
-                        <img
-                          src={book.image}
-                          alt={`Cover of ${book.title} by ${book.authors}`}
-                          className="w-full max-w-48 mx-auto rounded-lg shadow-md object-cover aspect-[3/4]"
-                          width="192"
-                          height="256"
-                        />
+                        {book.image ? (
+                          <img
+                            src={book.image}
+                            alt={`Cover of ${book.title} by ${book.authors}`}
+                            className="w-full max-w-48 mx-auto rounded-lg shadow-md object-cover aspect-[3/4]"
+                            width="192"
+                            height="256"
+                          />
+                        ) : (
+                          <div className="w-full max-w-48 mx-auto rounded-lg shadow-md aspect-[3/4] bg-praxis-gray-100 flex items-center justify-center">
+                            <div className="text-center p-4">
+                              <div className="text-praxis-dark-blue text-lg font-heading mb-2">
+                                {book.title}
+                              </div>
+                              <div className="text-praxis-gray text-sm">
+                                {book.authors}
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
 
                       {/* Book Details */}
@@ -187,9 +220,9 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                           btn hover-lift active-scale focus-ring
                           ${book.color === 'praxis-gold' ? 'btn-accent' : 'btn-secondary'}
                         `}
-                          aria-label={`View ${book.title} on Amazon`}
+                          aria-label={`Buy ${book.title} on Amazon`}
                         >
-                          View on Amazon
+                          Buy on Amazon
                         </a>
                       </div>
                     </div>
@@ -197,24 +230,79 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                 ))}
             </div>
 
-            {/* Additional Book */}
-            <div className="bg-praxis-white rounded-xl p-6 shadow-md border-l-4 border-praxis-pine">
-              <div className="flex items-center gap-6">
-                <div className="w-20 h-24 bg-praxis-pine-100 rounded flex-shrink-0 flex items-center justify-center">
-                  <div className="w-10 h-10 bg-praxis-pine rounded"></div>
-                </div>
-                <div className="flex-grow">
-                  <h4 className="h5 text-praxis-dark-blue mb-2">
-                    {books[2].title}
-                  </h4>
-                  <p className="body-small text-praxis-black mb-2">
-                    {books[2].authors} • {books[2].publisher}, {books[2].year}
-                  </p>
-                  <p className="body-base text-praxis-black">
-                    {books[2].description}
-                  </p>
-                </div>
-              </div>
+            {/* Additional Books */}
+            <div className="space-y-4">
+              {books
+                .filter(book => !book.featured)
+                .map((book, index) => (
+                  <div
+                    key={index}
+                    className={`bg-praxis-white rounded-xl p-6 shadow-md border-l-4 ${
+                      book.color === 'praxis-pine'
+                        ? 'border-praxis-pine'
+                        : book.color === 'praxis-sky'
+                          ? 'border-praxis-sky'
+                          : 'border-praxis-blue'
+                    }`}
+                  >
+                    <div className="flex items-center gap-6">
+                      {/* Book Cover */}
+                      <div className="flex-shrink-0">
+                        {book.image ? (
+                          <img
+                            src={book.image}
+                            alt={`Cover of ${book.title} by ${book.authors}`}
+                            className="w-20 h-24 rounded shadow-md object-cover"
+                          />
+                        ) : (
+                          <div
+                            className={`w-20 h-24 rounded flex-shrink-0 flex items-center justify-center ${
+                              book.color === 'praxis-pine'
+                                ? 'bg-praxis-pine-100'
+                                : book.color === 'praxis-sky'
+                                  ? 'bg-praxis-sky-100'
+                                  : 'bg-praxis-blue-100'
+                            }`}
+                          >
+                            <div
+                              className={`w-10 h-10 rounded ${
+                                book.color === 'praxis-pine'
+                                  ? 'bg-praxis-pine'
+                                  : book.color === 'praxis-sky'
+                                    ? 'bg-praxis-sky'
+                                    : 'bg-praxis-blue'
+                              }`}
+                            ></div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex-grow">
+                        <h4 className="h5 text-praxis-dark-blue mb-2">
+                          {book.title}
+                        </h4>
+                        <p className="body-small text-praxis-black mb-2">
+                          {book.authors} • {book.publisher}, {book.year}
+                        </p>
+                        <p className="body-base text-praxis-black">
+                          {book.description}
+                        </p>
+                        {book.amazonUrl && (
+                          <div className="mt-4">
+                            <a
+                              href={book.amazonUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn-outline btn-sm hover-lift active-scale focus-ring"
+                              aria-label={`Buy ${book.title} on Amazon`}
+                            >
+                              Buy on Amazon
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
 

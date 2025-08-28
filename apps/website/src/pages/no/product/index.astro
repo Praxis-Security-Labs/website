@@ -74,53 +74,25 @@ const productSchema = {
   },
 };
 
-// Breadcrumb Schema for Product Page
-const breadcrumbSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: [
-    {
-      '@type': 'ListItem',
-      position: 1,
-      name: 'Home',
-      item: 'https://praxisnavigator.io',
-    },
-    {
-      '@type': 'ListItem',
-      position: 2,
-      name: 'Product',
-      item: 'https://praxisnavigator.io/product',
-    },
-  ],
-};
-
-// FAQ Schema for Technical Questions
+// FAQ Schema for Norwegian Product Page
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'How does Microsoft Graph API behavioral monitoring work?',
+      name: 'Hvordan integreres Praxis Navigator med Microsoft Graph API?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Praxis Navigator connects to your Microsoft 365 environment through secure OAuth 2.0 authentication with read-only permissions. It analyzes behavioral patterns across Exchange Online, SharePoint, OneDrive, Teams, and Azure AD logs to provide insights into actual security behaviors without collecting PII or disrupting workflows.',
+        text: 'Praxis Navigator integreres sømløst med Microsoft Graph API for å gi sanntids atferdsbasert sikkerhetsovervåking på tvers av Microsoft 365-miljøet ditt.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What data privacy controls are in place?',
+      name: 'Hva gjør Security Culture Framework ENISA-adoptert?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Praxis Navigator follows a privacy-first design with no PII collection, SOC2 Type II certification, GDPR compliance, and encrypted data transmission. We only collect anonymized behavioral patterns and security-relevant metrics, never email content, file contents, or personal information.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'What are the technical requirements for deployment?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Requirements include Microsoft 365 E3/E5 licensing, Azure AD integration, and security admin consent for Graph API access. Setup takes approximately 15 minutes with zero infrastructure requirements on your end.',
+        text: 'Vårt Security Culture Framework har blitt offisielt adoptert av ENISA (European Union Agency for Cybersecurity) som standarden for måling av organisatorisk sikkerhetskultur på tvers av EU-medlemslandene.',
       },
     },
   ],
@@ -129,7 +101,7 @@ const faqSchema = {
 // Combine structured data
 const combinedSchema = {
   '@context': 'https://schema.org',
-  '@graph': [productSchema, breadcrumbSchema, faqSchema],
+  '@graph': [productSchema, faqSchema],
 } as Record<string, unknown>;
 ---
 
@@ -143,28 +115,6 @@ const combinedSchema = {
   ogType="website"
   lang={lang}
 >
-  <!-- Breadcrumb Navigation -->
-  <nav aria-label="Breadcrumb" class="bg-praxis-tan-50 py-4">
-    <div class="container mx-auto px-6">
-      <ol class="flex items-center space-x-2 text-sm">
-        <li>
-          <a
-            href="/no"
-            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
-          >
-            Home
-          </a>
-        </li>
-        <li class="text-praxis-gray">
-          <span aria-hidden="true">/</span>
-        </li>
-        <li aria-current="page" class="text-praxis-dark-blue font-medium">
-          Product Overview
-        </li>
-      </ol>
-    </div>
-  </nav>
-
   <!-- Page Content -->
   <ProductHeroSection client:load />
   <ProcessFlowSection />
@@ -316,9 +266,4 @@ const combinedSchema = {
   </section>
 </BaseLayout>
 
-<style>
-  /* Breadcrumb navigation styles */
-  nav[aria-label='Breadcrumb'] {
-    border-bottom: 1px solid #e5e5e5;
-  }
-</style>
+<style></style>
