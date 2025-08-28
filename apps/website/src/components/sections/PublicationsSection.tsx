@@ -110,7 +110,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
             >
               Research Portfolio &amp; Publications
             </h2>
-            <p className="body-large text-praxis-brown max-w-4xl mx-auto">
+            <p className="body-large text-praxis-black max-w-4xl mx-auto">
               A comprehensive body of work spanning academic research, industry
               publications, and practical guides that have shaped the field of
               security culture and behavioral monitoring.
@@ -165,12 +165,12 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                           {book.subtitle}
                         </p>
 
-                        <p className="body-small text-praxis-brown mb-3">
+                        <p className="body-small text-praxis-black mb-3">
                           <strong>Authors:</strong> {book.authors}
                         </p>
 
                         {book.isbn && (
-                          <p className="body-small text-praxis-brown mb-4">
+                          <p className="body-small text-praxis-black mb-4">
                             <strong>ISBN:</strong> {book.isbn}
                           </p>
                         )}
@@ -207,7 +207,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                   <h4 className="h5 text-praxis-dark-blue mb-2">
                     {books[2].title}
                   </h4>
-                  <p className="body-small text-praxis-brown mb-2">
+                  <p className="body-small text-praxis-black mb-2">
                     {books[2].authors} • {books[2].publisher}, {books[2].year}
                   </p>
                   <p className="body-base text-praxis-black">
@@ -242,11 +242,11 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                     {pub.journal}
                   </p>
 
-                  <p className="body-small text-praxis-brown mb-3">
+                  <p className="body-small text-praxis-black mb-3">
                     {pub.coAuthors}
                   </p>
 
-                  <p className="caption text-praxis-brown">DOI: {pub.doi}</p>
+                  <p className="caption text-praxis-black">DOI: {pub.doi}</p>
                 </div>
               ))}
             </div>
@@ -276,7 +276,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                     {partnership.department}
                   </p>
 
-                  <p className="body-base text-praxis-brown">
+                  <p className="body-base text-praxis-black">
                     {partnership.collaboration}
                   </p>
                 </div>
@@ -290,7 +290,7 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                   <div className="text-3xl font-heading text-praxis-gold mb-2">
                     50+
                   </div>
-                  <div className="body-small text-praxis-brown">
+                  <div className="body-small text-praxis-black">
                     Research Papers
                   </div>
                 </div>
@@ -298,19 +298,19 @@ export const PublicationsSection: React.FC<PublicationsSectionProps> = ({
                   <div className="text-3xl font-heading text-praxis-blue mb-2">
                     1,200+
                   </div>
-                  <div className="body-small text-praxis-brown">Citations</div>
+                  <div className="body-small text-praxis-black">Citations</div>
                 </div>
                 <div>
                   <div className="text-3xl font-heading text-praxis-pine mb-2">
                     12
                   </div>
-                  <div className="body-small text-praxis-brown">Countries</div>
+                  <div className="body-small text-praxis-black">Countries</div>
                 </div>
                 <div>
                   <div className="text-3xl font-heading text-praxis-brick mb-2">
                     15+
                   </div>
-                  <div className="body-small text-praxis-brown">
+                  <div className="body-small text-praxis-black">
                     Collaborations
                   </div>
                 </div>

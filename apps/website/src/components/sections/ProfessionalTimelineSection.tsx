@@ -9,7 +9,7 @@ export const ProfessionalTimelineSection: React.FC<
 > = ({ className = '' }) => {
   const timelineEvents = [
     {
-      year: '1998',
+      year: '1994',
       title: 'The Roer Group Founded',
       description:
         'Established consultancy focusing on human factors in information security, pioneering early work in security awareness and culture.',
@@ -78,7 +78,7 @@ export const ProfessionalTimelineSection: React.FC<
             <h2 id="timeline-heading" className="h2 text-praxis-dark-blue mb-6">
               A Journey of Innovation in Security Culture
             </h2>
-            <p className="body-large text-praxis-brown max-w-3xl mx-auto">
+            <p className="body-large text-praxis-black max-w-3xl mx-auto">
               From early consultancy work to leading global research
               initiatives, Kai&apos;s professional journey shows consistent
               innovation in security culture measurement and behavioral
@@ -135,7 +135,7 @@ export const ProfessionalTimelineSection: React.FC<
                       </h3>
 
                       {/* Description */}
-                      <p className="body-base text-praxis-brown">
+                      <p className="body-base text-praxis-black">
                         {event.description}
                       </p>
 
@@ -168,9 +168,9 @@ export const ProfessionalTimelineSection: React.FC<
                 <h4 className="h6 text-praxis-dark-blue mb-3">
                   Early Research
                 </h4>
-                <p className="body-small text-praxis-brown">
+                <p className="body-small text-praxis-black">
                   Foundational work in human factors and security awareness
-                  (1998-2010)
+                  (1994-2010)
                 </p>
               </div>
               <div className="bg-praxis-white rounded-lg p-6">
@@ -180,7 +180,7 @@ export const ProfessionalTimelineSection: React.FC<
                 <h4 className="h6 text-praxis-dark-blue mb-3">
                   Framework Creation
                 </h4>
-                <p className="body-small text-praxis-brown">
+                <p className="body-small text-praxis-black">
                   Systematic measurement approaches and platform development
                   (2010-2020)
                 </p>
@@ -192,9 +192,9 @@ export const ProfessionalTimelineSection: React.FC<
                 <h4 className="h6 text-praxis-dark-blue mb-3">
                   Modern Innovation
                 </h4>
-                <p className="body-small text-praxis-brown">
+                <p className="body-small text-praxis-black">
                   Advanced behavioral monitoring with Microsoft Graph API
-                  integration (2020-Present)
+                  integration (2023-Present)
                 </p>
               </div>
             </div>

@@ -43,14 +43,14 @@ export const AboutHeroSection: React.FC<AboutHeroSectionProps> = ({
                 Security Culture Pioneer &amp; Behavioral Monitoring Innovator
               </h2>
 
-              <p className="body-large mb-6 opacity-90">
+              <p className="body-large mb-6 text-praxis-sky-100">
                 With over 25 years of pioneering research in security culture
                 and behavioral monitoring, Kai Roer is the world&apos;s leading
                 authority on measuring and improving organizational security
                 behaviors.
               </p>
 
-              <p className="body-base mb-8 opacity-80">
+              <p className="body-base mb-8 text-praxis-sky-200">
                 From creating the open-source Security Culture Framework adopted
                 by ENISA for EU-wide guidelines to co-authoring &ldquo;The
                 Security Culture Playbook&rdquo; (Wiley, 2022), Kai&apos;s work
@@ -64,7 +64,7 @@ export const AboutHeroSection: React.FC<AboutHeroSectionProps> = ({
                   <div className="text-2xl font-heading text-praxis-gold mb-1">
                     25+
                   </div>
-                  <div className="text-sm text-praxis-white opacity-80">
+                  <div className="text-sm text-praxis-sky-100">
                     Years Research
                   </div>
                 </div>
@@ -72,7 +72,7 @@ export const AboutHeroSection: React.FC<AboutHeroSectionProps> = ({
                   <div className="text-2xl font-heading text-praxis-gold mb-1">
                     3
                   </div>
-                  <div className="text-sm text-praxis-white opacity-80">
+                  <div className="text-sm text-praxis-sky-100">
                     Published Books
                   </div>
                 </div>
@@ -80,7 +80,7 @@ export const AboutHeroSection: React.FC<AboutHeroSectionProps> = ({
                   <div className="text-2xl font-heading text-praxis-gold mb-1">
                     ENISA
                   </div>
-                  <div className="text-sm text-praxis-white opacity-80">
+                  <div className="text-sm text-praxis-sky-100">
                     Framework Adopted
                   </div>
                 </div>
@@ -88,9 +88,7 @@ export const AboutHeroSection: React.FC<AboutHeroSectionProps> = ({
                   <div className="text-2xl font-heading text-praxis-gold mb-1">
                     Global
                   </div>
-                  <div className="text-sm text-praxis-white opacity-80">
-                    Impact
-                  </div>
+                  <div className="text-sm text-praxis-sky-100">Impact</div>
                 </div>
               </div>
 
