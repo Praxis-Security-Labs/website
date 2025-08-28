@@ -1,0 +1,888 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+// SEO Configuration for Integrations Page
+const title =
+  'Platform Integrations | Praxis Navigator API & Enterprise Integrations';
+const description =
+  'Comprehensive integration capabilities for Praxis Navigator including REST API, SIEM integrations, business intelligence tools, SSO configuration, and enterprise security platform connectivity.';
+const keywords =
+  'Praxis Navigator integrations, REST API integration, SIEM integration, business intelligence integration, SSO single sign-on, enterprise security platform API, Microsoft Graph API integration';
+
+// Structured Data for Software API
+const apiSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebAPI',
+  name: 'Praxis Navigator Integration API',
+  description:
+    'REST API for integrating behavioral security monitoring with enterprise systems',
+  url: 'https://praxisnavigator.io/product/integrations',
+  provider: {
+    '@type': 'Organization',
+    name: 'Praxis Security Labs',
+    url: 'https://praxisnavigator.io',
+  },
+  documentation: 'https://praxisnavigator.io/product/integrations',
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://praxisnavigator.io',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Product',
+      item: 'https://praxisnavigator.io/product',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Integrations',
+      item: 'https://praxisnavigator.io/product/integrations',
+    },
+  ],
+};
+
+// Combine structured data
+const combinedSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [apiSchema, breadcrumbSchema],
+} as Record<string, unknown>;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="product"
+  structuredData={combinedSchema}
+  ogImage="/images/product/integrations-og.png"
+  ogType="website"
+  lang={lang}
+>
+  <!-- Breadcrumb Navigation -->
+  <nav
+    aria-label="Breadcrumb"
+    class="bg-praxis-gray-50 border-b border-praxis-gray-200"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a
+            href="/"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Home
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li>
+          <a
+            href="/product"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Product
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li aria-current="page" class="text-praxis-dark-blue font-medium">
+          Integrations
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-b from-praxis-blue to-praxis-sky">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="h1 text-praxis-white mb-8">Platform Integrations & API</h1>
+
+        <h2 class="h3 text-praxis-gold mb-8">
+          Seamless Integration with Your Existing Enterprise Security Stack
+        </h2>
+
+        <p
+          class="body-large text-praxis-white mb-12 max-w-3xl mx-auto opacity-90"
+        >
+          Connect Praxis Navigator with your existing security tools, SIEM
+          systems, business intelligence platforms, and enterprise applications
+          through our comprehensive API and integration framework.
+        </p>
+
+        <a
+          href="#integration-overview"
+          class="btn-accent btn-lg hover-lift active-scale focus-ring-gold"
+        >
+          Explore Integrations
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Categories Section -->
+  <section id="integration-overview" class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Enterprise Integration Capabilities
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Built to fit seamlessly into your existing enterprise technology
+            ecosystem
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-blue rounded-full"></div>
+            </div>
+            <h3 class="h6 text-praxis-dark-blue mb-2">REST API</h3>
+            <p class="body-small text-praxis-brown">Full API Access</p>
+          </div>
+
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-gold rounded-full"></div>
+            </div>
+            <h3 class="h6 text-praxis-dark-blue mb-2">SSO</h3>
+            <p class="body-small text-praxis-brown">Single Sign-On Ready</p>
+          </div>
+
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-pine rounded-full"></div>
+            </div>
+            <h3 class="h6 text-praxis-dark-blue mb-2">SIEM</h3>
+            <p class="body-small text-praxis-brown">
+              Security Tool Integration
+            </p>
+          </div>
+
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-brick-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-brick rounded-full"></div>
+            </div>
+            <h3 class="h6 text-praxis-dark-blue mb-2">BI Tools</h3>
+            <p class="body-small text-praxis-brown">Business Intelligence</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REST API Section -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">REST API Integration</h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Comprehensive REST API for accessing behavioral security data and
+            integrating with your custom applications
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- API Features -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <h3 class="h3 text-praxis-dark-blue mb-6">API Features</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>RESTful Design:</strong> Standard HTTP methods with JSON
+                  responses
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>OAuth 2.0:</strong> Secure authentication with token-based
+                  access
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Rate Limiting:</strong> Enterprise-grade API limits with
+                  burst handling
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Webhooks:</strong> Real-time notifications for behavioral
+                  alerts
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>SDKs Available:</strong> Python, JavaScript, C#, and Java
+                  libraries
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- API Endpoints -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <h3 class="h3 text-praxis-dark-blue mb-6">Key API Endpoints</h3>
+            <div class="space-y-4">
+              <div class="border border-praxis-gray-200 rounded-lg p-4">
+                <h4 class="h6 text-praxis-dark-blue mb-2">Risk Scores</h4>
+                <code
+                  class="text-sm text-praxis-pine bg-praxis-gray-50 px-2 py-1 rounded"
+                >
+                  GET /api/v1/risk-scores
+                </code>
+                <p class="body-small text-praxis-brown mt-2">
+                  Retrieve organizational and departmental risk scores
+                </p>
+              </div>
+
+              <div class="border border-praxis-gray-200 rounded-lg p-4">
+                <h4 class="h6 text-praxis-dark-blue mb-2">Behavioral Trends</h4>
+                <code
+                  class="text-sm text-praxis-pine bg-praxis-gray-50 px-2 py-1 rounded"
+                >
+                  GET /api/v1/trends
+                </code>
+                <p class="body-small text-praxis-brown mt-2">
+                  Access behavioral trend analysis and forecasting
+                </p>
+              </div>
+
+              <div class="border border-praxis-gray-200 rounded-lg p-4">
+                <h4 class="h6 text-praxis-dark-blue mb-2">
+                  Compliance Reports
+                </h4>
+                <code
+                  class="text-sm text-praxis-pine bg-praxis-gray-50 px-2 py-1 rounded"
+                >
+                  GET /api/v1/compliance
+                </code>
+                <p class="body-small text-praxis-brown mt-2">
+                  Generate compliance and audit reports
+                </p>
+              </div>
+
+              <div class="border border-praxis-gray-200 rounded-lg p-4">
+                <h4 class="h6 text-praxis-dark-blue mb-2">Alerts</h4>
+                <code
+                  class="text-sm text-praxis-pine bg-praxis-gray-50 px-2 py-1 rounded"
+                >
+                  GET /api/v1/alerts
+                </code>
+                <p class="body-small text-praxis-brown mt-2">
+                  Retrieve behavioral alerts and notifications
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIEM Integration Section -->
+  <section class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            SIEM & Security Tool Integrations
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Native integrations with leading security information and event
+            management platforms
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Splunk -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-blue rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-4">Splunk</h3>
+            <p class="body-base text-praxis-brown mb-4">
+              Native Splunk connector for behavioral security data ingestion
+            </p>
+            <ul class="text-left space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Real-time data streaming</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Custom dashboards</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Alert correlation</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Microsoft Sentinel -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-gold rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-4">Microsoft Sentinel</h3>
+            <p class="body-base text-praxis-brown mb-4">
+              Deep integration with Microsoft's cloud-native SIEM solution
+            </p>
+            <ul class="text-left space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Azure AD integration</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Workbook templates</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Automated playbooks</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- QRadar -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-pine rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-4">IBM QRadar</h3>
+            <p class="body-base text-praxis-brown mb-4">
+              Enterprise SIEM integration for behavioral risk correlation
+            </p>
+            <ul class="text-left space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black">DSM integration</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black">Custom rules</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black">Risk scoring</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business Intelligence Integration -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Business Intelligence & Analytics
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Connect behavioral security data with your business intelligence and
+            analytics platforms
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Microsoft Power BI -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-16 h-16 bg-praxis-gold-100 rounded-full flex items-center justify-center"
+              >
+                <div class="w-8 h-8 bg-praxis-gold rounded-full"></div>
+              </div>
+              <div>
+                <h3 class="h4 text-praxis-dark-blue">Microsoft Power BI</h3>
+                <p class="body-small text-praxis-brown">
+                  Native connector and custom visuals
+                </p>
+              </div>
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Direct data connector</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Pre-built dashboard templates</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Custom visual components</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Real-time data refresh</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Tableau -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-16 h-16 bg-praxis-blue-100 rounded-full flex items-center justify-center"
+              >
+                <div class="w-8 h-8 bg-praxis-blue rounded-full"></div>
+              </div>
+              <div>
+                <h3 class="h4 text-praxis-dark-blue">Tableau</h3>
+                <p class="body-small text-praxis-brown">
+                  Web data connector and REST API integration
+                </p>
+              </div>
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Web data connector</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Executive dashboard templates</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Interactive visualizations</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black"
+                  >Automated reporting</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SSO & Identity Integration -->
+  <section class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            SSO & Identity Management
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Seamless integration with enterprise identity providers and single
+            sign-on systems
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Azure AD -->
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-blue rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-3">
+              Azure Active Directory
+            </h3>
+            <p class="body-small text-praxis-brown mb-4">
+              Native integration with Microsoft's identity platform
+            </p>
+            <ul class="text-left space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black">SAML 2.0 SSO</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Conditional access</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Multi-factor auth</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Okta -->
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-gold rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-3">Okta</h3>
+            <p class="body-small text-praxis-brown mb-4">
+              Enterprise identity and access management integration
+            </p>
+            <ul class="text-left space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >OIDC integration</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >User provisioning</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Group management</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- ADFS -->
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-pine rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-3">Active Directory FS</h3>
+            <p class="body-small text-praxis-brown mb-4">
+              On-premises Active Directory federation services
+            </p>
+            <ul class="text-left space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black">SAML federation</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black">Claims mapping</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black">Domain trust</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Integration Support -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Integration Support & Resources
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Comprehensive support and documentation to ensure successful
+            integration
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Developer Resources -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <h3 class="h3 text-praxis-dark-blue mb-6">Developer Resources</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>API Documentation:</strong> Comprehensive OpenAPI specification
+                  with examples
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>SDKs & Libraries:</strong> Ready-to-use libraries for popular
+                  programming languages
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Code Examples:</strong> Sample integrations and best practices
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Testing Sandbox:</strong> Safe environment for development
+                  and testing
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Support Services -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <h3 class="h3 text-praxis-dark-blue mb-6">Integration Support</h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Technical Consultation:</strong> Expert guidance for complex
+                  integrations
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Custom Development:</strong> Tailored integration solutions
+                  for unique requirements
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>24/7 Support:</strong> Round-the-clock technical support
+                  for enterprise customers
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Training Programs:</strong> Hands-on training for your
+                  development team
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-praxis-blue-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="h2 text-praxis-dark-blue mb-8">
+          Ready to Integrate Praxis Navigator?
+        </h2>
+
+        <p class="body-large text-praxis-pine mb-12">
+          Contact our integration team to discuss your specific requirements and
+          get started with connecting Praxis Navigator to your enterprise
+          systems.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="/product/demo"
+            class="btn-primary btn-lg hover-lift active-scale focus-ring"
+          >
+            Schedule Integration Demo
+          </a>
+          <a
+            href="/contact"
+            class="btn-secondary btn-lg hover-lift active-scale focus-ring"
+          >
+            Contact Integration Team
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb navigation styles */
+  nav[aria-label='Breadcrumb'] {
+    border-bottom: 1px solid #e5e5e5;
+  }
+</style>

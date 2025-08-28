@@ -1,0 +1,502 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+// SEO Configuration for Demo Request Page
+const title = 'Request Demo | Praxis Navigator Platform Demonstration';
+const description =
+  'Schedule a personalized demo of Praxis Navigator behavioral security monitoring platform. See Microsoft Graph API integration and enterprise features in action.';
+const keywords =
+  'Praxis Navigator demo, behavioral security monitoring demo, Microsoft Graph API demo, enterprise security platform demonstration, security culture assessment demo';
+
+// Structured Data for Demo Service
+const demoSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Praxis Navigator Platform Demo',
+  description:
+    'Personalized demonstration of behavioral security monitoring capabilities',
+  provider: {
+    '@type': 'Organization',
+    name: 'Praxis Security Labs',
+    url: 'https://praxisnavigator.io',
+  },
+  serviceType: 'Software Demonstration',
+  areaServed: 'Worldwide',
+  availableChannel: {
+    '@type': 'ServiceChannel',
+    serviceUrl: 'https://praxisnavigator.io/product/demo',
+    serviceType: 'Online Demo',
+  },
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://praxisnavigator.io',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Product',
+      item: 'https://praxisnavigator.io/product',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Request Demo',
+      item: 'https://praxisnavigator.io/product/demo',
+    },
+  ],
+};
+
+// Combine structured data
+const combinedSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [demoSchema, breadcrumbSchema],
+} as Record<string, unknown>;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="product"
+  structuredData={combinedSchema}
+  ogImage="/images/product/demo-og.png"
+  ogType="website"
+  lang={lang}
+>
+  <!-- Breadcrumb Navigation -->
+  <nav
+    aria-label="Breadcrumb"
+    class="bg-praxis-gray-50 border-b border-praxis-gray-200"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a
+            href="/"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Home
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li>
+          <a
+            href="/product"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Product
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li aria-current="page" class="text-praxis-dark-blue font-medium">
+          Request Demo
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-b from-praxis-blue to-praxis-sky">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="h1 text-praxis-white mb-8">Request a Personalized Demo</h1>
+
+        <h2 class="h3 text-praxis-gold mb-8">
+          See Praxis Navigator in Action with Your Microsoft 365 Data
+        </h2>
+
+        <p
+          class="body-large text-praxis-white mb-12 max-w-3xl mx-auto opacity-90"
+        >
+          Schedule a 30-minute personalized demonstration where our experts will
+          show you how Praxis Navigator transforms your Microsoft 365
+          environment into a comprehensive behavioral security monitoring
+          system.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Options Section -->
+  <section class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Choose Your Demo Experience
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            We offer different demo formats to match your needs and timeline
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Live Demo -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border-2 border-praxis-gold hover:shadow-xl transition-all"
+          >
+            <div
+              class="bg-praxis-gold text-praxis-dark-blue px-3 py-1 rounded-full text-sm font-heading uppercase tracking-brand-wide mb-6 inline-block"
+            >
+              Recommended
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4">Live Demo</h3>
+            <p class="body-base text-praxis-brown mb-6">
+              30-minute personalized session with our security experts
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Real-time platform walkthrough</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Q&A with security experts</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Custom use case discussion</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Implementation planning</span
+                >
+              </li>
+            </ul>
+            <a
+              href="/contact"
+              class="btn-primary btn-lg w-full hover-lift active-scale focus-ring"
+            >
+              Schedule Live Demo
+            </a>
+          </div>
+
+          <!-- Self-Guided Demo -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <h3 class="h4 text-praxis-dark-blue mb-4">Self-Guided Demo</h3>
+            <p class="body-base text-praxis-brown mb-6">
+              Interactive sandbox environment to explore at your own pace
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >24/7 access to demo environment</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Sample data and scenarios</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Guided tutorials and walkthroughs</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Support documentation access</span
+                >
+              </li>
+            </ul>
+            <a
+              href="/trial-explainer"
+              class="btn-secondary btn-lg w-full hover-lift active-scale focus-ring"
+            >
+              Access Sandbox
+            </a>
+          </div>
+
+          <!-- Executive Briefing -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <h3 class="h4 text-praxis-dark-blue mb-4">Executive Briefing</h3>
+            <p class="body-base text-praxis-brown mb-6">
+              High-level business impact presentation for decision makers
+            </p>
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >ROI and business case overview</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Compliance and risk reduction</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Strategic security insights</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Implementation timeline</span
+                >
+              </li>
+            </ul>
+            <a
+              href="/contact"
+              class="btn-outline btn-lg w-full hover-lift active-scale focus-ring"
+            >
+              Request Briefing
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Features Section -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            What You'll See in the Demo
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Experience the full power of behavioral security monitoring with
+            real Microsoft 365 data scenarios
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <!-- Left Column -->
+          <div class="space-y-8">
+            <div class="bg-praxis-white rounded-xl p-6 shadow-lg">
+              <h3 class="h5 text-praxis-dark-blue mb-4">
+                Microsoft Graph Integration
+              </h3>
+              <p class="body-base text-praxis-brown mb-4">
+                See live data flowing from Exchange Online, SharePoint, Teams,
+                and Azure AD into behavioral insights.
+              </p>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Real-time data collection</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Privacy-first architecture</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-praxis-white rounded-xl p-6 shadow-lg">
+              <h3 class="h5 text-praxis-dark-blue mb-4">Risk Scoring Engine</h3>
+              <p class="body-base text-praxis-brown mb-4">
+                Watch as behavioral patterns are analyzed and transformed into
+                actionable risk scores and predictions.
+              </p>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Dynamic risk calculations</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Predictive analytics</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="space-y-8">
+            <div class="bg-praxis-white rounded-xl p-6 shadow-lg">
+              <h3 class="h5 text-praxis-dark-blue mb-4">
+                Executive Dashboards
+              </h3>
+              <p class="body-base text-praxis-brown mb-4">
+                Experience board-ready reports and executive summaries that
+                translate security behaviors into business impact.
+              </p>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >ROI calculations</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Compliance reporting</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-praxis-white rounded-xl p-6 shadow-lg">
+              <h3 class="h5 text-praxis-dark-blue mb-4">
+                Enterprise Integration
+              </h3>
+              <p class="body-base text-praxis-brown mb-4">
+                See how Praxis Navigator integrates with your existing security
+                tools, SIEM systems, and business intelligence platforms.
+              </p>
+              <ul class="space-y-2">
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >API integrations</span
+                  >
+                </li>
+                <li class="flex items-start gap-3">
+                  <div
+                    class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >SSO configuration</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-praxis-blue-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="h2 text-praxis-dark-blue mb-8">
+          Ready to See Behavioral Security Monitoring in Action?
+        </h2>
+
+        <p class="body-large text-praxis-pine mb-12">
+          Schedule your personalized demo today and discover how Praxis
+          Navigator can transform your Microsoft 365 environment into a
+          comprehensive security behavior monitoring system.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="/contact"
+            class="btn-primary btn-lg hover-lift active-scale focus-ring"
+          >
+            Schedule Live Demo
+          </a>
+          <a
+            href="/trial-explainer"
+            class="btn-secondary btn-lg hover-lift active-scale focus-ring"
+          >
+            Start Free Trial Instead
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb navigation styles */
+  nav[aria-label='Breadcrumb'] {
+    border-bottom: 1px solid #e5e5e5;
+  }
+</style>

@@ -238,14 +238,14 @@ export const FeaturesCapabilitiesSection: React.FC<
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="/integrations"
+                href="/product/integrations"
                 className="btn-outline hover-lift active-scale focus-ring"
                 aria-label="Learn more about platform integrations and API documentation"
               >
                 View Integrations
               </a>
               <a
-                href="/demo"
+                href="/product/demo"
                 className="btn-primary hover-lift active-scale focus-ring"
                 aria-label="Request a demo to see platform features in action"
               >

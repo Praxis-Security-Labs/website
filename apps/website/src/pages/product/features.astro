@@ -1,0 +1,752 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+// SEO Configuration for Features Page
+const title =
+  'Platform Features | Praxis Navigator Behavioral Security Monitoring';
+const description =
+  'Comprehensive overview of Praxis Navigator features including behavioral monitoring, risk scoring, compliance reporting, executive dashboards, and Microsoft Graph API integration.';
+const keywords =
+  'Praxis Navigator features, behavioral security monitoring features, Microsoft Graph API features, risk scoring engine, compliance reporting, executive dashboards, security analytics platform';
+
+// Structured Data for Software Features
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'Praxis Navigator Platform Features',
+  applicationCategory: 'Security Software',
+  description: description,
+  featureList: [
+    'Behavioral Monitoring',
+    'Risk Scoring Engine',
+    'Compliance Reporting',
+    'Executive Dashboards',
+    'Trend Analysis',
+    'Alert System',
+    'Microsoft Graph API Integration',
+    'Enterprise Security Controls',
+  ],
+  url: 'https://praxisnavigator.io/product/features',
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://praxisnavigator.io',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Product',
+      item: 'https://praxisnavigator.io/product',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Features',
+      item: 'https://praxisnavigator.io/product/features',
+    },
+  ],
+};
+
+// Combine structured data
+const combinedSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [softwareSchema, breadcrumbSchema],
+} as Record<string, unknown>;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="product"
+  structuredData={combinedSchema}
+  ogImage="/images/product/features-og.png"
+  ogType="website"
+  lang={lang}
+>
+  <!-- Breadcrumb Navigation -->
+  <nav
+    aria-label="Breadcrumb"
+    class="bg-praxis-gray-50 border-b border-praxis-gray-200"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a
+            href="/"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Home
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li>
+          <a
+            href="/product"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Product
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li aria-current="page" class="text-praxis-dark-blue font-medium">
+          Features
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-b from-praxis-blue to-praxis-sky">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="h1 text-praxis-white mb-8">
+          Platform Features & Capabilities
+        </h1>
+
+        <h2 class="h3 text-praxis-gold mb-8">
+          Comprehensive Behavioral Security Monitoring for Enterprise
+          Environments
+        </h2>
+
+        <p
+          class="body-large text-praxis-white mb-12 max-w-3xl mx-auto opacity-90"
+        >
+          Discover how Praxis Navigator transforms your Microsoft 365
+          environment into a comprehensive security behavior monitoring system
+          with enterprise-grade features and compliance controls.
+        </p>
+
+        <a
+          href="#core-features"
+          class="btn-accent btn-lg hover-lift active-scale focus-ring-gold"
+        >
+          Explore Features
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features Section -->
+  <section id="core-features" class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">Core Platform Features</h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Built for enterprise environments with the highest security and
+            compliance standards
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Behavioral Monitoring -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-20 h-20 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-blue rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4 text-center">
+              Behavioral Monitoring
+            </h3>
+            <p class="body-base text-praxis-brown mb-6 text-center">
+              Real-time tracking of security behaviors across your Microsoft 365
+              environment
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Email security practices monitoring</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >File sharing behavior analysis</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Authentication pattern tracking</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Policy compliance measurement</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Risk Scoring Engine -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-20 h-20 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-gold rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4 text-center">
+              Risk Scoring Engine
+            </h3>
+            <p class="body-base text-praxis-brown mb-6 text-center">
+              Dynamic calculations based on actual behaviors, not simulated
+              scenarios
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Individual and organizational risk scores</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Trend analysis and forecasting</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Risk factor identification</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Predictive modeling for security incidents</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Compliance Reporting -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-20 h-20 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-pine rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4 text-center">
+              Compliance Reporting
+            </h3>
+            <p class="body-base text-praxis-brown mb-6 text-center">
+              Automated documentation and evidence-based behavioral proof for
+              audits
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Automated compliance documentation</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Evidence-based behavioral proof</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Regulatory framework alignment</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Audit-ready reports and dashboards</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Executive Dashboards -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-20 h-20 bg-praxis-brick-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-brick rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4 text-center">
+              Executive Dashboards
+            </h3>
+            <p class="body-base text-praxis-brown mb-6 text-center">
+              Board-ready summaries that translate behaviors into business
+              impact
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Board-ready executive summaries</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >ROI and business impact metrics</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >KPI tracking and benchmarking</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Strategic security insights</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Trend Analysis -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-20 h-20 bg-praxis-sky-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-sky rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4 text-center">
+              Trend Analysis
+            </h3>
+            <p class="body-base text-praxis-brown mb-6 text-center">
+              Predictive analytics for future risk assessment and intervention
+              planning
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-sky rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Historical trend analysis</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-sky rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Predictive risk modeling</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-sky rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Security culture forecasting</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-sky rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Intervention recommendations</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Alert System -->
+          <div
+            class="bg-praxis-white rounded-xl p-8 shadow-lg border border-praxis-gray hover:shadow-xl transition-all"
+          >
+            <div
+              class="w-20 h-20 bg-praxis-tan-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-tan rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4 text-center">
+              Alert System
+            </h3>
+            <p class="body-base text-praxis-brown mb-6 text-center">
+              Intelligent alerting with automated workflows for security teams
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-tan rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Intelligent behavioral alerts</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-tan rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Automated workflow triggers</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-tan rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Escalation procedures</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-tan rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Integration with security tools</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Microsoft Graph Integration Section -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Microsoft Graph API Integration
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Comprehensive data collection across your Microsoft 365 environment
+            with enterprise-grade privacy controls
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Exchange Online -->
+          <div class="bg-praxis-white rounded-xl p-6 shadow-lg">
+            <div
+              class="w-16 h-16 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-blue rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue text-center mb-4">
+              Exchange Online
+            </h3>
+            <p class="body-small text-praxis-brown text-center mb-4">
+              Email security practices and threat response patterns
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Phishing email handling</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >External sender interactions</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Attachment security behaviors</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- SharePoint Online -->
+          <div class="bg-praxis-white rounded-xl p-6 shadow-lg">
+            <div
+              class="w-16 h-16 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-gold rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue text-center mb-4">
+              SharePoint Online
+            </h3>
+            <p class="body-small text-praxis-brown text-center mb-4">
+              File sharing behaviors and collaboration security
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >External sharing permissions</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Document access patterns</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Guest collaboration security</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Microsoft Teams -->
+          <div class="bg-praxis-white rounded-xl p-6 shadow-lg">
+            <div
+              class="w-16 h-16 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-pine rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue text-center mb-4">
+              Microsoft Teams
+            </h3>
+            <p class="body-small text-praxis-brown text-center mb-4">
+              Communication security and collaboration patterns
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Meeting security controls</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >Chat sharing behaviors</span
+                >
+              </li>
+              <li class="flex items-start gap-2">
+                <div
+                  class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                >
+                </div>
+                <span class="body-small text-praxis-black"
+                  >App integration security</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise Features Section -->
+  <section class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Enterprise-Grade Security & Compliance
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Built for enterprise environments with the highest security and
+            compliance standards
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-blue rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-3">SOC2 Type II</h3>
+            <p class="body-small text-praxis-brown">
+              Comprehensive security controls and audit compliance
+            </p>
+          </div>
+
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-gold rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-3">GDPR Aligned</h3>
+            <p class="body-small text-praxis-brown">
+              Privacy-first design with no PII collection
+            </p>
+          </div>
+
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-pine rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-3">ISO 27001</h3>
+            <p class="body-small text-praxis-brown">
+              Information security management system compliance
+            </p>
+          </div>
+
+          <div class="bg-praxis-sky-50 rounded-xl p-6 text-center">
+            <div
+              class="w-16 h-16 bg-praxis-brick-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <div class="w-8 h-8 bg-praxis-brick rounded-full"></div>
+            </div>
+            <h3 class="h5 text-praxis-dark-blue mb-3">Zero Trust</h3>
+            <p class="body-small text-praxis-brown">
+              Designed for modern enterprise security frameworks
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-praxis-blue-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="h2 text-praxis-dark-blue mb-8">
+          Experience These Features in Action
+        </h2>
+
+        <p class="body-large text-praxis-pine mb-12">
+          See how these powerful features work together to provide comprehensive
+          behavioral security monitoring for your Microsoft 365 environment.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="/product/demo"
+            class="btn-primary btn-lg hover-lift active-scale focus-ring"
+          >
+            Request Demo
+          </a>
+          <a
+            href="/trial-explainer"
+            class="btn-secondary btn-lg hover-lift active-scale focus-ring"
+          >
+            Start Free Trial
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb navigation styles */
+  nav[aria-label='Breadcrumb'] {
+    border-bottom: 1px solid #e5e5e5;
+  }
+</style>

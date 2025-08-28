@@ -1,0 +1,740 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url); // Will be 'en'
+
+// SEO Configuration for Security Page
+const title =
+  'Security & Compliance | Praxis Navigator Enterprise-Grade Security Controls';
+const description =
+  'Comprehensive overview of Praxis Navigator security architecture including SOC2 Type II certification, GDPR compliance, privacy-first design, and enterprise security controls for behavioral monitoring.';
+const keywords =
+  'Praxis Navigator security, SOC2 Type II certification, GDPR compliance, enterprise security controls, behavioral monitoring security, Microsoft Graph API security, privacy-first architecture, zero trust security';
+
+// Structured Data for Security Information
+const securitySchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Security & Compliance Documentation',
+  description: description,
+  url: 'https://praxisnavigator.io/product/security',
+  about: {
+    '@type': 'Thing',
+    name: 'Enterprise Security Compliance',
+    description:
+      'Comprehensive security and compliance framework for behavioral monitoring',
+  },
+};
+
+// Breadcrumb Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://praxisnavigator.io',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Product',
+      item: 'https://praxisnavigator.io/product',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Security',
+      item: 'https://praxisnavigator.io/product/security',
+    },
+  ],
+};
+
+// Combine structured data
+const combinedSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [securitySchema, breadcrumbSchema],
+} as Record<string, unknown>;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords={keywords}
+  pageType="product"
+  structuredData={combinedSchema}
+  ogImage="/images/product/security-og.png"
+  ogType="website"
+  lang={lang}
+>
+  <!-- Breadcrumb Navigation -->
+  <nav
+    aria-label="Breadcrumb"
+    class="bg-praxis-gray-50 border-b border-praxis-gray-200"
+  >
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <ol class="flex items-center space-x-2 text-sm">
+        <li>
+          <a
+            href="/"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Home
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li>
+          <a
+            href="/product"
+            class="text-praxis-brown hover:text-praxis-dark-blue transition-colors"
+          >
+            Product
+          </a>
+        </li>
+        <li class="text-praxis-gray">
+          <span aria-hidden="true">/</span>
+        </li>
+        <li aria-current="page" class="text-praxis-dark-blue font-medium">
+          Security
+        </li>
+      </ol>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="py-20 bg-gradient-to-b from-praxis-blue to-praxis-sky">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="h1 text-praxis-white mb-8">
+          Security & Compliance Documentation
+        </h1>
+
+        <h2 class="h3 text-praxis-gold mb-8">
+          Enterprise-Grade Security Controls for Behavioral Monitoring
+        </h2>
+
+        <p
+          class="body-large text-praxis-white mb-12 max-w-3xl mx-auto opacity-90"
+        >
+          Comprehensive security architecture designed for the world's most
+          security-conscious organizations. Built with privacy-first principles
+          and enterprise compliance requirements.
+        </p>
+
+        <a
+          href="#security-overview"
+          class="btn-accent btn-lg hover-lift active-scale focus-ring-gold"
+        >
+          Explore Security Architecture
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Overview Section -->
+  <section id="security-overview" class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Enterprise Security Framework
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Built for Fortune 500 companies, government agencies, and regulated
+            industries with the highest security standards
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- SOC2 Type II -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8 text-center">
+            <div
+              class="w-20 h-20 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-blue rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4">SOC2 Type II</h3>
+            <p class="body-base text-praxis-brown">
+              Comprehensive security controls and annual audit compliance
+            </p>
+          </div>
+
+          <!-- GDPR Compliance -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8 text-center">
+            <div
+              class="w-20 h-20 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-gold rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4">GDPR Aligned</h3>
+            <p class="body-base text-praxis-brown">
+              Privacy-first design with no PII collection or personal data
+              storage
+            </p>
+          </div>
+
+          <!-- ISO 27001 -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8 text-center">
+            <div
+              class="w-20 h-20 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-pine rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4">ISO 27001</h3>
+            <p class="body-base text-praxis-brown">
+              Information security management system compliance and best
+              practices
+            </p>
+          </div>
+
+          <!-- Zero Trust -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8 text-center">
+            <div
+              class="w-20 h-20 bg-praxis-brick-100 rounded-full flex items-center justify-center mx-auto mb-6"
+            >
+              <div class="w-10 h-10 bg-praxis-brick rounded-full"></div>
+            </div>
+            <h3 class="h4 text-praxis-dark-blue mb-4">Zero Trust</h3>
+            <p class="body-base text-praxis-brown">
+              Designed for modern enterprise security frameworks and
+              architectures
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy-First Architecture -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Privacy-First Data Architecture
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Designed from the ground up with privacy as the core principle, not
+            an afterthought
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- What We DON'T Collect -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <h3 class="h3 text-praxis-brick mb-8 text-center">
+              What We DON'T Collect
+            </h3>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-brick text-2xl">❌</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">
+                    No Personal Identifiable Information (PII)
+                  </h4>
+                  <p class="body-small text-praxis-black">
+                    No names, email addresses, phone numbers, or any data that
+                    can identify individuals
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-brick text-2xl">❌</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">No Content Data</h4>
+                  <p class="body-small text-praxis-black">
+                    No email content, file contents, message data, or document
+                    contents
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-brick text-2xl">❌</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">
+                    No Individual Tracking
+                  </h4>
+                  <p class="body-small text-praxis-black">
+                    No user surveillance, individual monitoring, or personal
+                    behavior tracking
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-brick text-2xl">❌</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">
+                    No Persistent Storage
+                  </h4>
+                  <p class="body-small text-praxis-black">
+                    No long-term storage of sensitive information or personal
+                    data
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- What We DO Monitor -->
+          <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+            <h3 class="h3 text-praxis-gold mb-8 text-center">
+              What We DO Monitor
+            </h3>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-gold text-2xl">✓</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">
+                    Behavioral Patterns
+                  </h4>
+                  <p class="body-small text-praxis-black">
+                    Aggregated security behavior trends and organizational
+                    patterns (anonymized)
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-gold text-2xl">✓</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">Security Events</h4>
+                  <p class="body-small text-praxis-black">
+                    Security-relevant actions and responses without personal
+                    identifiers
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-gold text-2xl">✓</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">Risk Indicators</h4>
+                  <p class="body-small text-praxis-black">
+                    Organizational security posture metrics and aggregated risk
+                    scores
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="text-praxis-gold text-2xl">✓</span>
+                <div>
+                  <h4 class="h6 text-praxis-dark-blue mb-2">
+                    Compliance Metrics
+                  </h4>
+                  <p class="body-small text-praxis-black">
+                    Policy adherence and security control effectiveness
+                    measurements
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Security Controls Section -->
+  <section class="py-20 bg-praxis-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Enterprise Security Controls
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Comprehensive security controls that protect your data and ensure
+            regulatory compliance
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Data Encryption -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8">
+            <h3 class="h4 text-praxis-dark-blue mb-6">
+              Data Encryption & Transport
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>TLS 1.3 Encryption:</strong> All data in transit protected
+                  with latest encryption standards
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>AES-256 At Rest:</strong> All stored data encrypted with
+                  industry-standard algorithms
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Key Management:</strong> Hardware security modules (HSM)
+                  for encryption key protection
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-blue rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Certificate Pinning:</strong> Additional protection against
+                  man-in-the-middle attacks
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Access Controls -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8">
+            <h3 class="h4 text-praxis-dark-blue mb-6">
+              Access Controls & Authentication
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>OAuth 2.0:</strong> Secure authentication with Microsoft
+                  Azure AD integration
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>RBAC:</strong> Role-based access control with principle
+                  of least privilege
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>MFA Required:</strong> Multi-factor authentication mandatory
+                  for all access
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-gold rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Session Management:</strong> Secure session handling with
+                  automatic timeout
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Infrastructure Security -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8">
+            <h3 class="h4 text-praxis-dark-blue mb-6">
+              Infrastructure Security
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Cloud-Native:</strong> Built on enterprise cloud infrastructure
+                  with 99.9% uptime SLA
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Network Isolation:</strong> Virtual private cloud with
+                  network segmentation
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>DDoS Protection:</strong> Advanced threat protection and
+                  traffic filtering
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-pine rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Regular Audits:</strong> Quarterly security assessments
+                  and penetration testing
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Compliance & Monitoring -->
+          <div class="bg-praxis-sky-50 rounded-xl p-8">
+            <h3 class="h4 text-praxis-dark-blue mb-6">
+              Compliance & Monitoring
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>24/7 Monitoring:</strong> Continuous security monitoring
+                  and threat detection
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Audit Logging:</strong> Comprehensive logs for all system
+                  activities and access
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Incident Response:</strong> 24/7 security operations center
+                  with rapid response
+                </span>
+              </li>
+              <li class="flex items-start gap-3">
+                <div
+                  class="w-2 h-2 bg-praxis-brick rounded-full mt-2 flex-shrink-0"
+                >
+                </div>
+                <span class="body-base text-praxis-black">
+                  <strong>Regular Reports:</strong> Monthly security and compliance
+                  status reports
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance Certifications -->
+  <section class="py-20 bg-praxis-tan-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="h2 text-praxis-dark-blue mb-6">
+            Industry Certifications & Standards
+          </h2>
+          <p class="body-large text-praxis-brown max-w-4xl mx-auto">
+            Independently verified compliance with global security and privacy
+            standards
+          </p>
+        </div>
+
+        <div class="bg-praxis-white rounded-xl p-8 shadow-lg">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- SOC2 Type II Details -->
+            <div class="text-center">
+              <div
+                class="w-20 h-20 bg-praxis-blue-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <div class="w-10 h-10 bg-praxis-blue rounded-full"></div>
+              </div>
+              <h3 class="h5 text-praxis-dark-blue mb-3">SOC2 Type II</h3>
+              <p class="body-small text-praxis-brown mb-4">
+                Annual independent audit of security controls
+              </p>
+              <ul class="text-left space-y-2">
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Security controls</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Availability monitoring</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-blue rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Processing integrity</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- GDPR Compliance Details -->
+            <div class="text-center">
+              <div
+                class="w-20 h-20 bg-praxis-gold-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <div class="w-10 h-10 bg-praxis-gold rounded-full"></div>
+              </div>
+              <h3 class="h5 text-praxis-dark-blue mb-3">GDPR Compliance</h3>
+              <p class="body-small text-praxis-brown mb-4">
+                European privacy regulation compliance
+              </p>
+              <ul class="text-left space-y-2">
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Privacy by design</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Data minimization</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-gold rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Right to erasure</span
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- ISO 27001 Details -->
+            <div class="text-center">
+              <div
+                class="w-20 h-20 bg-praxis-pine-100 rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <div class="w-10 h-10 bg-praxis-pine rounded-full"></div>
+              </div>
+              <h3 class="h5 text-praxis-dark-blue mb-3">ISO 27001</h3>
+              <p class="body-small text-praxis-brown mb-4">
+                International security management standard
+              </p>
+              <ul class="text-left space-y-2">
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Risk management</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Security policies</span
+                  >
+                </li>
+                <li class="flex items-start gap-2">
+                  <div
+                    class="w-1.5 h-1.5 bg-praxis-pine rounded-full mt-1.5 flex-shrink-0"
+                  >
+                  </div>
+                  <span class="body-small text-praxis-black"
+                    >Continuous improvement</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-praxis-blue-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="h2 text-praxis-dark-blue mb-8">
+          Ready to Implement Enterprise-Grade Security?
+        </h2>
+
+        <p class="body-large text-praxis-pine mb-12">
+          Contact our security team to discuss your compliance requirements and
+          learn how Praxis Navigator meets the highest enterprise security
+          standards.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a
+            href="/product/demo"
+            class="btn-primary btn-lg hover-lift active-scale focus-ring"
+          >
+            Request Security Demo
+          </a>
+          <a
+            href="/contact"
+            class="btn-secondary btn-lg hover-lift active-scale focus-ring"
+          >
+            Contact Security Team
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Breadcrumb navigation styles */
+  nav[aria-label='Breadcrumb'] {
+    border-bottom: 1px solid #e5e5e5;
+  }
+</style>

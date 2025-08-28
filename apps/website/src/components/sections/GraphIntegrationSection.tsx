@@ -301,14 +301,14 @@ export const GraphIntegrationSection: React.FC<
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
-                  href="/security"
+                  href="/product/security"
                   className="btn-outline hover-lift active-scale focus-ring"
                   aria-label="Learn more about security and compliance details"
                 >
                   Security Documentation
                 </a>
                 <a
-                  href="/demo"
+                  href="/product/demo"
                   className="btn-secondary hover-lift active-scale focus-ring"
                   aria-label="Request a demo to see compliance features"
                 >

@@ -164,7 +164,7 @@ export const SocialProofSection: React.FC<SocialProofSectionProps> = ({
             </h3>
             <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
               <a
-                href="/demo"
+                href="/product/demo"
                 className="btn-accent btn-lg hover-lift active-scale focus-ring-gold flex-1"
                 aria-label="Request a personalized demo to see proven results"
               >
