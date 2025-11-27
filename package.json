@@ -22,7 +22,7 @@
     "prepare": "[ -z \"$CI\" ] && husky || true"
   },
   "author": "Praxis Security Labs",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
