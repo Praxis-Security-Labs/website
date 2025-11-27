@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateBusinessEmail } from '@/utils/email-validation';
 
 interface SupportContactSectionProps {
   language?: 'en' | 'no';
@@ -31,6 +32,19 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [emailError, setEmailError] = useState('');
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData(prev => ({ ...prev, email: value }));
+
+    if (value) {
+      const validation = validateBusinessEmail(value, language);
+      setEmailError(validation.isValid ? '' : validation.message || '');
+    } else {
+      setEmailError('');
+    }
+  };
 
   const content = {
     en: {
@@ -349,10 +363,15 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                       id="email"
                       name="email"
                       value={formData.email}
-                      onChange={handleInputChange}
+                      onChange={handleEmailChange}
                       required
-                      className="w-full px-4 py-3 border border-praxis-blue-200 rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent"
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent ${
+                        emailError ? 'border-red-500' : 'border-praxis-blue-200'
+                      }`}
                     />
+                    {emailError && (
+                      <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                    )}
                   </div>
                   <div>
                     <label

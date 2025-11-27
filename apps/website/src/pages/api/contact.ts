@@ -102,7 +102,7 @@ export const POST: APIRoute = async ({ request }) => {
     const emailTemplates = getEmailTemplateConfig(formData.language || 'en');
 
     // Enhanced form data for CRM with language and cultural preferences
-    const enhancedFormData = {
+    const _enhancedFormData = {
       ...formData,
       // HubSpot/CRM properties
       leadSource: 'website_contact_form',
@@ -137,42 +137,40 @@ export const POST: APIRoute = async ({ request }) => {
           : undefined,
     };
 
-    // In a real implementation, you would:
-    // 1. Send to HubSpot CRM with language tagging
-    // 2. Send localized notification emails
-    // 3. Store in database with Norwegian compliance flags
-    // 4. Trigger appropriate language-specific marketing automation
-    // 5. Schedule follow-up in Norwegian business hours
-
-    // For now, we'll log the enhanced submission
-    console.log('Enhanced form submission received:', {
-      formType: enhancedFormData.formType,
-      segment: enhancedFormData.segment,
-      email: enhancedFormData.email,
-      company: enhancedFormData.company,
-      language: enhancedFormData.language,
-      culturalPreferences: enhancedFormData.culturalPreferences,
-      emailTemplateSet: enhancedFormData.emailTemplateSet,
-      businessContext: enhancedFormData.businessContext,
-      timestamp: enhancedFormData.timestamp,
+    // Send to Worker function for email processing
+    const workerResponse = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        company: formData.company,
+        jobTitle: formData.jobTitle,
+        phone: formData.phone,
+        message: formData.message,
+        formType: 'contact',
+        language: formData.language,
+        segment: formData.segment,
+      }),
     });
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    const workerResult = await workerResponse.json();
 
-    // Return localized success response
-    const successMessage =
-      formData.language === 'no'
-        ? 'Skjema sendt vellykket'
-        : 'Form submitted successfully';
+    if (!workerResult.success) {
+      return new Response(JSON.stringify({ error: workerResult.error }), {
+        status: workerResponse.status,
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
+    // Return success response from Worker
     return new Response(
       JSON.stringify({
         success: true,
-        message: successMessage,
+        message: workerResult.message,
         id: `contact_${Date.now()}`,
         language: formData.language,
-        emailTemplateSet: emailTemplates,
       }),
       {
         status: 200,

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateBusinessEmail } from '@/utils/email-validation';
 
 interface EnterpriseContactSectionProps {
   language?: 'en' | 'no';
@@ -9,6 +10,17 @@ export const EnterpriseContactSection: React.FC<
 > = ({ language = 'en' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [emailError, setEmailError] = useState('');
+
+  const handleEmailBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    const email = event.target.value;
+    if (email) {
+      const validation = validateBusinessEmail(email, language);
+      setEmailError(validation.isValid ? '' : validation.message || '');
+    } else {
+      setEmailError('');
+    }
+  };
 
   const content = {
     en: {
@@ -333,8 +345,14 @@ export const EnterpriseContactSection: React.FC<
                   name="email"
                   id="email"
                   required
-                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
+                  onBlur={handleEmailBlur}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors ${
+                    emailError ? 'border-red-500' : 'border-praxis-sky-300'
+                  }`}
                 />
+                {emailError && (
+                  <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                )}
               </div>
 
               {/* Company */}

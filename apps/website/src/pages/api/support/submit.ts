@@ -57,31 +57,41 @@ export const POST: APIRoute = async ({ request }) => {
     // Generate ticket ID
     const ticketId = `TRIAL-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
-    // For now, we'll log the request and simulate success
-    // In production, this would integrate with HubSpot or other CRM
-    console.log('Support Request Received:', {
-      ticketId,
-      timestamp: new Date().toISOString(),
-      data: {
-        ...data,
-        // Don't log sensitive info in production
-        email: data.email.replace(/(.{3}).*@/, '$1***@'),
-      },
+    // Send to Worker function for email processing
+    const workerResponse = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phone,
+        message: data.message,
+        formType: 'support',
+        requestType: data.requestType,
+        urgency: data.urgency,
+      }),
     });
 
-    // Here you would typically:
-    // 1. Save to database
-    // 2. Send to CRM (HubSpot)
-    // 3. Send confirmation email
-    // 4. Create support ticket
+    const workerResult = await workerResponse.json();
 
-    // Simulate processing delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+    if (!workerResult.success) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: { message: workerResult.error },
+        }),
+        {
+          status: workerResponse.status,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
 
     return new Response(
       JSON.stringify({
         success: true,
-        data: { ticketId },
+        data: { ticketId, message: workerResult.message },
       }),
       {
         status: 200,

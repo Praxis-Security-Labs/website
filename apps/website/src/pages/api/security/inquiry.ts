@@ -50,7 +50,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Prepare inquiry data
-    const inquiryData = {
+    const _inquiryData = {
       timestamp: new Date().toISOString(),
       contact: {
         name: name.trim(),
@@ -74,49 +74,37 @@ export const POST: APIRoute = async ({ request }) => {
       },
     };
 
-    // Here you would typically:
-    // 1. Save to database
-    // 2. Send notification email to security team
-    // 3. Create ticket in support system
-    // 4. Send confirmation email to requester
+    // Send to Worker function for email processing
+    const workerResponse = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        company: company,
+        message: securityQuestion,
+        formType: 'security',
+        language: language,
+        role: role,
+        complianceFramework: complianceFramework,
+        urgency: urgency,
+      }),
+    });
 
-    // For now, we'll log the inquiry and simulate success
-    console.log('Security Inquiry Received:', inquiryData);
+    const workerResult = await workerResponse.json();
 
-    // Track analytics
-    const trackingData = {
-      event: 'security_inquiry_submitted',
-      inquiry_type: 'security_compliance',
-      urgency,
-      compliance_framework: complianceFramework || 'none',
-      language,
-      company_name: company,
-      timestamp: inquiryData.timestamp,
-    };
-
-    // In production, you'd send this to your analytics service
-    console.log('Security Inquiry Analytics:', trackingData);
-
-    // Simulate email notifications (replace with actual email service)
-    const notifications = [
-      {
-        to: 'security@praxisnavigator.com',
-        subject: `Security Inquiry - ${urgency.toUpperCase()} Priority`,
-        template: 'security-team-notification',
-        data: inquiryData,
-      },
-      {
-        to: email,
-        subject:
-          language === 'no'
-            ? 'Takk for din sikkerhetsforespørsel'
-            : 'Thank you for your security inquiry',
-        template: 'inquiry-confirmation',
-        data: { ...inquiryData, language },
-      },
-    ];
-
-    console.log('Email Notifications Queued:', notifications.length);
+    if (!workerResult.success) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: workerResult.error,
+        }),
+        {
+          status: workerResponse.status,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
 
     // Generate inquiry ID for tracking
     const inquiryId = `SEC-${Date.now()}-${Math.random().toString(36).substring(2, 7).toUpperCase()}`;
@@ -127,9 +115,10 @@ export const POST: APIRoute = async ({ request }) => {
         success: true,
         inquiryId,
         message:
-          language === 'no'
+          workerResult.message ||
+          (language === 'no'
             ? 'Takk for din forespørsel. Vårt sikkerhetsteam vil kontakte deg innen 24 timer.'
-            : 'Thank you for your inquiry. Our security team will contact you within 24 hours.',
+            : 'Thank you for your inquiry. Our security team will contact you within 24 hours.'),
         estimatedResponse: urgency === 'high' ? '4 hours' : '24 hours',
       }),
       {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { validateBusinessEmail } from '@/utils/email-validation';
 
 interface ComplianceContactSectionProps {
   currentLanguage?: string;
@@ -20,6 +21,19 @@ export const ComplianceContactSection: React.FC<
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [emailError, setEmailError] = useState('');
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setFormData(prev => ({ ...prev, email: value }));
+
+    if (value) {
+      const validation = validateBusinessEmail(value, currentLanguage);
+      setEmailError(validation.isValid ? '' : validation.message || '');
+    } else {
+      setEmailError('');
+    }
+  };
 
   const content = {
     en: {
@@ -556,10 +570,15 @@ export const ComplianceContactSection: React.FC<
                       type="email"
                       name="email"
                       value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                      onChange={handleEmailChange}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent ${
+                        emailError ? 'border-red-500' : 'border-praxis-gray-300'
+                      }`}
                       required
                     />
+                    {emailError && (
+                      <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block body-base text-praxis-black font-medium mb-2">
