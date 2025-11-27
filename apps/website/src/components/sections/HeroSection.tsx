@@ -40,7 +40,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Primary CTA */}
         <div className="flex justify-center mb-16 max-w-lg mx-auto">
           <a
-            href="/trial-explainer"
+            href="/start-now"
             className="btn-accent btn-xl hover-lift active-scale focus-ring-gold w-full text-lg font-bold shadow-2xl"
             aria-label={
               language === 'no'

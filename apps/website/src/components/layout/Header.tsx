@@ -219,7 +219,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Trial Button */}
             <a
-              href="/trial-explainer"
+              href="/start-now"
               className="btn-accent btn-sm"
               aria-label={
                 currentLanguage === 'no'
@@ -386,7 +386,7 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
 
               <a
-                href="/trial-explainer"
+                href="/start-now"
                 className="btn-accent w-full text-center"
                 onClick={closeMobileMenu}
                 aria-label={

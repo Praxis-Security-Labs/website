@@ -96,7 +96,7 @@ export const PricingHeroSection: React.FC<PricingHeroSectionProps> = ({
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="/trial-explainer"
+                href="/start-now"
                 className="btn-accent btn-lg inline-flex items-center justify-center"
                 aria-label={
                   language === 'no'

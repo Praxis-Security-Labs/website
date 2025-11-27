@@ -58,7 +58,7 @@ export const TrialCallToActionSection: React.FC<
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <a
-                href="/trial-explainer"
+                href="/start-now"
                 className="btn-accent btn-lg inline-flex items-center justify-center group"
                 aria-label={
                   language === 'no'

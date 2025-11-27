@@ -26,7 +26,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       en: {
         primary: {
           text: 'Start Free Trial',
-          href: '/trial-explainer',
+          href: '/start-now',
         },
         secondary: {
           text: 'View Training ROI Guide',
@@ -36,7 +36,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       no: {
         primary: {
           text: 'Start Gratis Prøveperiode',
-          href: '/trial-explainer',
+          href: '/start-now',
         },
         secondary: {
           text: 'Se Opplæring ROI Guide',
@@ -48,7 +48,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       en: {
         primary: {
           text: 'Start Free Trial',
-          href: '/trial-explainer',
+          href: '/start-now',
         },
         secondary: {
           text: 'View ROI Calculator',
@@ -58,7 +58,7 @@ export const PersonaCTA: React.FC<PersonaCTAProps> = ({
       no: {
         primary: {
           text: 'Start Gratis Prøveperiode',
-          href: '/trial-explainer',
+          href: '/start-now',
         },
         secondary: {
           text: 'Se ROI Kalkulator',

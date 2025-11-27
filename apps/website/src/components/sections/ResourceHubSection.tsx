@@ -469,7 +469,7 @@ export const ResourceHubSection: FC<{ language?: 'en' | 'no' }> = ({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/trial-explainer"
+              href="/start-now"
               className="btn-accent inline-flex items-center justify-center"
             >
               <svg

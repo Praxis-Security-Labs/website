@@ -164,7 +164,7 @@ export const SocialProofSection: React.FC<SocialProofSectionProps> = ({
             </h3>
             <div className="flex justify-center max-w-lg mx-auto">
               <a
-                href="/trial-explainer"
+                href="/start-now"
                 className="btn-accent btn-xl hover-lift active-scale focus-ring-gold w-full text-lg font-bold shadow-2xl"
                 aria-label="Sign up today to start your free trial"
               >

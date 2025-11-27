@@ -189,7 +189,7 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
         },
         body: JSON.stringify({
           ...formData,
-          pageContext: 'trial-explainer',
+          pageContext: 'start-now',
           utm: {
             source: 'website',
             medium: 'trial_explainer',

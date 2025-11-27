@@ -251,7 +251,7 @@ export const ManagersContactSection: React.FC<ManagersContactSectionProps> = ({
             {/* CTA Buttons */}
             <div className="space-y-4">
               <a
-                href="/trial-explainer"
+                href="/start-now"
                 className="btn btn-primary w-full flex items-center justify-center"
               >
                 <svg

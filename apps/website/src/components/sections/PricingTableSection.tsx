@@ -42,7 +42,7 @@ export const PricingTableSection: React.FC<PricingTableSectionProps> = ({
         ? language === 'no'
           ? '/no/contact'
           : '/contact'
-        : '/trial-explainer',
+        : '/start-now',
     supportLevel: plan.supportLevel,
   }));
 

@@ -471,7 +471,7 @@ export const TrialExplainerFlow: React.FC<TrialExplainerFlowProps> = ({
   const handleTrialStart = () => {
     // Navigate to Azure Marketplace
     window.open(
-      'https://azuremarketplace.microsoft.com/en-us/marketplace/apps/praxisnavigator1692887606830.praxis_navigator',
+      'https://portal.azure.com/?microsoft_azure_marketplace_ItemHideKey=5a1ec9c4-0dfd-4a83-bf2a-30fd571dd159#view/Microsoft_Azure_Marketplace/GalleryItemDetailsBladeNopdl/id/praxissecuritylabsas1742323332583.praxis-navigator-core/selectionMode~/false/resourceGroupId//resourceGroupLocation//dontDiscardJourney~/false',
       '_blank'
     );
   };
