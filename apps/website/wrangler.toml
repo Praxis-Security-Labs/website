@@ -1,0 +1,14 @@
+# Cloudflare Pages Configuration for Praxis Website
+# This file ensures the correct build command is used for deployment
+
+name = "praxis-website"
+compatibility_date = "2024-11-28"
+
+# Pages configuration
+[pages]
+build_output_dir = "dist"
+
+# Build configuration that handles npm optional dependencies issue
+# Uses npm install instead of npm ci to avoid @rollup/rollup-linux-x64-gnu error
+[build]
+command = "npm run build:cf"

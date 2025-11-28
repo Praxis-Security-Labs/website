@@ -26,7 +26,7 @@ This document provides the step-by-step configuration for setting up Cloudflare 
 **Framework preset:** None (Custom)
 **Build command:** 
 ```bash
-cd apps/website && npm run build
+cd apps/website && npm run build:cf
 ```
 **Build output directory:** 
 ```
@@ -50,15 +50,30 @@ Click "Save and Deploy" to trigger initial build
 ## Troubleshooting
 
 ### Common Build Issues
+
+#### 1. npm Optional Dependencies Error 
+**Error:** `Cannot find module @rollup/rollup-linux-x64-gnu`
+**Solution:** Ensure using `build:cf` command instead of `build`
+- ✅ **Correct:** `cd apps/website && npm run build:cf`
+- ❌ **Incorrect:** `cd apps/website && npm run build`
+
+**Why this happens:** Cloudflare's Linux build environment with `npm ci` has known issues with optional dependencies for native modules.
+
+**The `build:cf` command includes:**
+```bash
+npm install --include=optional && astro check && astro build
+```
+
+#### 2. Other Common Issues
 1. **Node.js version**: Ensure Node.js 18 is selected
-2. **Build command**: Must include `cd apps/website &&` prefix for monorepo
+2. **Build command**: Must include `cd apps/website &&` prefix for monorepo  
 3. **Output directory**: Must be `apps/website/dist` not just `dist`
 4. **Dependencies**: Build will run `npm install` automatically in correct directory
 
 ### Build Command Explanation
 Since this is a monorepo with the main app in `apps/website/`, the build command needs to:
 1. Navigate to the correct directory: `cd apps/website`
-2. Run the build command: `npm run build`
+2. Run the Cloudflare-optimized build: `npm run build:cf`
 3. Output will be generated in `apps/website/dist/`
 
 ## Task 2: Configure Pull Request Preview Environments
@@ -78,7 +93,7 @@ Since this is a monorepo with the main app in `apps/website/`, the build command
 
 ### Step 3: Preview Build Configuration
 **Preview build settings should match production:**
-- Build command: `cd apps/website && npm run build`
+- Build command: `cd apps/website && npm run build:cf`
 - Build output directory: `apps/website/dist`
 - Node.js version: `18`
 
