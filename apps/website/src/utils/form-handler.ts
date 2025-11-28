@@ -162,7 +162,17 @@ export async function submitForm(
       body: JSON.stringify(payload),
     });
 
-    const result = await response.json();
+    // Handle non-JSON responses (like HTML error pages)
+    let result;
+    try {
+      result = await response.json();
+    } catch (error) {
+      console.error('Failed to parse response as JSON:', error);
+      return {
+        success: false,
+        error: getErrorMessage('submitError', data.language),
+      };
+    }
 
     if (!response.ok || !result.success) {
       return {
