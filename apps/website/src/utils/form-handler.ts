@@ -1,7 +1,17 @@
 import type { ContactFormData, ContactFormResponse } from '../types/contact';
 
 // Extended form data interface for form handling
-export interface ExtendedFormData extends ContactFormData {
+export interface ExtendedFormData {
+  // Core ContactFormData fields
+  firstName: string;
+  lastName: string;
+  name?: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  jobTitle?: string;
+  message: string;
+  subject?: string;
   honeypot?: string;
   source?: string;
   timestamp?: string;
@@ -10,6 +20,7 @@ export interface ExtendedFormData extends ContactFormData {
   urgency?: string;
   requestType?: string;
   segment?: string;
+  employeeCount?: string;
 }
 
 // Form submission handler

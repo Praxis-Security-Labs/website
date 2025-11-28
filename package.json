@@ -29,5 +29,9 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

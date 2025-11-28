@@ -21,16 +21,17 @@ export interface FormState {
 export function useFormState(initialData: Partial<ExtendedFormData> = {}) {
   // Ensure all form fields have default string values to avoid controlled/uncontrolled warnings
   const defaultFormData: ExtendedFormData = {
-    email: '',
-    message: '',
-    formType: 'contact',
-    language: 'en',
     firstName: '',
     lastName: '',
     name: '',
-    company: '',
+    email: '',
     phone: '',
+    company: '',
     jobTitle: '',
+    message: '',
+    subject: '',
+    formType: 'contact',
+    language: 'en',
     requestType: 'trial-help',
     urgency: 'medium',
     segment: '',
