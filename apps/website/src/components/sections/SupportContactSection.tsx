@@ -1,50 +1,28 @@
-import React, { useState } from 'react';
-import { validateBusinessEmail } from '@/utils/email-validation';
+import React from 'react';
+import { useFormState } from '../../hooks/useFormState';
 
 interface SupportContactSectionProps {
   language?: 'en' | 'no';
   variant?: 'trial-support' | 'general-support';
 }
 
-interface SupportForm {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  requestType: 'trial-help' | 'technical-question' | 'demo-request';
-  message: string;
-  urgency: 'low' | 'medium' | 'high';
-}
-
 export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
   language = 'en',
   variant = 'trial-support',
 }) => {
-  const [formData, setFormData] = useState<SupportForm>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
+  // Use unified form handler
+  const {
+    formData,
+    formState,
+    handleInputChange,
+    handleEmailBlur,
+    handleSubmit,
+  } = useFormState({
+    formType: 'support',
+    language,
     requestType: 'trial-help',
-    message: '',
     urgency: 'medium',
   });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [emailError, setEmailError] = useState('');
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setFormData(prev => ({ ...prev, email: value }));
-
-    if (value) {
-      const validation = validateBusinessEmail(value, language);
-      setEmailError(validation.isValid ? '' : validation.message || '');
-    } else {
-      setEmailError('');
-    }
-  };
 
   const content = {
     en: {
@@ -167,77 +145,17 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
 
   const t = content[language];
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // Track form submission analytics
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'support_form_submit', {
-          request_type: formData.requestType,
-          urgency: formData.urgency,
-          variant: variant,
-          language: language,
-          page_location: window.location.href,
-        });
-      }
-
-      // Submit to API endpoint
-      const response = await fetch('/api/support/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          pageContext: 'start-now',
-          utm: {
-            source: 'website',
-            medium: 'trial_explainer',
-            campaign: 'trial_signup',
-            content: language,
-          },
-        }),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        // Reset form
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          requestType: 'trial-help',
-          message: '',
-          urgency: 'medium',
-        });
-      } else {
-        throw new Error('Submission failed');
-      }
-    } catch (error) {
-      console.error('Form submission error:', error);
-      alert(
-        language === 'no'
-          ? 'Det oppstod en feil. Vennligst prøv igjen eller kontakt oss direkte på support@praxis-security.com'
-          : 'An error occurred. Please try again or contact us directly at support@praxis-security.com'
-      );
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleFormSubmit = (e: React.FormEvent) => {
+    handleSubmit(e, {
+      pageContext: 'start-now',
+      variant: variant,
+      utm: {
+        source: 'website',
+        medium: 'trial_explainer',
+        campaign: 'trial_signup',
+        content: language,
+      },
+    });
   };
 
   return (
@@ -298,7 +216,7 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
               {t.form.title}
             </h3>
 
-            {isSubmitted ? (
+            {formState.isSubmitted ? (
               <div className="bg-green-50 border border-green-200 rounded-xl p-8 text-center">
                 <div className="text-4xl mb-4">✅</div>
                 <h4 className="text-xl font-semibold text-green-800 mb-2">
@@ -308,7 +226,7 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
               </div>
             ) : (
               <form
-                onSubmit={handleSubmit}
+                onSubmit={handleFormSubmit}
                 className="bg-white rounded-xl p-8 shadow-md space-y-6"
               >
                 {/* Name Fields */}
@@ -324,9 +242,11 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                       type="text"
                       id="firstName"
                       name="firstName"
-                      value={formData.firstName}
+                      value={formData.firstName || ''}
                       onChange={handleInputChange}
                       required
+                      autoComplete="given-name"
+                      data-form-type="user-input"
                       className="w-full px-4 py-3 border border-praxis-blue-200 rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent"
                     />
                   </div>
@@ -341,9 +261,11 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                       type="text"
                       id="lastName"
                       name="lastName"
-                      value={formData.lastName}
+                      value={formData.lastName || ''}
                       onChange={handleInputChange}
                       required
+                      autoComplete="family-name"
+                      data-form-type="user-input"
                       className="w-full px-4 py-3 border border-praxis-blue-200 rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent"
                     />
                   </div>
@@ -362,15 +284,22 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                       type="email"
                       id="email"
                       name="email"
-                      value={formData.email}
-                      onChange={handleEmailChange}
+                      value={formData.email || ''}
+                      onChange={handleInputChange}
+                      onBlur={handleEmailBlur}
                       required
+                      autoComplete="email"
+                      data-form-type="user-input"
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent ${
-                        emailError ? 'border-red-500' : 'border-praxis-blue-200'
+                        formState.emailError
+                          ? 'border-red-500'
+                          : 'border-praxis-blue-200'
                       }`}
                     />
-                    {emailError && (
-                      <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                    {formState.emailError && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {formState.emailError}
+                      </p>
                     )}
                   </div>
                   <div>
@@ -384,8 +313,10 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                       type="tel"
                       id="phone"
                       name="phone"
-                      value={formData.phone}
+                      value={formData.phone || ''}
                       onChange={handleInputChange}
+                      autoComplete="tel"
+                      data-form-type="user-input"
                       className="w-full px-4 py-3 border border-praxis-blue-200 rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent"
                     />
                   </div>
@@ -403,7 +334,7 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                     <select
                       id="requestType"
                       name="requestType"
-                      value={formData.requestType}
+                      value={formData.requestType || 'trial-help'}
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-praxis-blue-200 rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent"
@@ -427,7 +358,7 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                     <select
                       id="urgency"
                       name="urgency"
-                      value={formData.urgency}
+                      value={formData.urgency || 'medium'}
                       onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 border border-praxis-blue-200 rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent"
@@ -454,10 +385,12 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                   <textarea
                     id="message"
                     name="message"
-                    value={formData.message}
+                    value={formData.message || ''}
                     onChange={handleInputChange}
                     required
                     rows={5}
+                    autoComplete="off"
+                    data-form-type="user-input"
                     className="w-full px-4 py-3 border border-praxis-blue-200 rounded-lg focus:ring-2 focus:ring-praxis-accent focus:border-transparent"
                     placeholder={
                       language === 'no'
@@ -471,10 +404,10 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
                 <div>
                   <button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={formState.isSubmitting}
                     className="w-full btn-accent btn-lg disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting
+                    {formState.isSubmitting
                       ? language === 'no'
                         ? 'Sender...'
                         : 'Sending...'

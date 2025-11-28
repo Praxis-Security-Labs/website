@@ -28,7 +28,10 @@ export const ComplianceContactSection: React.FC<
     setFormData(prev => ({ ...prev, email: value }));
 
     if (value) {
-      const validation = validateBusinessEmail(value, currentLanguage);
+      const validation = validateBusinessEmail(
+        value,
+        currentLanguage as 'en' | 'no'
+      );
       setEmailError(validation.isValid ? '' : validation.message || '');
     } else {
       setEmailError('');
@@ -377,8 +380,19 @@ export const ComplianceContactSection: React.FC<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => {
+    // Defensive check for extension interference
+    if (!e.target || !e.target.name) {
+      console.warn('Invalid form event detected');
+      return;
+    }
+
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+
+    try {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    } catch (error) {
+      console.error('Error handling input change:', error);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -526,7 +540,7 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="text"
                       name="name"
-                      value={formData.name}
+                      value={formData.name || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -539,7 +553,7 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="text"
                       name="title"
-                      value={formData.title}
+                      value={formData.title || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -554,9 +568,11 @@ export const ComplianceContactSection: React.FC<
                   <input
                     type="text"
                     name="company"
-                    value={formData.company}
+                    value={formData.company || ''}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                    autoComplete="organization"
+                    data-form-type="user-input"
                     required
                   />
                 </div>
@@ -569,11 +585,13 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="email"
                       name="email"
-                      value={formData.email}
+                      value={formData.email || ''}
                       onChange={handleEmailChange}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent ${
                         emailError ? 'border-red-500' : 'border-praxis-gray-300'
                       }`}
+                      autoComplete="email"
+                      data-form-type="user-input"
                       required
                     />
                     {emailError && (
@@ -587,9 +605,11 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="tel"
                       name="phone"
-                      value={formData.phone}
+                      value={formData.phone || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
+                      autoComplete="tel"
+                      data-form-type="user-input"
                     />
                   </div>
                 </div>
@@ -601,7 +621,7 @@ export const ComplianceContactSection: React.FC<
                     </label>
                     <select
                       name="inquiryType"
-                      value={formData.inquiryType}
+                      value={formData.inquiryType || 'gdpr'}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -622,7 +642,7 @@ export const ComplianceContactSection: React.FC<
                     </label>
                     <select
                       name="urgency"
-                      value={formData.urgency}
+                      value={formData.urgency || 'medium'}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                     >
@@ -641,9 +661,11 @@ export const ComplianceContactSection: React.FC<
                   </label>
                   <textarea
                     name="message"
-                    value={formData.message}
+                    value={formData.message || ''}
                     onChange={handleInputChange}
                     rows={6}
+                    autoComplete="off"
+                    data-form-type="user-input"
                     className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                     placeholder={
                       isNorwegian

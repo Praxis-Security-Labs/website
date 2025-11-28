@@ -64,13 +64,10 @@ const getEmailTemplateConfig = (language: string) => {
 };
 
 export const POST: APIRoute = async ({ request }) => {
-  let language = 'en'; // Default language for error messages
-
   try {
     const rawFormData = await request.json();
 
     // Capture language for potential error messages
-    language = rawFormData.language || 'en';
 
     // Basic validation
     if (
@@ -102,7 +99,7 @@ export const POST: APIRoute = async ({ request }) => {
     const emailTemplates = getEmailTemplateConfig(formData.language || 'en');
 
     // Enhanced form data for CRM with language and cultural preferences
-    const _enhancedFormData = {
+    const enhancedFormData = {
       ...formData,
       // HubSpot/CRM properties
       leadSource: 'website_contact_form',
@@ -141,18 +138,7 @@ export const POST: APIRoute = async ({ request }) => {
     const workerResponse = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        company: formData.company,
-        jobTitle: formData.jobTitle,
-        phone: formData.phone,
-        message: formData.message,
-        formType: 'contact',
-        language: formData.language,
-        segment: formData.segment,
-      }),
+      body: JSON.stringify(enhancedFormData),
     });
 
     const workerResult = await workerResponse.json();
@@ -170,7 +156,7 @@ export const POST: APIRoute = async ({ request }) => {
         success: true,
         message: workerResult.message,
         id: `contact_${Date.now()}`,
-        language: formData.language,
+        language: rawFormData.language,
       }),
       {
         status: 200,
@@ -182,8 +168,7 @@ export const POST: APIRoute = async ({ request }) => {
   } catch (error) {
     console.error('Contact form submission error:', error);
 
-    const errorMessage =
-      language === 'no' ? 'Intern serverfeil' : 'Internal server error';
+    const errorMessage = 'Internal server error';
 
     return new Response(JSON.stringify({ error: errorMessage }), {
       status: 500,

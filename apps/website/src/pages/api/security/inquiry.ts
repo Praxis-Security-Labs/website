@@ -50,7 +50,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Prepare inquiry data
-    const _inquiryData = {
+    const inquiryData = {
       timestamp: new Date().toISOString(),
       contact: {
         name: name.trim(),
@@ -78,17 +78,7 @@ export const POST: APIRoute = async ({ request }) => {
     const workerResponse = await fetch('/api/contact', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        company: company,
-        message: securityQuestion,
-        formType: 'security',
-        language: language,
-        role: role,
-        complianceFramework: complianceFramework,
-        urgency: urgency,
-      }),
+      body: JSON.stringify(inquiryData),
     });
 
     const workerResult = await workerResponse.json();

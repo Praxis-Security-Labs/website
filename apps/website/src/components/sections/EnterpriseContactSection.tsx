@@ -312,6 +312,8 @@ export const EnterpriseContactSection: React.FC<
                     name="firstName"
                     id="firstName"
                     required
+                    autoComplete="given-name"
+                    data-form-type="user-input"
                     className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                   />
                 </div>
@@ -327,6 +329,8 @@ export const EnterpriseContactSection: React.FC<
                     name="lastName"
                     id="lastName"
                     required
+                    autoComplete="family-name"
+                    data-form-type="user-input"
                     className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                   />
                 </div>
@@ -346,6 +350,8 @@ export const EnterpriseContactSection: React.FC<
                   id="email"
                   required
                   onBlur={handleEmailBlur}
+                  autoComplete="email"
+                  data-form-type="user-input"
                   className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors ${
                     emailError ? 'border-red-500' : 'border-praxis-sky-300'
                   }`}
@@ -368,6 +374,8 @@ export const EnterpriseContactSection: React.FC<
                   name="company"
                   id="company"
                   required
+                  autoComplete="organization"
+                  data-form-type="user-input"
                   className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
               </div>
@@ -385,6 +393,8 @@ export const EnterpriseContactSection: React.FC<
                   name="jobTitle"
                   id="jobTitle"
                   required
+                  autoComplete="organization-title"
+                  data-form-type="user-input"
                   className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
               </div>
@@ -439,6 +449,8 @@ export const EnterpriseContactSection: React.FC<
                   name="message"
                   id="message"
                   rows={4}
+                  autoComplete="off"
+                  data-form-type="user-input"
                   className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors resize-y"
                   placeholder="Tell us about your specific requirements..."
                 />
