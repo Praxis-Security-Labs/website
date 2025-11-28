@@ -146,7 +146,15 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
   const t = content[language];
 
   const handleFormSubmit = (e: React.FormEvent) => {
-    handleSubmit(e, {
+    console.log('🔴 [DEBUG] Form submit button clicked on start-now page');
+    console.log('🔴 [DEBUG] Form variant:', variant);
+    console.log('🔴 [DEBUG] Form language:', language);
+    console.log(
+      '🔴 [DEBUG] Current form data before submission:',
+      JSON.stringify(formData, null, 2)
+    );
+
+    const additionalContext = {
       pageContext: 'start-now',
       variant: variant,
       utm: {
@@ -155,7 +163,14 @@ export const SupportContactSection: React.FC<SupportContactSectionProps> = ({
         campaign: 'trial_signup',
         content: language,
       },
-    });
+    };
+
+    console.log(
+      '🔴 [DEBUG] Additional context:',
+      JSON.stringify(additionalContext, null, 2)
+    );
+
+    handleSubmit(e, additionalContext);
   };
 
   return (

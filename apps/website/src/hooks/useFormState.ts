@@ -64,14 +64,14 @@ export function useFormState(initialData: Partial<ExtendedFormData> = {}) {
     const { name, value } = e.target;
 
     try {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      setFormData((prev: ExtendedFormData) => ({ ...prev, [name]: value }));
 
       // Clear any previous errors for this field
       if (formState.emailError && name === 'email') {
-        setFormState(prev => ({ ...prev, emailError: '' }));
+        setFormState((prev: FormState) => ({ ...prev, emailError: '' }));
       }
       if (formState.formError) {
-        setFormState(prev => ({ ...prev, formError: '' }));
+        setFormState((prev: FormState) => ({ ...prev, formError: '' }));
       }
     } catch (error) {
       console.error('Error handling input change:', error);
@@ -95,20 +95,46 @@ export function useFormState(initialData: Partial<ExtendedFormData> = {}) {
     e: React.FormEvent,
     additionalContext?: Record<string, any>
   ) => {
+    console.log('🟡 [DEBUG] handleSubmit called in useFormState hook');
+    console.log(
+      '🟡 [DEBUG] Form data to be submitted:',
+      JSON.stringify(formData, null, 2)
+    );
+    console.log(
+      '🟡 [DEBUG] Additional context received:',
+      JSON.stringify(additionalContext, null, 2)
+    );
+
     e.preventDefault();
+    console.log(
+      '🟡 [DEBUG] Form submission prevented default, setting isSubmitting to true'
+    );
     setFormState(prev => ({ ...prev, isSubmitting: true, formError: '' }));
 
     try {
+      console.log(
+        '🟡 [DEBUG] Calling submitForm with data:',
+        JSON.stringify(formData, null, 2)
+      );
       const result = await submitForm(formData, additionalContext);
 
+      console.log(
+        '🟡 [DEBUG] Received response from submitForm:',
+        JSON.stringify(result, null, 2)
+      );
+
       if (result.success) {
+        console.log('🟢 [DEBUG] Form submission successful!');
+        console.log(
+          '🟢 [DEBUG] Setting form state to submitted and resetting form data'
+        );
         setFormState(prev => ({
           ...prev,
           isSubmitting: false,
           isSubmitted: true,
         }));
         // Reset form on successful submission
-        setFormData(prev => ({
+        setFormData((prev: ExtendedFormData) => ({
           ...prev,
           email: '',
           message: '',
@@ -116,20 +142,32 @@ export function useFormState(initialData: Partial<ExtendedFormData> = {}) {
           lastName: '',
           phone: '',
         }));
+        console.log('🟢 [DEBUG] Form reset completed');
       } else {
+        console.log(
+          '🔴 [DEBUG] Form submission failed with result:',
+          JSON.stringify(result, null, 2)
+        );
         setFormState(prev => ({
           ...prev,
           isSubmitting: false,
           formError: result.error || 'Submission failed',
           emailError: result.validationErrors?.email || '',
         }));
+        console.log('🔴 [DEBUG] Form state updated with error information');
       }
-    } catch {
+    } catch (error) {
+      console.log('🔴 [DEBUG] Exception caught during form submission:', error);
+      console.log(
+        '🔴 [DEBUG] Error details:',
+        JSON.stringify(error, Object.getOwnPropertyNames(error), 2)
+      );
       setFormState(prev => ({
         ...prev,
         isSubmitting: false,
         formError: getErrorMessage('networkError', formData.language),
       }));
+      console.log('🔴 [DEBUG] Form state updated with network error');
     }
   };
 

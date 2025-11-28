@@ -10,6 +10,7 @@
       "@/layouts/*": ["./src/layouts/*"],
       "@/styles/*": ["./src/styles/*"]
     },
+    "types": ["@cloudflare/workers-types"],
     "strict": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
