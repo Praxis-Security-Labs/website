@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { validateBusinessEmail } from '@/utils/email-validation';
+import React from 'react';
+import { useFormState } from '../../hooks/useFormState';
 
 interface EnterpriseContactSectionProps {
   language?: 'en' | 'no';
@@ -8,19 +8,11 @@ interface EnterpriseContactSectionProps {
 export const EnterpriseContactSection: React.FC<
   EnterpriseContactSectionProps
 > = ({ language = 'en' }) => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [emailError, setEmailError] = useState('');
-
-  const handleEmailBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    const email = event.target.value;
-    if (email) {
-      const validation = validateBusinessEmail(email, language);
-      setEmailError(validation.isValid ? '' : validation.message || '');
-    } else {
-      setEmailError('');
-    }
-  };
+  const { formState, handleSubmit } = useFormState({
+    formType: 'contact',
+    language,
+    segment: 'enterprise',
+  });
 
   const content = {
     en: {
@@ -119,50 +111,20 @@ export const EnterpriseContactSection: React.FC<
 
   const t = content[language];
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setIsSubmitting(true);
-
-    const formData = new FormData(event.currentTarget);
-    const data = {
-      firstName: formData.get('firstName'),
-      lastName: formData.get('lastName'),
-      email: formData.get('email'),
-      company: formData.get('company'),
-      jobTitle: formData.get('jobTitle'),
-      employeeCount: formData.get('employeeCount'),
-      phone: formData.get('phone'),
-      message: formData.get('message'),
-      segment: 'enterprise',
-      formType: 'enterprise-contact',
-      language,
-    };
-
-    try {
-      // Submit to HubSpot or backend API
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        // Reset form
-        (event.target as HTMLFormElement).reset();
-      } else {
-        console.error('Form submission failed');
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleFormSubmit = (e: React.FormEvent) => {
+    handleSubmit(e, {
+      pageContext: 'enterprise-contact',
+      variant: 'enterprise',
+      utm: {
+        source: 'website',
+        medium: 'enterprise_page',
+        campaign: 'enterprise_contact',
+        content: language,
+      },
+    });
   };
 
-  if (isSubmitted) {
+  if (formState.isSubmitted) {
     return (
       <section className="bg-gradient-to-br from-praxis-pine to-praxis-pine-800 border-t border-praxis-pine">
         <div className="container mx-auto px-6 py-20">
@@ -297,7 +259,7 @@ export const EnterpriseContactSection: React.FC<
               {t.form.title}
             </h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleFormSubmit} className="space-y-6">
               {/* Name Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -349,16 +311,10 @@ export const EnterpriseContactSection: React.FC<
                   name="email"
                   id="email"
                   required
-                  onBlur={handleEmailBlur}
                   autoComplete="email"
                   data-form-type="user-input"
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors ${
-                    emailError ? 'border-red-500' : 'border-praxis-sky-300'
-                  }`}
+                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
-                {emailError && (
-                  <p className="mt-1 text-sm text-red-600">{emailError}</p>
-                )}
               </div>
 
               {/* Company */}
@@ -459,10 +415,12 @@ export const EnterpriseContactSection: React.FC<
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={formState.isSubmitting}
                 className="w-full bg-praxis-sky hover:bg-praxis-sky-600 disabled:bg-praxis-sky-300 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-praxis-sky focus:ring-offset-2"
               >
-                {isSubmitting ? t.form.submittingText : t.form.submitText}
+                {formState.isSubmitting
+                  ? t.form.submittingText
+                  : t.form.submitText}
               </button>
             </form>
           </div>

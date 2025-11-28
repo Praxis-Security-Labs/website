@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { validateBusinessEmail } from '@/utils/email-validation';
+import { useFormState } from '../../hooks/useFormState';
 
 interface ComplianceContactSectionProps {
   currentLanguage?: string;
@@ -9,23 +10,22 @@ export const ComplianceContactSection: React.FC<
   ComplianceContactSectionProps
 > = ({ currentLanguage = 'en' }) => {
   const isNorwegian = currentLanguage === 'no';
-  const [formData, setFormData] = useState({
+  const [localFormData, setLocalFormData] = useState({
     name: '',
     title: '',
     company: '',
-    email: '',
     phone: '',
     inquiryType: '',
-    message: '',
     urgency: 'normal',
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [emailError, setEmailError] = useState('');
+  const { formState, handleSubmit } = useFormState({
+    formType: 'security',
+    language: currentLanguage as 'en' | 'no',
+  });
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setFormData(prev => ({ ...prev, email: value }));
 
     if (value) {
       const validation = validateBusinessEmail(
@@ -389,50 +389,42 @@ export const ComplianceContactSection: React.FC<
     const { name, value } = e.target;
 
     try {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      setLocalFormData(prev => ({ ...prev, [name]: value }));
     } catch (error) {
       console.error('Error handling input change:', error);
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleFormSubmit = (e: React.FormEvent) => {
     // Basic validation
+    const form = e.currentTarget as HTMLFormElement;
+    const formData = new FormData(form);
+
     if (
-      !formData.name ||
-      !formData.title ||
-      !formData.company ||
-      !formData.email ||
-      !formData.inquiryType ||
-      !formData.message
+      !localFormData.name ||
+      !localFormData.title ||
+      !localFormData.company ||
+      !formData.get('email') ||
+      !localFormData.inquiryType ||
+      !formData.get('message')
     ) {
       alert(t.form.error);
       return;
     }
 
-    setIsSubmitting(true);
-
-    try {
-      // In a real implementation, this would submit to your form handler
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSubmitted(true);
-    } catch (error) {
-      // Log error in production to monitoring system if available
-      if (typeof window !== 'undefined' && 'Sentry' in window) {
-        (
-          window as unknown as {
-            Sentry: { captureException: (error: unknown) => void };
-          }
-        ).Sentry.captureException(error);
-      }
-      alert('There was an error submitting your inquiry. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    handleSubmit(e, {
+      pageContext: 'compliance-contact',
+      variant: 'compliance',
+      utm: {
+        source: 'website',
+        medium: 'compliance_page',
+        campaign: 'compliance_contact',
+        content: currentLanguage,
+      },
+    });
   };
 
-  if (submitted) {
+  if (formState.isSubmitted) {
     return (
       <section className="py-16 lg:py-24 bg-praxis-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -444,26 +436,6 @@ export const ComplianceContactSection: React.FC<
             <p className="body-base text-praxis-gray-600 mb-8">
               {t.form.success}
             </p>
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                setFormData({
-                  name: '',
-                  title: '',
-                  company: '',
-                  email: '',
-                  phone: '',
-                  inquiryType: '',
-                  message: '',
-                  urgency: 'normal',
-                });
-              }}
-              className="btn-primary"
-            >
-              {isNorwegian
-                ? 'Send inn Ny Forespørsel'
-                : 'Submit Another Inquiry'}
-            </button>
           </div>
         </div>
       </section>
@@ -531,7 +503,7 @@ export const ComplianceContactSection: React.FC<
                 {t.form.subtitle}
               </p>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block body-base text-praxis-black font-medium mb-2">
@@ -540,7 +512,7 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="text"
                       name="name"
-                      value={formData.name || ''}
+                      value={localFormData.name || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -553,7 +525,7 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="text"
                       name="title"
-                      value={formData.title || ''}
+                      value={localFormData.title || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -568,7 +540,7 @@ export const ComplianceContactSection: React.FC<
                   <input
                     type="text"
                     name="company"
-                    value={formData.company || ''}
+                    value={localFormData.company || ''}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                     autoComplete="organization"
@@ -585,7 +557,6 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="email"
                       name="email"
-                      value={formData.email || ''}
                       onChange={handleEmailChange}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent ${
                         emailError ? 'border-red-500' : 'border-praxis-gray-300'
@@ -605,7 +576,7 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="tel"
                       name="phone"
-                      value={formData.phone || ''}
+                      value={localFormData.phone || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       autoComplete="tel"
@@ -621,7 +592,7 @@ export const ComplianceContactSection: React.FC<
                     </label>
                     <select
                       name="inquiryType"
-                      value={formData.inquiryType || 'gdpr'}
+                      value={localFormData.inquiryType || 'gdpr'}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -642,7 +613,7 @@ export const ComplianceContactSection: React.FC<
                     </label>
                     <select
                       name="urgency"
-                      value={formData.urgency || 'medium'}
+                      defaultValue="medium"
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                     >
@@ -661,7 +632,6 @@ export const ComplianceContactSection: React.FC<
                   </label>
                   <textarea
                     name="message"
-                    value={formData.message || ''}
                     onChange={handleInputChange}
                     rows={6}
                     autoComplete="off"
@@ -678,10 +648,10 @@ export const ComplianceContactSection: React.FC<
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={formState.isSubmitting}
                   className="w-full btn-accent disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? t.form.submitting : t.form.submit}
+                  {formState.isSubmitting ? t.form.submitting : t.form.submit}
                 </button>
               </form>
             </div>

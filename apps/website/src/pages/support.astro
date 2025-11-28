@@ -324,13 +324,17 @@ const supportSchema = {
         data.requestType = 'support';
 
         try {
-          // Submit to support API endpoint
-          const response = await fetch('/api/support/submit', {
+          // Submit directly to Cloudflare Worker
+          const response = await fetch('/api/contact', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+              ...data,
+              formType: 'support',
+              language: 'en',
+            }),
           });
 
           if (response.ok) {
