@@ -5,15 +5,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
-    "build:cf": "npm install --include=optional && astro check && astro build",
+    "build": "echo '🔧 [CLOUDFLARE BUILD] Starting npm install with optional dependencies...' && npm install --include=optional && echo '🔧 [CLOUDFLARE BUILD] Running Astro check and build...' && astro check && astro build && echo '🎉 [CLOUDFLARE BUILD] Build completed successfully!'",
+    "build:local": "astro check && astro build",
+    "build:cf": "echo '🔧 [CLOUDFLARE BUILD] Starting npm install with optional dependencies...' && npm install --include=optional && echo '🔧 [CLOUDFLARE BUILD] Running Astro check and build...' && astro check && astro build && echo '🎉 [CLOUDFLARE BUILD] Build completed successfully!'",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest",
     "test:e2e": "playwright test",
-    "test:lighthouse": "lhci autorun",
+    "test:size": "size-limit",
     "deploy": "wrangler pages deploy dist",
     "wrangler": "wrangler",
     "worker:deploy": "wrangler deploy",
@@ -36,9 +37,9 @@
   "devDependencies": {
     "@azure/msal-browser": "^4.26.2",
     "@cloudflare/workers-types": "^4.20241127.0",
-    "@lhci/cli": "^0.15.0",
     "@playwright/test": "^1.57.0",
     "@sentry/browser": "^10.27.0",
+    "@size-limit/preset-app": "^11.2.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
@@ -50,9 +51,28 @@
     "eslint-plugin-jsx-a11y": "^6.10.0",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "performance-budget": "^1.4.2",
     "vitest": "^4.0.14",
     "web-vitals": "^5.1.0",
     "wrangler": "^4.51.0"
-  }
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.53.3"
+  },
+  "size-limit": [
+    {
+      "name": "Client bundle (JS)",
+      "path": "dist/_astro/*.js",
+      "limit": "512KB"
+    },
+    {
+      "name": "Styles (CSS)",
+      "path": "dist/_astro/*.css",
+      "limit": "128KB"
+    },
+    {
+      "name": "Total bundle",
+      "path": "dist/**/*",
+      "limit": "2MB"
+    }
+  ]
 }

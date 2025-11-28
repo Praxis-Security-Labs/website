@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "npm run dev --workspace=apps/website",
     "dev:worker": "npm run dev --workspace=apps/worker",
-    "build": "npm run build:cf --workspace=apps/website",
+    "build": "npm run build:local --workspace=apps/website",
+    "build:cf": "npm run build --workspace=apps/website",
     "build:worker": "npm run deploy --workspace=apps/worker",
     "deploy:worker": "npm run deploy --workspace=apps/worker",
     "preview": "npm run preview --workspace=apps/website",
