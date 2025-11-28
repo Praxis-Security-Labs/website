@@ -10,7 +10,10 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace=apps/website",
+    "dev:worker": "npm run dev --workspace=apps/worker",
     "build": "npm run build --workspace=apps/website",
+    "build:worker": "npm run deploy --workspace=apps/worker",
+    "deploy:worker": "npm run deploy --workspace=apps/worker",
     "preview": "npm run preview --workspace=apps/website",
     "lint": "npm run lint --workspace=apps/website",
     "lint:fix": "npm run lint:fix --workspace=apps/website",

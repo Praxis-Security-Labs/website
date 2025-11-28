@@ -6,7 +6,9 @@ This is the promotional website for Praxis Security Labs, built with Astro and R
 
 ```
 /
-├── apps/website/          # Main Astro application
+├── apps/
+│   ├── website/           # Main Astro static site application
+│   └── worker/            # Cloudflare Worker for API endpoints
 ├── packages/
 │   ├── praxis-ui/         # Praxis design system components
 │   └── shared/            # Shared TypeScript types and utilities
@@ -44,8 +46,10 @@ This is the promotional website for Praxis Security Labs, built with Astro and R
 ### Available Scripts
 
 #### Root Level Scripts (monorepo management)
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
+- `npm run dev` - Start website development server
+- `npm run dev:worker` - Start worker development server
+- `npm run build` - Build website for production
+- `npm run deploy:worker` - Deploy worker to Cloudflare
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
 - `npm run lint:fix` - Fix ESLint errors
@@ -55,23 +59,48 @@ This is the promotional website for Praxis Security Labs, built with Astro and R
 - `npm run test:e2e` - Run end-to-end tests
 
 #### Workspace-specific Scripts
-All scripts above run on the `apps/website` workspace. To run commands directly on specific workspaces:
+All scripts above run on their respective workspaces. To run commands directly on specific workspaces:
 
 ```bash
-# Run commands in website app
+# Website commands
 npm run dev --workspace=apps/website
 npm run build --workspace=apps/website
 
+# Worker commands  
+npm run dev --workspace=apps/worker
+npm run deploy --workspace=apps/worker
+
 # Install dependencies in specific workspace
 npm install <package> --workspace=apps/website
+npm install <package> --workspace=apps/worker
+```
+
+## Deployment
+
+### Website (Astro Static Site)
+The website deploys automatically to Cloudflare Pages via GitHub integration:
+- **Production**: Connected to `main` branch
+- **Preview**: Connected to feature branches
+
+### Worker (API Endpoints)
+The worker must be deployed manually:
+
+```bash
+# Deploy worker to production
+npm run deploy:worker
+
+# Or deploy from worker directory
+cd apps/worker
+npm run deploy
 ```
 
 ## Technology Stack
 
-- **Static Site Generator**: Astro ^3.0.0
-- **UI Framework**: React ^18.0.0  
-- **Styling**: Tailwind CSS ^3.3.0 with Praxis Design System
-- **TypeScript**: ^5.2.0 (strict mode)
+- **Static Site Generator**: Astro ^5.16.0
+- **UI Framework**: React ^19.2.0  
+- **Styling**: Tailwind CSS ^3.4.0 with Praxis Design System
+- **TypeScript**: ^5.6.0 (strict mode)
+- **API**: Cloudflare Worker with KV storage
 - **Testing**: Vitest (unit), Playwright (E2E)
 - **Code Quality**: ESLint + Prettier
 - **Build Tool**: Vite (built into Astro)
