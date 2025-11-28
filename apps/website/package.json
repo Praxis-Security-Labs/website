@@ -55,6 +55,9 @@
     "web-vitals": "^5.1.0",
     "wrangler": "^4.51.0"
   },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.53.3"
+  },
   "size-limit": [
     {
       "name": "Client bundle (JS)",
