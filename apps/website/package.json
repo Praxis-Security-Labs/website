@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
-    "build:cf": "npm install --include=optional && astro check && astro build",
+    "build": "echo '🔧 [CLOUDFLARE BUILD] Starting npm install with optional dependencies...' && npm install --include=optional && echo '🔧 [CLOUDFLARE BUILD] Running Astro check and build...' && astro check && astro build && echo '🎉 [CLOUDFLARE BUILD] Build completed successfully!'",
+    "build:local": "astro check && astro build",
+    "build:cf": "echo '🔧 [CLOUDFLARE BUILD] Starting npm install with optional dependencies...' && npm install --include=optional && echo '🔧 [CLOUDFLARE BUILD] Running Astro check and build...' && astro check && astro build && echo '🎉 [CLOUDFLARE BUILD] Build completed successfully!'",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",

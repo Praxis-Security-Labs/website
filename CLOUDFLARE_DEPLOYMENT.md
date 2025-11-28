@@ -26,7 +26,7 @@ This document provides the step-by-step configuration for setting up Cloudflare 
 **Framework preset:** None (Custom)
 **Build command:** 
 ```bash
-cd apps/website && npm run build:cf
+cd apps/website && npm run build
 ```
 **Build output directory:** 
 ```
@@ -53,13 +53,13 @@ Click "Save and Deploy" to trigger initial build
 
 #### 1. npm Optional Dependencies Error 
 **Error:** `Cannot find module @rollup/rollup-linux-x64-gnu`
-**Solution:** Ensure using `build:cf` command instead of `build`
-- ✅ **Correct:** `cd apps/website && npm run build:cf`
-- ❌ **Incorrect:** `cd apps/website && npm run build`
+**Solution:** The default `build` command now handles this automatically
+- ✅ **Correct:** `cd apps/website && npm run build` (default)
+- ℹ️ **For local dev:** `npm run build:local` (skips the npm install step)
 
-**Why this happens:** Cloudflare's Linux build environment with `npm ci` has known issues with optional dependencies for native modules.
+**Why this works:** The default `build` command includes `npm install --include=optional` which fixes Cloudflare's npm ci optional dependency bug.
 
-**The `build:cf` command includes:**
+**The default `build` command includes:**
 ```bash
 npm install --include=optional && astro check && astro build
 ```
@@ -73,7 +73,7 @@ npm install --include=optional && astro check && astro build
 ### Build Command Explanation
 Since this is a monorepo with the main app in `apps/website/`, the build command needs to:
 1. Navigate to the correct directory: `cd apps/website`
-2. Run the Cloudflare-optimized build: `npm run build:cf`
+2. Run the default build command: `npm run build` (which includes optional dependency fix)
 3. Output will be generated in `apps/website/dist/`
 
 ## Task 2: Configure Pull Request Preview Environments
@@ -93,7 +93,7 @@ Since this is a monorepo with the main app in `apps/website/`, the build command
 
 ### Step 3: Preview Build Configuration
 **Preview build settings should match production:**
-- Build command: `cd apps/website && npm run build:cf`
+- Build command: `cd apps/website && npm run build`
 - Build output directory: `apps/website/dist`
 - Node.js version: `18`
 
