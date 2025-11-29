@@ -1,5 +1,6 @@
 /* eslint-env worker */
-/* global KVNamespace */
+/// <reference types="@cloudflare/workers-types" />
+
 import type { EmailMessage } from './types/email';
 import type { ContactFormData } from './types/contact';
 
@@ -22,12 +23,10 @@ interface Env {
 
 // Allowed origins for CORS
 const ALLOWED_ORIGINS = [
-  'https://praxisnavigator.com',
-  'https://www.praxisnavigator.com',
-  'https://staging.praxisnavigator.com',
-  'http://localhost:4321', // Astro dev server
-  'http://localhost:3000', // Alternative dev port
-  'https://localhost:4321', // HTTPS dev
+  'https://praxisnavigator.io',
+  'https://app.praxisnavigator.io',
+  'https://test.app.praxisnavigator.io',
+  'https://dev.app.praxisnavigator.io',
 ];
 
 // Security headers

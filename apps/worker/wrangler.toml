@@ -10,15 +10,16 @@ zone_name = "praxisnavigator.io"
 # KV namespace bindings (using existing namespaces)
 [[kv_namespaces]]
 binding = "RATE_LIMIT_KV"
-id = "f0a6b1c2d3e4f5a6b7c8d9e0f1a2b3c4"
+id = "fc9fca8da4e74935acb9fdb4eccba12a"
 
 [[kv_namespaces]]
 binding = "CONSUMER_EMAIL_KV"
-id = "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
+id = "1db0c718c288456eb681f9ee5d43e0fa"
 
-# Environment variables (set these in Cloudflare dashboard)
-# CF_M365_TENANT_ID = "your-tenant-id"
-# CF_M365_CLIENT_ID = "your-client-id" 
-# CF_M365_SENDER = "your-sender@domain.com"
-# RECIPIENT_EMAIL = "recipient@domain.com"
-# CF_M365_CLIENT_SECRET = "your-client-secret" (use: npx wrangler secret put CF_M365_CLIENT_SECRET)
+# Environment variables for Microsoft Graph API
+[vars]
+CF_M365_TENANT_ID = "your-tenant-id-here"
+CF_M365_CLIENT_ID = "your-client-id-here" 
+CF_M365_SENDER = "noreply@praxisnavigator.io"
+RECIPIENT_EMAIL = "contact@praxisnavigator.io"
+# CF_M365_CLIENT_SECRET is set as secret (use: npx wrangler secret put CF_M365_CLIENT_SECRET)
