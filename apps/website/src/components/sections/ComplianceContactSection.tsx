@@ -378,55 +378,6 @@ export const ComplianceContactSection: React.FC<
 
   const t = content[isNorwegian ? 'no' : 'en'];
 
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) => {
-    // Defensive check for extension interference
-    if (!e.target || !e.target.name) {
-      console.warn('Invalid form event detected');
-      return;
-    }
-
-    const { name, value } = e.target;
-
-    try {
-      setLocalFormData(prev => ({ ...prev, [name]: value }));
-    } catch (error) {
-      console.error('Error handling input change:', error);
-    }
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    // Basic validation
-    const form = e.currentTarget as HTMLFormElement;
-    const formData = new FormData(form);
-
-    if (
-      !localFormData.name ||
-      !localFormData.title ||
-      !localFormData.company ||
-      !formData.get('email') ||
-      !localFormData.inquiryType ||
-      !formData.get('message')
-    ) {
-      alert(t.form.error);
-      return;
-    }
-
-    handleSubmit(e, {
-      pageContext: 'compliance-contact',
-      variant: 'compliance',
-      utm: {
-        source: 'website',
-        medium: 'compliance_page',
-        campaign: 'compliance_contact',
-        content: currentLanguage,
-      },
-    });
-  };
-
   if (formState.isSubmitted) {
     return (
       <section className="py-16 lg:py-24 bg-praxis-white">

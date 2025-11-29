@@ -137,19 +137,6 @@ export const EnterpriseContactSection: React.FC<
     handleSubmit(e, additionalContext);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    handleSubmit(e, {
-      pageContext: 'enterprise-contact',
-      variant: 'enterprise',
-      utm: {
-        source: 'website',
-        medium: 'enterprise_page',
-        campaign: 'enterprise_contact',
-        content: language,
-      },
-    });
-  };
-
   if (formState.isSubmitted) {
     return (
       <section className="bg-gradient-to-br from-praxis-pine to-praxis-pine-800 border-t border-praxis-pine">
