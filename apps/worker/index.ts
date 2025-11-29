@@ -19,6 +19,9 @@ interface Env {
   CF_M365_CLIENT_SECRET: string;
   CF_M365_SENDER: string;
   RECIPIENT_EMAIL: string;
+  
+  // Turnstile (optional for gradual rollout)
+  CF_TURNSTILE_SECRET?: string;
 }
 
 // Allowed origins for CORS
@@ -84,6 +87,77 @@ const CONTENT_FILTERS = {
     /(..)\1{10,}/i, // Repeated characters
   ],
 };
+
+// Progressive rate limiting configuration
+interface ProgressiveRateLimit {
+  attempts: number;
+  lastAttempt: number;
+  delays: number[]; // Progressive delay in seconds
+}
+
+const PROGRESSIVE_DELAYS = [0, 5, 15, 60, 300, 900]; // 0s, 5s, 15s, 1m, 5m, 15m
+
+// Cloudflare Turnstile verification
+async function verifyTurnstile(token: string, clientIP: string, env: Env): Promise<boolean> {
+  if (!env.CF_TURNSTILE_SECRET || !token) {
+    // If Turnstile not configured, skip verification (gradual rollout)
+    return true;
+  }
+
+  const formData = new FormData();
+  formData.append('secret', env.CF_TURNSTILE_SECRET);
+  formData.append('response', token);
+  formData.append('remoteip', clientIP);
+
+  try {
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const result = await response.json() as { success: boolean; 'error-codes'?: string[] };
+    return result.success;
+  } catch (error) {
+    // Fail open for availability
+    console.error('Turnstile verification failed:', error);
+    return true;
+  }
+}
+
+// Progressive rate limiting
+async function getProgressiveDelay(env: Env, clientIP: string): Promise<number> {
+  const key = `progressive:${clientIP}`;
+  const existing = await env.RATE_LIMIT_KV.get(key);
+  
+  let rateLimitData: ProgressiveRateLimit = existing 
+    ? JSON.parse(existing)
+    : { attempts: 0, lastAttempt: 0, delays: PROGRESSIVE_DELAYS };
+  
+  const now = Date.now();
+  const timeSinceLastAttempt = (now - rateLimitData.lastAttempt) / 1000;
+  
+  // Reset if enough time has passed (1 hour)
+  if (timeSinceLastAttempt > 3600) {
+    rateLimitData.attempts = 0;
+  }
+  
+  const delayIndex = Math.min(rateLimitData.attempts, rateLimitData.delays.length - 1);
+  const requiredDelay = rateLimitData.delays[delayIndex];
+  
+  if (timeSinceLastAttempt < requiredDelay) {
+    return requiredDelay - Math.floor(timeSinceLastAttempt);
+  }
+  
+  // Update attempt count
+  rateLimitData.attempts++;
+  rateLimitData.lastAttempt = now;
+  
+  await env.RATE_LIMIT_KV.put(key, JSON.stringify(rateLimitData), {
+    expirationTtl: 3600, // 1 hour
+  });
+  
+  return 0; // No delay needed
+}
 
 // Get Microsoft Graph access token
 async function getAccessToken(env: Env): Promise<string> {
@@ -401,6 +475,25 @@ async function handleContactRequest(
     
     const country = getCountryCode(request);
 
+    // Check progressive delay first (before other validations)
+    const delaySeconds = await getProgressiveDelay(env, clientIP);
+    if (delaySeconds > 0) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: `Please wait ${delaySeconds} seconds before trying again.`,
+        }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': delaySeconds.toString(),
+            ...corsHeaders,
+          },
+        }
+      );
+    }
+
     // Enhanced rate limiting
     const rateLimitResult = await checkRateLimit(env, clientIP, country);
     if (!rateLimitResult.allowed) {
@@ -421,7 +514,26 @@ async function handleContactRequest(
     }
 
     // Parse and validate form data
-    const formData = await request.json();
+    const rawFormData = await request.json();
+    const formData = rawFormData as any; // Type assertion for form data access
+    
+    // Verify Turnstile if configured and token provided
+    if (formData.turnstileToken && !await verifyTurnstile(formData.turnstileToken, clientIP, env)) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Security verification failed. Please try again.',
+        }),
+        {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json',
+            ...corsHeaders,
+          },
+        }
+      );
+    }
+    
     const validatedData = validateContactForm(formData);
 
     // Send email

@@ -1,5 +1,25 @@
 import type { ContactFormData, ContactFormResponse } from '../types/contact';
 
+// Get Turnstile token from global context if available
+function getTurnstileToken(): string | null {
+  // Try to get token from global window object (set by TurnstileWidget)
+  if (typeof window !== 'undefined' && (window as any).turnstileToken) {
+    return (window as any).turnstileToken;
+  }
+
+  // Try to get token from React context if available
+  try {
+    const contextElement = document.querySelector('[data-turnstile-token]');
+    if (contextElement) {
+      return contextElement.getAttribute('data-turnstile-token');
+    }
+  } catch {
+    // Context not available, continue without token
+  }
+
+  return null;
+}
+
 // Extended form data interface for form handling
 export interface ExtendedFormData {
   // Core ContactFormData fields
@@ -21,6 +41,7 @@ export interface ExtendedFormData {
   requestType?: string;
   segment?: string;
   employeeCount?: string;
+  turnstileToken?: string; // Add Turnstile token support
 }
 
 // Form submission handler
@@ -38,7 +59,22 @@ export async function submitContactForm(
   );
 
   try {
-    const requestBody = JSON.stringify(formData);
+    // Automatically include Turnstile token if available
+    const turnstileToken = getTurnstileToken();
+    const enrichedFormData = {
+      ...formData,
+      ...(turnstileToken && { turnstileToken }),
+    };
+
+    if (turnstileToken) {
+      console.log('🔐 [DEBUG] Including Turnstile token in form submission');
+    } else {
+      console.log(
+        '🔐 [DEBUG] No Turnstile token available, proceeding without CAPTCHA'
+      );
+    }
+
+    const requestBody = JSON.stringify(enrichedFormData);
     console.log('🟠 [DEBUG] Request body to be sent:', requestBody);
     console.log('🟠 [DEBUG] Making fetch request to /api/contact');
 

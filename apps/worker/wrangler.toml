@@ -23,3 +23,4 @@ CF_M365_CLIENT_ID = "your-client-id-here"
 CF_M365_SENDER = "noreply@praxisnavigator.io"
 RECIPIENT_EMAIL = "contact@praxisnavigator.io"
 # CF_M365_CLIENT_SECRET is set as secret (use: npx wrangler secret put CF_M365_CLIENT_SECRET)
+# CF_TURNSTILE_SECRET is optional (use: npx wrangler secret put CF_TURNSTILE_SECRET)
