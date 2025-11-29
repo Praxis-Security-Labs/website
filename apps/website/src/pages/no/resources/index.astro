@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { NewsletterSignup } from '../../../components/forms/NewsletterSignup';
 
 const title = 'Sikkerhetskultur Ressurser & Forskning | Praxis Navigator';
 const description =
@@ -312,28 +313,11 @@ const structuredData = {
           kulturprogrammer.
         </p>
 
-        <div class="max-w-md mx-auto mb-8">
-          <form class="flex flex-col sm:flex-row gap-3">
-            <input
-              type="email"
-              placeholder="Skriv inn din e-postadresse"
-              class="flex-grow px-4 py-3 rounded-lg text-praxis-dark-blue"
-              required
-              aria-label="E-postadresse for ressursoppdateringer"
-            />
-            <button
-              type="submit"
-              class="btn-accent px-6 py-3 whitespace-nowrap"
-              aria-label="Abonner på ressursoppdateringer"
-            >
-              Abonner
-            </button>
-          </form>
-        </div>
-
-        <p class="text-sm text-praxis-light-blue">
-          Ingen spam, aldri. Avmeld når som helst. Personvernerklæring gjelder.
-        </p>
+        <NewsletterSignup 
+          language="no"
+          variant="resources"
+          client:load 
+        />
       </div>
     </section>
 

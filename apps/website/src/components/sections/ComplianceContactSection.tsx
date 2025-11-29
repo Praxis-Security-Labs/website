@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { validateBusinessEmail } from '@/utils/email-validation';
+import React from 'react';
 import { useFormState } from '../../hooks/useFormState';
 
 interface ComplianceContactSectionProps {
@@ -10,32 +9,36 @@ export const ComplianceContactSection: React.FC<
   ComplianceContactSectionProps
 > = ({ currentLanguage = 'en' }) => {
   const isNorwegian = currentLanguage === 'no';
-  const [localFormData, setLocalFormData] = useState({
-    name: '',
-    title: '',
-    company: '',
-    phone: '',
-    inquiryType: '',
-    urgency: 'normal',
-  });
-  const [emailError, setEmailError] = useState('');
-  const { formState, handleSubmit } = useFormState({
-    formType: 'security',
+  const {
+    formData,
+    formState,
+    handleInputChange,
+    handleEmailBlur,
+    handleSubmit,
+  } = useFormState({
+    formType: 'contact',
     language: currentLanguage as 'en' | 'no',
+    segment: 'compliance',
   });
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleFormSubmit = (e: React.FormEvent) => {
+    console.log('🔴 [DEBUG] Compliance contact form submit clicked');
+    console.log('🔴 [DEBUG] Form language:', currentLanguage);
+    console.log('🔴 [DEBUG] Form data:', JSON.stringify(formData, null, 2));
 
-    if (value) {
-      const validation = validateBusinessEmail(
-        value,
-        currentLanguage as 'en' | 'no'
-      );
-      setEmailError(validation.isValid ? '' : validation.message || '');
-    } else {
-      setEmailError('');
-    }
+    const additionalContext = {
+      pageContext: 'compliance-contact',
+      variant: 'compliance',
+      utm: {
+        source: 'website',
+        medium: 'compliance_page',
+        campaign: 'compliance_contact',
+        content: currentLanguage,
+      },
+    };
+
+    console.log('🔴 [DEBUG] Additional context:', JSON.stringify(additionalContext, null, 2));
+    handleSubmit(e, additionalContext);
   };
 
   const content = {
@@ -511,8 +514,8 @@ export const ComplianceContactSection: React.FC<
                     </label>
                     <input
                       type="text"
-                      name="name"
-                      value={localFormData.name || ''}
+                      name="firstName"
+                      value={formData.firstName || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -524,8 +527,8 @@ export const ComplianceContactSection: React.FC<
                     </label>
                     <input
                       type="text"
-                      name="title"
-                      value={localFormData.title || ''}
+                      name="jobTitle"
+                      value={formData.jobTitle || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -540,7 +543,7 @@ export const ComplianceContactSection: React.FC<
                   <input
                     type="text"
                     name="company"
-                    value={localFormData.company || ''}
+                    value={formData.company || ''}
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                     autoComplete="organization"
@@ -557,16 +560,18 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="email"
                       name="email"
-                      onChange={handleEmailChange}
+                      value={formData.email || ''}
+                      onChange={handleInputChange}
+                      onBlur={handleEmailBlur}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent ${
-                        emailError ? 'border-red-500' : 'border-praxis-gray-300'
+                        formState.emailError ? 'border-red-500' : 'border-praxis-gray-300'
                       }`}
                       autoComplete="email"
                       data-form-type="user-input"
                       required
                     />
-                    {emailError && (
-                      <p className="mt-1 text-sm text-red-600">{emailError}</p>
+                    {formState.emailError && (
+                      <p className="mt-1 text-sm text-red-600">{formState.emailError}</p>
                     )}
                   </div>
                   <div>
@@ -576,7 +581,7 @@ export const ComplianceContactSection: React.FC<
                     <input
                       type="tel"
                       name="phone"
-                      value={localFormData.phone || ''}
+                      value={formData.phone || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       autoComplete="tel"
@@ -591,8 +596,8 @@ export const ComplianceContactSection: React.FC<
                       {t.form.fields.inquiryType}
                     </label>
                     <select
-                      name="inquiryType"
-                      value={localFormData.inquiryType || 'gdpr'}
+                      name="requestType"
+                      value={formData.requestType || ''}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                       required
@@ -613,7 +618,7 @@ export const ComplianceContactSection: React.FC<
                     </label>
                     <select
                       name="urgency"
-                      defaultValue="medium"
+                      value={formData.urgency || 'medium'}
                       onChange={handleInputChange}
                       className="w-full px-4 py-3 border border-praxis-gray-300 rounded-lg focus:ring-2 focus:ring-praxis-gold focus:border-transparent"
                     >
@@ -632,6 +637,7 @@ export const ComplianceContactSection: React.FC<
                   </label>
                   <textarea
                     name="message"
+                    value={formData.message || ''}
                     onChange={handleInputChange}
                     rows={6}
                     autoComplete="off"
@@ -645,6 +651,13 @@ export const ComplianceContactSection: React.FC<
                     required
                   />
                 </div>
+
+                {/* Error display */}
+                {formState.formError && (
+                  <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                    <p className="text-red-600">{formState.formError}</p>
+                  </div>
+                )}
 
                 <button
                   type="submit"

@@ -8,7 +8,13 @@ interface EnterpriseContactSectionProps {
 export const EnterpriseContactSection: React.FC<
   EnterpriseContactSectionProps
 > = ({ language = 'en' }) => {
-  const { formState, handleSubmit } = useFormState({
+  const {
+    formData,
+    formState,
+    handleInputChange,
+    handleEmailBlur,
+    handleSubmit,
+  } = useFormState({
     formType: 'contact',
     language,
     segment: 'enterprise',
@@ -110,6 +116,26 @@ export const EnterpriseContactSection: React.FC<
   };
 
   const t = content[language];
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    console.log('🔴 [DEBUG] Enterprise contact form submit clicked');
+    console.log('🔴 [DEBUG] Form language:', language);
+    console.log('🔴 [DEBUG] Form data:', JSON.stringify(formData, null, 2));
+
+    const additionalContext = {
+      pageContext: 'enterprise-contact',
+      variant: 'enterprise',
+      utm: {
+        source: 'website',
+        medium: 'enterprise_page',
+        campaign: 'enterprise_contact',
+        content: language,
+      },
+    };
+
+    console.log('🔴 [DEBUG] Additional context:', JSON.stringify(additionalContext, null, 2));
+    handleSubmit(e, additionalContext);
+  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     handleSubmit(e, {
@@ -273,6 +299,8 @@ export const EnterpriseContactSection: React.FC<
                     type="text"
                     name="firstName"
                     id="firstName"
+                    value={formData.firstName || ''}
+                    onChange={handleInputChange}
                     required
                     autoComplete="given-name"
                     data-form-type="user-input"
@@ -290,6 +318,8 @@ export const EnterpriseContactSection: React.FC<
                     type="text"
                     name="lastName"
                     id="lastName"
+                    value={formData.lastName || ''}
+                    onChange={handleInputChange}
                     required
                     autoComplete="family-name"
                     data-form-type="user-input"
@@ -310,11 +340,23 @@ export const EnterpriseContactSection: React.FC<
                   type="email"
                   name="email"
                   id="email"
+                  value={formData.email || ''}
+                  onChange={handleInputChange}
+                  onBlur={handleEmailBlur}
                   required
                   autoComplete="email"
                   data-form-type="user-input"
-                  className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors ${
+                    formState.emailError
+                      ? 'border-red-500'
+                      : 'border-praxis-sky-300'
+                  }`}
                 />
+                {formState.emailError && (
+                  <p className="mt-1 text-sm text-red-600">
+                    {formState.emailError}
+                  </p>
+                )}
               </div>
 
               {/* Company */}
@@ -329,6 +371,8 @@ export const EnterpriseContactSection: React.FC<
                   type="text"
                   name="company"
                   id="company"
+                  value={formData.company || ''}
+                  onChange={handleInputChange}
                   required
                   autoComplete="organization"
                   data-form-type="user-input"
@@ -348,6 +392,8 @@ export const EnterpriseContactSection: React.FC<
                   type="text"
                   name="jobTitle"
                   id="jobTitle"
+                  value={formData.jobTitle || ''}
+                  onChange={handleInputChange}
                   required
                   autoComplete="organization-title"
                   data-form-type="user-input"
@@ -366,6 +412,8 @@ export const EnterpriseContactSection: React.FC<
                 <select
                   name="employeeCount"
                   id="employeeCount"
+                  value={formData.employeeCount || ''}
+                  onChange={handleInputChange}
                   required
                   className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 >
@@ -389,6 +437,8 @@ export const EnterpriseContactSection: React.FC<
                   type="tel"
                   name="phone"
                   id="phone"
+                  value={formData.phone || ''}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-3 border border-praxis-sky-300 rounded-lg focus:ring-2 focus:ring-praxis-sky focus:border-transparent transition-colors"
                 />
               </div>
@@ -404,6 +454,8 @@ export const EnterpriseContactSection: React.FC<
                 <textarea
                   name="message"
                   id="message"
+                  value={formData.message || ''}
+                  onChange={handleInputChange}
                   rows={4}
                   autoComplete="off"
                   data-form-type="user-input"
@@ -411,6 +463,13 @@ export const EnterpriseContactSection: React.FC<
                   placeholder="Tell us about your specific requirements..."
                 />
               </div>
+
+              {/* Error display */}
+              {formState.formError && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+                  <p className="text-red-600">{formState.formError}</p>
+                </div>
+              )}
 
               {/* Submit Button */}
               <button

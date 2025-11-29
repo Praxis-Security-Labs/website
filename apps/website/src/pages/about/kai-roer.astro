@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getLangFromUrl } from '../../i18n/utils';
+import { NewsletterSignup } from '../../components/forms/NewsletterSignup';
 
 const lang = getLangFromUrl(Astro.url); // Will be 'en'
 import { AboutHeroSection } from '../../components/sections/AboutHeroSection';
@@ -304,33 +305,11 @@ const combinedSchema = {
         </div>
 
         <!-- Newsletter Signup -->
-        <div class="bg-praxis-blue-50 rounded-xl p-8">
-          <h3 class="h4 text-praxis-dark-blue mb-4">
-            Research Updates & Insights
-          </h3>
-          <p class="body-base text-praxis-pine mb-6">
-            Subscribe to receive latest research findings, industry insights,
-            and platform updates.
-          </p>
-          <div class="max-w-md mx-auto">
-            <form class="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                class="input flex-grow"
-                required
-                aria-label="Email address for research updates"
-              />
-              <button
-                type="submit"
-                class="btn-secondary hover-lift active-scale focus-ring"
-                aria-label="Subscribe to research updates"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
+        <NewsletterSignup 
+          language={lang}
+          variant="research"
+          client:load 
+        />
 
         <!-- Professional Bio Download -->
         <div class="mt-12">
